@@ -9,17 +9,6 @@ import "./navbar.css";
 import { Stack, Link, Typography } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
 
-/*
-colors {
-  zlatisto: #fbc760,
-  cherno: #170f0a,
-  kafqvo: #9c6838,
-  sivo:#665d58,
-  tamno sivo: #4c4850,
-  
-}
-*/
-
 const myColors = {
   black: "#070707",
   "dark-silver": "#847470",

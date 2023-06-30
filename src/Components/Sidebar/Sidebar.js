@@ -12,18 +12,6 @@ import CardMedia from "@mui/material/CardMedia";
 import { Link, Stack } from "@mui/material";
 import DoubleArrowOutlinedIcon from "@mui/icons-material/DoubleArrowOutlined";
 
-/*
-colors {
-  zlatisto: #fbc760,
-  cherno: #170f0a,
-  kafqvo: #9c6838,
-  sivo:#665d58,
-  tamno sivo: #4c4850,
-  mrasno belo: #fefffd,
-  
-}
-*/
-
 const myColors = {
   black: "#070707",
   "dark-silver": "#847470",
