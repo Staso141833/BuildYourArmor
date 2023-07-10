@@ -1,5 +1,21 @@
 .App {
   text-align: center;
+  background-image: linear-gradient(
+    to right top,
+    #170f0a,
+    #3f2b1e,
+    #6a4a2e,
+    #966c3d,
+    #c2914c,
+    #ca9953,
+    #d3a05b,
+    #dba862,
+    #c19362,
+    #a48060,
+    #866e5d,
+    #665d58
+  );
+  height: auto;
 }
 
 .App-logo {
