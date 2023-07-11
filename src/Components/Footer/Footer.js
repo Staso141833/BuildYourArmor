@@ -45,12 +45,8 @@ export const Footer = () => {
                 gap: 1,
               }}
             >
-              <BusinessIcon sx={{ }} />
-              <Typography
-                variant="body2"
-                color="text.secondary"
-              
-              >
+              <BusinessIcon sx={{}} />
+              <Typography variant="body2" color="text.secondary">
                 40bl., Darvenitsa, Sofia
               </Typography>
             </Stack>

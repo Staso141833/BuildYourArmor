@@ -1,14 +1,13 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import "./login.css";
 
-
 const myColors = {
-  "black": "#070707",
+  black: "#070707",
   "dark-silver": "#847470",
   "light-silver": "#b9b3ae",
-  "gold": "#fbc760",
-  "white": "#edebea",
-}
+  gold: "#fbc760",
+  white: "#edebea",
+};
 
 export const Login = () => {
   const onLogin = (e) => {
@@ -16,7 +15,7 @@ export const Login = () => {
   };
   return (
     <>
-      <form noValidate sx={{ width: "70vw", height: "80vh", }}>
+      <form noValidate sx={{ width: "70vw", height: "80vh" }}>
         <Stack
           spacing={2}
           sx={{
@@ -33,7 +32,7 @@ export const Login = () => {
             alignItems: "center",
             boxShadow: "10px 20px 20px #665d58",
             overflow: "hidden",
-            marginBottom: "140px", 
+            marginBottom: "140px",
           }}
         >
           <Stack
