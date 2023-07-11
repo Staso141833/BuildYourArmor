@@ -18,9 +18,10 @@ export const Home = () => {
           component="img"
           // image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRMKr8W2IFRq066ZVGxH2fbq9SehxamcDHvQ&usqp=CAU"
           // image="https://www.bodybuildingmealplan.com/wp-content/uploads/Tom-Platz-Leg-Day-Hack-Squats.jpg"
-          image="https://rare-gallery.com/uploads/posts/1182843-men-monochrome-Arnold-Schwarzenegger-Bodybuilder-bodybuilding-muscle-arm-black-and-white-monochrome-photography-wrestler.jpg"
+          // image="https://rare-gallery.com/uploads/posts/1182843-men-monochrome-Arnold-Schwarzenegger-Bodybuilder-bodybuilding-muscle-arm-black-and-white-monochrome-photography-wrestler.jpg"
           // image="https://i.pinimg.com/736x/bd/45/ba/bd45ba309354d9ad47c9cdc6125fd44d.jpg"
-          alt="unsplash image"
+          image="https://rare-gallery.com/uploads/posts/1182843-men-monochrome-Arnold-Schwarzenegger-Bodybuilder-bodybuilding-muscle-arm-black-and-white-monochrome-photography-wrestler.jpg"
+          alt="Arnold"
           sx={{
             opacity: "0.9",
             height: "100vh",
