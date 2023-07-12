@@ -6,7 +6,7 @@ import { Register } from "./Components/Register/Register.js";
 import NavigationBar from "./Components/Navbar/Navbar.js";
 import { Footer } from "./Components/Footer/Footer.js";
 import { ShareExperience } from "./Components/ShareExpereince/ShareExpereince.js";
-
+import { BasicMuscles } from "./Components/BasicMuscles/BasicMuscles.js";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />;
         <Route path="/register" element={<Register />} />;
         <Route path="/share" element={<ShareExperience/>}/>;
+        <Route path="/basicMuscles" element={<BasicMuscles />} />;
       </Routes>
       <Footer></Footer>
     </div>
