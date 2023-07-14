@@ -8,6 +8,7 @@ import { Footer } from "./Components/Footer/Footer.js";
 import { ShareExperience } from "./Components/ShareExpereince/ShareExpereince.js";
 import { BasicMuscles } from "./Components/BasicMuscles/BasicMuscles.js";
 import { Catalog } from "./Components/Catalog/Catalog.js";
+import { Details } from "./Components/Details/Details.js";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/share" element={<ShareExperience/>}/>;
         <Route path="/basicMuscles" element={<BasicMuscles />} />;
         <Route path="/catalog" element={<Catalog />} />;
+        <Route path="/details" element={<Details />} />;
       </Routes>
       <Footer></Footer>
     </div>
