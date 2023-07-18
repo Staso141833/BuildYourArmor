@@ -169,7 +169,7 @@ export const ShareExperience = () => {
             width: "200px",
             left: "50%",
             top: "50%",
-            transform: "translate(250%, 291%)",
+            transform: "translate(250%, 290%)",
           }}
         ></CardMedia>
       </Stack>
