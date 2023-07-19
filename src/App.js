@@ -10,6 +10,7 @@ import { BasicMuscles } from "./Components/BasicMuscles/BasicMuscles.js";
 import { Catalog } from "./Components/Catalog/Catalog.js";
 import { Details } from "./Components/Details/Details.js";
 import { Trapezius } from "./Components/BasicMuscles/Trapezius/Trapezius.js";
+import { Edit } from "./Components/Edit/Edit.js";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/basicMuscles" element={<BasicMuscles />} />;
         <Route path="/catalog" element={<Catalog />} />;
         <Route path="/details" element={<Details />} />;
+        <Route path="/edit" element={<Edit />} />;
         <Route path="/trapezius" element={<Trapezius />} />;
       </Routes>
       <Footer></Footer>
