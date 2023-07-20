@@ -12,6 +12,9 @@ import { Details } from "./Components/Details/Details.js";
 import { Trapezius } from "./Components/BasicMuscles/Trapezius/Trapezius.js";
 import { Edit } from "./Components/Edit/Edit.js";
 import { Back } from "./Components/BasicMuscles/Back/Back.js";
+import { Biceps } from "./Components/BasicMuscles/Arms/Biceps/Biceps.js";
+import { Triceps } from "./Components/BasicMuscles/Arms/Triceps/Triceps.js";
+import { Forearms } from "./Components/BasicMuscles/Arms/Forearms/Forearms.js";
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
         <Route path="/edit" element={<Edit />} />;
         <Route path="/trapezius" element={<Trapezius />} />;
         <Route path="/back" element={<Back />} />;
+        <Route path="/biceps" element={<Biceps />} />;
+        <Route path="/triceps" element={<Triceps />} />;
+        <Route path="/forearms" element={<Forearms />} />;
       </Routes>
       <Footer></Footer>
     </div>

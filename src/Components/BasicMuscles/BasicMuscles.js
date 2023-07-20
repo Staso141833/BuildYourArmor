@@ -349,7 +349,7 @@ export const BasicMuscles = () => {
                   }}
                 >
                   <Link
-                    href="/arms"
+                    href="/biceps"
                     sx={{
                       textDecoration: "none",
                       color: myColors.gold,
@@ -376,7 +376,7 @@ export const BasicMuscles = () => {
                   }}
                 >
                   <Link
-                    href="/arms"
+                    href="/triceps"
                     sx={{
                       textDecoration: "none",
                       color: myColors.gold,
@@ -403,7 +403,7 @@ export const BasicMuscles = () => {
                   }}
                 >
                   <Link
-                    href="/arms"
+                    href="/forearms"
                     sx={{
                       textDecoration: "none",
                       color: myColors.gold,
