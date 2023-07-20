@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right top,
     #170f0a,
     #3f2b1e,
@@ -14,7 +14,8 @@
     #a48060,
     #866e5d,
     #665d58
-  );
+  ); */
+  background-color: #3f2b1e1f;
   height: auto;
 }
 
