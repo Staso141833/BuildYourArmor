@@ -15,6 +15,7 @@ import { Back } from "./Components/BasicMuscles/Back/Back.js";
 import { Biceps } from "./Components/BasicMuscles/Arms/Biceps/Biceps.js";
 import { Triceps } from "./Components/BasicMuscles/Arms/Triceps/Triceps.js";
 import { Forearms } from "./Components/BasicMuscles/Arms/Forearms/Forearms.js";
+import { Chest } from "./Components/BasicMuscles/Chest/Chest.js";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/biceps" element={<Biceps />} />;
         <Route path="/triceps" element={<Triceps />} />;
         <Route path="/forearms" element={<Forearms />} />;
+        <Route path="/chest" element={<Chest/>}/>;
       </Routes>
       <Footer></Footer>
     </div>
