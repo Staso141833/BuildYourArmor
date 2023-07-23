@@ -16,6 +16,7 @@ import { Biceps } from "./Components/BasicMuscles/Arms/Biceps/Biceps.js";
 import { Triceps } from "./Components/BasicMuscles/Arms/Triceps/Triceps.js";
 import { Forearms } from "./Components/BasicMuscles/Arms/Forearms/Forearms.js";
 import { Chest } from "./Components/BasicMuscles/Chest/Chest.js";
+import { DeltoidMuscle } from "./Components/BasicMuscles/Deltoid/Deltoid.js";
 
 function App() {
   return (
@@ -26,17 +27,18 @@ function App() {
         <Route path="/home" element={<Home />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/register" element={<Register />} />;
-        <Route path="/share" element={<ShareExperience/>}/>;
+        <Route path="/share" element={<ShareExperience />} />;
         <Route path="/basicMuscles" element={<BasicMuscles />} />;
         <Route path="/catalog" element={<Catalog />} />;
         <Route path="/details" element={<Details />} />;
         <Route path="/edit" element={<Edit />} />;
         <Route path="/trapezius" element={<Trapezius />} />;
+        <Route path="/deltoid" element={<DeltoidMuscle />} />;
         <Route path="/back" element={<Back />} />;
         <Route path="/biceps" element={<Biceps />} />;
         <Route path="/triceps" element={<Triceps />} />;
         <Route path="/forearms" element={<Forearms />} />;
-        <Route path="/chest" element={<Chest/>}/>;
+        <Route path="/chest" element={<Chest />} />;
       </Routes>
       <Footer></Footer>
     </div>
