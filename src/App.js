@@ -17,6 +17,7 @@ import { Triceps } from "./Components/BasicMuscles/Arms/Triceps/Triceps.js";
 import { Forearms } from "./Components/BasicMuscles/Arms/Forearms/Forearms.js";
 import { Chest } from "./Components/BasicMuscles/Chest/Chest.js";
 import { DeltoidMuscle } from "./Components/BasicMuscles/Deltoid/Deltoid.js";
+import { Abs } from "./Components/BasicMuscles/Abs/Abs.js";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/triceps" element={<Triceps />} />;
         <Route path="/forearms" element={<Forearms />} />;
         <Route path="/chest" element={<Chest />} />;
+        <Route path="/abs" element={<Abs />} />;
       </Routes>
       <Footer></Footer>
     </div>
