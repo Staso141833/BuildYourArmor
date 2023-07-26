@@ -592,7 +592,7 @@ export const BasicMuscles = () => {
                   }}
                 >
                   <Link
-                    href="/legs"
+                    href="/calves"
                     sx={{
                       textDecoration: "none",
                       color: myColors.gold,
