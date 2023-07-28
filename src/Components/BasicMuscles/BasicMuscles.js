@@ -100,9 +100,9 @@ export const BasicMuscles = () => {
               zIndex: "2",
             }}
           >
-            <Grid
+            {/* <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
@@ -126,10 +126,10 @@ export const BasicMuscles = () => {
               >
                 Trapezius
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
@@ -202,7 +202,7 @@ export const BasicMuscles = () => {
                       padding: "12px",
                     }}
                   >
-                    Front Delt
+                    Shoulers
                   </Link>
                 </MenuItem>
                 <MenuItem
@@ -213,7 +213,7 @@ export const BasicMuscles = () => {
                   }}
                 >
                   <Link
-                    href="/deltoid"
+                    href="/trapezius"
                     sx={{
                       textDecoration: "none",
                       color: myColors.gold,
@@ -229,42 +229,16 @@ export const BasicMuscles = () => {
                       padding: "12px",
                     }}
                   >
-                    Side Delt
+                    Trapezius
                   </Link>
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseDelts}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
-                  <Link
-                    href="/deltoid"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
-                    Back delt
-                  </Link>
-                </MenuItem>
+             
               </Menu>
             </Grid>
 
             <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
@@ -293,7 +267,7 @@ export const BasicMuscles = () => {
 
             <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
@@ -426,7 +400,7 @@ export const BasicMuscles = () => {
             </Grid>
             <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
@@ -454,7 +428,7 @@ export const BasicMuscles = () => {
             </Grid>
             <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
@@ -482,7 +456,7 @@ export const BasicMuscles = () => {
             </Grid>
             <Grid
               item
-              xs={1.6}
+              xs={1.895}
               sx={{
                 backgroundColor: myColors.black,
                 display: "flex",
