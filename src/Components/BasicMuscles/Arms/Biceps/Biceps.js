@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Card, CardMedia, Stack, Typography } from "@mui/material";
 
 export const Biceps = () => {
   return (
@@ -69,7 +69,7 @@ export const Biceps = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-evenly",
-              gap: 2,
+              gap: 3,
             }}
           >
             <Typography variant="p">
@@ -133,6 +133,23 @@ export const Biceps = () => {
               back, so you won't get a large enough range of motion.
             </Typography>
 
+            <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Card position="relative">
+                <CardMedia
+                  position="absolute"
+                  component="img"
+                  alt="Arnold"
+                  image="https://i.pinimg.com/originals/99/d7/54/99d754c2b7adb6f9a39f296115adf27e.jpg"
+                ></CardMedia>
+              </Card>
+              <Typography variant="p">
+                Bicep density is important, but bicep height is an often
+                overlooked quality. I've always trained hard to develop "peaks",
+                and I think I've won a lot of competitions thanks to my high
+                biceps.
+              </Typography>
+            </Stack>
+
             <Typography variant="p">
               Some bodybuilders don't want to go all the way down and get full
               elbow extension because they can't lift as much weight that way.
@@ -162,6 +179,22 @@ export const Biceps = () => {
               impress the judges with if you're lazy at the top of the Biceps
               Curl movement.
             </Typography>
+
+            <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Card position="relative">
+                <CardMedia
+                  position="absolute"
+                  component="img"
+                  alt="Robby Robinson"
+                  image="https://anabol.bg/image/data/BLOG/blog2/new/robby-robinson.jpg"
+                ></CardMedia>
+              </Card>
+              <Typography variant="p">
+                Robbie Robinson's arms are some of the best examples of sculpted
+                and separated biceps. In this photo, Robbie looks like an
+                anatomical atlas.
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>
