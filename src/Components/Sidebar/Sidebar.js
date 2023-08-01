@@ -44,7 +44,7 @@ export default function TemporaryDrawer({ state, setState, toggleDrawer }) {
           "Share your experience",
           "Basic muscles",
           "The power of knowledge",
-          "News",
+          "Increase intensity",
         ].map((text, index) => (
           <ListItem
             key={text}
