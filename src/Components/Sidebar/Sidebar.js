@@ -20,7 +20,7 @@ const myColors = {
   white: "#edebea",
 };
 
-const links = ["/home", "/share", "/basicMuscles", "/catalog", "/register"];
+const links = ["/home", "/share", "/basicMuscles", "/catalog", "/intensity"];
 
 export default function TemporaryDrawer({ state, setState, toggleDrawer }) {
   const list = (anchor) => (

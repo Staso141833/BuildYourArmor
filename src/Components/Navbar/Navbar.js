@@ -90,6 +90,7 @@ export default function NavigationBar() {
               textTransform: "uppercase",
               textAlign: "center",
               fontFamily: "Robotto",
+              textShadow: "2px 4px 4px"
             }}
           >
             You are what you eat

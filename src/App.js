@@ -20,6 +20,7 @@ import { DeltoidMuscle } from "./Components/BasicMuscles/Deltoid/Deltoid.js";
 import { Abs } from "./Components/BasicMuscles/Abs/Abs.js";
 import { Legs } from "./Components/BasicMuscles/Legs/Legs.js";
 import { Calves } from "./Components/BasicMuscles/Legs/Calves.js";
+import { IncreaseIntensity } from "./Components/IncreaseIntensity/IncreaseIntensity.js";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/abs" element={<Abs />} />;
         <Route path="/legs" element={<Legs />} />;
         <Route path="/calves" element={<Calves />} />;
+        <Route path="/intensity" element={<IncreaseIntensity />} />;
       </Routes>
       <Footer></Footer>
     </div>
