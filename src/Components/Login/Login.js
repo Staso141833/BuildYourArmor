@@ -1,6 +1,11 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import "./login.css";
 
+import { auth, googleProvider } from "../../config/firebase.js";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useState } from "react";
+import { useForm } from "../../hooks/useForm.js";
+
 const myColors = {
   black: "#070707",
   "dark-silver": "#847470",
@@ -9,10 +14,26 @@ const myColors = {
   white: "#edebea",
 };
 
+const LoginFormKeys = {
+  Email: "email",
+  Password: "password",
+};
+
 export const Login = () => {
-  const onLogin = (e) => {
-    e.preventDefault();
-  };
+
+  const {values, changeHandler, onSubmit } = useForm({[LoginFormKeys.Email]: "", [LoginFormKeys.Password]: ""}, onLoginSubmit)
+
+  console.log(auth?.currentUser?.email);
+
+  // const signIn = async () => {
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+ 
   return (
     <>
       <form noValidate sx={{ width: "70vw", height: "80vh" }}>
@@ -61,26 +82,34 @@ export const Login = () => {
             <TextField
               label="Emails"
               type="email"
+              name={LoginFormKeys.Email}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
                 color: "white",
               }}
+              value={values[LoginFormKeys.Email]}
+              onChange={changeHandler}
+        
             />
             <TextField
               label="Password"
               type="password"
+              name={LoginFormKeys.Password}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
+              value={values[LoginFormKeys.Password]}
+              onChange={changeHandler}
+             
             />
             <Button
               type="submit"
               variant="outlined"
-              onClick={onLogin}
+              onClick={onLoginSubmit}
               sx={{
                 backgroundColor: "#170f0a",
                 color: "#fbc760",
@@ -93,7 +122,27 @@ export const Login = () => {
                 },
               }}
             >
-              Login
+              Sign In
+            </Button>
+
+            <Button
+              type="submit"
+              variant="outlined"
+              onClick={signInWithGoogle}
+              sx={{
+                backgroundColor: "#170f0a",
+                color: "#fbc760",
+                padding: "12px",
+                fontSize: "16px",
+                width: "46%",
+                border: " 1px solid #fbc760",
+                "&:hover": {
+                  backgroundColor: "fbc760",
+                },
+                mb: 2,
+              }}
+            >
+              Sign In With Google
             </Button>
           </Stack>
 

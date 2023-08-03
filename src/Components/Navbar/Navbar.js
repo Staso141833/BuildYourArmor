@@ -6,8 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import TemporaryDrawer from "../Sidebar/Sidebar.js";
 import "./navbar.css";
-import { Stack, Link, Typography } from "@mui/material";
+import { Stack, Link, Typography, Button } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
+
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase.js";
 
 const myColors = {
   black: "#070707",
@@ -36,6 +39,14 @@ export default function NavigationBar() {
     setState({ ...state, [anchor]: open });
   };
 
+  const onLogout = async () => {
+    try {
+      await signOut(auth)
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -56,7 +67,7 @@ export default function NavigationBar() {
             sx={{
               display: "flex",
               flexDirection: "row",
-              width: "8vw",
+              width: "15%",
             }}
           >
             <IconButton
@@ -99,8 +110,8 @@ export default function NavigationBar() {
             sx={{
               display: "flex",
               flexDirection: "row",
-              gap: "30px",
-              width: "8vw",
+              gap: 3,
+              width: "15%",
             }}
           >
             <Typography variant="h6">
@@ -112,6 +123,11 @@ export default function NavigationBar() {
               <Link sx={{ color: "#fbc760" }} href="/register" underline="none">
                 Register
               </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Button underline="none" sx={{color: "#fbc760", fontWeight: "bold"}} onClick={onLogout}>
+                Sign Out
+              </Button>
             </Typography>
           </Stack>
         </Toolbar>
