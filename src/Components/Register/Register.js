@@ -1,14 +1,45 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
+import { useContext, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext.js";
+import { useForm } from "../../hooks/useForm.js";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase.js";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const onRegister = (e) => {
-    e.preventDefault();
+  // const { onRegisterSubmit } = useContext(AuthContext);
+  // const { values, changeHandler, onSubmit } = useForm(
+  //   {
+  //     email: "",
+  //     password: "",
+  //     rePassword: "",
+  //   },
+  //   onRegisterSubmit
+  // );
+
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const navigate = useNavigate();
+
+  const onRegisterSubmit = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      navigate("/home")
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
     <>
-      <form noValidate>
-        <Stack
+
+      <form >
+        <Stack noValidate
           spacing={2}
           sx={{
             display: "flex",
@@ -53,6 +84,11 @@ export const Register = () => {
             <TextField
               label="Emails"
               type="email"
+              placeholder="email"
+              // name="email"
+              onChange={(event) => {
+                setRegisterEmail(event.target.value);
+              }}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
@@ -63,26 +99,36 @@ export const Register = () => {
             <TextField
               label="Password"
               color="warning"
+              placeholder="password"
               type="password"
+              // name="password"
+              onChange={(event) => {
+                setRegisterPassword(event.target.value);
+              }}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
             />
-            <TextField
+            {/* <TextField
               label="Re-password"
               type="password"
+              name="rePassword"
+              placeholder="rePassword"
+              onChange={(event) => {
+                setRegisterPassword(event.target.value);
+              }}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
-            />
+            /> */}
             <Button
               type="submit"
               variant="outlined"
-              onClick={onRegister}
+              onClick={onRegisterSubmit}
               sx={{
                 backgroundColor: "#170f0a",
                 color: "#fbc760",

@@ -9,8 +9,10 @@ import "./navbar.css";
 import { Stack, Link, Typography, Button } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
 
-import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase.js";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const myColors = {
   black: "#070707",
@@ -28,6 +30,11 @@ export default function NavigationBar() {
     right: false,
   });
 
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -39,13 +46,17 @@ export default function NavigationBar() {
     setState({ ...state, [anchor]: open });
   };
 
+  const navigate = useNavigate();
+
   const onLogout = async () => {
     try {
-      await signOut(auth)
-    } catch(err) {
+      await signOut(auth);
+      console.log("You have alreadt logged out!")
+      navigate("/home")
+    } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -101,7 +112,7 @@ export default function NavigationBar() {
               textTransform: "uppercase",
               textAlign: "center",
               fontFamily: "Robotto",
-              textShadow: "2px 4px 4px"
+              textShadow: "2px 4px 4px",
             }}
           >
             You are what you eat
@@ -114,6 +125,7 @@ export default function NavigationBar() {
               width: "15%",
             }}
           >
+            <Typography variant="h6">{user?.email}</Typography>
             <Typography variant="h6">
               <Link sx={{ color: "#fbc760" }} href="/login" underline="none">
                 Login
@@ -125,7 +137,11 @@ export default function NavigationBar() {
               </Link>
             </Typography>
             <Typography variant="h6">
-              <Button underline="none" sx={{color: "#fbc760", fontWeight: "bold"}} onClick={onLogout}>
+              <Button
+                underline="none"
+                sx={{ color: "#fbc760", fontWeight: "bold" }}
+                onClick={onLogout}
+              >
                 Sign Out
               </Button>
             </Typography>

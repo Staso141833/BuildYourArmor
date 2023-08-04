@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { auth } from "../config/firebase.js";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export const useForm = (initialValues, createUserWithEmailAndPassword) => {
+export const useForm = (initialValues, onSubmitHanlder) => {
   const [values, setValues] = useState(initialValues);
 
   const changeHandler = (e) => {
@@ -12,17 +10,7 @@ export const useForm = (initialValues, createUserWithEmailAndPassword) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    
-
-    createUserWithEmailAndPassword(auth,email, password)
-
-      // const signIn = async () => {
-  //   try {
-  //     await createUserWithEmailAndPassword(auth, email, password);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+    onSubmitHanlder(values);
 
     setValues(initialValues);
   };

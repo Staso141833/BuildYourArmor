@@ -1,10 +1,11 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import "./login.css";
 
-import { auth, googleProvider } from "../../config/firebase.js";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth } from "../../config/firebase.js";
+
 import { useState } from "react";
 import { useForm } from "../../hooks/useForm.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const myColors = {
   black: "#070707",
@@ -20,10 +21,9 @@ const LoginFormKeys = {
 };
 
 export const Login = () => {
+  // const {values, changeHandler, onSubmit } = useForm({[LoginFormKeys.Email]: "", [LoginFormKeys.Password]: ""}, onLoginSubmit)
 
-  const {values, changeHandler, onSubmit } = useForm({[LoginFormKeys.Email]: "", [LoginFormKeys.Password]: ""}, onLoginSubmit)
-
-  console.log(auth?.currentUser?.email);
+  // console.log(auth?.currentUser?.email);
 
   // const signIn = async () => {
   //   try {
@@ -33,7 +33,23 @@ export const Login = () => {
   //   }
   // };
 
- 
+  const [loginEmail, setloginEmail] = useState("");
+  const [loginPassword, setloginPassword] = useState("");
+
+  const onLoginSubmit = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      console.log("You have successfully logged in!")
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <form noValidate sx={{ width: "70vw", height: "80vh" }}>
@@ -82,29 +98,31 @@ export const Login = () => {
             <TextField
               label="Emails"
               type="email"
-              name={LoginFormKeys.Email}
+              // name={LoginFormKeys.Email}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
                 color: "white",
               }}
-              value={values[LoginFormKeys.Email]}
-              onChange={changeHandler}
-        
+              // value={values[LoginFormKeys.Email]}
+              onChange={(event) => {
+                setloginEmail(event.target.value);
+              }}
             />
             <TextField
               label="Password"
               type="password"
-              name={LoginFormKeys.Password}
+              // name={LoginFormKeys.Password}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
-              value={values[LoginFormKeys.Password]}
-              onChange={changeHandler}
-             
+              // value={values[LoginFormKeys.Password]}
+              onChange={(event) => {
+                setloginPassword(event.target.value);
+              }}
             />
             <Button
               type="submit"
@@ -125,25 +143,7 @@ export const Login = () => {
               Sign In
             </Button>
 
-            <Button
-              type="submit"
-              variant="outlined"
-              onClick={signInWithGoogle}
-              sx={{
-                backgroundColor: "#170f0a",
-                color: "#fbc760",
-                padding: "12px",
-                fontSize: "16px",
-                width: "46%",
-                border: " 1px solid #fbc760",
-                "&:hover": {
-                  backgroundColor: "fbc760",
-                },
-                mb: 2,
-              }}
-            >
-              Sign In With Google
-            </Button>
+    
           </Stack>
 
           <CardMedia
