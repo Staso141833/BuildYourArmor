@@ -19,7 +19,7 @@ const myColors = {
 
 const links = ["/home", "/share", "/basicMuscles", "/catalog", "/intensity"];
 
-export default function TemporaryDrawer({ state, setState, toggleDrawer }) {
+export default function TemporaryDrawer({ state, toggleDrawer }) {
   const list = (anchor) => (
     <Box
       sx={{

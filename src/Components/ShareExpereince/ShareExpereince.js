@@ -45,12 +45,13 @@ export const ShareExperience = () => {
         width: "auto",
         height: "90vh",
         overflow: "hidden",
+
       }}
     >
       <Paper
         sx={{
           width: "660px",
-          height: "660px",
+          height: "90%",
           backgroundColor: "#fbc760",
           border: "3px solid #170f0a",
           display: "flex",
@@ -60,6 +61,7 @@ export const ShareExperience = () => {
           position: "absolute",
           left: "50%",
           top: "50%",
+          mt: 8,
           transform: "translate(-53%, -61%)",
           zIndex: "2",
           boxShadow: "40px 30px 30px #170f0a",
@@ -109,21 +111,30 @@ export const ShareExperience = () => {
               </Select>
             </Box>
             <TextField
-              label="Explanation"
-              variant="outlined"
-              placeholder="Other explanation"
-              sx={{ width: "100%" }}
-            />
-            <TextField
               label="Name"
               variant="outlined"
               placeholder="Name"
               sx={{ width: "100%" }}
             />
             <TextField
-              label="How to do"
+              label="kgs"
+              type="number"
+              variant="outlined"
+              placeholder="Other explanation"
+              sx={{ width: "100%" }}
+            />
+            <TextField
+              label="height"
+              type="number"
               variant="outlined"
               placeholder="How to do"
+              sx={{ width: "100%" }}
+            />
+
+            <TextField
+              label="description"
+              variant="outlined"
+              placeholder="Explanation"
               multiline
               rows={4}
               sx={{ width: "100%" }}
@@ -139,7 +150,7 @@ export const ShareExperience = () => {
         </FormGroup>
 
         <Button
-          type="submit"
+          
           variant="outlined"
           onClick={onRedirect}
           sx={{

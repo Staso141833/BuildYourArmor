@@ -10,6 +10,9 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
+import { db } from "../../config/firebase.js";
+import { collection, getDocs } from "firebase/firestore";
 
 const myColors = {
   black: "#070707",
@@ -20,6 +23,18 @@ const myColors = {
 };
 
 export const Catalog = () => {
+  const [users, setUsers] = useState([]);
+  const usersCollectionRefference = collection(db, "users");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRefference);
+
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers();
+  }, []);
   return (
     <Box
       sx={{
@@ -33,7 +48,9 @@ export const Catalog = () => {
       }}
     >
       <Masonry columns={4} spacing={4} sx={{ margin: "32px 48px" }}>
-        <Box>
+        {users.map((user) => {
+          return (
+            <Box>
           <Card
             sx={{
               border: "1px outset  silver",
@@ -43,71 +60,14 @@ export const Catalog = () => {
             <CardMedia
               component="img"
               height="auto"
-              image="https://i.ytimg.com/vi/6g57DJntRXk/maxresdefault.jpg"
-              sx={{ opacity: 0.8 }}
-            ></CardMedia>
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{ color: myColors["dark-silver"] }}
-              >
-                Muscle group: biceps
-              </Typography>
-              <Typography variant="h4">Bozidar Vangelov</Typography>
-            </CardContent>
-            <CardActions
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: 1.5,
-              }}
-            >
-              <Link
-                href="/details"
-                variant="contained"
-                sx={{
-                  backgroundColor: myColors["light-silver"],
-                  color: myColors.black,
-                  padding: "8px",
-                  borderRadius: "6px",
-                  marginRight: 1,
-                  fontWeight: "bold",
-                  textDecoration: "none",
-                  fontFamily: "Robotto",
-                  transition: "all 300ms",
-                  "&:hover": {
-                    backgroundColor: myColors.black,
-                    color: myColors["dark-silver"],
-                  },
-                }}
-              >
-                Details
-              </Link>
-            </CardActions>
-          </Card>
-        </Box>
-
-        <Box>
-          <Card
-            sx={{
-              border: "1px outset  silver",
-              backgroundColor: myColors.white,
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="auto"
-              image="https://cdn.shopify.com/s/files/1/1876/4703/articles/shutterstock_554051863_1000x.jpg?v=1636207391"
+              image={user.imageUrl}
               sx={{ opacity: 0.8 }}
             ></CardMedia>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                Muscle group: biceps
+                {user.muscleGroup}
               </Typography>
-              <Typography variant="h4">bat Radi Pankov</Typography>
+              <Typography variant="h4">{user.name}</Typography>
             </CardContent>
             <CardActions
               sx={{
@@ -130,6 +90,10 @@ export const Catalog = () => {
             </CardActions>
           </Card>
         </Box>
+          )
+        }) }
+
+        {/* 
 
         <Box>
           <Card
@@ -369,7 +333,7 @@ export const Catalog = () => {
               </Button>
             </CardActions>
           </Card>
-        </Box>
+        </Box> */}
       </Masonry>
     </Box>
   );

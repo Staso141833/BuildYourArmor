@@ -6,8 +6,18 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import TemporaryDrawer from "../Sidebar/Sidebar.js";
 import "./navbar.css";
-import { Stack, Link, Typography, Button } from "@mui/material";
+import {
+  Stack,
+  Link,
+  Typography,
+  Button,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  List,
+} from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
+import { FitnessCenterSharp } from "@mui/icons-material";
 
 import { auth } from "../../config/firebase.js";
 import { signOut, onAuthStateChanged } from "firebase/auth";
@@ -48,6 +58,7 @@ export default function NavigationBar() {
       console.error(err);
     }
   };
+  const links = ["/home", "/share", "/basicMuscles", "/catalog", "/intensity"];
 
   const isAuthenticated = auth.currentUser?.accessToken;
 
@@ -131,6 +142,52 @@ export default function NavigationBar() {
           >
             {isAuthenticated && (
               <>
+                <List sx={{ display: "flex", flexDirection: "row" }}>
+                  {[
+                    "Home",
+                    "Share your experience",
+                    "Basic muscles",
+                    "The power of knowledge",
+                    "Increase intensity",
+                  ].map((text, index) => (
+                    <ListItem
+                      key={text}
+                      disablePadding
+                      sx={{
+                        marginBottom: 2,
+                        transition: "all 300ms",
+                        "&:hover": {
+                          backgroundColor: myColors.black,
+                        },
+                      }}
+                    >
+                      <ListItemButton>
+                        <ListItemIcon sx={{ color: myColors.gold }}>
+                          {index % 2 === 0 ? (
+                            <FitnessCenterSharp
+                              fontSize="small"
+                              position="right"
+                            />
+                          ) : (
+                            <FitnessCenterSharp fontSize="small" />
+                          )}
+                        </ListItemIcon>
+
+                        <Link
+                          href={`${links[index]}`}
+                          sx={{
+                            color: myColors.gold,
+                            textDecoration: "none",
+                            fontSize: "14px",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {text}
+                        </Link>
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
                 <Typography variant="h6">
                   <Button
                     underline="none"
