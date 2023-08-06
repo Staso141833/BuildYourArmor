@@ -35,6 +35,22 @@ export default function NavigationBar() {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
+
+  const navigate = useNavigate();
+
+  const onLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("You have already logged out!");
+
+      navigate("/home");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const isAuthenticated = auth.currentUser?.accessToken;
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -44,18 +60,6 @@ export default function NavigationBar() {
     }
 
     setState({ ...state, [anchor]: open });
-  };
-
-  const navigate = useNavigate();
-
-  const onLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log("You have alreadt logged out!")
-      navigate("/home")
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   return (
@@ -122,29 +126,48 @@ export default function NavigationBar() {
               display: "flex",
               flexDirection: "row",
               gap: 3,
-              width: "15%",
+              width: "auto",
             }}
           >
-            <Typography variant="h6">{user?.email}</Typography>
-            <Typography variant="h6">
-              <Link sx={{ color: "#fbc760" }} href="/login" underline="none">
-                Login
-              </Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link sx={{ color: "#fbc760" }} href="/register" underline="none">
-                Register
-              </Link>
-            </Typography>
-            <Typography variant="h6">
-              <Button
-                underline="none"
-                sx={{ color: "#fbc760", fontWeight: "bold" }}
-                onClick={onLogout}
-              >
-                Sign Out
-              </Button>
-            </Typography>
+            {isAuthenticated && (
+              <>
+                <Typography variant="h6">
+                  <Button
+                    underline="none"
+                    sx={{ color: "#fbc760", fontWeight: "bold" }}
+                    onClick={onLogout}
+                  >
+                    Sign Out
+                  </Button>
+                </Typography>
+
+                <Typography variant="h6" sx={{ color: "#fbc760" }}>
+                  {user?.email}
+                </Typography>
+              </>
+            )}
+            {!isAuthenticated && (
+              <>
+                <Typography variant="h6">
+                  <Link
+                    sx={{ color: "#fbc760" }}
+                    href="/login"
+                    underline="none"
+                  >
+                    Login
+                  </Link>
+                </Typography>
+                <Typography variant="h6">
+                  <Link
+                    sx={{ color: "#fbc760" }}
+                    href="/register"
+                    underline="none"
+                  >
+                    Register
+                  </Link>
+                </Typography>
+              </>
+            )}
           </Stack>
         </Toolbar>
       </AppBar>

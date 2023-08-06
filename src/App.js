@@ -21,38 +21,35 @@ import { Abs } from "./Components/BasicMuscles/Abs/Abs.js";
 import { Legs } from "./Components/BasicMuscles/Legs/Legs.js";
 import { Calves } from "./Components/BasicMuscles/Legs/Calves.js";
 import { IncreaseIntensity } from "./Components/IncreaseIntensity/IncreaseIntensity.js";
-import { AuthProvider } from "./Components/contexts/AuthContext.js";
 
 function App() {
   return (
-    <AuthProvider>
-      <div className="App">
-        <NavigationBar></NavigationBar>
-        <Routes>
-          <Route path="/" element={<Home />} />;
-          <Route path="/home" element={<Home />} />;
-          <Route path="/login" element={<Login />} />;
-          <Route path="/register" element={<Register />} />;
-          <Route path="/share" element={<ShareExperience />} />;
-          <Route path="/basicMuscles" element={<BasicMuscles />} />;
-          <Route path="/catalog" element={<Catalog />} />;
-          <Route path="/details" element={<Details />} />;
-          <Route path="/edit" element={<Edit />} />;
-          <Route path="/trapezius" element={<Trapezius />} />;
-          <Route path="/deltoid" element={<DeltoidMuscle />} />;
-          <Route path="/back" element={<Back />} />;
-          <Route path="/biceps" element={<Biceps />} />;
-          <Route path="/triceps" element={<Triceps />} />;
-          <Route path="/forearms" element={<Forearms />} />;
-          <Route path="/chest" element={<Chest />} />;
-          <Route path="/abs" element={<Abs />} />;
-          <Route path="/legs" element={<Legs />} />;
-          <Route path="/calves" element={<Calves />} />;
-          <Route path="/intensity" element={<IncreaseIntensity />} />;
-        </Routes>
-        <Footer></Footer>
-      </div>
-    </AuthProvider>
+    <div className="App">
+      <NavigationBar></NavigationBar>
+      <Routes>
+        <Route path="/" element={<Home />} />;
+        <Route path="/home" element={<Home />} />;
+        <Route path="/login" element={<Login />} />;
+        <Route path="/register" element={<Register />} />;
+        <Route path="/share" element={<ShareExperience />} />;
+        <Route path="/basicMuscles" element={<BasicMuscles />} />;
+        <Route path="/catalog" element={<Catalog />} />;
+        <Route path="/details" element={<Details />} />;
+        <Route path="/edit" element={<Edit />} />;
+        <Route path="/trapezius" element={<Trapezius />} />;
+        <Route path="/deltoid" element={<DeltoidMuscle />} />;
+        <Route path="/back" element={<Back />} />;
+        <Route path="/biceps" element={<Biceps />} />;
+        <Route path="/triceps" element={<Triceps />} />;
+        <Route path="/forearms" element={<Forearms />} />;
+        <Route path="/chest" element={<Chest />} />;
+        <Route path="/abs" element={<Abs />} />;
+        <Route path="/legs" element={<Legs />} />;
+        <Route path="/calves" element={<Calves />} />;
+        <Route path="/intensity" element={<IncreaseIntensity />} />;
+      </Routes>
+      <Footer></Footer>
+    </div>
   );
 }
 

@@ -2,39 +2,31 @@ import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import "./login.css";
 
 import { auth } from "../../config/firebase.js";
-
 import { useState } from "react";
-import { useForm } from "../../hooks/useForm.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
-
-const LoginFormKeys = {
-  Email: "email",
-  Password: "password",
-};
+// const myColors = {
+//   black: "#070707",
+//   "dark-silver": "#847470",
+//   "light-silver": "#b9b3ae",
+//   gold: "#fbc760",
+//   white: "#edebea",
+// };
 
 export const Login = () => {
-  // const {values, changeHandler, onSubmit } = useForm({[LoginFormKeys.Email]: "", [LoginFormKeys.Password]: ""}, onLoginSubmit)
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-  // console.log(auth?.currentUser?.email);
+  const emailHandler = (e) => {
+    setLoginEmail(e.target.value);
+  };
 
-  // const signIn = async () => {
-  //   try {
-  //     await createUserWithEmailAndPassword(auth, email, password);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const passwordHandler = (e) => {
+    setLoginPassword(e.target.value);
+  };
 
-  const [loginEmail, setloginEmail] = useState("");
-  const [loginPassword, setloginPassword] = useState("");
+  const navigate = useNavigate();
 
   const onLoginSubmit = async () => {
     try {
@@ -43,8 +35,10 @@ export const Login = () => {
         loginEmail,
         loginPassword
       );
-      console.log("You have successfully logged in!")
+      console.log("You have successfully logged in!");
+
       console.log(user);
+      navigate("/home");
     } catch (error) {
       console.log(error.message);
     }
@@ -98,36 +92,29 @@ export const Login = () => {
             <TextField
               label="Emails"
               type="email"
-              // name={LoginFormKeys.Email}
+              value={loginEmail}
+              onChange={emailHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
                 color: "white",
               }}
-              // value={values[LoginFormKeys.Email]}
-              onChange={(event) => {
-                setloginEmail(event.target.value);
-              }}
             />
             <TextField
               label="Password"
               type="password"
-              // name={LoginFormKeys.Password}
+              value={loginPassword}
+              onChange={passwordHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
-              // value={values[LoginFormKeys.Password]}
-              onChange={(event) => {
-                setloginPassword(event.target.value);
-              }}
             />
             <Button
-              type="submit"
-              variant="outlined"
               onClick={onLoginSubmit}
+              variant="outlined"
               sx={{
                 backgroundColor: "#170f0a",
                 color: "#fbc760",
@@ -142,8 +129,6 @@ export const Login = () => {
             >
               Sign In
             </Button>
-
-    
           </Stack>
 
           <CardMedia

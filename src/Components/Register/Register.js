@@ -1,34 +1,32 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
-import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext.js";
-import { useForm } from "../../hooks/useForm.js";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+
 import { auth } from "../../config/firebase.js";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export const Register = () => {
-  // const { onRegisterSubmit } = useContext(AuthContext);
-  // const { values, changeHandler, onSubmit } = useForm(
-  //   {
-  //     email: "",
-  //     password: "",
-  //     rePassword: "",
-  //   },
-  //   onRegisterSubmit
-  // );
-
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const navigate = useNavigate();
 
+  const emailHandler = (e) => {
+    setRegisterEmail(e.target.value);
+  };
+
+  const passwordHandler = (e) => {
+    setRegisterPassword(e.target.value);
+  };
+
   const onRegisterSubmit = async () => {
     try {
+      console.log("Before register!");
       const user = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
-      navigate("/home")
+      navigate("/home");
       console.log(user);
     } catch (error) {
       console.log(error.message);
@@ -37,9 +35,8 @@ export const Register = () => {
 
   return (
     <>
-
-      <form >
-        <Stack noValidate
+      <form>
+        <Stack
           spacing={2}
           sx={{
             display: "flex",
@@ -84,11 +81,8 @@ export const Register = () => {
             <TextField
               label="Emails"
               type="email"
-              placeholder="email"
-              // name="email"
-              onChange={(event) => {
-                setRegisterEmail(event.target.value);
-              }}
+              value={registerEmail}
+              onChange={emailHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
@@ -99,12 +93,9 @@ export const Register = () => {
             <TextField
               label="Password"
               color="warning"
-              placeholder="password"
               type="password"
-              // name="password"
-              onChange={(event) => {
-                setRegisterPassword(event.target.value);
-              }}
+              value={registerPassword}
+              onChange={passwordHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
@@ -126,9 +117,8 @@ export const Register = () => {
               }}
             /> */}
             <Button
-              type="submit"
-              variant="outlined"
               onClick={onRegisterSubmit}
+              variant="outlined"
               sx={{
                 backgroundColor: "#170f0a",
                 color: "#fbc760",

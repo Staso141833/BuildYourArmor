@@ -1,43 +1,39 @@
-import { createContext, useContext, useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase.js";
+// import { createContext, useContext, useState } from "react";
 
-export const AuthContext = createContext();
+// import { auth } from "../../config/firebase.js";
 
-export const AuthProvider = ({ children }) => {
- 
+// export const AuthContext = createContext();
 
-  const [loginEmail, setloginEmail] = useState("");
-  const [loginPassword, setloginPassword] = useState("");
+// export const AuthProvider = ({ children }) => {
 
+//   const [loginEmail, setloginEmail] = useState("");
+//   const [loginPassword, setloginPassword] = useState("");
 
+//   const onLoginSubmit = async () => {};
 
+//   const onLogout = async () => {};
 
-  const onLoginSubmit = async () => {};
+//   const contextValues = {
 
-  const onLogout = async () => {};
+//     onLoginSubmit,
+//     onLogout,
+//     userId: auth._id,
+//     token: auth.accessToken,
+//     userEmail: auth.email,
+//     isAuthenticated: !!auth.accessToken
+//   }
 
-  const contextValues = {
-    
-    onLoginSubmit,
-    onLogout,
-    userId: auth._id,
-    token: auth.accessToken,
-    userEmail: auth.email,
-    isAuthenticated: !!auth.accessToken
-  }
+//   return (
+//     <>
+//         <AuthContext.Provider value={contextValues}>
+//             {children}
+//         </AuthContext.Provider>
+//     </>
+//   );
+// };
 
-  return (
-    <>
-        <AuthContext.Provider value={contextValues}>
-            {children}
-        </AuthContext.Provider>
-    </>
-  );
-};
+// export const useAuthContext = () => {
+//     const context = useContext(AuthContext);
 
-export const useAuthContext = () => {
-    const context = useContext(AuthContext);
-    
-    return context;
-}
+//     return context;
+// }
