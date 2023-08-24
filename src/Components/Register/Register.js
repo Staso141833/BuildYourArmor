@@ -26,8 +26,9 @@ export const Register = () => {
         registerEmail,
         registerPassword
       );
-      navigate("/home");
+      navigate("/catalog");
       console.log(user);
+      console.log(user.user.uid);
     } catch (error) {
       console.log(error.message);
     }

@@ -58,9 +58,10 @@ export default function NavigationBar() {
       console.error(err);
     }
   };
-  const links = ["/home", "/share", "/basicMuscles", "/catalog", "/intensity"];
+  const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
 
   const isAuthenticated = auth.currentUser?.accessToken;
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

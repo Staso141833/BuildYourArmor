@@ -38,7 +38,7 @@ export const Login = () => {
       console.log("You have successfully logged in!");
 
       console.log(user);
-      navigate("/home");
+      navigate("/catalog");
     } catch (error) {
       console.log(error.message);
     }

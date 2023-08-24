@@ -31,10 +31,10 @@ function App() {
         <Route path="/home" element={<Home />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/register" element={<Register />} />;
-        <Route path="/share" element={<ShareExperience />} />;
+        <Route path="/create" element={<ShareExperience />} />;
         <Route path="/basicMuscles" element={<BasicMuscles />} />;
         <Route path="/catalog" element={<Catalog />} />;
-        <Route path="/details" element={<Details />} />;
+        <Route path="/catalog/details" element={<Details />} />;
         <Route path="/edit" element={<Edit />} />;
         <Route path="/trapezius" element={<Trapezius />} />;
         <Route path="/deltoid" element={<DeltoidMuscle />} />;

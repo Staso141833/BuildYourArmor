@@ -15,6 +15,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { db } from "../../config/firebase.js";
 
 const myColors = {
   black: "#070707",
@@ -25,6 +35,17 @@ const myColors = {
 };
 
 export const Details = () => {
+   const [publication, setPublication] = useState({});
+
+
+
+
+
+  const onDelete = async () => {
+    const publicDoc = doc(db, "publications", doc.id);
+    await deleteDoc(publicDoc);
+  };
+
   return (
     <>
       <Box
@@ -65,11 +86,11 @@ export const Details = () => {
               <CardMedia
                 sx={{ objectFit: "cover", height: "65%" }} //fill, cover, contain, none, scale-down
                 component="img"
-                image="https://cdn.shopify.com/s/files/1/0752/5585/articles/biceps-exercises.png?v=1623163616&width=1500"
+                image=""
               ></CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div">
-                  Author: Bozhidar Vangelov
+                  Author: {doc.name}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
                   Muscle: Biceps
@@ -98,7 +119,7 @@ export const Details = () => {
                     textDecoration: "none",
                     width: "40%",
                     borderRadius: "6px",
-                    textTransform:"uppercase",
+                    textTransform: "uppercase",
                     fontSize: "16px",
                     "&:hover": {
                       backgroundColor: myColors["light-silver"],
@@ -221,17 +242,7 @@ export const Details = () => {
                   backgroundColor: myColors.white,
                   padding: "12px 0px",
                 }}
-              >
-                {""}
-                Exercise is a body activity that enhances or maintains physical
-                fitness and overall health and wellness.[1] It is performed for
-                various reasons, including weight loss or maintenance, to aid
-                growth and improve strength, develop muscles and the
-                cardiovascular system, hone athletic skills, improve health,[2]
-                or simply for enjoyment. Many individuals choose to exercise
-                outdoors where they can congregate in groups, socialize, and
-                improve well-being as well as mental health.
-              </Typography>
+              ></Typography>
             </Stack>
 
             <Stack

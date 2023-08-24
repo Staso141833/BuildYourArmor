@@ -11,7 +11,11 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { redirect } from "react-router-dom";
+import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../config/firebase.js";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../config/firebase.js";
 
 const myColors = {
   black: "#070707",
@@ -33,10 +37,51 @@ const muscleGroups = [
   "legs",
 ];
 
-const onRedirect = () => {
-  redirect("/home");
-};
 export const ShareExperience = () => {
+  const [newMuscleGroup, setNewMuscleGroup] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newWeight, setNewWeight] = useState(0);
+  const [newHeight, setNewHeight] = useState(0);
+  const [newDescription, setNewDescription] = useState("");
+  const [newImage, setNewImage] = useState("");
+
+  const newMuscleGroupHandler = (e) => {
+    setNewMuscleGroup(e.target.value);
+  };
+
+  const newNameHandler = (e) => {
+    setNewName(e.target.value);
+  };
+  const newWeightHandler = (e) => {
+    setNewWeight(Number(e.target.value));
+  };
+  const newHeightHandler = (e) => {
+    setNewHeight(Number(e.target.value));
+  };
+  const newDescriptionHandler = (e) => {
+    setNewDescription(e.target.value);
+  };
+  const newImageHandler = (e) => {
+    setNewImage(e.target.value);
+  };
+
+  const navigate = useNavigate();
+  const publicationCollectionRefference = collection(db, "publications");
+
+  const createPublication = async () => {
+    await addDoc(publicationCollectionRefference, {
+      muscleGroup: newMuscleGroup,
+      name: newName,
+      weight: newWeight,
+      height: newHeight,
+      description: newDescription,
+      imageUrl: newImage,
+      _ownerId: auth?.currentUser?.uid,
+    });
+
+    navigate("/catalog");
+  };
+
   return (
     <Stack
       sx={{
@@ -45,7 +90,6 @@ export const ShareExperience = () => {
         width: "auto",
         height: "90vh",
         overflow: "hidden",
-
       }}
     >
       <Paper
@@ -90,7 +134,7 @@ export const ShareExperience = () => {
               gap: "24px",
             }}
           >
-            <Box sx={{ width: "80%" }}>
+            {/* <Box sx={{ width: "80%" }}>
               <InputLabel sx={{ left: "auto" }}>muscleGroup</InputLabel>
               <Select
                 sx={{ width: 300 }}
@@ -105,15 +149,24 @@ export const ShareExperience = () => {
                   },
                 }}
               >
-                {muscleGroups.map((muscleValue) => {
-                  return <MenuItem value={muscleValue}>{muscleValue}</MenuItem>;
+                {muscleGroups.map((newMuscleGroup) => {
+                  return (
+                    <MenuItem
+                      value={newMuscleGroup}
+                      onChange={newMuscleGroupHandler}
+                    >
+                      {newMuscleGroup}{" "}
+                    </MenuItem>
+                  );
                 })}
               </Select>
-            </Box>
+            </Box> */}
             <TextField
               label="Name"
               variant="outlined"
               placeholder="Name"
+              value={newName}
+              onChange={newNameHandler}
               sx={{ width: "100%" }}
             />
             <TextField
@@ -121,6 +174,8 @@ export const ShareExperience = () => {
               type="number"
               variant="outlined"
               placeholder="Other explanation"
+              value={newWeight}
+              onChange={newWeightHandler}
               sx={{ width: "100%" }}
             />
             <TextField
@@ -128,6 +183,8 @@ export const ShareExperience = () => {
               type="number"
               variant="outlined"
               placeholder="How to do"
+              value={newHeight}
+              onChange={newHeightHandler}
               sx={{ width: "100%" }}
             />
 
@@ -137,22 +194,26 @@ export const ShareExperience = () => {
               placeholder="Explanation"
               multiline
               rows={4}
+              value={newDescription}
+              onChange={newDescriptionHandler}
               sx={{ width: "100%" }}
             />
 
             <TextField
               label="Image Url"
               variant="outlined"
+              type="img"
               placeholder="Image Url"
+              value={newImage}
+              onChange={newImageHandler}
               sx={{ width: "100%" }}
             />
           </FormControl>
         </FormGroup>
 
         <Button
-          
           variant="outlined"
-          onClick={onRedirect}
+          onClick={createPublication}
           sx={{
             backgroundColor: "#170f0a",
             color: "#fbc760",
