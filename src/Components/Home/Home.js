@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, Card, CardMedia, Paper } from "@mui/material";
+import { Typography, Box, Card, CardMedia } from "@mui/material";
 
 const myColors = {
   black: "#070707",

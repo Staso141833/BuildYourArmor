@@ -24,19 +24,18 @@ const myColors = {
 };
 
 export const Catalog = () => {
-  const [publications, setPublication] = useState([]);
+  const [publications, setPublications] = useState([]);
   const publicationsCollectionRefference = collection(db, "publications");
 
   useEffect(() => {
     const getPublications = async () => {
       const data = await getDocs(publicationsCollectionRefference);
 
-      setPublication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPublications(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
     getPublications();
   }, []);
-
 
   return (
     <Box

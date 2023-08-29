@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { Home } from "./Components/Home/Home.js";
 import { Login } from "./Components/Login/Login.js";
 import { Register } from "./Components/Register/Register.js";
@@ -21,8 +21,16 @@ import { Abs } from "./Components/BasicMuscles/Abs/Abs.js";
 import { Legs } from "./Components/BasicMuscles/Legs/Legs.js";
 import { Calves } from "./Components/BasicMuscles/Legs/Calves.js";
 import { IncreaseIntensity } from "./Components/IncreaseIntensity/IncreaseIntensity.js";
+import { useEffect, useState } from "react";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "./config/firebase.js";
+
 
 function App() {
+
+
+
+
   return (
     <div className="App">
       <NavigationBar></NavigationBar>
@@ -34,7 +42,7 @@ function App() {
         <Route path="/create" element={<ShareExperience />} />;
         <Route path="/basicMuscles" element={<BasicMuscles />} />;
         <Route path="/catalog" element={<Catalog />} />;
-        <Route path="/catalog/details" element={<Details />} />;
+        <Route path="/catalog/:publicationId" element={<Details />} />;
         <Route path="/edit" element={<Edit />} />;
         <Route path="/trapezius" element={<Trapezius />} />;
         <Route path="/deltoid" element={<DeltoidMuscle />} />;

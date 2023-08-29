@@ -10,7 +10,6 @@ import {
   CardContent,
   CardMedia,
   Link,
-  Paper,
   Stack,
   TextField,
   Typography,
@@ -23,8 +22,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { db } from "../../config/firebase.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { auth, db } from "../../config/firebase.js";
 
 const myColors = {
   black: "#070707",
@@ -35,15 +34,28 @@ const myColors = {
 };
 
 export const Details = () => {
-   const [publication, setPublication] = useState({});
+  const [publication, setPublication] = useState({});
 
+  const { publicationId } = useParams();
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    const docRef = doc(db, "publications", publicationId);
+    const getPublication = async () => {
+      const data = await getDoc(docRef);
 
+      setPublication(data.data());
+    };
 
+    getPublication();
+  }, []);
 
-  const onDelete = async () => {
-    const publicDoc = doc(db, "publications", doc.id);
-    await deleteDoc(publicDoc);
+  const isOwner = publication._ownerId === auth?.currentUser?.uid;
+
+  const onDeleteMovie = async () => {
+    const publicationDoc = doc(db, "publications", publicationId);
+    await deleteDoc(publicationDoc);
+    navigate("/catalog")
   };
 
   return (
@@ -86,14 +98,17 @@ export const Details = () => {
               <CardMedia
                 sx={{ objectFit: "cover", height: "65%" }} //fill, cover, contain, none, scale-down
                 component="img"
-                image=""
+                image={publication.imageUrl}
               ></CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div">
-                  Author: {doc.name}
+                  Author: {publication.name}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  Muscle: Biceps
+                  Height: {publication.height}
+                </Typography>
+                <Typography gutterBottom variant="h5" component="div">
+                  Wight: {publication.weight}
                 </Typography>
               </CardContent>
 
@@ -107,46 +122,75 @@ export const Details = () => {
                   gap: 1,
                 }}
               >
-                <Link
-                  href="/edit"
-                  variant="contained"
-                  sx={{
-                    backgroundColor: myColors.black,
-                    color: myColors["light-silver"],
-                    fontWeight: "bold",
-                    transition: "all 300ms",
-                    padding: "12px",
-                    textDecoration: "none",
-                    width: "40%",
-                    borderRadius: "6px",
-                    textTransform: "uppercase",
-                    fontSize: "16px",
-                    "&:hover": {
-                      backgroundColor: myColors["light-silver"],
-                      color: myColors.black,
-                    },
-                  }}
-                >
-                  Edit
-                </Link>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: myColors.black,
-                    color: myColors["light-silver"],
-                    fontWeight: "bold",
-                    transition: "all 300ms",
-                    width: "40%",
-                    padding: "9px",
-                    fontFamily: "Robotto",
-                    "&:hover": {
-                      backgroundColor: myColors["light-silver"],
-                      color: myColors.black,
-                    },
-                  }}
-                >
-                  Delete
-                </Button>
+                {isOwner && (
+                  <>
+                    <Link
+                      href="/edit"
+                      variant="contained"
+                      sx={{
+                        backgroundColor: myColors.black,
+                        color: myColors["light-silver"],
+                        fontWeight: "bold",
+                        transition: "all 300ms",
+                        padding: "12px",
+                        textDecoration: "none",
+                        width: "40%",
+                        borderRadius: "6px",
+                        textTransform: "uppercase",
+                        fontSize: "16px",
+                        "&:hover": {
+                          backgroundColor: myColors["light-silver"],
+                          color: myColors.black,
+                        },
+                      }}
+                    >
+                      Edit
+                    </Link>
+                    <Button
+                      variant="contained"
+                      onClick={onDeleteMovie}
+                      sx={{
+                        backgroundColor: myColors.black,
+                        color: myColors["light-silver"],
+                        fontWeight: "bold",
+                        transition: "all 300ms",
+                        width: "40%",
+                        padding: "9px",
+                        fontFamily: "Robotto",
+                        "&:hover": {
+                          backgroundColor: myColors["light-silver"],
+                          color: myColors.black,
+                        },
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </>
+                )}
+                {!isOwner && (
+                  <Link
+                    href="/create"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: myColors.black,
+                      color: myColors["light-silver"],
+                      fontWeight: "bold",
+                      transition: "all 300ms",
+                      padding: "12px",
+                      textDecoration: "none",
+                      width: "auto",
+                      borderRadius: "6px",
+                      textTransform: "uppercase",
+                      fontSize: "16px",
+                      "&:hover": {
+                        backgroundColor: myColors["light-silver"],
+                        color: myColors.black,
+                      },
+                    }}
+                  >
+                    Add publication
+                  </Link>
+                )}
               </CardActions>
             </Card>
 
@@ -242,7 +286,9 @@ export const Details = () => {
                   backgroundColor: myColors.white,
                   padding: "12px 0px",
                 }}
-              ></Typography>
+              >
+                {publication.description}
+              </Typography>
             </Stack>
 
             <Stack
