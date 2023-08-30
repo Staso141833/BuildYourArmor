@@ -48,14 +48,16 @@ export const Details = () => {
     };
 
     getPublication();
-  }, []);
+  }, [publicationId]);
 
   const isOwner = publication._ownerId === auth?.currentUser?.uid;
 
-  const onDeleteMovie = async () => {
+  const onDeletePublication = async () => {
     const publicationDoc = doc(db, "publications", publicationId);
+    window.alert("Are you sure you want to delete this publication?");
     await deleteDoc(publicationDoc);
-    navigate("/catalog")
+
+    navigate("/catalog");
   };
 
   return (
@@ -125,7 +127,7 @@ export const Details = () => {
                 {isOwner && (
                   <>
                     <Link
-                      href="/edit"
+                      href={`/catalog/${publicationId}/edit`}
                       variant="contained"
                       sx={{
                         backgroundColor: myColors.black,
@@ -148,7 +150,7 @@ export const Details = () => {
                     </Link>
                     <Button
                       variant="contained"
-                      onClick={onDeleteMovie}
+                      onClick={onDeletePublication}
                       sx={{
                         backgroundColor: myColors.black,
                         color: myColors["light-silver"],

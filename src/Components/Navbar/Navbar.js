@@ -2,22 +2,12 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import TemporaryDrawer from "../Sidebar/Sidebar.js";
+
+import TemporaryDrawer from "../TemporaryDrawer/TemporaryDrawer.js";
 import "./navbar.css";
-import {
-  Stack,
-  Link,
-  Typography,
-  Button,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  List,
-} from "@mui/material";
+import { Stack, Link, Typography, Button } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
-import { FitnessCenterSharp } from "@mui/icons-material";
+
 
 import { auth } from "../../config/firebase.js";
 import { signOut, onAuthStateChanged } from "firebase/auth";
@@ -62,7 +52,6 @@ export default function NavigationBar() {
 
   const isAuthenticated = auth.currentUser?.accessToken;
 
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -97,20 +86,27 @@ export default function NavigationBar() {
               width: "15%",
             }}
           >
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{
-                mr: 2,
-                color: "#fbc760",
-                transition: "transform 3000ms ease-in-out",
-              }}
-              onClick={toggleDrawer("left", true)}
-            >
-              <MenuIcon />
-            </IconButton>
+            {/* <IconButton>
+              <MenuIcon
+                size="large"
+                edge="start"
+                color="warning"
+                aria-label="menu"
+                sx={{
+                  mr: 2,
+                  color: "#fbc760",
+                  transition: "transform 3000ms ease-in-out",
+                }}
+                onClick={toggleDrawer("left", true)}
+              />
+            </IconButton> */}
+
+            <TemporaryDrawer
+              state={state}
+              setState={setState}
+              toggleDrawer={toggleDrawer}
+            ></TemporaryDrawer>
+
             <SafetyCheckTwoToneIcon
               sx={{ fontSize: "40px", color: myColors.gold }}
             ></SafetyCheckTwoToneIcon>
@@ -143,7 +139,7 @@ export default function NavigationBar() {
           >
             {isAuthenticated && (
               <>
-                <List sx={{ display: "flex", flexDirection: "row" }}>
+                {/* <List sx={{ display: "flex", flexDirection: "row" }}>
                   {[
                     "Home",
                     "Share your experience",
@@ -188,7 +184,7 @@ export default function NavigationBar() {
                       </ListItemButton>
                     </ListItem>
                   ))}
-                </List>
+                </List> */}
                 <Typography variant="h6">
                   <Button
                     underline="none"
@@ -229,11 +225,6 @@ export default function NavigationBar() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <TemporaryDrawer
-        state={state}
-        setState={setState}
-        toggleDrawer={toggleDrawer}
-      ></TemporaryDrawer>
     </Box>
   );
 }
