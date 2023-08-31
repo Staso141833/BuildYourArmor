@@ -50,6 +50,11 @@ export const Details = () => {
     getPublication();
   }, [publicationId]);
 
+  const curUser = auth?.currentUser?.uid;
+  const oId = publication._ownerId;
+  console.log(oId)
+  console.log(curUser)
+ 
   const isOwner = publication._ownerId === auth?.currentUser?.uid;
 
   const onDeletePublication = async () => {
@@ -107,10 +112,10 @@ export const Details = () => {
                   Author: {publication.name}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  Height: {publication.height}
+                  Weight: {publication.weight}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  Wight: {publication.weight}
+                  Height: {publication.height}
                 </Typography>
               </CardContent>
 

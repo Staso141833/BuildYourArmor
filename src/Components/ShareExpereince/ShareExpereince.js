@@ -73,7 +73,6 @@ export const ShareExperience = () => {
 
   const createPublication = async () => {
     await addDoc(publicationCollectionRef, {
-      muscleGroup: newMuscleGroup,
       name: newName,
       weight: newWeight,
       height: newHeight,
@@ -82,61 +81,71 @@ export const ShareExperience = () => {
       _ownerId: auth?.currentUser?.uid,
     });
 
+    // const newPublication = {
+    //   muscleGroup: newMuscleGroup,
+    //   name: newName,
+    //   weight: newWeight,
+    //   height: newHeight,
+    //   description: newDescription,
+    //   imageUrl: newImage,
+    //   _ownerId: auth?.currentUser?.uid,
+    // };
+
     navigate("/catalog");
-  }
-    return (
-      <Stack
+  };
+  return (
+    <Stack
+      sx={{
+        position: "relative",
+        backgroundColor: "#f6f6f6",
+        width: "auto",
+        height: "90vh",
+        overflow: "hidden",
+      }}
+    >
+      <Paper
         sx={{
-          position: "relative",
-          backgroundColor: "#f6f6f6",
-          width: "auto",
-          height: "90vh",
-          overflow: "hidden",
+          width: "660px",
+          height: "90%",
+          backgroundColor: "#fbc760",
+          border: "3px solid #170f0a",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "24px",
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          mt: 8,
+          transform: "translate(-53%, -61%)",
+          zIndex: "2",
+          boxShadow: "40px 30px 30px #170f0a",
+          "&:hover": {
+            padding: "4px",
+            transition: "all 0.4s ease-in-out",
+          },
         }}
       >
-        <Paper
+        <Stack
           sx={{
-            width: "660px",
-            height: "90%",
-            backgroundColor: "#fbc760",
-            border: "3px solid #170f0a",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "24px",
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            mt: 8,
-            transform: "translate(-53%, -61%)",
-            zIndex: "2",
-            boxShadow: "40px 30px 30px #170f0a",
-            "&:hover": {
-              padding: "4px",
-              transition: "all 0.4s ease-in-out",
-            },
+            fontSize: 34,
+            fontWeight: 700,
+            marginTop: "34px",
+            letterSpacing: 2,
+            textTransform: "uppercase",
           }}
         >
-          <Stack
+          Share your expereince
+        </Stack>
+
+        <FormGroup row sx={{ justifyContent: "space-around" }}>
+          <FormControl
             sx={{
-              fontSize: 34,
-              fontWeight: 700,
-              marginTop: "34px",
-              letterSpacing: 2,
-              textTransform: "uppercase",
+              display: "flex",
+              gap: "24px",
             }}
           >
-            Share your expereince
-          </Stack>
-
-          <FormGroup row sx={{ justifyContent: "space-around" }}>
-            <FormControl
-              sx={{
-                display: "flex",
-                gap: "24px",
-              }}
-            >
-              {/* <Box sx={{ width: "80%" }}>
+            {/* <Box sx={{ width: "80%" }}>
               <InputLabel sx={{ left: "auto" }}>muscleGroup</InputLabel>
               <Select
                 sx={{ width: 300 }}
@@ -163,90 +172,95 @@ export const ShareExperience = () => {
                 })}
               </Select>
             </Box> */}
-              <TextField
-                label="Name"
-                variant="outlined"
-                placeholder="Name"
-                value={newName}
-                onChange={newNameHandler}
-                sx={{ width: "100%" }}
-              />
-              <TextField
-                label="kgs"
-                type="number"
-                variant="outlined"
-                placeholder="Other explanation"
-                value={newWeight}
-                onChange={newWeightHandler}
-                sx={{ width: "100%" }}
-              />
-              <TextField
-                label="height"
-                type="number"
-                variant="outlined"
-                placeholder="How to do"
-                value={newHeight}
-                onChange={newHeightHandler}
-                sx={{ width: "100%" }}
-              />
+            <TextField
+              label="Name"
+              name="name"
+              variant="outlined"
+              placeholder="Name"
+              value={newName}
+              onChange={newNameHandler}
+              sx={{ width: "100%" }}
+            />
+            <TextField
+              label="kgs"
+              type="number"
+              variant="outlined"
+              name="weight"
+              placeholder="Other explanation"
+              value={newWeight}
+              onChange={newWeightHandler}
+              sx={{ width: "100%" }}
+            />
+            <TextField
+              label="height"
+              type="number"
+              name="height"
+              variant="outlined"
+              placeholder="How to do"
+              value={newHeight}
+              onChange={newHeightHandler}
+              sx={{ width: "100%" }}
+            />
 
-              <TextField
-                label="description"
-                variant="outlined"
-                placeholder="Explanation"
-                multiline
-                rows={4}
-                value={newDescription}
-                onChange={newDescriptionHandler}
-                sx={{ width: "100%" }}
-              />
+            <TextField
+              label="description"
+              variant="outlined"
+              placeholder="Explanation"
+              name="description"
+              multiline
+              rows={4}
+              value={newDescription}
+              onChange={newDescriptionHandler}
+              sx={{ width: "100%" }}
+            />
 
-              <TextField
-                label="Image Url"
-                variant="outlined"
-                type="img"
-                placeholder="Image Url"
-                value={newImage}
-                onChange={newImageHandler}
-                sx={{ width: "100%" }}
-              />
-            </FormControl>
-          </FormGroup>
+            <TextField
+              label="Image Url"
+              variant="outlined"
+              name="imageUrl"
+              type="img"
+              placeholder="Image Url"
+              value={newImage}
+              onChange={newImageHandler}
+              sx={{ width: "100%" }}
+            />
+          </FormControl>
+        </FormGroup>
 
-          <Button
-            variant="outlined"
-            onClick={createPublication}
-            sx={{
-              backgroundColor: "#170f0a",
-              color: "#fbc760",
-              padding: "12px",
-              fontSize: "16px",
+        <Button
+          variant="outlined"
+          onClick={createPublication}
+          sx={{
+            backgroundColor: "#170f0a",
+            color: "#fbc760",
+            padding: "12px",
+            fontSize: "16px",
 
-              width: "60%",
-              border: " 1px solid #4c4850",
-              "&:hover": {
-                backgroundColor: "#4c4850",
-                border: "1px solid black",
-              },
-            }}
-          >
-            Publish
-          </Button>
-        </Paper>
-        <Stack sx={{ position: "absolute" }}>
-          <CardMedia
-            component="img"
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjzFDFDPUsRTDly7lBJkOUXxizcWZo-aLIfdKhD-PvblYcldlFdvJN1XOMbG7MMhk4jZE&usqp=CAU"
-            // image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGy2osMQ8i6WdL9X5Dmrf5TUwRYITkq8wZ5A&usqp=CAU"
-            alt="growing up"
-            sx={{
-              width: "200px",
-              left: "50%",
-              top: "50%",
-              transform: "translate(250%, 290%)",
-            }}
-          ></CardMedia>
-        </Stack>
+            width: "60%",
+            border: " 1px solid #4c4850",
+            "&:hover": {
+              backgroundColor: "#4c4850",
+              border: "1px solid black",
+            },
+          }}
+        >
+          Publish
+        </Button>
+      </Paper>
+      <Stack sx={{ position: "absolute" }}>
+        <CardMedia
+          component="img"
+          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjzFDFDPUsRTDly7lBJkOUXxizcWZo-aLIfdKhD-PvblYcldlFdvJN1XOMbG7MMhk4jZE&usqp=CAU"
+          // image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGy2osMQ8i6WdL9X5Dmrf5TUwRYITkq8wZ5A&usqp=CAU"
+          alt="growing up"
+          sx={{
+            width: "200px",
+            left: "50%",
+            top: "50%",
+            transform: "translate(250%, 290%)",
+          }}
+        ></CardMedia>
       </Stack>
-    );
-  };
+    </Stack>
+  );
+};

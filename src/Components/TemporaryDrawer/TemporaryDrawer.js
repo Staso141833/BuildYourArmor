@@ -17,6 +17,7 @@ import {
   FitnessCenterTwoTone,
   SportsGymnastics,
 } from "@mui/icons-material";
+import { auth } from "../../config/firebase.js";
 
 const myColors = {
   black: "#070707",
@@ -33,6 +34,7 @@ export default function TemporaryDrawer() {
     bottom: false,
     right: false,
   });
+
 
   const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
 

@@ -1,5 +1,5 @@
 import { db } from "../config/firebase.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   collection,
   getDocs,
@@ -10,33 +10,44 @@ import {
   doc,
 } from "firebase/firestore";
 
-const publicationCollectionRef = collection(db, "publications");
+export const publicationServiceFactory = (token) => {
+  const publicationsCollectionRefference = collection(db, "publications");
 
-class PublicationDataService {
-  createPublication = async (newPublication) => {
-    await addDoc(publicationCollectionRef, newPublication);
-    const navigate = useNavigate();
-    navigate("/catalog");
-    return addDoc(publicationCollectionRef, newPublication);
-  };
-  updatePublication = (id, updatedPublication) => {
-    const publicationDoc = doc(db, "publications", id);
-    const navigate = useNavigate();
-    navigate("/catalog");
-    return updateDoc(publicationDoc, updatedPublication);
-  };
-  deletePublication = (id) => {
-    const publicationDoc = doc(db, "publications", id);
-    return deleteDoc(publicationDoc);
+  const getAll = async () => {
+    const data = await getDocs(publicationsCollectionRefference);
+
+    return data;
   };
 
-  getAllPublications = () => {
-    return getDocs(publicationCollectionRef);
+  const getOne = async (publicationId) => {
+    const publicationDoc = doc(db, "publications", publicationId);
+    const data = await getDoc(publicationDoc);
+    return data;
   };
-  getPublication = (id) => {
-    const publicationDoc = doc(db, "publications", id);
-    return getDoc(publicationDoc);
-  };
-}
 
-export default new PublicationDataService();
+  const create = async (newPublication) => {
+    const publicationsCollectionRefference = collection(db, "publications");
+    const data = await addDoc(publicationsCollectionRefference, newPublication);
+
+    return data;
+  };
+  const edit = async (id, updatedPublication) => {
+    const publicationDoc = doc(db, "publications", id);
+    const data = await updateDoc(publicationDoc, updatedPublication);
+    return data;
+  };
+
+  const deletePublication = async (id) => {
+    const publicationDoc = doc(db, "publications", id);
+    const data = await deleteDoc(publicationDoc);
+    return data;
+  };
+
+  return {
+    getOne,
+    getAll,
+    create,
+    edit,
+    delete: deletePublication,
+  };
+};

@@ -7,7 +7,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { db } from "../../config/firebase.js";
+import { auth, db } from "../../config/firebase.js";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -40,17 +40,19 @@ export const Edit = () => {
   const onPublicationEditSubmit = async (values) => {
     const publicationDoc = doc(db, "publications", publicationId);
     await updateDoc(publicationDoc, values);
-    navigate("/catalog");
+    console.log(values._ownerId)
+    console.log(values.name)
+    navigate(`/catalog/${publicationId}`);
   };
-
+ 
   const { values, changeHandler, onSubmit, changeValues } = useForm(
     {
-      id: "",
       name: "",
       weight: "",
       height: "",
       description: "",
       imageUrl: "",
+      _ownerId: auth?.currentUser?.uid,
     },
     onPublicationEditSubmit
   );
@@ -59,10 +61,13 @@ export const Edit = () => {
     const docRef = doc(db, "publications", publicationId);
     const getPublication = async () => {
       const data = await getDoc(docRef);
+      console.log(data.data());
       changeValues(data.data());
     };
     getPublication();
   }, [publicationId]);
+
+  const onOwnerClick = () => {};
 
   return (
     <Stack
@@ -107,7 +112,7 @@ export const Edit = () => {
           Edit
         </Stack>
 
-        <FormGroup row sx={{ justifyContent: "space-around" }}>
+        <FormGroup row sx={{ justifyContent: "space-around", height: "auto" }}>
           <FormControl
             sx={{
               display: "flex",
@@ -152,6 +157,7 @@ export const Edit = () => {
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
+
             <TextField
               type="number"
               variant="outlined"
