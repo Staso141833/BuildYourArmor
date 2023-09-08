@@ -1,15 +1,5 @@
 import { Masonry } from "@mui/lab";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Link,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { db } from "../../config/firebase.js";
 import { collection, doc, getDocs } from "firebase/firestore";
@@ -37,6 +27,7 @@ export const Catalog = () => {
     getPublications();
   }, []);
 
+  console.log(publications);
   return (
     <Box
       sx={{
@@ -50,7 +41,23 @@ export const Catalog = () => {
       }}
     >
       {publications.lenght === 0 && (
-        <Typography variant="h2">No publications yet</Typography>
+        <Typography
+          variant="h2"
+          component="div"
+          sx={{
+            flexGrow: 1,
+            color: myColors.gold,
+            fontSize: "30px",
+            letterSpacing: "4px",
+            fontWeight: "600",
+            textTransform: "uppercase",
+            textAlign: "center",
+            fontFamily: "Robotto",
+            textShadow: "2px 4px 4px",
+          }}
+        >
+          No publications yet. Would you like yours to be the first?
+        </Typography>
       )}
       <Masonry columns={4} spacing={4} sx={{ margin: "32px 48px" }}>
         {publications.map((publication) => (

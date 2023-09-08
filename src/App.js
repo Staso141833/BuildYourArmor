@@ -5,7 +5,7 @@ import { Login } from "./Components/Login/Login.js";
 import { Register } from "./Components/Register/Register.js";
 import NavigationBar from "./Components/Navbar/Navbar.js";
 import { Footer } from "./Components/Footer/Footer.js";
-import { ShareExperience } from "./Components/ShareExpereince/ShareExpereince.js";
+import { Create } from "./Components/Create/Create.js";
 import { BasicMuscles } from "./Components/BasicMuscles/BasicMuscles.js";
 import { Catalog } from "./Components/Catalog/Catalog.js";
 import { Details } from "./Components/Details/Details.js";
@@ -24,6 +24,7 @@ import { IncreaseIntensity } from "./Components/IncreaseIntensity/IncreaseIntens
 import { PublicationOwner } from "./common/PublicationOwner.js";
 import { PublicationProvider } from "./contexts/PublicationContext.js";
 
+
 function App() {
   return (
     <PublicationProvider>
@@ -34,7 +35,7 @@ function App() {
           <Route path="/home" element={<Home />} />;
           <Route path="/login" element={<Login />} />;
           <Route path="/register" element={<Register />} />;
-          <Route path="/create" element={<ShareExperience />} />;
+          <Route path="/create" element={<Create />} />;
           <Route path="/basicMuscles" element={<BasicMuscles />} />;
           <Route path="/catalog" element={<Catalog />} />;
           <Route path="/catalog/:publicationId" element={<Details />} />;

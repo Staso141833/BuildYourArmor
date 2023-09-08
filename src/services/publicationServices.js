@@ -1,5 +1,4 @@
 import { db } from "../config/firebase.js";
-import { useNavigate, useParams } from "react-router-dom";
 import {
   collection,
   getDocs,
@@ -20,26 +19,33 @@ export const publicationServiceFactory = (token) => {
   };
 
   const getOne = async (publicationId) => {
-    const publicationDoc = doc(db, "publications", publicationId);
-    const data = await getDoc(publicationDoc);
+    const docRefference = doc(db, "publications", publicationId);
+    const data = await getDoc(docRefference);
     return data;
   };
 
   const create = async (newPublication) => {
-    const publicationsCollectionRefference = collection(db, "publications");
-    const data = await addDoc(publicationsCollectionRefference, newPublication);
+    const docRefference = collection(db, "publications");
+    const data = await addDoc(docRefference, newPublication);
 
     return data;
   };
-  const edit = async (id, updatedPublication) => {
-    const publicationDoc = doc(db, "publications", id);
-    const data = await updateDoc(publicationDoc, updatedPublication);
+
+  const edit = async (publicationId, updatedPublication) => {
+    const docRefference = doc(db, "publications", publicationId);
+    const data = await updateDoc(docRefference, updatedPublication);
     return data;
   };
+
+  // const onPublicationEditSubmit = async (values) => {
+  //   const publicationDoc = doc(db, "publications", publicationId);
+  //   await updateDoc(publicationDoc, values);
+  //   navigate(`/catalog/${publicationId}`);
+  // };
 
   const deletePublication = async (id) => {
-    const publicationDoc = doc(db, "publications", id);
-    const data = await deleteDoc(publicationDoc);
+    const docRefference = doc(db, "publications", id);
+    const data = await deleteDoc(docRefference);
     return data;
   };
 

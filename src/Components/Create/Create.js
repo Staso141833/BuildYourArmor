@@ -4,19 +4,18 @@ import {
   CardMedia,
   FormControl,
   FormGroup,
-  InputLabel,
-  MenuItem,
   Paper,
-  Select,
+  InputLabel,
   Stack,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../config/firebase.js";
 
-import { auth } from "../../config/firebase.js";
-import PublicationDataService from "../../services/publicationServices.js";
+import { auth, db } from "../../config/firebase.js";
+
+import { usePublicationContext } from "../../contexts/PublicationContext.js";
+import { useForm } from "../../hooks/useForm.js";
+import { addDoc, collection } from "firebase/firestore";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const myColors = {
@@ -39,18 +38,14 @@ const muscleGroups = [
   "legs",
 ];
 
-export const ShareExperience = () => {
-  const [newMuscleGroup, setNewMuscleGroup] = useState("");
+export const Create = () => {
   const [newName, setNewName] = useState("");
   const [newWeight, setNewWeight] = useState(0);
   const [newHeight, setNewHeight] = useState(0);
   const [newDescription, setNewDescription] = useState("");
   const [newImage, setNewImage] = useState("");
 
-  const newMuscleGroupHandler = (e) => {
-    setNewMuscleGroup(e.target.value);
-  };
-
+  const navigate = useNavigate();
   const newNameHandler = (e) => {
     setNewName(e.target.value);
   };
@@ -67,11 +62,8 @@ export const ShareExperience = () => {
     setNewImage(e.target.value);
   };
 
-  const navigate = useNavigate();
-
-  const publicationCollectionRef = collection(db, "publications");
-
   const createPublication = async () => {
+    const publicationCollectionRef = collection(db, "publications");
     await addDoc(publicationCollectionRef, {
       name: newName,
       weight: newWeight,
@@ -80,19 +72,9 @@ export const ShareExperience = () => {
       imageUrl: newImage,
       _ownerId: auth?.currentUser?.uid,
     });
-
-    // const newPublication = {
-    //   muscleGroup: newMuscleGroup,
-    //   name: newName,
-    //   weight: newWeight,
-    //   height: newHeight,
-    //   description: newDescription,
-    //   imageUrl: newImage,
-    //   _ownerId: auth?.currentUser?.uid,
-    // };
-
     navigate("/catalog");
   };
+
   return (
     <Stack
       sx={{

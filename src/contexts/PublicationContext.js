@@ -1,7 +1,6 @@
-import { doc, getDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import publicationServiceFactory from "../services/publicationServices.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { publicationServiceFactory } from "../services/publicationServices.js";
 
 export const PublicationContext = createContext();
 
@@ -10,11 +9,14 @@ export const PublicationProvider = ({ children }) => {
   const [publications, setPublications] = useState([]);
   const publicationService = publicationServiceFactory();
 
+
   useEffect(() => {
     publicationService.getAll().then((result) => {
       setPublications(result);
     });
   }, []);
+
+
 
   const onCreatePublicationSubmit = async (data) => {
     const newPublication = await publicationService.create(data);
@@ -23,20 +25,53 @@ export const PublicationProvider = ({ children }) => {
   };
 
   const onPublicationEditSubmit = async (values) => {
-    const result = await publicationService.edit(values.id, values);
-    setPublications((state) =>
-      state.map((oldPublication) =>
-        oldPublication.id === values.id ? result : oldPublication
-      )
+    console.log(values._id);
+
+    const result = await publicationService.edit(values._id, values);
+
+    setPublications(result);
+    // setPublications((state) =>
+    // state.map((oldPublication) =>
+    //     oldPublication._id === values._id ? result : oldPublication
+    //   )
+    // );
+    navigate(`/catalog/${values._id}`);
+  };
+
+  // const onPublicationEditSubmit = async (values) => {
+  //   const publicationDoc = doc(db, "publications", publicationId);
+  //   await updateDoc(publicationDoc, values);
+  //   navigate(`/catalog/${publicationId}`);
+  // };
+
+  const getPublication = (publicationId) => {
+    return publications.find((publication) => publication.id === publicationId);
+  };
+
+  const deletePublication = (publicationId) => {
+    const caution = window.confirm(
+      "Are you sure you want to delete this public?"
     );
-    navigate(`/catalog/$${values.id}`);
+    if (caution) {
+      setPublications((state) =>
+        state.filter((publication) => publication.id !== publicationId)
+      );
+    }
   };
 
   const contextValues = {
     publications,
     onCreatePublicationSubmit,
     onPublicationEditSubmit,
+    getPublication,
+    deletePublication,
   };
+
+  return (
+    <PublicationContext.Provider value={contextValues}>
+      {children}
+    </PublicationContext.Provider>
+  );
 };
 
 export const usePublicationContext = () => {

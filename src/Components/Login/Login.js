@@ -35,9 +35,7 @@ export const Login = () => {
         loginEmail,
         loginPassword
       );
-      console.log("You have successfully logged in!");
 
-      console.log(user);
       navigate("/catalog");
     } catch (error) {
       console.log(error.message);

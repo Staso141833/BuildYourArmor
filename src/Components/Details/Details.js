@@ -24,6 +24,8 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../../config/firebase.js";
+import { publicationServiceFactory } from "../../services/publicationServices.js";
+import { usePublicationContext } from "../../contexts/PublicationContext.js";
 
 const myColors = {
   black: "#070707",
@@ -35,35 +37,50 @@ const myColors = {
 
 export const Details = () => {
   const [publication, setPublication] = useState({});
-
+  const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
+  const { deletePublication } = usePublicationContext();
 
-  const navigate = useNavigate();
   useEffect(() => {
-    const docRef = doc(db, "publications", publicationId);
-    const getPublication = async () => {
-      const data = await getDoc(docRef);
-
-      setPublication(data.data());
-    };
-
-    getPublication();
+    publicationService.getOne(publicationId).then((result) => {
+      setPublication(result.data());
+    });
   }, [publicationId]);
 
-  const curUser = auth?.currentUser?.uid;
-  const oId = publication._ownerId;
-  console.log(oId)
-  console.log(curUser)
+  const onDeleteClick = () => {
  
+    const result = "Are you sure you want to delete this furniture?";
+
+    if (result) {
+      deletePublication(publicationId);
+      publicationService.delete(publicationId);
+    }
+  };
+  
+  publication["_id"] = publicationId;
+
+  console.log(publication._id)
+
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   const docRef = doc(db, "publications", publicationId);
+  //   const getPublication = async () => {
+  //     const data = await getDoc(docRef);
+
+  //     setPublication(data.data());
+  //   };
+
+  //   getPublication();
+  // }, [publicationId]);
+
   const isOwner = publication._ownerId === auth?.currentUser?.uid;
 
-  const onDeletePublication = async () => {
-    const publicationDoc = doc(db, "publications", publicationId);
-    window.alert("Are you sure you want to delete this publication?");
-    await deleteDoc(publicationDoc);
-
-    navigate("/catalog");
-  };
+  // const onDeletePublication = async () => {
+  //   const publicationDoc = doc(db, "publications", publicationId);
+  //   window.alert("Are you sure you want to delete this publication?");
+  //   await deleteDoc(publicationDoc);
+  //   navigate("/catalog");
+  // };
 
   return (
     <>
@@ -155,7 +172,7 @@ export const Details = () => {
                     </Link>
                     <Button
                       variant="contained"
-                      onClick={onDeletePublication}
+                      onClick={onDeleteClick}
                       sx={{
                         backgroundColor: myColors.black,
                         color: myColors["light-silver"],

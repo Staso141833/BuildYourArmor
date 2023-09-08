@@ -12,6 +12,8 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "../../hooks/useForm.js";
+import { publicationServiceFactory } from "../../services/publicationServices.js";
+import { usePublicationContext } from "../../contexts/PublicationContext.js";
 
 const myColors = {
   black: "#070707",
@@ -34,17 +36,11 @@ const muscleGroups = [
 ];
 
 export const Edit = () => {
+  const { onPublicationEditSubmit } = usePublicationContext();
+  const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
   const navigate = useNavigate();
 
-  const onPublicationEditSubmit = async (values) => {
-    const publicationDoc = doc(db, "publications", publicationId);
-    await updateDoc(publicationDoc, values);
-    console.log(values._ownerId)
-    console.log(values.name)
-    navigate(`/catalog/${publicationId}`);
-  };
- 
   const { values, changeHandler, onSubmit, changeValues } = useForm(
     {
       name: "",
@@ -58,16 +54,33 @@ export const Edit = () => {
   );
 
   useEffect(() => {
-    const docRef = doc(db, "publications", publicationId);
-    const getPublication = async () => {
-      const data = await getDoc(docRef);
-      console.log(data.data());
-      changeValues(data.data());
-    };
-    getPublication();
+    publicationService.getOne(publicationId).then((publication) => {
+      const result = publication.data();
+
+      changeValues(result);
+      // const result = publication.data().indexOf("value");
+    });
   }, [publicationId]);
 
-  const onOwnerClick = () => {};
+  values["_id"] = publicationId;
+
+  console.log(values);
+
+  // const onPublicationEditSubmit = async (values) => {
+  //   const publicationDoc = doc(db, "publications", publicationId);
+  //   await updateDoc(publicationDoc, values);
+  //   navigate(`/catalog/${publicationId}`);
+  // };
+
+  // useEffect(() => {
+  //   const docRef = doc(db, "publications", publicationId);
+  //   const getPublication = async () => {
+  //     const data = await getDoc(docRef);
+  //     console.log(data.data());
+  //     changeValues(data.data());
+  //   };
+  //   getPublication();
+  // }, [publicationId]);
 
   return (
     <Stack
