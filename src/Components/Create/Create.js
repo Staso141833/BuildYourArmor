@@ -39,41 +39,57 @@ const muscleGroups = [
 ];
 
 export const Create = () => {
-  const [newName, setNewName] = useState("");
-  const [newWeight, setNewWeight] = useState(0);
-  const [newHeight, setNewHeight] = useState(0);
-  const [newDescription, setNewDescription] = useState("");
-  const [newImage, setNewImage] = useState("");
+  // const [newName, setNewName] = useState("");
+  // const [newWeight, setNewWeight] = useState(0);
+  // const [newHeight, setNewHeight] = useState(0);
+  // const [newDescription, setNewDescription] = useState("");
+  // const [newImage, setNewImage] = useState("");
 
-  const navigate = useNavigate();
-  const newNameHandler = (e) => {
-    setNewName(e.target.value);
-  };
-  const newWeightHandler = (e) => {
-    setNewWeight(Number(e.target.value));
-  };
-  const newHeightHandler = (e) => {
-    setNewHeight(Number(e.target.value));
-  };
-  const newDescriptionHandler = (e) => {
-    setNewDescription(e.target.value);
-  };
-  const newImageHandler = (e) => {
-    setNewImage(e.target.value);
-  };
+  // const navigate = useNavigate();
+  // const newNameHandler = (e) => {
+  //   setNewName(e.target.value);
+  // };
+  // const newWeightHandler = (e) => {
+  //   setNewWeight(Number(e.target.value));
+  // };
+  // const newHeightHandler = (e) => {
+  //   setNewHeight(Number(e.target.value));
+  // };
+  // const newDescriptionHandler = (e) => {
+  //   setNewDescription(e.target.value);
+  // };
+  // const newImageHandler = (e) => {
+  //   setNewImage(e.target.value);
+  // };
 
-  const createPublication = async () => {
-    const publicationCollectionRef = collection(db, "publications");
-    await addDoc(publicationCollectionRef, {
-      name: newName,
-      weight: newWeight,
-      height: newHeight,
-      description: newDescription,
-      imageUrl: newImage,
-      _ownerId: auth?.currentUser?.uid,
-    });
-    navigate("/catalog");
-  };
+  const { onCreatePublicationSubmit } = usePublicationContext();
+  
+  // const ownerId = auth?.currentUser?.uid;
+  // console.log(ownerId)
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      name: "",
+      weight: "",
+      height: "",
+      description: "",
+      imageUrl: "",
+      _ownerId: ""
+    },
+    onCreatePublicationSubmit
+  );
+
+  // const createPublication = async () => {
+  //   const publicationCollectionRef = collection(db, "publications");
+  //   await addDoc(publicationCollectionRef, {
+  //     name: newName,
+  //     weight: newWeight,
+  //     height: newHeight,
+  //     description: newDescription,
+  //     imageUrl: newImage,
+  //     _ownerId: auth?.currentUser?.uid,
+  //   });
+  //   navigate("/catalog");
+  // };
 
   return (
     <Stack
@@ -159,8 +175,8 @@ export const Create = () => {
               name="name"
               variant="outlined"
               placeholder="Name"
-              value={newName}
-              onChange={newNameHandler}
+              value={values.name}
+              onChange={changeHandler}
               sx={{ width: "100%" }}
             />
             <TextField
@@ -169,8 +185,8 @@ export const Create = () => {
               variant="outlined"
               name="weight"
               placeholder="Other explanation"
-              value={newWeight}
-              onChange={newWeightHandler}
+              value={values.weight}
+              onChange={changeHandler}
               sx={{ width: "100%" }}
             />
             <TextField
@@ -179,8 +195,8 @@ export const Create = () => {
               name="height"
               variant="outlined"
               placeholder="How to do"
-              value={newHeight}
-              onChange={newHeightHandler}
+              value={values.height}
+              onChange={changeHandler}
               sx={{ width: "100%" }}
             />
 
@@ -191,8 +207,8 @@ export const Create = () => {
               name="description"
               multiline
               rows={4}
-              value={newDescription}
-              onChange={newDescriptionHandler}
+              value={values.description}
+              onChange={changeHandler}
               sx={{ width: "100%" }}
             />
 
@@ -202,8 +218,8 @@ export const Create = () => {
               name="imageUrl"
               type="img"
               placeholder="Image Url"
-              value={newImage}
-              onChange={newImageHandler}
+              value={values.imageUrl}
+              onChange={changeHandler}
               sx={{ width: "100%" }}
             />
           </FormControl>
@@ -211,7 +227,7 @@ export const Create = () => {
 
         <Button
           variant="outlined"
-          onClick={createPublication}
+          onClick={onSubmit}
           sx={{
             backgroundColor: "#170f0a",
             color: "#fbc760",

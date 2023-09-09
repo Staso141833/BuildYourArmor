@@ -57,9 +57,9 @@ export const Details = () => {
     }
   };
   
-  publication["_id"] = publicationId;
+ 
 
-  console.log(publication._id)
+
 
   // const navigate = useNavigate();
   // useEffect(() => {

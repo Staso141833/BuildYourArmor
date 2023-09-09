@@ -1,4 +1,4 @@
-import { db } from "../config/firebase.js";
+import { auth, db } from "../config/firebase.js";
 import {
   collection,
   getDocs,
@@ -25,6 +25,9 @@ export const publicationServiceFactory = (token) => {
   };
 
   const create = async (newPublication) => {
+    const ownerId = auth?.currentUser?.uid;
+
+    newPublication["_ownerId"] = ownerId;
     const docRefference = collection(db, "publications");
     const data = await addDoc(docRefference, newPublication);
 

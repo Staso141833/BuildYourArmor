@@ -64,8 +64,6 @@ export const Edit = () => {
 
   values["_id"] = publicationId;
 
-  console.log(values);
-
   // const onPublicationEditSubmit = async (values) => {
   //   const publicationDoc = doc(db, "publications", publicationId);
   //   await updateDoc(publicationDoc, values);
