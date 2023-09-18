@@ -17,7 +17,7 @@ export const publicationServiceFactory = (token) => {
 
     return data;
   };
-
+ 
   const getOne = async (publicationId) => {
     const docRefference = doc(db, "publications", publicationId);
     const data = await getDoc(docRefference);

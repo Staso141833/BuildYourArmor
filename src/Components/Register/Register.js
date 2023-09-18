@@ -1,38 +1,20 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
-import { useState } from "react";
-
+import { useContext } from "react";
 import { auth } from "../../config/firebase.js";
-import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { AuthContext } from "../../contexts/AuthContext.js";
+import { useForm } from "../../hooks/useForm.js";
 
 export const Register = () => {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const navigate = useNavigate();
-
-  const emailHandler = (e) => {
-    setRegisterEmail(e.target.value);
-  };
-
-  const passwordHandler = (e) => {
-    setRegisterPassword(e.target.value);
-  };
-
-  const onRegisterSubmit = async () => {
-    try {
-      console.log("Before register!");
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      navigate("/catalog");
-      console.log(user);
-      console.log(user.user.uid);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  const { onRegisterSubmit } = useContext(AuthContext);
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      auth: auth,
+      email: "",
+      password: "",
+      rePassword: "",
+    },
+    onRegisterSubmit
+  );
 
   return (
     <>
@@ -82,8 +64,9 @@ export const Register = () => {
             <TextField
               label="Emails"
               type="email"
-              value={registerEmail}
-              onChange={emailHandler}
+              name="email"
+              value={values.email}
+              onChange={changeHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
@@ -95,30 +78,30 @@ export const Register = () => {
               label="Password"
               color="warning"
               type="password"
-              value={registerPassword}
-              onChange={passwordHandler}
+              name="password"
+              value={values.password}
+              onChange={changeHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
             />
-            {/* <TextField
-              label="Re-password"
+            <TextField
+              label="re-password"
+              color="warning"
               type="password"
               name="rePassword"
-              placeholder="rePassword"
-              onChange={(event) => {
-                setRegisterPassword(event.target.value);
-              }}
+              value={values.rePassword}
+              onChange={changeHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
               }}
-            /> */}
+            />
             <Button
-              onClick={onRegisterSubmit}
+              onClick={onSubmit}
               variant="outlined"
               sx={{
                 backgroundColor: "#170f0a",
@@ -159,3 +142,33 @@ export const Register = () => {
     </>
   );
 };
+
+// const [registerEmail, setRegisterEmail] = useState("");
+// const [registerPassword, setRegisterPassword] = useState("");
+// const [registerRePassword, setRegisterRePassword] = useState("");
+// const navigate = useNavigate();
+
+// const emailHandler = (e) => {
+//   setRegisterEmail(e.target.value);
+// };
+
+// const passwordHandler = (e) => {
+//   setRegisterPassword(e.target.value);
+// };
+
+// const rePasswordHandler = (e) => {
+// setRegisterRePassword(e.target.value)
+// }
+
+// const onRegisterSubmit = async () => {
+//   try {
+//     const user = await createUserWithEmailAndPassword(
+//       auth,
+//       registerEmail,
+//       registerPassword
+//     );
+//     navigate("/catalog");
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };

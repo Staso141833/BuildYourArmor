@@ -5,42 +5,48 @@ import { auth } from "../../config/firebase.js";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
-// const myColors = {
-//   black: "#070707",
-//   "dark-silver": "#847470",
-//   "light-silver": "#b9b3ae",
-//   gold: "#fbc760",
-//   white: "#edebea",
-// };
+import { useForm } from "../../hooks/useForm.js";
+import { useAuthContext } from "../../contexts/AuthContext.js";
 
 export const Login = () => {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
 
-  const emailHandler = (e) => {
-    setLoginEmail(e.target.value);
-  };
 
-  const passwordHandler = (e) => {
-    setLoginPassword(e.target.value);
-  };
+  // const { onLoginSubmit } = useAuthContext();
+  // const { values, changeHandler, onSubmit } = useForm(
+  //   {
+  //     auth: auth,
+  //     loginEmail: "",
+  //     loginPassword: "",
+  //   },
+  //   onLoginSubmit
+  // );
 
-  const navigate = useNavigate();
+ const [loginEmail, setLoginEmail] = useState("");
+ const [loginPassword, setLoginPassword] = useState("");
 
-  const onLoginSubmit = async () => {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
+ const emailHandler = (e) => {
+   setLoginEmail(e.target.value);
+ };
 
-      navigate("/catalog");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+ const passwordHandler = (e) => {
+   setLoginPassword(e.target.value);
+ };
+
+ const navigate = useNavigate();
+
+ const onLoginSubmit = async () => {
+   try {
+     const user = await signInWithEmailAndPassword(
+       auth,
+       loginEmail,
+       loginPassword
+     );
+
+     navigate("/catalog");
+   } catch (error) {
+     console.log(error.message);
+   }
+ };
 
   return (
     <>
@@ -90,6 +96,7 @@ export const Login = () => {
             <TextField
               label="Emails"
               type="email"
+              name="loginEmail"
               value={loginEmail}
               onChange={emailHandler}
               sx={{
@@ -102,6 +109,7 @@ export const Login = () => {
             <TextField
               label="Password"
               type="password"
+              name="loginPassword"
               value={loginPassword}
               onChange={passwordHandler}
               sx={{
@@ -144,3 +152,30 @@ export const Login = () => {
     </>
   );
 };
+
+// const [loginEmail, setLoginEmail] = useState("");
+// const [loginPassword, setLoginPassword] = useState("");
+
+// const emailHandler = (e) => {
+//   setLoginEmail(e.target.value);
+// };
+
+// const passwordHandler = (e) => {
+//   setLoginPassword(e.target.value);
+// };
+
+// const navigate = useNavigate();
+
+// const onLoginSubmit = async () => {
+//   try {
+//     const user = await signInWithEmailAndPassword(
+//       auth,
+//       loginEmail,
+//       loginPassword
+//     );
+
+//     navigate("/catalog");
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };

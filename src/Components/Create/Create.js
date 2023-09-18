@@ -8,6 +8,8 @@ import {
   InputLabel,
   Stack,
   TextField,
+  Select,
+  MenuItem,
 } from "@mui/material";
 
 import { auth, db } from "../../config/firebase.js";
@@ -39,57 +41,20 @@ const muscleGroups = [
 ];
 
 export const Create = () => {
-  // const [newName, setNewName] = useState("");
-  // const [newWeight, setNewWeight] = useState(0);
-  // const [newHeight, setNewHeight] = useState(0);
-  // const [newDescription, setNewDescription] = useState("");
-  // const [newImage, setNewImage] = useState("");
-
-  // const navigate = useNavigate();
-  // const newNameHandler = (e) => {
-  //   setNewName(e.target.value);
-  // };
-  // const newWeightHandler = (e) => {
-  //   setNewWeight(Number(e.target.value));
-  // };
-  // const newHeightHandler = (e) => {
-  //   setNewHeight(Number(e.target.value));
-  // };
-  // const newDescriptionHandler = (e) => {
-  //   setNewDescription(e.target.value);
-  // };
-  // const newImageHandler = (e) => {
-  //   setNewImage(e.target.value);
-  // };
-
   const { onCreatePublicationSubmit } = usePublicationContext();
-  
-  // const ownerId = auth?.currentUser?.uid;
-  // console.log(ownerId)
+
   const { values, changeHandler, onSubmit } = useForm(
     {
+      muscleGroup: "",
       name: "",
       weight: "",
       height: "",
       description: "",
       imageUrl: "",
-      _ownerId: ""
+      _ownerId: "",
     },
     onCreatePublicationSubmit
   );
-
-  // const createPublication = async () => {
-  //   const publicationCollectionRef = collection(db, "publications");
-  //   await addDoc(publicationCollectionRef, {
-  //     name: newName,
-  //     weight: newWeight,
-  //     height: newHeight,
-  //     description: newDescription,
-  //     imageUrl: newImage,
-  //     _ownerId: auth?.currentUser?.uid,
-  //   });
-  //   navigate("/catalog");
-  // };
 
   return (
     <Stack
@@ -143,33 +108,6 @@ export const Create = () => {
               gap: "24px",
             }}
           >
-            {/* <Box sx={{ width: "80%" }}>
-              <InputLabel sx={{ left: "auto" }}>muscleGroup</InputLabel>
-              <Select
-                sx={{ width: 300 }}
-                label={"muscleGroup"}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      maxHeight: 200,
-                      backgroundColor: "#665d58",
-                      color: "#fbc760",
-                    },
-                  },
-                }}
-              >
-                {muscleGroups.map((newMuscleGroup) => {
-                  return (
-                    <MenuItem
-                      value={newMuscleGroup}
-                      onChange={newMuscleGroupHandler}
-                    >
-                      {newMuscleGroup}{" "}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </Box> */}
             <TextField
               label="Name"
               name="name"
@@ -179,6 +117,31 @@ export const Create = () => {
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
+
+            <Box width="220px">
+              <TextField
+                sx={{ width: "220px" }}
+                label="select muscle"
+                select
+                name="muscleGroup"
+                color="warning"
+                value={values.muscleGroup}
+                onChange={changeHandler}
+                SelectProps={{
+                  multiline: true,
+                }}
+              >
+                {muscleGroups.map((muscleGroup) => (
+                  <MenuItem
+                    value={muscleGroup}
+                    color="warning"
+                    sx={{ width: "auto", backgroundColor: myColors.gold }}
+                  >
+                    {muscleGroup}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Box>
             <TextField
               label="kgs"
               type="number"

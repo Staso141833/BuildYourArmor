@@ -20,12 +20,17 @@ import {
   doc,
   getDoc,
   getDocs,
+  query,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../../config/firebase.js";
 import { publicationServiceFactory } from "../../services/publicationServices.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
+import * as commentService from "../../services/commentService.js";
+import { AddComent } from "./AddComment.js";
+import { publicationReducer } from "../../reducers/publicationReducer.js";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const myColors = {
   black: "#070707",
@@ -39,16 +44,24 @@ export const Details = () => {
   const [publication, setPublication] = useState({});
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
+  // const [publication, dispatch] = useReducer(publicationReducer, {});
   const { deletePublication } = usePublicationContext();
+  const [comments, setComments] = useState({});
 
+  const navigate = useNavigate();
   useEffect(() => {
-    publicationService.getOne(publicationId).then((result) => {
-      setPublication(result.data());
-    });
+    const docRef = doc(db, "publications", publicationId);
+    const getPublication = async () => {
+      const data = await getDoc(docRef);
+      setPublication(data.data());
+    };
+
+    getPublication();
   }, [publicationId]);
 
+  const isAuthenticated = auth?.currentUser;
+
   const onDeleteClick = () => {
- 
     const result = "Are you sure you want to delete this furniture?";
 
     if (result) {
@@ -56,31 +69,19 @@ export const Details = () => {
       publicationService.delete(publicationId);
     }
   };
-  
- 
-
-
-
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   const docRef = doc(db, "publications", publicationId);
-  //   const getPublication = async () => {
-  //     const data = await getDoc(docRef);
-
-  //     setPublication(data.data());
-  //   };
-
-  //   getPublication();
-  // }, [publicationId]);
 
   const isOwner = publication._ownerId === auth?.currentUser?.uid;
 
-  // const onDeletePublication = async () => {
-  //   const publicationDoc = doc(db, "publications", publicationId);
-  //   window.alert("Are you sure you want to delete this publication?");
-  //   await deleteDoc(publicationDoc);
-  //   navigate("/catalog");
-  // };
+  // useEffect(() => {
+    
+  //   // const q = query(collection(db, `publications/${publicationId}/comments`));
+  // //   const getComments = async () => {
+  // //     const data = commentService.getAll(publicationId)
+  // //     setComments(data);
+  // //   };
+  // //   getComments();
+  // // }, [publicationId]);
+  // // console.log(comments)
 
   return (
     <>
@@ -111,11 +112,11 @@ export const Details = () => {
           >
             <Card
               sx={{
-                height: "70vh",
+                height: "76vh",
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
                 alignItems: "center",
               }}
             >
@@ -127,6 +128,9 @@ export const Details = () => {
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div">
                   Author: {publication.name}
+                </Typography>
+                <Typography gutterBottom variant="h4" component="div">
+                  Muscle: {publication.muscleGroup}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
                   Weight: {publication.weight}
@@ -204,6 +208,7 @@ export const Details = () => {
                       textDecoration: "none",
                       width: "auto",
                       borderRadius: "6px",
+                      mb: 3,
                       textTransform: "uppercase",
                       fontSize: "16px",
                       "&:hover": {
@@ -217,55 +222,11 @@ export const Details = () => {
                 )}
               </CardActions>
             </Card>
-
-            <Accordion
-              sx={{
-                width: "100%",
-                backgroundColor: myColors.gold,
-                marginBottom: "124px",
-                borderRadius: "4px",
-                overflow: "hidden",
-              }}
-            >
-              <AccordionSummary
-                id="panel1-header"
-                aria-controls="panel1-content"
-                disableGutters="false"
-                expandIcon={<ExpandMore />}
-              >
-                {" "}
-                <Typography>Write your comment...</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <TextField
-                  label="My comment"
-                  variant="outlined"
-                  placeholder="My comment"
-                  multiline
-                  rows={6}
-                  sx={{ height: "240px", width: "80%" }}
-                />
-              </AccordionDetails>
-
-              <Button
-                variant="contained"
-                size="large"
-                sx={{
-                  backgroundColor: myColors.black,
-                  color: myColors["light-silver"],
-                  fontWeight: "bold",
-                  transition: "all 300ms",
-                  width: "34%",
-                  marginBottom: 4,
-                  "&:hover": {
-                    backgroundColor: myColors["light-silver"],
-                    color: myColors.black,
-                  },
-                }}
-              >
-                Comment
-              </Button>
-            </Accordion>
+            {isAuthenticated && (
+              <div>
+                <AddComent onCommentSubmit={publicationId} />
+              </div>
+            )}
           </Stack>
 
           <Stack
@@ -335,6 +296,7 @@ export const Details = () => {
               >
                 Comments
               </Typography>
+              {/* {loading && "Loading..."}
               <Stack
                 sx={{
                   border: "4px inset",
@@ -346,72 +308,20 @@ export const Details = () => {
                   backgroundColor: myColors.black,
                 }}
               >
-                <Typography
-                  variant="p"
-                  sx={{
-                    width: "80%",
-                    fontSize: "20px",
-                    color: myColors.white,
-                    margin: "12px 0px",
-                  }}
-                >
-                  {" "}
-                  Emil Ushev: Amazing excercice! I do it every time I go into
-                  the gym. Thank you!
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    width: "80%",
-                    fontSize: "20px",
-                    color: myColors.white,
-                    margin: "12px 0px",
-                  }}
-                >
-                  {" "}
-                  Rado Pankov: Great excercice! I do it every time I go into the
-                  gym. Thank you!
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    width: "80%",
-                    fontSize: "20px",
-                    color: myColors.white,
-                    margin: "12px 0px",
-                  }}
-                >
-                  {" "}
-                  Michail Ushev: Amazing excercice! I do it every time I go into
-                  the gym. Thank you!
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    width: "80%",
-                    fontSize: "20px",
-                    color: myColors.white,
-                    margin: "12px 0px",
-                  }}
-                >
-                  {" "}
-                  Michail Ushev: Amazing excercice! I do it every time I go into
-                  the gym. Thank you!
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    width: "80%",
-                    fontSize: "20px",
-                    color: myColors.white,
-                    margin: "12px 0px",
-                  }}
-                >
-                  {" "}
-                  Michail Ushev: Amazing excercice! I do it every time I go into
-                  the gym. Thank you!
-                </Typography>
-              </Stack>
+                {querySnapshot?.map((doc) => (
+                  <Typography
+                    variant="p"
+                    sx={{
+                      width: "80%",
+                      fontSize: "20px",
+                      color: myColors.white,
+                      margin: "12px 0px",
+                    }}
+                  >
+                    {doc.name}
+                  </Typography>
+                ))}
+              </Stack> */}
             </Stack>
           </Stack>
         </Stack>
@@ -419,3 +329,34 @@ export const Details = () => {
     </>
   );
 };
+
+// const navigate = useNavigate();
+// useEffect(() => {
+//   const docRef = doc(db, "publications", publicationId);
+//   const getPublication = async () => {
+//     const data = await getDoc(docRef);
+
+//     setPublication(data.data());
+//   };
+
+//   getPublication();
+// }, [publicationId]);
+
+// const onDeletePublication = async () => {
+//   const publicationDoc = doc(db, "publications", publicationId);
+//   window.alert("Are you sure you want to delete this publication?");
+//   await deleteDoc(publicationDoc);
+//   navigate("/catalog");
+// };
+
+//   Promise.all([
+//     publicationService.getOne(publicationId),
+//     commentService.getAll(publicationId),
+//   ]).then(([publicationData, comments]) => {
+//     const publicationState = {
+//       ...publicationData,
+//       comments,
+//     };
+//     dispatch({ type: "PUBLICATION_FETCH", playload: publicationState });
+//   });
+// }, [publicationId]);

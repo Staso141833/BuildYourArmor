@@ -1,7 +1,7 @@
 import { Masonry } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { db } from "../../config/firebase.js";
+import { auth, db } from "../../config/firebase.js";
 import { collection, doc, getDocs } from "firebase/firestore";
 import { CatalogItem } from "./CatalogItem.js";
 
@@ -27,7 +27,9 @@ export const Catalog = () => {
     getPublications();
   }, []);
 
-  console.log(publications);
+
+
+ 
   return (
     <Box
       sx={{

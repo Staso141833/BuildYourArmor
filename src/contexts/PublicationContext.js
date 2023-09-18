@@ -16,30 +16,25 @@ export const PublicationProvider = ({ children }) => {
   }, []);
 
   const onCreatePublicationSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
     const newPublication = await publicationService.create(data);
-    setPublications(newPublication);
-    // setPublications((state) => [...state, newPublication]);
+    //setPublications(newPublication);
+    setPublications((state) => [...state, newPublication]);
+
     navigate("/catalog");
   };
 
   const onPublicationEditSubmit = async (values) => {
-    console.log(values);
-    console.log(values._id);
-
     const result = await publicationService.edit(values._id, values);
 
     setPublications(result);
     //  setPublications((state) =>
-    //  state.map((oldPublication) =>
+    //    state?.map((oldPublication) =>
     //      oldPublication._id === values._id ? result : oldPublication
     //    )
     //  );
     navigate(`/catalog/${values._id}`);
   };
-
-
-
 
   const getPublication = (publicationId) => {
     return publications.find((publication) => publication.id === publicationId);

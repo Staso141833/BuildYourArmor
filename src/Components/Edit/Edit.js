@@ -1,8 +1,10 @@
 import {
+  Box,
   Button,
   CardMedia,
   FormControl,
   FormGroup,
+  MenuItem,
   Paper,
   Stack,
   TextField,
@@ -39,7 +41,6 @@ export const Edit = () => {
   const { onPublicationEditSubmit } = usePublicationContext();
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
-  const navigate = useNavigate();
 
   const { values, changeHandler, onSubmit, changeValues } = useForm(
     {
@@ -58,7 +59,6 @@ export const Edit = () => {
       const result = publication.data();
 
       changeValues(result);
-      // const result = publication.data().indexOf("value");
     });
   }, [publicationId]);
 
@@ -92,7 +92,7 @@ export const Edit = () => {
       <Paper
         sx={{
           width: "660px",
-          height: "660px",
+          height: "auto",
           backgroundColor: "#fbc760",
           border: "3px solid #170f0a",
           display: "flex",
@@ -106,16 +106,15 @@ export const Edit = () => {
           zIndex: "2",
           boxShadow: "40px 30px 30px #170f0a",
           "&:hover": {
-            padding: "4px",
             transition: "all 0.4s ease-in-out",
           },
         }}
       >
         <Stack
+          component="h2"
           sx={{
-            fontSize: 34,
             fontWeight: 700,
-            marginTop: "34px",
+            marginTop: 3,
             letterSpacing: 2,
             textTransform: "uppercase",
           }}
@@ -130,27 +129,6 @@ export const Edit = () => {
               gap: "24px",
             }}
           >
-            {/* <Box sx={{ width: "80%" }}>
-              <InputLabel sx={{ left: "auto" }}>muscleGroup</InputLabel>
-              <Select
-                sx={{ width: 300 }}
-                label={"muscleGroup"}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      maxHeight: 200,
-                      backgroundColor: "#665d58",
-                      color: "#fbc760",
-                    },
-                  },
-                }}
-              >
-                {muscleGroups.map((muscleValue) => {
-                  return <MenuItem value={muscleValue}>{muscleValue}</MenuItem>;
-                })}
-              </Select>
-            </Box> */}
-
             <TextField
               variant="outlined"
               placeholder="Name"
@@ -159,6 +137,40 @@ export const Edit = () => {
               value={values.name}
               onChange={changeHandler}
             />
+            <Box width="220px">
+              <TextField
+                // sx={{ width: "220px" }}
+                label="select muscle"
+                select
+                fullWidth
+                name="muscleGroup"
+                color="warning"
+                helperText="Please select your muscle group"
+                value={values.muscleGroup}
+                error
+                onChange={changeHandler}
+                SelectProps={{
+                  multiline: true,
+                }}
+              >
+                {muscleGroups.map((muscleGroup) => (
+                  <MenuItem
+                    value={muscleGroup}
+                    color="warning"
+                    sx={{
+                      width: "auto",
+                      background: myColors.gold,
+                      "&:hover": {
+                        background: "#ffff",
+                        transition: "all 0.4s ease-in-out",
+                      },
+                    }}
+                  >
+                    {muscleGroup}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Box>
             <TextField
               type="number"
               variant="outlined"
@@ -211,10 +223,12 @@ export const Edit = () => {
             fontSize: "16px",
             fontFamily: "Robotto",
             width: "60%",
+            mb: 1,
             border: " 1px solid #4c4850",
             "&:hover": {
               backgroundColor: "#4c4850",
               border: "1px solid black",
+              transition: "all 0.4s ease-in-out",
             },
           }}
         >

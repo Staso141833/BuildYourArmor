@@ -8,11 +8,12 @@ import "./navbar.css";
 import { Stack, Link, Typography, Button } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
 
-
 import { auth } from "../../config/firebase.js";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
+import { AuthContext, useAuthContext } from "../../contexts/AuthContext.js";
 import { useNavigate } from "react-router-dom";
+import RemoveCookie from "../../hooks/removeCookie.js";
 
 const myColors = {
   black: "#070707",
@@ -30,24 +31,20 @@ export default function NavigationBar() {
     right: false,
   });
 
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
 
-  const navigate = useNavigate();
-
-  const onLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log("You have already logged out!");
-
-      navigate("/home");
-    } catch (err) {
-      console.error(err);
-    }
+  const onClickLogout = async () => {
+    await signOut(auth);
+    RemoveCookie("usrin");
+    
+    navigate("/")
   };
+
   const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
 
   const isAuthenticated = auth.currentUser?.accessToken;
@@ -189,7 +186,7 @@ export default function NavigationBar() {
                   <Button
                     underline="none"
                     sx={{ color: "#fbc760", fontWeight: "bold" }}
-                    onClick={onLogout}
+                    onClick={onClickLogout}
                   >
                     Sign Out
                   </Button>
