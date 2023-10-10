@@ -101,7 +101,12 @@ export const Create = () => {
           Share your expereince
         </Stack>
 
-        <FormGroup row sx={{ justifyContent: "space-around" }}>
+        <FormGroup
+          row
+          // method="POST"
+          // onClick={onSubmit}
+          sx={{ justifyContent: "space-around" }}
+        >
           <FormControl
             sx={{
               display: "flex",
@@ -124,7 +129,7 @@ export const Create = () => {
                 label="select muscle"
                 select
                 name="muscleGroup"
-                color="warning"
+                color="success"
                 value={values.muscleGroup}
                 onChange={changeHandler}
                 SelectProps={{
@@ -134,8 +139,15 @@ export const Create = () => {
                 {muscleGroups.map((muscleGroup) => (
                   <MenuItem
                     value={muscleGroup}
-                    color="warning"
-                    sx={{ width: "auto", backgroundColor: myColors.gold }}
+                    sx={{
+                      width: "auto",
+                      backgroundColor: myColors.gold,
+                      transition: "all 350ms",
+                      "&:hover": {
+                        backgroundColor: myColors.black,
+                        color: myColors.gold
+                      },
+                    }}
                   >
                     {muscleGroup}
                   </MenuItem>

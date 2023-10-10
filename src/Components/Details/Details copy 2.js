@@ -32,6 +32,7 @@ import * as commentService from "../../services/commentService.js";
 import { AddComent } from "./AddComment.js";
 import { publicationReducer } from "../../reducers/publicationReducer.js";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { dispatch } from "page";
 
 const myColors = {
   black: "#070707",
@@ -45,14 +46,19 @@ export const Details = () => {
   // const [publication, setPublication] = useState({});
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
-  // const [pub, setPub] = useState({});
-  const [publication, dispatch] = useReducer(publicationReducer, {
-    comments: [],
-  });
+  const [publication, dispatch] = useReducer(publicationReducer, {});
   const { deletePublication } = usePublicationContext();
-  //  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const navigate = useNavigate();
+  console.log(publicationId);
+
+  const getPublication = async (publicationId) => {
+    const docRef = doc(db, "publications", publicationId);
+    const data = await getDoc(docRef);
+
+    return data;
+  };
 
   useEffect(() => {
     Promise.all([
@@ -63,53 +69,42 @@ export const Details = () => {
         ...publicationData,
         comments,
       };
-      //  setPub(publicationData);
-      //  setComments(comments);
-      // publicationState.comments.forEach((comment) =>
-      //   console.log(comment)
-      // );
-
+      console.log(publicationData);
       dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
     });
   }, [publicationId]);
 
-  console.log(publication);
-
-  const currentUser = auth?.currentUser?.email;
-  const isAuthenticated = auth?.currentUser?.uid;
-  const isOwner = publication._ownerId === auth?.currentUser?.uid;
   const userEmail = auth?.currentUser?.email;
-  const ownerId = publication._ownerId;
-  console.log(ownerId);
 
   const onCommentSubmit = async (values) => {
-    const response = await setDoc(
-      doc(db, `publications/${publicationId}/comments`, values.newComment),
+    const newComment = await setDoc(
+      doc(
+        db,
+        `publications/${publicationId.publicationId}/comments`,
+        values.newComment
+      ),
       { comment: values.newComment }
     );
+    setComments((state) => [...state, newComment]);
 
-    //  setComments((state) => [...state, values.newComment]);
-
-    console.log(response);
-
-    const updatedInfo = {
-      ownerId,
-      publicationId,
-      response,
-    };
     dispatch({
       type: "COMMENT_ADD",
-      payload: updatedInfo,
+      payload: newComment,
       userEmail,
     });
   };
 
-  const getPublication = async () => {
-    const docRef = doc(db, "publications", publicationId);
-    const data = await getDoc(docRef);
+  // useEffect(() => {
+  //   const docRef = doc(db, "publications", publicationId);
+  //   const getPublication = async () => {
+  //     const data = await getDoc(docRef);
+  //     setPublication(data.data());
+  //   };
 
-    return data.data();
-  };
+  //   getPublication();
+  // }, [publicationId]);
+
+  const isAuthenticated = auth?.currentUser;
 
   const onDeleteClick = () => {
     const result = "Are you sure you want to delete this furniture?";
@@ -119,6 +114,21 @@ export const Details = () => {
       publicationService.delete(publicationId);
     }
   };
+
+  const isOwner = publication._ownerId === auth?.currentUser?.uid;
+
+  useEffect(() => {
+    const getAllComments = async () => {
+      const q = query(collection(db, `publications/${publicationId}/comments`));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().newComment);
+      });
+    };
+
+    getAllComments();
+  }, [publicationId]);
 
   return (
     <>
@@ -333,29 +343,7 @@ export const Details = () => {
               >
                 Comments
               </Typography>
-              <Typography>Checking</Typography>
-              <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                {publication?.comments?.map((comment) => (
-                  <li key={comment.id}>
-                    <Typography
-                      variant="p"
-                      sx={{
-                        width: "80%",
-                        fontSize: "20px",
-                        color: myColors.black,
-                        margin: "12px 0px",
-                      }}
-                    >
-                      {currentUser} commented: {comment.comment}{" "}
-                      <Button sx={{ backgroundColor: myColors.gold }}>
-                        Like
-                      </Button>
-                    </Typography>
-                  </li>
-                ))}
-              </Stack>
-
-              {/* {loading && "Loading...
+              {/* {loading && "Loading..."}
               <Stack
                 sx={{
                   border: "4px inset",

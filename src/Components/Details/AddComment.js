@@ -7,9 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useForm } from "../../hooks/useForm.js";
-import { useState } from "react";
-import { db } from "../../config/firebase.js";
+
 import {
   collection,
   query,
@@ -18,10 +16,15 @@ import {
   setDoc,
   doc,
   getDoc,
+  addDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import * as commentService from "../../services/commentService.js";
+import { useForm } from "../../hooks/useForm.js";
+import { useReducer, useState } from "react";
+import { auth, db } from "../../config/firebase.js";
+import { publicationReducer } from "../../reducers/publicationReducer.js";
 
 const myColors = {
   black: "#070707",
@@ -31,27 +34,42 @@ const myColors = {
   white: "#edebea",
 };
 
-export const AddComent = () => {
-  const [comments, setComments] = useState([]);
-  const publicationId = useParams();
+export const AddComent = ({ onCommentSubmit }) => {
+  const [publication, dispatch] = useReducer(publicationReducer, {});
 
-  const onCommentSubmit = async (values) => {
-    const newComment = await setDoc(
-      doc(
-        db,
-        `publications/${publicationId.publicationId}/comments`,
-        values.newComment
-      ),
-      { comment: values.newComment }
-    );
-    setComments((state) => [...state, newComment]);
-  };
+  // const onCommentSubmit = async (values) => {
+  //   console.log(values.newComment);
+  //   console.log(publicationId.publicationId);
+  //   const newComment = await setDoc(
+  //     doc(
+  //       db,
+  //       `publications/${publicationId.publicationId}/comments`,
+  //       values.newComment
+  //     ),
+  //     { comment: values.newComment }
+  //   );
+
+  //   const comment = values.newComment;
+  //   dispatch({
+  //     type: "COMMENT_ADD",
+  //     payload: comment,
+  //     userEmail,
+  //   });
+  // setComments(newComment)
+  // setComments((state) => [...state, newComment]);
+  //};
+
   const { values, changeHandler, onSubmit } = useForm(
     {
       newComment: "",
     },
     onCommentSubmit
   );
+
+  const [comments, setComments] = useState([]);
+  const publicationId = useParams();
+
+  const userEmail = auth?.currentUser?.email;
 
   return (
     <>

@@ -7,9 +7,10 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 
-export const publicationServiceFactory = (token) => {
+export const publicationServiceFactory = () => {
   const publicationsCollectionRefference = collection(db, "publications");
 
   const getAll = async () => {
@@ -17,7 +18,7 @@ export const publicationServiceFactory = (token) => {
 
     return data;
   };
- 
+
   const getOne = async (publicationId) => {
     const docRefference = doc(db, "publications", publicationId);
     const data = await getDoc(docRefference);
@@ -28,9 +29,11 @@ export const publicationServiceFactory = (token) => {
     const ownerId = auth?.currentUser?.uid;
 
     newPublication["_ownerId"] = ownerId;
+
     const docRefference = collection(db, "publications");
     const data = await addDoc(docRefference, newPublication);
-
+    console.log(data.firestore)
+    console.log(data.id)
     return data;
   };
 

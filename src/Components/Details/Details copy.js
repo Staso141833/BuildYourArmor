@@ -21,7 +21,6 @@ import {
   getDoc,
   getDocs,
   query,
-  setDoc,
 } from "firebase/firestore";
 import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -42,74 +41,26 @@ const myColors = {
 };
 
 export const Details = () => {
-  // const [publication, setPublication] = useState({});
+  const [publication, setPublication] = useState({});
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
-  // const [pub, setPub] = useState({});
-  const [publication, dispatch] = useReducer(publicationReducer, {
-    comments: [],
-  });
+  // const [publication, dispatch] = useReducer(publicationReducer, {});
   const { deletePublication } = usePublicationContext();
-  //  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all([
-      getPublication(publicationId),
-      commentService.getAll(publicationId),
-    ]).then(([publicationData, comments]) => {
-      const publicationState = {
-        ...publicationData,
-        comments,
-      };
-      //  setPub(publicationData);
-      //  setComments(comments);
-      // publicationState.comments.forEach((comment) =>
-      //   console.log(comment)
-      // );
-
-      dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
-    });
+    const docRef = doc(db, "publications", publicationId);
+    const getPublication = async () => {
+      const data = await getDoc(docRef);
+      setPublication(data.data());
+    };
+    getPublication();
   }, [publicationId]);
 
-  console.log(publication);
-
-  const currentUser = auth?.currentUser?.email;
-  const isAuthenticated = auth?.currentUser?.uid;
-  const isOwner = publication._ownerId === auth?.currentUser?.uid;
-  const userEmail = auth?.currentUser?.email;
-  const ownerId = publication._ownerId;
-  console.log(ownerId);
-
-  const onCommentSubmit = async (values) => {
-    const response = await setDoc(
-      doc(db, `publications/${publicationId}/comments`, values.newComment),
-      { comment: values.newComment }
-    );
-
-    //  setComments((state) => [...state, values.newComment]);
-
-    console.log(response);
-
-    const updatedInfo = {
-      ownerId,
-      publicationId,
-      response,
-    };
-    dispatch({
-      type: "COMMENT_ADD",
-      payload: updatedInfo,
-      userEmail,
-    });
-  };
-
-  const getPublication = async () => {
-    const docRef = doc(db, "publications", publicationId);
-    const data = await getDoc(docRef);
-
-    return data.data();
-  };
+  const currentUser = auth.currentUser.email
+  const isAuthenticated = auth?.currentUser;
 
   const onDeleteClick = () => {
     const result = "Are you sure you want to delete this furniture?";
@@ -117,9 +68,37 @@ export const Details = () => {
     if (result) {
       deletePublication(publicationId);
       publicationService.delete(publicationId);
+      navigate("/catalog")
     }
   };
 
+  const isOwner = publication._ownerId === auth?.currentUser?.uid;
+
+  const newComments = [];
+  useEffect(() => {
+    const getAllComments = async () => {
+      const q = query(collection(db, `publications/${publicationId}/comments`));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        newComments.push(doc.data())
+        // console.log(doc.id, " => ", doc.data().newComment);
+      });
+      setComments(newComments)
+    };
+
+    getAllComments();
+  }, [publicationId]);
+  //
+
+  //     const q = query(collection(db, `publications/${publicationId}/comments`));
+  //     const getComments = async () => {
+  //       const data = commentService.getAll(publicationId)
+  //       setComments(data);
+  //     };
+  //     getComments();
+  //
+  
+  // console.log(comments.map((x) => console.log(x.newComment)))
   return (
     <>
       <Box
@@ -261,7 +240,7 @@ export const Details = () => {
             </Card>
             {isAuthenticated && (
               <div>
-                <AddComent onCommentSubmit={onCommentSubmit} />
+                <AddComent />
               </div>
             )}
           </Stack>
@@ -333,10 +312,13 @@ export const Details = () => {
               >
                 Comments
               </Typography>
-              <Typography>Checking</Typography>
-              <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                {publication?.comments?.map((comment) => (
-                  <li key={comment.id}>
+              <Typography>
+                Checking
+              </Typography>
+              <Stack>
+      
+                {comments.map((eachComment) => (
+                  <li key={eachComment.id}>
                     <Typography
                       variant="p"
                       sx={{
@@ -346,10 +328,7 @@ export const Details = () => {
                         margin: "12px 0px",
                       }}
                     >
-                      {currentUser} commented: {comment.comment}{" "}
-                      <Button sx={{ backgroundColor: myColors.gold }}>
-                        Like
-                      </Button>
+                     {currentUser} commented: {eachComment.newComment}
                     </Typography>
                   </li>
                 ))}

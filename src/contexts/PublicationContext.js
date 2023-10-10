@@ -10,16 +10,39 @@ export const PublicationProvider = ({ children }) => {
   const publicationService = publicationServiceFactory();
 
   useEffect(() => {
-    publicationService.getAll().then((result) => {
-      setPublications(result);
-    });
+    const test = async () => {
+      const data = await publicationService.getAll();
+
+      console.log(data.docs)
+
+      setPublications(
+        data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+
+    test();
   }, []);
 
+  console.log(publications)
+
+  // useEffect(() => {
+  //   const getPublications = async () => {
+  //     const data = await getDocs(publicationsCollectionRefference);
+
+  //     setPublications(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   };
+
+  //   getPublications();
+  // }, []);
+
   const onCreatePublicationSubmit = async (data) => {
-    console.log(data);
     const newPublication = await publicationService.create(data);
     //setPublications(newPublication);
-    setPublications((state) => [...state, newPublication]);
+
+    setPublications((state) => {
+      console.log(state);
+      return [...state, newPublication];
+    });
 
     navigate("/catalog");
   };

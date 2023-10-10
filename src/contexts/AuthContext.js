@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }) => {
   const authService = authServiceFactory();
 
   const onLoginSubmit = async (values) => {
-    console.log(values);
     try {
       const result = await signInWithEmailAndPassword(values);
 
@@ -55,7 +54,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const onRegisterSubmit = async (values) => {
-    console.log(values);
     const { rePassword, ...registerData } = values;
     if (rePassword !== registerData.password) {
       throw Error("Passwords do not match!");

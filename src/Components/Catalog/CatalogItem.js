@@ -23,11 +23,7 @@ const myColors = {
 export const CatalogItem = ({
   id,
   name,
-  weight,
-  height,
-  description,
   imageUrl,
-  _ownerId,
 }) => {
   // const [publicationId, setPublicationId] = useState();
 
