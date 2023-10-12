@@ -13,31 +13,18 @@ export const PublicationProvider = ({ children }) => {
     const test = async () => {
       const data = await publicationService.getAll();
 
-      console.log(data.docs)
+      const newData = data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-      setPublications(
-        data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
+      setPublications(newData);
     };
+    console.log(publications);
 
     test();
   }, []);
 
-  console.log(publications)
-
-  // useEffect(() => {
-  //   const getPublications = async () => {
-  //     const data = await getDocs(publicationsCollectionRefference);
-
-  //     setPublications(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
-
-  //   getPublications();
-  // }, []);
 
   const onCreatePublicationSubmit = async (data) => {
     const newPublication = await publicationService.create(data);
-    //setPublications(newPublication);
 
     setPublications((state) => {
       console.log(state);
@@ -50,12 +37,12 @@ export const PublicationProvider = ({ children }) => {
   const onPublicationEditSubmit = async (values) => {
     const result = await publicationService.edit(values._id, values);
 
-    setPublications(result);
-    //  setPublications((state) =>
-    //    state?.map((oldPublication) =>
-    //      oldPublication._id === values._id ? result : oldPublication
-    //    )
-    //  );
+    // setPublications(result);
+      setPublications((state) =>
+        state?.map((oldPublication) =>
+          oldPublication._id === values._id ? result : oldPublication
+        )
+      );
     navigate(`/catalog/${values._id}`);
   };
 

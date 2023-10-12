@@ -8,23 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-  getDoc,
-  addDoc,
-} from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import * as commentService from "../../services/commentService.js";
 import { useForm } from "../../hooks/useForm.js";
-import { useReducer, useState } from "react";
-import { auth, db } from "../../config/firebase.js";
-import { publicationReducer } from "../../reducers/publicationReducer.js";
 
 const myColors = {
   black: "#070707",
@@ -35,41 +19,12 @@ const myColors = {
 };
 
 export const AddComent = ({ onCommentSubmit }) => {
-  const [publication, dispatch] = useReducer(publicationReducer, {});
-
-  // const onCommentSubmit = async (values) => {
-  //   console.log(values.newComment);
-  //   console.log(publicationId.publicationId);
-  //   const newComment = await setDoc(
-  //     doc(
-  //       db,
-  //       `publications/${publicationId.publicationId}/comments`,
-  //       values.newComment
-  //     ),
-  //     { comment: values.newComment }
-  //   );
-
-  //   const comment = values.newComment;
-  //   dispatch({
-  //     type: "COMMENT_ADD",
-  //     payload: comment,
-  //     userEmail,
-  //   });
-  // setComments(newComment)
-  // setComments((state) => [...state, newComment]);
-  //};
-
   const { values, changeHandler, onSubmit } = useForm(
     {
-      newComment: "",
+      comment: "",
     },
     onCommentSubmit
   );
-
-  const [comments, setComments] = useState([]);
-  const publicationId = useParams();
-
-  const userEmail = auth?.currentUser?.email;
 
   return (
     <>
@@ -94,10 +49,10 @@ export const AddComent = ({ onCommentSubmit }) => {
         <AccordionDetails>
           <TextField
             label="My comment"
-            name="newComment"
+            name="comment"
             variant="outlined"
             placeholder="My comment"
-            value={values.newComment}
+            value={values.comment}
             onChange={changeHandler}
             multiline
             rows={6}
@@ -128,18 +83,3 @@ export const AddComent = ({ onCommentSubmit }) => {
     </>
   );
 };
-
-// const onCommentSubmit = async () => {
-//   const q = query(collection(db, "publications"));
-//   const querySnapshot = await getDoc(q);
-//   const queryData = querySnapshot.docs.map((detail) => ({
-//     ...detail.data(),
-//     id: detail.id,
-//   }));
-
-//   queryData.map(async (v) => {
-//     await setDoc(doc(db, `publications/${v.id}/comments`, newComment), {
-//       newComment,
-//     });
-//   });
-// };

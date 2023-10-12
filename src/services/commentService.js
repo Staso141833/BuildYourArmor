@@ -15,7 +15,7 @@ export const getAll = async (publicationId) => {
   const q = query(collection(db, `publications/${publicationId}/comments`));
 
   const querySnapshot = await getDocs(q);
-  const data = querySnapshot.docs.map((doc) => ({
+  const data = querySnapshot?.docs?.map((doc) => ({
     ...doc.data(),
     id: doc.id,
   }));
@@ -23,26 +23,31 @@ export const getAll = async (publicationId) => {
   return data;
 };
 
+// useEffect(() => {
+//   const test = async () => {
+//     const data = await publicationService.getAll();
 
-// const [comments, setComments ] = useState()
-// export const onCommentSubmit = async (values, publicationId) => {
+//     console.log(data.docs);
 
-//   const newComment = await setDoc(
-//     doc(
-//       db,
-//       `publications/${publicationId.publicationId}/comments`,
-//       values.newComment
-//     ),
-//     { comment: values.newComment }
-//   );
+//     setPublications(
+//       data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id }))
+//     );
+//   };
 
-//   setComments((state) => [...state, newComment]);
-// };
+//   test();
+// }, []);
 
-// export const create = async (values, publicationId) => {
-//   const data = await setDoc(
-//     doc(db, `publications/${publicationId}/comments`, values.newComment), {values.newComment}
-//   );
+// export const getAll = async (publicationId) => {
 
-// return data;
+//   const q = query(collection(db, `publications/${publicationId}/comments`));
+
+//   const querySnapshot = await getDocs(q);
+//   console.log(querySnapshot.docs[1].id)
+//   const data = querySnapshot?.docs?.map((doc) => ({
+//     ...doc.data(),
+//     id: doc.id,
+//   }));
+
+//   console.log(data);
+//   return data;
 // };

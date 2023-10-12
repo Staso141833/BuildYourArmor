@@ -142,6 +142,7 @@ export const Create = () => {
                     sx={{
                       width: "auto",
                       backgroundColor: myColors.gold,
+                      color: myColors.white,
                       transition: "all 350ms",
                       "&:hover": {
                         backgroundColor: myColors.black,

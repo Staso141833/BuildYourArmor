@@ -156,10 +156,10 @@ export const Edit = () => {
                 {muscleGroups.map((muscleGroup) => (
                   <MenuItem
                     value={muscleGroup}
-                    color="warning"
                     sx={{
                       width: "auto",
                       background: myColors.gold,
+                      color: myColors.white,
                       "&:hover": {
                         background: "#ffff",
                         transition: "all 0.4s ease-in-out",

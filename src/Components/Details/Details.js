@@ -1,8 +1,4 @@
-import { ExpandMore } from "@mui/icons-material";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
   Button,
   Card,
@@ -15,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -42,15 +39,13 @@ const myColors = {
 };
 
 export const Details = () => {
-  // const [publication, setPublication] = useState({});
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
-  // const [pub, setPub] = useState({});
+
   const [publication, dispatch] = useReducer(publicationReducer, {
     comments: [],
   });
   const { deletePublication } = usePublicationContext();
-  //  const [comments, setComments] = useState([]);
 
   const navigate = useNavigate();
 
@@ -59,44 +54,43 @@ export const Details = () => {
       getPublication(publicationId),
       commentService.getAll(publicationId),
     ]).then(([publicationData, comments]) => {
+      console.log(comments);
       const publicationState = {
         ...publicationData,
         comments,
       };
-      //  setPub(publicationData);
-      //  setComments(comments);
-      // publicationState.comments.forEach((comment) =>
-      //   console.log(comment)
-      // );
 
       dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
     });
   }, [publicationId]);
 
-  console.log(publication);
-
-  const currentUser = auth?.currentUser?.email;
   const isAuthenticated = auth?.currentUser?.uid;
   const isOwner = publication._ownerId === auth?.currentUser?.uid;
   const userEmail = auth?.currentUser?.email;
   const ownerId = publication._ownerId;
-  console.log(ownerId);
 
-  const onCommentSubmit = async (values) => {
-    const response = await setDoc(
-      doc(db, `publications/${publicationId}/comments`, values.newComment),
-      { comment: values.newComment }
+  const onCommentSubmit = async (comment) => {
+    const docRefference = collection(
+      db,
+      `publications/${publicationId}/comments`
     );
 
-    //  setComments((state) => [...state, values.newComment]);
+    const copyOfComment = comment.comment;
 
-    console.log(response);
+    const data = await addDoc(docRefference, comment);
+    console.log(data);
+    console.log(data.id);
 
+    const commentId = data.id;
     const updatedInfo = {
-      ownerId,
+      ["_ownerId"]: ownerId,
+      ["_commentId"]: commentId,
       publicationId,
-      response,
+      comment: copyOfComment,
     };
+
+    console.log(updatedInfo);
+    console.log(userEmail);
     dispatch({
       type: "COMMENT_ADD",
       payload: updatedInfo,
@@ -117,8 +111,11 @@ export const Details = () => {
     if (result) {
       deletePublication(publicationId);
       publicationService.delete(publicationId);
+      navigate("/catalog");
     }
   };
+
+  console.log(publication);
 
   return (
     <>
@@ -333,20 +330,25 @@ export const Details = () => {
               >
                 Comments
               </Typography>
-              <Typography>Checking</Typography>
+              {!publication.comments?.length && (
+                <Typography variant="h5" sx={{ textShadow: "14px 10px 18px" }}>
+                  No comments yet. Be the first one who will give an opinion!
+                </Typography>
+              )}
+
               <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {publication?.comments?.map((comment) => (
-                  <li key={comment.id}>
+                  <li key={comment._commentId}>
                     <Typography
                       variant="p"
                       sx={{
                         width: "80%",
-                        fontSize: "20px",
+                        fontSize: "18px",
                         color: myColors.black,
                         margin: "12px 0px",
                       }}
                     >
-                      {currentUser} commented: {comment.comment}{" "}
+                      {publication?.author?.email} commented: {comment.comment}{" "}
                       <Button sx={{ backgroundColor: myColors.gold }}>
                         Like
                       </Button>
@@ -419,3 +421,27 @@ export const Details = () => {
 //     dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
 //   });
 // }, [publicationId]);
+
+// onCommentSubmit last update
+
+// const onCommentSubmit = async (values) => {
+//   const response = await setDoc(
+//     doc(db, `publications/${publicationId}/comments`, values.newComment),
+//     { comment: values.newComment }
+//   );
+
+//   console.log(response);
+
+//   const updatedInfo = {
+//     ownerId,
+//     publicationId,
+//     response,
+//   };
+
+//   console.log(updatedInfo);
+//   dispatch({
+//     type: "COMMENT_ADD",
+//     payload: updatedInfo,
+//     userEmail,
+//   });
+// };
