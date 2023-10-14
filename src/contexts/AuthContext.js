@@ -10,6 +10,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -31,9 +32,11 @@ export const AuthProvider = ({ children }) => {
   const authService = authServiceFactory();
 
   const onLoginSubmit = async (values) => {
+    console.log(values)
     try {
+      console.log("Get into try!")
       const result = await signInWithEmailAndPassword(values);
-
+      console.log(result)
       if (result) {
         console.log(result);
         RemoveCookie("usrin");
@@ -41,7 +44,7 @@ export const AuthProvider = ({ children }) => {
         setSuccess(true);
         setUserIn(result);
         navigate("/catalog");
-        return result;
+        // return result;
       }
     } catch (error) {
       console.log(`${error}`);

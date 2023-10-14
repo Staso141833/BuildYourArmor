@@ -22,7 +22,6 @@ export const PublicationProvider = ({ children }) => {
     test();
   }, []);
 
-
   const onCreatePublicationSubmit = async (data) => {
     const newPublication = await publicationService.create(data);
 
@@ -37,12 +36,11 @@ export const PublicationProvider = ({ children }) => {
   const onPublicationEditSubmit = async (values) => {
     const result = await publicationService.edit(values._id, values);
 
-    // setPublications(result);
-      setPublications((state) =>
-        state?.map((oldPublication) =>
-          oldPublication._id === values._id ? result : oldPublication
-        )
-      );
+    setPublications((state) =>
+      state?.map((oldPublication) =>
+        oldPublication._id === values._id ? result : oldPublication
+      )
+    );
     navigate(`/catalog/${values._id}`);
   };
 

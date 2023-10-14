@@ -8,9 +8,7 @@ import {
   Link,
   Button,
 } from "@mui/material";
-import { deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase.js";
-import { useEffect, useState } from "react";
+
 
 const myColors = {
   black: "#070707",
@@ -25,22 +23,7 @@ export const CatalogItem = ({
   name,
   imageUrl,
 }) => {
-  // const [publicationId, setPublicationId] = useState();
 
-  // useEffect(() => {
-  //   const getId = async () => {
-  //     const docRef = doc(db, "publications", doc.id);
-  //     const data = await getDoc(docRef);
-
-  //     setPublicationId(data);
-  //   };
-
-  //   getId();
-  // }, []);
-
-  // const onConsole = () => {
-  //   console.log(`${publicationId}`);
-  // };
 
   return (
     <Box>

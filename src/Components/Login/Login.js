@@ -7,46 +7,74 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
+import RemoveCookie from "../../hooks/removeCookie.js";
+import SetCookie from "../../hooks/setCookie.js";
+import GetCookie from "../../hooks/getCookie.js";
 
 export const Login = () => {
-
-
   // const { onLoginSubmit } = useAuthContext();
   // const { values, changeHandler, onSubmit } = useForm(
   //   {
-  //     auth: auth,
+  //     ["auth"]: auth,
   //     loginEmail: "",
   //     loginPassword: "",
   //   },
   //   onLoginSubmit
   // );
 
- const [loginEmail, setLoginEmail] = useState("");
- const [loginPassword, setLoginPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [success, setSuccess] = useState("");
+  const [newError, setNewError] = useState("");
 
- const emailHandler = (e) => {
-   setLoginEmail(e.target.value);
- };
+  const checkUser = GetCookie("usrin");
 
- const passwordHandler = (e) => {
-   setLoginPassword(e.target.value);
- };
+  const [userIn, setUserIn] = useState(
+    checkUser === undefined ? {} : JSON.stringify(checkUser)
+  );
 
- const navigate = useNavigate();
+  const emailHandler = (e) => {
+    setLoginEmail(e.target.value);
+  };
 
- const onLoginSubmit = async () => {
-   try {
-     const user = await signInWithEmailAndPassword(
-       auth,
-       loginEmail,
-       loginPassword
-     );
+  const passwordHandler = (e) => {
+    setLoginPassword(e.target.value);
+  };
 
-     navigate("/catalog");
-   } catch (error) {
-     console.log(error.message);
-   }
- };
+  const navigate = useNavigate();
+
+  const values = {
+    auth,
+    loginEmail,
+    loginPassword,
+  };
+
+  const onLoginSubmit = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      if (user) {
+        RemoveCookie("usrin");
+        SetCookie("usrin", JSON.stringify(user));
+        setSuccess(true);
+        setUserIn(user);
+        navigate("/catalog");
+        return user;
+      }
+
+      navigate("/catalog");
+    } catch (error) {
+      console.log(`${error}`);
+      if (error.response) {
+        console.log(error.response.data.message);
+        setNewError(error.response.data.message);
+        console.log(error.response.status);
+      }
+    }
+  };
 
   return (
     <>
@@ -153,6 +181,34 @@ export const Login = () => {
   );
 };
 
+// const [loginEmail, setLoginEmail] = useState("");
+// const [loginPassword, setLoginPassword] = useState("");
+
+// const emailHandler = (e) => {
+//   setLoginEmail(e.target.value);
+// };
+
+// const passwordHandler = (e) => {
+//   setLoginPassword(e.target.value);
+// };
+
+// const navigate = useNavigate();
+
+// const onLoginSubmit = async () => {
+//   try {
+//     const user = await signInWithEmailAndPassword(
+//       auth,
+//       loginEmail,
+//       loginPassword
+//     );
+
+//     navigate("/catalog");
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+
+// login 14/10/23
 // const [loginEmail, setLoginEmail] = useState("");
 // const [loginPassword, setLoginPassword] = useState("");
 

@@ -1,6 +1,4 @@
-
 import jsCookie from "js-cookie";
-
 
 const SetCookie = (cookiename, usrin) => {
   jsCookie.set(cookiename, usrin, {

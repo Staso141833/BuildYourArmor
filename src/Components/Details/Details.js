@@ -6,6 +6,8 @@ import {
   CardContent,
   CardMedia,
   Link,
+  List,
+  ListItem,
   Stack,
   TextField,
   Typography,
@@ -29,6 +31,7 @@ import * as commentService from "../../services/commentService.js";
 import { AddComent } from "./AddComment.js";
 import { publicationReducer } from "../../reducers/publicationReducer.js";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { Like } from "./Like.js";
 
 const myColors = {
   black: "#070707",
@@ -45,7 +48,9 @@ export const Details = () => {
   const [publication, dispatch] = useReducer(publicationReducer, {
     comments: [],
   });
+  const [likes, setLikes] = useState({});
   const { deletePublication } = usePublicationContext();
+
 
   const navigate = useNavigate();
 
@@ -54,12 +59,12 @@ export const Details = () => {
       getPublication(publicationId),
       commentService.getAll(publicationId),
     ]).then(([publicationData, comments]) => {
-      console.log(comments);
+      publicationData["_id"] = publicationId;
       const publicationState = {
         ...publicationData,
         comments,
       };
-
+      console.log(publicationState);
       dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
     });
   }, [publicationId]);
@@ -74,23 +79,15 @@ export const Details = () => {
       db,
       `publications/${publicationId}/comments`
     );
-
-    const copyOfComment = comment.comment;
-
     const data = await addDoc(docRefference, comment);
-    console.log(data);
-    console.log(data.id);
-
     const commentId = data.id;
     const updatedInfo = {
       ["_ownerId"]: ownerId,
       ["_commentId"]: commentId,
       publicationId,
-      comment: copyOfComment,
+      comment: comment.comment,
     };
 
-    console.log(updatedInfo);
-    console.log(userEmail);
     dispatch({
       type: "COMMENT_ADD",
       payload: updatedInfo,
@@ -112,6 +109,8 @@ export const Details = () => {
       deletePublication(publicationId);
       publicationService.delete(publicationId);
       navigate("/catalog");
+    } else {
+      return ;
     }
   };
 
@@ -335,27 +334,28 @@ export const Details = () => {
                   No comments yet. Be the first one who will give an opinion!
                 </Typography>
               )}
-
-              <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <ul>
+                {/* <Stack sx={{ display: "flex", flexDirection: "column", gap: 1, alignItems: "center" }}> */}
                 {publication?.comments?.map((comment) => (
-                  <li key={comment._commentId}>
-                    <Typography
-                      variant="p"
-                      sx={{
-                        width: "80%",
-                        fontSize: "18px",
-                        color: myColors.black,
-                        margin: "12px 0px",
-                      }}
-                    >
-                      {publication?.author?.email} commented: {comment.comment}{" "}
-                      <Button sx={{ backgroundColor: myColors.gold }}>
-                        Like
-                      </Button>
-                    </Typography>
+                  <li key={comment.id} sx={{ width: "50%" }}>
+                    <Stack sx={{display: "flex", flexDirection: "row",}}>
+                      <Typography
+                        variant="p"
+                        sx={{
+                          width: "100%",
+                          fontSize: "18px",
+                          color: myColors.black,
+                          margin: "12px 0px",
+                        }}
+                      >
+                        {comment?.author?.email}commented: {comment.comment}{" "}
+                      </Typography>
+                      <Like commentId={comment.id} likes={likes}/>
+                    </Stack>
                   </li>
                 ))}
-              </Stack>
+                {/* </Stack> */}
+              </ul>
 
               {/* {loading && "Loading...
               <Stack

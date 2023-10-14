@@ -16,7 +16,7 @@ import { auth, db } from "../../config/firebase.js";
 
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
 import { useForm } from "../../hooks/useForm.js";
-import { addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -52,6 +52,7 @@ export const Create = () => {
       description: "",
       imageUrl: "",
       _ownerId: "",
+      createdAt: Timestamp.now().toDate(),
     },
     onCreatePublicationSubmit
   );

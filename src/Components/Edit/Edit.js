@@ -57,7 +57,6 @@ export const Edit = () => {
   useEffect(() => {
     publicationService.getOne(publicationId).then((publication) => {
       const result = publication.data();
-
       changeValues(result);
     });
   }, [publicationId]);
@@ -144,7 +143,7 @@ export const Edit = () => {
                 select
                 fullWidth
                 name="muscleGroup"
-                color="warning"
+                color="success"
                 helperText="Please select your muscle group"
                 value={values.muscleGroup}
                 error
@@ -160,6 +159,7 @@ export const Edit = () => {
                       width: "auto",
                       background: myColors.gold,
                       color: myColors.white,
+                      textTransform: "uppercase",
                       "&:hover": {
                         background: "#ffff",
                         transition: "all 0.4s ease-in-out",
@@ -169,7 +169,9 @@ export const Edit = () => {
                     {muscleGroup}
                   </MenuItem>
                 ))}
+              
               </TextField>
+              <Stack variant="p" sx={{fontSize: "16px"}}>Your current muscle is {values.muscleGroup}</Stack>
             </Box>
             <TextField
               type="number"

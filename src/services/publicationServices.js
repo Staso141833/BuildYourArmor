@@ -32,8 +32,6 @@ export const publicationServiceFactory = () => {
 
     const docRefference = collection(db, "publications");
     const data = await addDoc(docRefference, newPublication);
-    console.log(data.firestore)
-    console.log(data.id)
     return data;
   };
 
