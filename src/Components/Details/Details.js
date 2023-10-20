@@ -54,7 +54,7 @@ export const Details = () => {
 
   const navigate = useNavigate();
 
-  console.log(userId)
+  console.log(userId);
 
   useEffect(() => {
     Promise.all([
@@ -160,21 +160,31 @@ export const Details = () => {
     const getData = await getDoc(docRef);
     const updatedLikesCount = getData.data().likes;
     console.log(getData.data());
-    const updatedData = {
-      author: {
-        email: getData.data().author.email,
-      },
-      comment: getData.data().comment,
-      createdBy: getData.data().createdBy,
-      createdOn: getData.data().createdOn,
-      // likes: [updatedLikesCount],
-      publicationId: publicationId,
-      ["_id"]: getData.data().id,
-    };
-    console.log(updatedLikesCount);
+
     dispatch({
       type: "COMMENT_LIKES_UPDATE",
       payload: updatedLikesCount,
+      commentId,
+    });
+  };
+
+  const onClickEditCommentSubmit = async (values) => {
+    console.log(values.comment);
+    console.log(values._id);
+    const newComment = values.comment;
+    const commentId = values._id;
+    const docRefference = doc(
+      db,
+      `publications/${publicationId}/comments`,
+      commentId
+    );
+    const data = await updateDoc(docRefference, values);
+
+    console.log(data);
+
+    dispatch({
+      type: "COMMENT_EDIT",
+      payload: newComment,
       commentId,
     });
   };
@@ -189,6 +199,20 @@ export const Details = () => {
       await publicationService.delete(publication._id);
       deletePublication(publication._id);
       navigate("/catalog");
+    }
+  };
+
+  const onDeleteCommentClick = async (commentId, publicationId) => {
+    const caution = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+
+    if (caution) {
+      console.log(commentId);
+      console.log(publicationId);
+      await commentService.deleteComment(commentId, publicationId);
+
+      dispatch({ type: "COMMENT_DELETE", commentId  });
     }
   };
 
@@ -443,19 +467,26 @@ export const Details = () => {
                       }}
                     >
                       {comment?.author?.email} commented: {comment?.comment}
+                      {comment.createdBy === userId && (
+                        <EditAndDelete
+                          commentId={comment._id}
+                          onClickEditCommentSubmit={onClickEditCommentSubmit}
+                          onDeleteCommentClick={onDeleteCommentClick}
+                        />
+                      )}
                     </Typography>
-                    {userId && (
-                      <Like
-                        commentId={comment?._id}
-                        likesCount={comment?.likes}
-                        publicationId={publicationId}
-                        onLikeClick={onLikeClick}
-                      />
-                    )}
-
-                    {comment.createdBy === userId && (
-                      <EditAndDelete commentId={comment._id} />
-                    )}
+                    <Stack
+                      sx={{ display: "flex", flexDirection: "row", gap: 1 }}
+                    >
+                      {userId && (
+                        <Like
+                          commentId={comment?._id}
+                          likesCount={comment?.likes}
+                          publicationId={publicationId}
+                          onLikeClick={onLikeClick}
+                        />
+                      )}
+                    </Stack>
                   </Stack>
                 </ListItem>
               ))}

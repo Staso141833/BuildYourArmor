@@ -8,7 +8,7 @@ import { auth } from "../config/firebase.js";
 export const authServiceFactory = () => {
   const login = async (loginData) => {
     const data = await signInWithEmailAndPassword(loginData);
-    console.log(data)
+  
     return data;
   };
 
@@ -19,6 +19,8 @@ export const authServiceFactory = () => {
   };
 
   const logout = () => signOut(auth);
+
+
   return {
     login,
     register,

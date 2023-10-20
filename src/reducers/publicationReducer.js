@@ -1,11 +1,8 @@
 export const publicationReducer = (state, action) => {
-  // console.log(action);
   switch (action.type) {
     case "PUBLICATION_FETCH":
       return { ...action.payload };
-    case "COMMENT_ADD":   
-     console.log(action.payload);
-    console.log(action.commentId)
+    case "COMMENT_ADD":
       return {
         ...state,
         comments: [
@@ -19,12 +16,39 @@ export const publicationReducer = (state, action) => {
         ],
       };
     case "COMMENT_LIKES_UPDATE":
-      console.log(action.payload);
-      console.log(action.commentId)
-      return { ...state, comments: [...state.comments.map((currentComment) => currentComment._id === action.commentId ? {...currentComment, likes: [action.payload]} : {...currentComment})] };
-    //   return { ...state, comments: [state.comments.map((currentComment) => currentComment._id === action.commentId ? {...currentComment, likes: [currentComment.likes.push(action.payload)]} : currentComment)] };
-      default:
+      return {
+        ...state,
+        comments: [
+          ...state.comments.map((currentComment) =>
+            currentComment._id === action.commentId
+              ? { ...currentComment, likes: [action.payload] }
+              : { ...currentComment }
+          ),
+        ],
+      };
+
+    case "COMMENT_EDIT":
+      return {
+        ...state,
+        comments: [
+          ...state.comments.map((currentComment) =>
+            currentComment._id === action.commentId
+              ? { ...currentComment, comment: action.payload }
+              : { ...currentComment }
+          ),
+        ],
+      };
+
+    case "COMMENT_DELETE":
+      return {
+        ...state,
+        comments: [
+          ...state.comments.filter(
+            (currentComment) => currentComment._id !== action.commentId
+          ),
+        ],
+      };
+    default:
       return state;
   }
 };
-// ...state, comments: [...state.comments,{...action.payload, author: {email: action.userEmail,},},],};

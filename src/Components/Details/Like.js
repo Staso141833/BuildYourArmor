@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mui/material";
 
 import { FingerprintRounded } from "@mui/icons-material";
-
+import { colors } from "../../metaData/colors.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
@@ -27,10 +27,9 @@ export const Like = ({
     <Stack>
       <Button
         onClick={onLikeCommentClick}
-        color="success"
         variant="contained"
         startIcon={<FingerprintRounded />}
-        sx={{ width: "74px", textTransform: "lowercase" }}
+        sx={{ width: "74px", textTransform: "lowercase", backgroundColor: colors.gold }}
         style={{
           cursor: "pointer",
           color: likesCount?.includes(userId) ? "red" : "blue",
