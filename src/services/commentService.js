@@ -9,16 +9,31 @@ import {
 import { db } from "../config/firebase.js";
 
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-export const getAll = async (publicationId) => {
+
+
+export const getAll = async (publicationId, userId, userEmail) => {
+  
   const q = query(collection(db, `publications/${publicationId}/comments`));
 
   const querySnapshot = await getDocs(q);
+  // console.log(querySnapshot.docs[0])
+  // const currentUser = querySnapshot.docs[0]._userDataWriter.firestore._authCredentials.currentUser.uid
+  // console.log(querySnapshot.docs[0].data())
+  // const data = querySnapshot?.docs?.map((doc) => ({
+  //   author:{ email: userEmail, _id: userId},
+  //   ...doc.data(),
+  //   id: doc.id,
+  //   ["_ownerId"]:userId,
+  // }));
+
   const data = querySnapshot?.docs?.map((doc) => ({
     ...doc.data(),
-    id: doc.id,
-  }));
+    _id: doc.id,
+  }))
+
+  console.log(data);
 
   return data;
 };

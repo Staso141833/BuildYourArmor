@@ -37,7 +37,9 @@ const muscleGroups = [
   "wrist",
   "chest",
   "abs",
-  "legs",
+  "front thigh",
+  "back thigh",
+  "calves",
 ];
 
 export const Create = () => {
@@ -52,7 +54,7 @@ export const Create = () => {
       description: "",
       imageUrl: "",
       _ownerId: "",
-      createdAt: Timestamp.now().toDate(),
+      createdOn: Timestamp.now().toDate(),
     },
     onCreatePublicationSubmit
   );
@@ -147,7 +149,7 @@ export const Create = () => {
                       transition: "all 350ms",
                       "&:hover": {
                         backgroundColor: myColors.black,
-                        color: myColors.gold
+                        color: myColors.gold,
                       },
                     }}
                   >

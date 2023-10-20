@@ -2,79 +2,19 @@ import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import "./login.css";
 
 import { auth } from "../../config/firebase.js";
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
-import RemoveCookie from "../../hooks/removeCookie.js";
-import SetCookie from "../../hooks/setCookie.js";
-import GetCookie from "../../hooks/getCookie.js";
 
 export const Login = () => {
-  // const { onLoginSubmit } = useAuthContext();
-  // const { values, changeHandler, onSubmit } = useForm(
-  //   {
-  //     ["auth"]: auth,
-  //     loginEmail: "",
-  //     loginPassword: "",
-  //   },
-  //   onLoginSubmit
-  // );
-
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [success, setSuccess] = useState("");
-  const [newError, setNewError] = useState("");
-
-  const checkUser = GetCookie("usrin");
-
-  const [userIn, setUserIn] = useState(
-    checkUser === undefined ? {} : JSON.stringify(checkUser)
+  const { onLoginSubmit } = useAuthContext();
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      ["auth"]: auth,
+      loginEmail: "",
+      loginPassword: "",
+    },
+    onLoginSubmit
   );
-
-  const emailHandler = (e) => {
-    setLoginEmail(e.target.value);
-  };
-
-  const passwordHandler = (e) => {
-    setLoginPassword(e.target.value);
-  };
-
-  const navigate = useNavigate();
-
-  const values = {
-    auth,
-    loginEmail,
-    loginPassword,
-  };
-
-  const onLoginSubmit = async () => {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-      if (user) {
-        RemoveCookie("usrin");
-        SetCookie("usrin", JSON.stringify(user));
-        setSuccess(true);
-        setUserIn(user);
-        navigate("/catalog");
-        return user;
-      }
-
-      navigate("/catalog");
-    } catch (error) {
-      console.log(`${error}`);
-      if (error.response) {
-        console.log(error.response.data.message);
-        setNewError(error.response.data.message);
-        console.log(error.response.status);
-      }
-    }
-  };
 
   return (
     <>
@@ -125,8 +65,8 @@ export const Login = () => {
               label="Emails"
               type="email"
               name="loginEmail"
-              value={loginEmail}
-              onChange={emailHandler}
+              value={values.loginEmail}
+              onChange={changeHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
@@ -138,8 +78,8 @@ export const Login = () => {
               label="Password"
               type="password"
               name="loginPassword"
-              value={loginPassword}
-              onChange={passwordHandler}
+              value={values.loginPassword}
+              onChange={changeHandler}
               sx={{
                 width: "80%",
                 backgroundColor: "#B3AEAB",
@@ -147,7 +87,7 @@ export const Login = () => {
               }}
             />
             <Button
-              onClick={onLoginSubmit}
+              onClick={onSubmit}
               variant="outlined"
               sx={{
                 backgroundColor: "#170f0a",

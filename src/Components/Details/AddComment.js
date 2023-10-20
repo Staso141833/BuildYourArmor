@@ -55,8 +55,8 @@ export const AddComent = ({ onCommentSubmit }) => {
             value={values.comment}
             onChange={changeHandler}
             multiline
-            rows={6}
-            sx={{ height: "240px", width: "80%" }}
+            rows={4}
+            sx={{ height: "140px", width: "100%" }}
           />
         </AccordionDetails>
 
@@ -69,7 +69,7 @@ export const AddComent = ({ onCommentSubmit }) => {
             color: myColors["light-silver"],
             fontWeight: "bold",
             transition: "all 300ms",
-            width: "34%",
+            width: "44%",
             marginBottom: 4,
             "&:hover": {
               backgroundColor: myColors["light-silver"],

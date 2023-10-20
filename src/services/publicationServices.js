@@ -47,10 +47,9 @@ export const publicationServiceFactory = () => {
   //   navigate(`/catalog/${publicationId}`);
   // };
 
-  const deletePublication = async (id) => {
+  const deletePublication = (id) => {
     const docRefference = doc(db, "publications", id);
-    const data = await deleteDoc(docRefference);
-    return data;
+    return deleteDoc(docRefference);
   };
 
   return {

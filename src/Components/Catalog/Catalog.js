@@ -16,8 +16,6 @@ const myColors = {
 };
 
 export const Catalog = () => {
-  //const { publications } = usePublicationContext();
-  // console.log(publications.data())
   const [publications, setPublications] = useState([]);
   const publicationsCollectionRefference = collection(db, "publications");
 
@@ -26,9 +24,10 @@ export const Catalog = () => {
       const data = await getDocs(publicationsCollectionRefference);
       setPublications(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
     getPublications();
   }, []);
+
+  console.log(publications);
 
   return (
     <Box

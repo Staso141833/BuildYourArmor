@@ -1,8 +1,8 @@
 import jsCookie from "js-cookie";
 
-const SetCookie = (cookiename, usrin) => {
-  jsCookie.set(cookiename, usrin, {
-    expires: 3,
+const SetCookie = (cookiename, userIn) => {
+  jsCookie.set(cookiename, userIn, {
+    expires: 2,
     secure: true,
     sameSite: "strict",
     path: "/",

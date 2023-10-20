@@ -34,7 +34,9 @@ const muscleGroups = [
   "wrist",
   "chest",
   "abs",
-  "legs",
+  "front thigh",
+  "back thigh",
+  "calves",
 ];
 
 export const Edit = () => {
@@ -50,6 +52,7 @@ export const Edit = () => {
       description: "",
       imageUrl: "",
       _ownerId: auth?.currentUser?.uid,
+      
     },
     onPublicationEditSubmit
   );
@@ -61,23 +64,7 @@ export const Edit = () => {
     });
   }, [publicationId]);
 
-  values["_id"] = publicationId;
-
-  // const onPublicationEditSubmit = async (values) => {
-  //   const publicationDoc = doc(db, "publications", publicationId);
-  //   await updateDoc(publicationDoc, values);
-  //   navigate(`/catalog/${publicationId}`);
-  // };
-
-  // useEffect(() => {
-  //   const docRef = doc(db, "publications", publicationId);
-  //   const getPublication = async () => {
-  //     const data = await getDoc(docRef);
-  //     console.log(data.data());
-  //     changeValues(data.data());
-  //   };
-  //   getPublication();
-  // }, [publicationId]);
+    values["_id"] = publicationId;
 
   return (
     <Stack
@@ -169,9 +156,10 @@ export const Edit = () => {
                     {muscleGroup}
                   </MenuItem>
                 ))}
-              
               </TextField>
-              <Stack variant="p" sx={{fontSize: "16px"}}>Your current muscle is {values.muscleGroup}</Stack>
+              <Stack variant="p" sx={{ fontSize: "16px" }}>
+                Your current muscle is {values.muscleGroup}
+              </Stack>
             </Box>
             <TextField
               type="number"

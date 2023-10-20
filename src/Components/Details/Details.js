@@ -13,14 +13,16 @@ import {
   Typography,
 } from "@mui/material";
 import {
+  Timestamp,
   addDoc,
+  arrayRemove,
+  arrayUnion,
   collection,
-  deleteDoc,
   doc,
   getDoc,
   getDocs,
-  query,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -30,8 +32,10 @@ import { usePublicationContext } from "../../contexts/PublicationContext.js";
 import * as commentService from "../../services/commentService.js";
 import { AddComent } from "./AddComment.js";
 import { publicationReducer } from "../../reducers/publicationReducer.js";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+
 import { Like } from "./Like.js";
+import { useAuthContext } from "../../contexts/AuthContext.js";
+import { EditAndDelete } from "./EditAndDelete.js";
 
 const myColors = {
   black: "#070707",
@@ -44,34 +48,33 @@ const myColors = {
 export const Details = () => {
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
-
-  const [publication, dispatch] = useReducer(publicationReducer, {
-    comments: [],
-  });
-  const [likes, setLikes] = useState({});
+  const { userEmail, isAuthenticated, userId } = useAuthContext();
+  const [publication, dispatch] = useReducer(publicationReducer, {});
   const { deletePublication } = usePublicationContext();
 
-
   const navigate = useNavigate();
+
+  console.log(userId)
 
   useEffect(() => {
     Promise.all([
       getPublication(publicationId),
-      commentService.getAll(publicationId),
-    ]).then(([publicationData, comments]) => {
+      commentService.getAll(publicationId, userId, userEmail),
+    ]).then(([publicationData, commentsData]) => {
       publicationData["_id"] = publicationId;
+      const comments = commentsData;
+      // const comments = commentsData.map((comment) => ({...comment, ["_commentId"]: comment.id, ["_uid"]: userId, author: userEmail }))
+      console.log(commentsData);
       const publicationState = {
         ...publicationData,
         comments,
       };
-      console.log(publicationState);
+
       dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
     });
   }, [publicationId]);
 
-  const isAuthenticated = auth?.currentUser?.uid;
-  const isOwner = publication._ownerId === auth?.currentUser?.uid;
-  const userEmail = auth?.currentUser?.email;
+  const isOwner = publication._ownerId === userId;
   const ownerId = publication._ownerId;
 
   const onCommentSubmit = async (comment) => {
@@ -79,18 +82,38 @@ export const Details = () => {
       db,
       `publications/${publicationId}/comments`
     );
-    const data = await addDoc(docRefference, comment);
-    const commentId = data.id;
-    const updatedInfo = {
-      ["_ownerId"]: ownerId,
-      ["_commentId"]: commentId,
+    const commentInfo = {
+      email: userEmail,
+      createdBy: userId,
       publicationId,
+      comment,
+    };
+
+    //  const data = await addDoc(docRefference, comment);
+    const data = await addDoc(docRefference, {
       comment: comment.comment,
+      author: { email: commentInfo.email },
+      createdBy: commentInfo.createdBy,
+      publicationId: commentInfo.publicationId,
+      createdOn: Timestamp.now().toDate(),
+      likes: [],
+    });
+
+    const commentId = data.id;
+    commentInfo["_id"] = data.id;
+
+    const myObject = {
+      comment: comment.comment,
+      createdBy: commentInfo.createdBy,
+      publicationId: commentInfo.publicationId,
+      createdOn: Timestamp.now().toDate(),
+      ["_id"]: data.id,
+      likes: [],
     };
 
     dispatch({
       type: "COMMENT_ADD",
-      payload: updatedInfo,
+      payload: myObject,
       userEmail,
     });
   };
@@ -98,23 +121,76 @@ export const Details = () => {
   const getPublication = async () => {
     const docRef = doc(db, "publications", publicationId);
     const data = await getDoc(docRef);
-
     return data.data();
   };
 
-  const onDeleteClick = () => {
-    const result = "Are you sure you want to delete this furniture?";
+  const onLikeClick = async (commentId, likesCount) => {
+    const docRef = doc(db, `publications/${publicationId}/comments`, commentId);
 
-    if (result) {
-      deletePublication(publicationId);
-      publicationService.delete(publicationId);
-      navigate("/catalog");
+    console.log(likesCount);
+    const likesReference = doc(
+      db,
+      `publications/${publicationId}/comments`,
+      commentId
+    );
+    console.log(userId);
+
+    if (likesCount.includes(userId)) {
+      updateDoc(likesReference, {
+        likes: arrayRemove(userId),
+      })
+        .then(() => {
+          console.log("unliked");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
-      return ;
+      updateDoc(likesReference, {
+        likes: arrayUnion(userId),
+      })
+        .then(() => {
+          console.log("liked");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+
+    const getData = await getDoc(docRef);
+    const updatedLikesCount = getData.data().likes;
+    console.log(getData.data());
+    const updatedData = {
+      author: {
+        email: getData.data().author.email,
+      },
+      comment: getData.data().comment,
+      createdBy: getData.data().createdBy,
+      createdOn: getData.data().createdOn,
+      // likes: [updatedLikesCount],
+      publicationId: publicationId,
+      ["_id"]: getData.data().id,
+    };
+    console.log(updatedLikesCount);
+    dispatch({
+      type: "COMMENT_LIKES_UPDATE",
+      payload: updatedLikesCount,
+      commentId,
+    });
   };
 
   console.log(publication);
+  const onDeleteClick = async () => {
+    const caution = window.confirm(
+      "Are you sure you want to delete this public?"
+    );
+
+    if (caution) {
+      await publicationService.delete(publication._id);
+      deletePublication(publication._id);
+      navigate("/catalog");
+    }
+  };
 
   return (
     <>
@@ -131,22 +207,26 @@ export const Details = () => {
             flexDirection: "row",
             gap: 2,
             marginTop: 4,
-            width: "90%",
+            width: "100%",
             height: "100%",
+            justifyContent: "space-evenly",
           }}
         >
           <Stack
             sx={{
               display: "flex",
+              width: "48%",
               flexDirection: "column",
               gap: 1,
               marginBottom: 2,
+              alignItems: "center",
+              justifyContent: "space-evenly",
             }}
           >
             <Card
               sx={{
-                height: "76vh",
-                width: "100%",
+                height: "auto",
+                width: "80%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-evenly",
@@ -168,6 +248,7 @@ export const Details = () => {
                 <Typography gutterBottom variant="h5" component="div">
                   Weight: {publication.weight}
                 </Typography>
+
                 <Typography gutterBottom variant="h5" component="div">
                   Height: {publication.height}
                 </Typography>
@@ -255,11 +336,53 @@ export const Details = () => {
                 )}
               </CardActions>
             </Card>
-            {isAuthenticated && (
-              <div>
-                <AddComent onCommentSubmit={onCommentSubmit} />
-              </div>
-            )}
+            <Stack
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 4,
+                width: "50%",
+              }}
+            >
+              <Stack
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 2,
+                  width: "80%",
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{
+                    letterSpacing: 4,
+                    textTransform: "uppercase",
+                    color: myColors.gold,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Explanation
+                </Typography>
+                <Typography
+                  variant="p"
+                  sx={{
+                    width: "80%",
+                    fontSize: "20px",
+                    border: "4px inset",
+                    borderColor: myColors.gold,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    backgroundColor: myColors.white,
+                    padding: "12px 0px",
+                  }}
+                >
+                  {publication.description}
+                </Typography>
+              </Stack>
+            </Stack>
           </Stack>
 
           <Stack
@@ -267,122 +390,75 @@ export const Details = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 4,
-              width: "50%",
+              width: "48%",
+              gap: 2,
             }}
           >
+            {isAuthenticated && (
+              <div>
+                <AddComent onCommentSubmit={onCommentSubmit} />
+              </div>
+            )}
+            <Typography
+              variant="h5"
+              sx={{
+                letterSpacing: 4,
+                textTransform: "uppercase",
+                color: myColors["dark-silver"],
+                fontWeight: "bold",
+              }}
+            >
+              Comments
+            </Typography>
+            {!publication.comments?.length && (
+              <Typography variant="h5" sx={{ textShadow: "14px 10px 18px" }}>
+                No comments yet. Be the first one who will give an opinion!
+              </Typography>
+            )}
             <Stack
               sx={{
                 display: "flex",
                 flexDirection: "column",
+                gap: 1,
                 alignItems: "center",
-                gap: 2,
-                width: "80%",
+                width: "100%",
               }}
             >
-              <Typography
-                variant="h5"
-                sx={{
-                  letterSpacing: 4,
-                  textTransform: "uppercase",
-                  color: myColors.gold,
-                  fontWeight: "bold",
-                }}
-              >
-                Explanation
-              </Typography>
-              <Typography
-                variant="p"
-                sx={{
-                  width: "80%",
-                  fontSize: "20px",
-                  border: "4px inset",
-                  borderColor: myColors.gold,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  backgroundColor: myColors.white,
-                  padding: "12px 0px",
-                }}
-              >
-                {publication.description}
-              </Typography>
-            </Stack>
-
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "80%",
-                gap: 2,
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{
-                  letterSpacing: 4,
-                  textTransform: "uppercase",
-                  color: myColors["dark-silver"],
-                  fontWeight: "bold",
-                }}
-              >
-                Comments
-              </Typography>
-              {!publication.comments?.length && (
-                <Typography variant="h5" sx={{ textShadow: "14px 10px 18px" }}>
-                  No comments yet. Be the first one who will give an opinion!
-                </Typography>
-              )}
-              <ul>
-                {/* <Stack sx={{ display: "flex", flexDirection: "column", gap: 1, alignItems: "center" }}> */}
-                {publication?.comments?.map((comment) => (
-                  <li key={comment.id} sx={{ width: "50%" }}>
-                    <Stack sx={{display: "flex", flexDirection: "row",}}>
-                      <Typography
-                        variant="p"
-                        sx={{
-                          width: "100%",
-                          fontSize: "18px",
-                          color: myColors.black,
-                          margin: "12px 0px",
-                        }}
-                      >
-                        {comment?.author?.email}commented: {comment.comment}{" "}
-                      </Typography>
-                      <Like commentId={comment.id} likes={likes}/>
-                    </Stack>
-                  </li>
-                ))}
-                {/* </Stack> */}
-              </ul>
-
-              {/* {loading && "Loading...
-              <Stack
-                sx={{
-                  border: "4px inset",
-                  borderColor: myColors.gold,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  width: "80%",
-                  backgroundColor: myColors.black,
-                }}
-              >
-                {querySnapshot?.map((doc) => (
-                  <Typography
-                    variant="p"
+              {publication?.comments?.map((comment) => (
+                <ListItem key={comment?._id} sx={{ width: "100%" }}>
+                  <Stack
                     sx={{
-                      width: "80%",
-                      fontSize: "20px",
-                      color: myColors.white,
-                      margin: "12px 0px",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
                     }}
                   >
-                    {doc.name}
-                  </Typography>
-                ))}
-              </Stack> */}
+                    <Typography
+                      variant="p"
+                      sx={{
+                        width: "100%",
+                        fontSize: "18px",
+                        color: myColors.black,
+                        margin: "12px 0px",
+                      }}
+                    >
+                      {comment?.author?.email} commented: {comment?.comment}
+                    </Typography>
+                    {userId && (
+                      <Like
+                        commentId={comment?._id}
+                        likesCount={comment?.likes}
+                        publicationId={publicationId}
+                        onLikeClick={onLikeClick}
+                      />
+                    )}
+
+                    {comment.createdBy === userId && (
+                      <EditAndDelete commentId={comment._id} />
+                    )}
+                  </Stack>
+                </ListItem>
+              ))}
             </Stack>
           </Stack>
         </Stack>
@@ -432,16 +508,16 @@ export const Details = () => {
 
 //   console.log(response);
 
-//   const updatedInfo = {
+//   const commentInfo = {
 //     ownerId,
 //     publicationId,
 //     response,
 //   };
 
-//   console.log(updatedInfo);
+//   console.log(commentInfo);
 //   dispatch({
 //     type: "COMMENT_ADD",
-//     payload: updatedInfo,
+//     payload: commentInfo,
 //     userEmail,
 //   });
 // };

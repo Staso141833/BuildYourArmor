@@ -11,9 +11,9 @@ import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
 import { auth } from "../../config/firebase.js";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
-import { AuthContext, useAuthContext } from "../../contexts/AuthContext.js";
 import { useNavigate } from "react-router-dom";
 import RemoveCookie from "../../hooks/removeCookie.js";
+import { useAuthContext } from "../../contexts/AuthContext.js";
 
 const myColors = {
   black: "#070707",
@@ -30,24 +30,14 @@ export default function NavigationBar() {
     bottom: false,
     right: false,
   });
-
+  const {userIn, userEmail, isAuthenticated, userId, token, onLogout } = useAuthContext();
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
 
-  const onClickLogout = async () => {
-    await signOut(auth);
-    RemoveCookie("usrin");
-    
-    navigate("/")
-  };
-
+  
   const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
 
-  const isAuthenticated = auth.currentUser?.accessToken;
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -186,14 +176,14 @@ export default function NavigationBar() {
                   <Button
                     underline="none"
                     sx={{ color: "#fbc760", fontWeight: "bold" }}
-                    onClick={onClickLogout}
+                    onClick={onLogout}
                   >
                     Sign Out
                   </Button>
                 </Typography>
 
                 <Typography variant="h6" sx={{ color: "#fbc760" }}>
-                  {user?.email}
+                  {userEmail}
                 </Typography>
               </>
             )}

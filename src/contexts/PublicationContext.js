@@ -17,7 +17,6 @@ export const PublicationProvider = ({ children }) => {
 
       setPublications(newData);
     };
-    console.log(publications);
 
     test();
   }, []);
@@ -41,6 +40,7 @@ export const PublicationProvider = ({ children }) => {
         oldPublication._id === values._id ? result : oldPublication
       )
     );
+   
     navigate(`/catalog/${values._id}`);
   };
 
@@ -49,14 +49,9 @@ export const PublicationProvider = ({ children }) => {
   };
 
   const deletePublication = (publicationId) => {
-    const caution = window.confirm(
-      "Are you sure you want to delete this public?"
+    setPublications((state) =>
+      state.filter((publication) => publication.id !== publicationId)
     );
-    if (caution) {
-      setPublications((state) =>
-        state.filter((publication) => publication.id !== publicationId)
-      );
-    }
   };
 
   const contextValues = {
