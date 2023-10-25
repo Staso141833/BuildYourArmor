@@ -4,19 +4,19 @@ import { useForm } from "../../hooks/useForm.js";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
+import * as commentService from "../../services/commentService";
 export const EditAndDelete = ({
-  onClickEditCommentSubmit,
   commentId,
+  onClickEditCommentSubmit,
   onDeleteCommentClick,
+  publicationId,
 }) => {
   const [isEdited, setIsEdited] = useState(false);
-
-  const { publicationId } = useParams();
 
   console.log(commentId);
 
   useEffect(() => {
-    getComment(commentId).then((oldValue) => {
+    commentService.getOneComment(commentId, publicationId).then((oldValue) => {
       changeValues(oldValue);
     });
   }, [publicationId]);
@@ -72,13 +72,14 @@ export const EditAndDelete = ({
         <Stack sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <TextField
             label="Update comment"
+            variant="standard"
             name="comment"
             placeholder="Update comment"
             values={values.comment}
             onChange={changeHandler}
             multiline
             rows={4}
-            sx={{ height: "100px", width: "100%" }}
+            sx={{ height: "64px", width: "100%" }}
           />
           <Button onClick={onClickEdit} variant="contained">
             Edit

@@ -55,6 +55,7 @@ export const Create = () => {
       imageUrl: "",
       _ownerId: "",
       createdOn: Timestamp.now().toDate(),
+      likes: [],
     },
     onCreatePublicationSubmit
   );

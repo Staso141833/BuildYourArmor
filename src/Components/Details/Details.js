@@ -54,8 +54,6 @@ export const Details = () => {
 
   const navigate = useNavigate();
 
-  console.log(userId);
-
   useEffect(() => {
     Promise.all([
       getPublication(publicationId),
@@ -63,8 +61,6 @@ export const Details = () => {
     ]).then(([publicationData, commentsData]) => {
       publicationData["_id"] = publicationId;
       const comments = commentsData;
-      // const comments = commentsData.map((comment) => ({...comment, ["_commentId"]: comment.id, ["_uid"]: userId, author: userEmail }))
-      console.log(commentsData);
       const publicationState = {
         ...publicationData,
         comments,
@@ -74,8 +70,8 @@ export const Details = () => {
     });
   }, [publicationId]);
 
-  const isOwner = publication._ownerId === userId;
   const ownerId = publication._ownerId;
+  const isOwner = ownerId === userId;
 
   const onCommentSubmit = async (comment) => {
     const docRefference = collection(
@@ -89,7 +85,6 @@ export const Details = () => {
       comment,
     };
 
-    //  const data = await addDoc(docRefference, comment);
     const data = await addDoc(docRefference, {
       comment: comment.comment,
       author: { email: commentInfo.email },
@@ -107,7 +102,7 @@ export const Details = () => {
       createdBy: commentInfo.createdBy,
       publicationId: commentInfo.publicationId,
       createdOn: Timestamp.now().toDate(),
-      ["_id"]: data.id,
+      ["_id"]: commentInfo._id,
       likes: [],
     };
 
@@ -124,16 +119,10 @@ export const Details = () => {
     return data.data();
   };
 
-  const onLikeClick = async (commentId, likesCount) => {
-    const docRef = doc(db, `publications/${publicationId}/comments`, commentId);
+  const onClickLikePublicationSubmit = async () => {
+    const likesReference = doc(db, "publications", publicationId);
 
-    console.log(likesCount);
-    const likesReference = doc(
-      db,
-      `publications/${publicationId}/comments`,
-      commentId
-    );
-    console.log(userId);
+    const likesCount = publication.likes;
 
     if (likesCount.includes(userId)) {
       updateDoc(likesReference, {
@@ -145,6 +134,11 @@ export const Details = () => {
         .catch((error) => {
           console.log(error);
         });
+
+      dispatch({
+        type: "PUBLICATION_LIKE_REMOVE",
+        payload: userId,
+      });
     } else {
       updateDoc(likesReference, {
         likes: arrayUnion(userId),
@@ -155,22 +149,60 @@ export const Details = () => {
         .catch((error) => {
           console.log(error);
         });
+
+      dispatch({
+        type: "PUBLICATION_LIKE_ADD",
+        payload: userId,
+      });
+    }
+  };
+
+  const onClickLikeCommentSubmit = async (commentId, likesCount) => {
+    const likesReference = doc(
+      db,
+      `publications/${publicationId}/comments`,
+      commentId
+    );
+
+    if (likesCount.includes(userId)) {
+      updateDoc(likesReference, {
+        likes: arrayRemove(userId),
+      })
+        .then(() => {
+          console.log("unliked");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      dispatch({
+        type: "COMMENT_LIKES_REMOVE",
+        payload: userId,
+        commentId,
+      });
+    } else {
+      updateDoc(likesReference, {
+        likes: arrayUnion(userId),
+      })
+        .then(() => {
+          console.log("liked");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      dispatch({
+        type: "COMMENT_LIKES_ADD",
+        payload: userId,
+        commentId,
+      });
     }
 
-    const getData = await getDoc(docRef);
+    const getData = await getDoc(likesReference);
     const updatedLikesCount = getData.data().likes;
-    console.log(getData.data());
-
-    dispatch({
-      type: "COMMENT_LIKES_UPDATE",
-      payload: updatedLikesCount,
-      commentId,
-    });
   };
 
   const onClickEditCommentSubmit = async (values) => {
-    console.log(values.comment);
-    console.log(values._id);
     const newComment = values.comment;
     const commentId = values._id;
     const docRefference = doc(
@@ -179,8 +211,6 @@ export const Details = () => {
       commentId
     );
     const data = await updateDoc(docRefference, values);
-
-    console.log(data);
 
     dispatch({
       type: "COMMENT_EDIT",
@@ -212,7 +242,7 @@ export const Details = () => {
       console.log(publicationId);
       await commentService.deleteComment(commentId, publicationId);
 
-      dispatch({ type: "COMMENT_DELETE", commentId  });
+      dispatch({ type: "COMMENT_DELETE", commentId });
     }
   };
 
@@ -249,8 +279,8 @@ export const Details = () => {
           >
             <Card
               sx={{
-                height: "auto",
-                width: "80%",
+                height: "80vh",
+                width: "auto",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-evenly",
@@ -258,7 +288,7 @@ export const Details = () => {
               }}
             >
               <CardMedia
-                sx={{ objectFit: "cover", height: "65%" }} //fill, cover, contain, none, scale-down
+                sx={{ objectFit: "contain", height: "65%" }} //fill, cover, contain, none, scale-down
                 component="img"
                 image={publication.imageUrl}
               ></CardMedia>
@@ -358,6 +388,20 @@ export const Details = () => {
                     Add publication
                   </Link>
                 )}
+                <Button
+                  variant="outlined"
+                  color="warning"
+                  onClick={onClickLikePublicationSubmit}
+                  style={{
+                    cursor: "pointer",
+                    color: publication?.likes?.includes(userId)
+                      ? "red"
+                      : "blue",
+                  }}
+                >
+                  Like
+                </Button>
+                {publication?.likes?.length}
               </CardActions>
             </Card>
             <Stack
@@ -387,7 +431,7 @@ export const Details = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Explanation
+                  Explanation of the exercise
                 </Typography>
                 <Typography
                   variant="p"
@@ -453,28 +497,14 @@ export const Details = () => {
                   <Stack
                     sx={{
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                       alignItems: "center",
                     }}
                   >
-                    <Typography
-                      variant="p"
-                      sx={{
-                        width: "100%",
-                        fontSize: "18px",
-                        color: myColors.black,
-                        margin: "12px 0px",
-                      }}
-                    >
-                      {comment?.author?.email} commented: {comment?.comment}
-                      {comment.createdBy === userId && (
-                        <EditAndDelete
-                          commentId={comment._id}
-                          onClickEditCommentSubmit={onClickEditCommentSubmit}
-                          onDeleteCommentClick={onDeleteCommentClick}
-                        />
-                      )}
-                    </Typography>
+                    {comment?.author?.email} commented on{" "}
+                    {comment.createdOn.toDate().toDateString()}
+                    {/* {comment?.createdOn.toDate().toDateString()}: */}
+                    {comment?.comment}
                     <Stack
                       sx={{ display: "flex", flexDirection: "row", gap: 1 }}
                     >
@@ -483,7 +513,15 @@ export const Details = () => {
                           commentId={comment?._id}
                           likesCount={comment?.likes}
                           publicationId={publicationId}
-                          onLikeClick={onLikeClick}
+                          onClickLikeCommentSubmit={onClickLikeCommentSubmit}
+                        />
+                      )}
+                      {comment.createdBy === userId && (
+                        <EditAndDelete
+                          commentId={comment._id}
+                          onClickEditCommentSubmit={onClickEditCommentSubmit}
+                          onDeleteCommentClick={onDeleteCommentClick}
+                          publicationId={publicationId}
                         />
                       )}
                     </Stack>
@@ -497,58 +535,3 @@ export const Details = () => {
     </>
   );
 };
-
-// const navigate = useNavigate();
-// useEffect(() => {
-//   const docRef = doc(db, "publications", publicationId);
-//   const getPublication = async () => {
-//     const data = await getDoc(docRef);
-
-//     setPublication(data.data());
-//   };
-
-//   getPublication();
-// }, [publicationId]);
-
-// const onDeletePublication = async () => {
-//   const publicationDoc = doc(db, "publications", publicationId);
-//   window.alert("Are you sure you want to delete this publication?");
-//   await deleteDoc(publicationDoc);
-//   navigate("/catalog");
-// };
-
-//   Promise.all([
-//     publicationService.getOne(publicationId),
-//     commentService.getAll(publicationId),
-//   ]).then(([publicationData, comments]) => {
-//     const publicationState = {
-//       ...publicationData,
-//       comments,
-//     };
-//     dispatch({ type: "PUBLICATION_FETCH", payload: publicationState });
-//   });
-// }, [publicationId]);
-
-// onCommentSubmit last update
-
-// const onCommentSubmit = async (values) => {
-//   const response = await setDoc(
-//     doc(db, `publications/${publicationId}/comments`, values.newComment),
-//     { comment: values.newComment }
-//   );
-
-//   console.log(response);
-
-//   const commentInfo = {
-//     ownerId,
-//     publicationId,
-//     response,
-//   };
-
-//   console.log(commentInfo);
-//   dispatch({
-//     type: "COMMENT_ADD",
-//     payload: commentInfo,
-//     userEmail,
-//   });
-// };

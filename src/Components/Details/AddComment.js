@@ -1,4 +1,4 @@
-import { ExpandMore } from "@mui/icons-material";
+import { ExpandCircleDownOutlined, ExpandMore } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -41,7 +41,7 @@ export const AddComent = ({ onCommentSubmit }) => {
           id="panel1-header"
           aria-controls="panel1-content"
           disableGutters="false"
-          expandIcon={<ExpandMore />}
+          expandIcon={<ExpandCircleDownOutlined />}
         >
           {" "}
           <Typography>Write your comment...</Typography>
