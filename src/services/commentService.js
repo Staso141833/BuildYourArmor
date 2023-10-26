@@ -10,10 +10,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase.js";
 
-import { useParams } from "react-router-dom";
-import { useContext, useState } from "react";
 
-export const getAll = async (publicationId, userId, userEmail) => {
+export const getAll = async (publicationId) => {
   const q = query(collection(db, `publications/${publicationId}/comments`));
 
   const querySnapshot = await getDocs(q);

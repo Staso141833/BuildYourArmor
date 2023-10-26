@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useForm } from "../../hooks/useForm.js";
+import { useFormMine } from "../../hooks/useFormMine.js";
 
 const myColors = {
   black: "#070707",
@@ -19,7 +19,7 @@ const myColors = {
 };
 
 export const AddComent = ({ onCommentSubmit }) => {
-  const { values, changeHandler, onSubmit } = useForm(
+  const { values, changeHandler, onSubmit } = useFormMine(
     {
       comment: "",
     },

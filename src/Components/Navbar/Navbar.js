@@ -8,11 +8,9 @@ import "./navbar.css";
 import { Stack, Link, Typography, Button } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
 
-import { auth } from "../../config/firebase.js";
-import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RemoveCookie from "../../hooks/removeCookie.js";
+
 import { useAuthContext } from "../../contexts/AuthContext.js";
 
 const myColors = {
@@ -30,14 +28,12 @@ export default function NavigationBar() {
     bottom: false,
     right: false,
   });
-  const {userIn, userEmail, isAuthenticated, userId, token, onLogout } = useAuthContext();
+  const { userIn, userEmail, isAuthenticated, userId, token, onLogout } =
+    useAuthContext();
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
-
-  
   const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
-
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

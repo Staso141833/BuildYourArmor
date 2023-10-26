@@ -1,13 +1,16 @@
 import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import "./login.css";
-
 import { auth } from "../../config/firebase.js";
-import { useForm } from "../../hooks/useForm.js";
+import { useFormMine } from "../../hooks/useFormMine.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export const Login = () => {
   const { onLoginSubmit } = useAuthContext();
-  const { values, changeHandler, onSubmit } = useForm(
+
+  const { values, changeHandler, onSubmit } = useFormMine(
     {
       ["auth"]: auth,
       loginEmail: "",
@@ -16,9 +19,26 @@ export const Login = () => {
     onLoginSubmit
   );
 
+  const schema = yup.object().shape({
+    loginEmail: yup.string().required("Email is required!"),
+    loginPassword: yup
+      .string()
+      .min(4)
+      .max(20)
+      .required("Password must be at least 4 characters"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   return (
     <>
-      <form noValidate sx={{ width: "70vw", height: "80vh" }}>
+      <form method="POST" sx={{ width: "70vw", height: "80vh" }}>
         <Stack
           spacing={2}
           sx={{
@@ -44,7 +64,7 @@ export const Login = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "54px",
+              gap: 3,
               height: "100%",
               backgroundColor: "#B3AEAB",
             }}
@@ -65,18 +85,22 @@ export const Login = () => {
               label="Emails"
               type="email"
               name="loginEmail"
+              {...register("loginEmail")}
               value={values.loginEmail}
               onChange={changeHandler}
               sx={{
                 width: "80%",
-                backgroundColor: "#B3AEAB",
                 borderRadius: "4px",
                 color: "white",
               }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors?.loginEmail?.message}
+            </Typography>
             <TextField
               label="Password"
               type="password"
+              {...register("loginPassword")}
               name="loginPassword"
               value={values.loginPassword}
               onChange={changeHandler}
@@ -86,9 +110,12 @@ export const Login = () => {
                 borderRadius: "4px",
               }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.loginPassword?.message}
+            </Typography>
             <Button
-              onClick={onSubmit}
               variant="outlined"
+              onClick={handleSubmit(onSubmit)}
               sx={{
                 backgroundColor: "#170f0a",
                 color: "#fbc760",
@@ -120,58 +147,3 @@ export const Login = () => {
     </>
   );
 };
-
-// const [loginEmail, setLoginEmail] = useState("");
-// const [loginPassword, setLoginPassword] = useState("");
-
-// const emailHandler = (e) => {
-//   setLoginEmail(e.target.value);
-// };
-
-// const passwordHandler = (e) => {
-//   setLoginPassword(e.target.value);
-// };
-
-// const navigate = useNavigate();
-
-// const onLoginSubmit = async () => {
-//   try {
-//     const user = await signInWithEmailAndPassword(
-//       auth,
-//       loginEmail,
-//       loginPassword
-//     );
-
-//     navigate("/catalog");
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-
-// login 14/10/23
-// const [loginEmail, setLoginEmail] = useState("");
-// const [loginPassword, setLoginPassword] = useState("");
-
-// const emailHandler = (e) => {
-//   setLoginEmail(e.target.value);
-// };
-
-// const passwordHandler = (e) => {
-//   setLoginPassword(e.target.value);
-// };
-
-// const navigate = useNavigate();
-
-// const onLoginSubmit = async () => {
-//   try {
-//     const user = await signInWithEmailAndPassword(
-//       auth,
-//       loginEmail,
-//       loginPassword
-//     );
-
-//     navigate("/catalog");
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };

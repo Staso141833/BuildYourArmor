@@ -10,10 +10,9 @@ import {
   TextField,
 } from "@mui/material";
 import { auth, db } from "../../config/firebase.js";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useForm } from "../../hooks/useForm.js";
+import { useFormMine } from "../../hooks/useFormMine.js";
 import { publicationServiceFactory } from "../../services/publicationServices.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
 
@@ -44,7 +43,7 @@ export const Edit = () => {
   const publicationService = publicationServiceFactory();
   const { publicationId } = useParams();
 
-  const { values, changeHandler, onSubmit, changeValues } = useForm(
+  const { values, changeHandler, onSubmit, changeValues } = useFormMine(
     {
       name: "",
       weight: "",

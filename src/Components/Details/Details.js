@@ -32,10 +32,12 @@ import { usePublicationContext } from "../../contexts/PublicationContext.js";
 import * as commentService from "../../services/commentService.js";
 import { AddComent } from "./AddComment.js";
 import { publicationReducer } from "../../reducers/publicationReducer.js";
+import { colors } from "../../metaData/colors.js";
 
 import { Like } from "./Like.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
 import { EditAndDelete } from "./EditAndDelete.js";
+import { FingerprintRounded } from "@mui/icons-material";
 
 const myColors = {
   black: "#070707",
@@ -124,7 +126,7 @@ export const Details = () => {
 
     const likesCount = publication.likes;
 
-    if (likesCount.includes(userId)) {
+    if (likesCount?.includes(userId)) {
       updateDoc(likesReference, {
         likes: arrayRemove(userId),
       })
@@ -197,9 +199,6 @@ export const Details = () => {
         commentId,
       });
     }
-
-    const getData = await getDoc(likesReference);
-    const updatedLikesCount = getData.data().likes;
   };
 
   const onClickEditCommentSubmit = async (values) => {
@@ -272,7 +271,7 @@ export const Details = () => {
               width: "48%",
               flexDirection: "column",
               gap: 1,
-              marginBottom: 2,
+              marginBottom: 1,
               alignItems: "center",
               justifyContent: "space-evenly",
             }}
@@ -288,7 +287,7 @@ export const Details = () => {
               }}
             >
               <CardMedia
-                sx={{ objectFit: "contain", height: "65%" }} //fill, cover, contain, none, scale-down
+                sx={{ objectFit: "cover", height: "65%" }} //fill, cover, contain, none, scale-down
                 component="img"
                 image={publication.imageUrl}
               ></CardMedia>
@@ -296,7 +295,7 @@ export const Details = () => {
                 <Typography gutterBottom variant="h4" component="div">
                   Author: {publication.name}
                 </Typography>
-                <Typography gutterBottom variant="h4" component="div">
+                <Typography gutterBottom variant="h5" component="div">
                   Muscle: {publication.muscleGroup}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
@@ -306,22 +305,81 @@ export const Details = () => {
                 <Typography gutterBottom variant="h5" component="div">
                   Height: {publication.height}
                 </Typography>
+                <Typography variant="h5">
+                  {publication?.likes?.length} likes
+                </Typography>
               </CardContent>
 
               <CardActions
                 sx={{
                   display: "flex",
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: 1.5,
-                  width: "40%",
-                  gap: 1,
+                  width: "100%",
                 }}
               >
-                {isOwner && (
-                  <>
+                <Stack
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                    width: "100%",
+                    gap: 1,
+                    margin: 1,
+                    mb: 1,
+                  }}
+                >
+                  {isOwner && (
+                    <>
+                      <Link
+                        href={`/catalog/${publicationId}/edit`}
+                        variant="contained"
+                        sx={{
+                          backgroundColor: myColors.black,
+                          color: myColors["light-silver"],
+                          fontWeight: "bold",
+                          transition: "all 300ms",
+                          padding: "12px",
+                          textDecoration: "none",
+                          width: "40%",
+                          borderRadius: "6px",
+                          textTransform: "uppercase",
+                          fontSize: "16px",
+                          "&:hover": {
+                            backgroundColor: myColors["light-silver"],
+                            color: myColors.black,
+                          },
+                        }}
+                      >
+                        Edit
+                      </Link>
+                      <Button
+                        variant="contained"
+                        onClick={onDeleteClick}
+                        sx={{
+                          backgroundColor: myColors.black,
+                          color: myColors["light-silver"],
+                          fontWeight: "bold",
+                          transition: "all 300ms",
+                          width: "40%",
+                          padding: "9px",
+                          fontFamily: "Robotto",
+                          "&:hover": {
+                            backgroundColor: myColors["light-silver"],
+                            color: myColors.black,
+                          },
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </>
+                  )}
+                  {!isOwner && (
                     <Link
-                      href={`/catalog/${publicationId}/edit`}
+                      href="/create"
                       variant="contained"
                       sx={{
                         backgroundColor: myColors.black,
@@ -330,78 +388,39 @@ export const Details = () => {
                         transition: "all 300ms",
                         padding: "12px",
                         textDecoration: "none",
-                        width: "40%",
+                        width: "auto",
                         borderRadius: "6px",
                         textTransform: "uppercase",
-                        fontSize: "16px",
+                        fontSize: "12px",
                         "&:hover": {
                           backgroundColor: myColors["light-silver"],
                           color: myColors.black,
                         },
                       }}
                     >
-                      Edit
+                      Add publication
                     </Link>
+                  )}
+                  {isAuthenticated && (
                     <Button
-                      variant="contained"
-                      onClick={onDeleteClick}
+                      variant="outlined"
                       sx={{
-                        backgroundColor: myColors.black,
-                        color: myColors["light-silver"],
-                        fontWeight: "bold",
-                        transition: "all 300ms",
-                        width: "40%",
-                        padding: "9px",
-                        fontFamily: "Robotto",
-                        "&:hover": {
-                          backgroundColor: myColors["light-silver"],
-                          color: myColors.black,
-                        },
+                        backgroundColor: colors.gold,
+                        width: "100px",
+                        height: "auto",
+                      }}
+                      onClick={onClickLikePublicationSubmit}
+                      style={{
+                        cursor: "pointer",
+                        color: publication?.likes?.includes(userId)
+                          ? myColors.black
+                          : myColors["dark-silver"],
                       }}
                     >
-                      Delete
+                      <FingerprintRounded></FingerprintRounded>
                     </Button>
-                  </>
-                )}
-                {!isOwner && (
-                  <Link
-                    href="/create"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: myColors.black,
-                      color: myColors["light-silver"],
-                      fontWeight: "bold",
-                      transition: "all 300ms",
-                      padding: "12px",
-                      textDecoration: "none",
-                      width: "auto",
-                      borderRadius: "6px",
-                      mb: 3,
-                      textTransform: "uppercase",
-                      fontSize: "16px",
-                      "&:hover": {
-                        backgroundColor: myColors["light-silver"],
-                        color: myColors.black,
-                      },
-                    }}
-                  >
-                    Add publication
-                  </Link>
-                )}
-                <Button
-                  variant="outlined"
-                  color="warning"
-                  onClick={onClickLikePublicationSubmit}
-                  style={{
-                    cursor: "pointer",
-                    color: publication?.likes?.includes(userId)
-                      ? "red"
-                      : "blue",
-                  }}
-                >
-                  Like
-                </Button>
-                {publication?.likes?.length}
+                  )}
+                </Stack>
               </CardActions>
             </Card>
             <Stack
@@ -458,31 +477,38 @@ export const Details = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              textAlign: "center",
+              alignContent: "flex-start",
               width: "48%",
               gap: 2,
             }}
           >
-            {isAuthenticated && (
-              <div>
+            <Stack sx={{ width: "50%" }}>
+              {isAuthenticated && (
                 <AddComent onCommentSubmit={onCommentSubmit} />
-              </div>
-            )}
+              )}
+            </Stack>
             <Typography
               variant="h5"
               sx={{
                 letterSpacing: 4,
                 textTransform: "uppercase",
+
+                textAlign: "center",
                 color: myColors["dark-silver"],
                 fontWeight: "bold",
               }}
             >
               Comments
             </Typography>
-            {!publication.comments?.length && (
-              <Typography variant="h5" sx={{ textShadow: "14px 10px 18px" }}>
-                No comments yet. Be the first one who will give an opinion!
-              </Typography>
-            )}
+            <Stack>
+              {!publication.comments?.length && (
+                <Typography variant="h5" sx={{ textShadow: "14px 10px 18px" }}>
+                  No comments yet. Be the first one who will give an opinion!
+                </Typography>
+              )}
+            </Stack>
+
             <Stack
               sx={{
                 display: "flex",
@@ -498,11 +524,16 @@ export const Details = () => {
                     sx={{
                       display: "flex",
                       flexDirection: "column",
+                      width: "60%",
                       alignItems: "center",
+                      backgroundColor: colors.black,
+                      color: colors.white,
+                      padding: 1,
+                      borderRadius: 1,
                     }}
                   >
                     {comment?.author?.email} commented on{" "}
-                    {comment.createdOn.toDate().toDateString()}
+                    {comment.createdOn.toDate().toDateString()}:
                     {/* {comment?.createdOn.toDate().toDateString()}: */}
                     {comment?.comment}
                     <Stack

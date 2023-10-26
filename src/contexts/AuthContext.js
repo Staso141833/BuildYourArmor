@@ -24,11 +24,6 @@ export const AuthProvider = ({ children }) => {
 
   const checkUser = GetCookie("userIn");
 
-  // const [userIn, setUserIn] = useState(
-  //   checkUser === undefined ? {} : JSON.stringify(checkUser)
-  // );
-  //
-  console.log(userIn)
   const authService = authServiceFactory();
 
   const onLoginSubmit = async (values) => {
@@ -48,7 +43,7 @@ export const AuthProvider = ({ children }) => {
         setUserIn(user);
         //  SetCookie("userIn", JSON.stringify(user));
         setSuccess(true);
-       
+
         navigate("/catalog");
 
         return user;
@@ -83,13 +78,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-
   onAuthStateChanged(auth, (currentUser) => {
     setUserIn(currentUser);
   });
 
   const onLogout = async () => {
-
     try {
       await authService.logout(auth);
       RemoveCookie("userIn");
@@ -101,17 +94,6 @@ export const AuthProvider = ({ children }) => {
       console.log(`There is a problem ${error}`);
     }
   };
-
-    // onAuthStateChanged(auth, (currentUser) => {
-  //   setUser(currentUser);
-  // });
-
-  // const onClickLogout = async () => {
-  //   await signOut(auth);
-  //   RemoveCookie("userIn");
-
-  //   navigate("/");
-  // };
 
   const contextValues = {
     onLoginSubmit,

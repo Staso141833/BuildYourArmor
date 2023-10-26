@@ -15,7 +15,7 @@ import {
 import { auth, db } from "../../config/firebase.js";
 
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
-import { useForm } from "../../hooks/useForm.js";
+import { useFormMine } from "../../hooks/useFormMine.js";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ const muscleGroups = [
 export const Create = () => {
   const { onCreatePublicationSubmit } = usePublicationContext();
 
-  const { values, changeHandler, onSubmit } = useForm(
+  const { values, changeHandler, onSubmit } = useFormMine(
     {
       muscleGroup: "",
       name: "",

@@ -1,10 +1,9 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useForm } from "../../hooks/useForm.js";
-import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebase.js";
+import { useFormMine } from "../../hooks/useFormMine.js";
 import * as commentService from "../../services/commentService";
+import { colors } from "../../metaData/colors.js";
+
 export const EditAndDelete = ({
   commentId,
   onClickEditCommentSubmit,
@@ -13,7 +12,6 @@ export const EditAndDelete = ({
 }) => {
   const [isEdited, setIsEdited] = useState(false);
 
-  console.log(commentId);
 
   useEffect(() => {
     commentService.getOneComment(commentId, publicationId).then((oldValue) => {
@@ -21,24 +19,13 @@ export const EditAndDelete = ({
     });
   }, [publicationId]);
 
-  const { values, changeHandler, onSubmit, changeValues } = useForm(
+  const { values, changeHandler, onSubmit, changeValues } = useFormMine(
     {
       comment: "",
     },
     onClickEditCommentSubmit
   );
   values["_id"] = commentId;
-
-  const getComment = async (commentId) => {
-    const docRefference = doc(
-      db,
-      `publications/${publicationId}/comments`,
-      commentId
-    );
-    const data = await getDoc(docRefference);
-    const result = data.data();
-    return result;
-  };
 
   const onClickEdit = (e) => {
     onSubmit(e);
@@ -59,7 +46,7 @@ export const EditAndDelete = ({
           color="success"
           onClick={onEdit}
           variant="contained"
-          sx={{ width: "auto", textTransform: "lowercase" }}
+          sx={{ width: "auto", textTransform: "lowercase", backgroundColor: colors["light-silver"], color: colors.black }}
           style={{
             cursor: "pointer",
           }}
@@ -79,7 +66,7 @@ export const EditAndDelete = ({
             onChange={changeHandler}
             multiline
             rows={4}
-            sx={{ height: "64px", width: "100%" }}
+            sx={{ height: "64px", width: "100%", backgroundColor: colors.white }}
           />
           <Button onClick={onClickEdit} variant="contained">
             Edit
@@ -90,7 +77,7 @@ export const EditAndDelete = ({
         color="success"
         variant="contained"
         onClick={onDeleteClick}
-        sx={{ width: "auto", textTransform: "lowercase" }}
+        sx={{ width: "auto", textTransform: "lowercase", backgroundColor: colors["dark-silver"] }}
         style={{
           cursor: "pointer",
         }}

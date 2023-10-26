@@ -2,11 +2,14 @@ import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
 import { useContext } from "react";
 import { auth } from "../../config/firebase.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
-import { useForm } from "../../hooks/useForm.js";
+import { useFormMine } from "../../hooks/useFormMine.js";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export const Register = () => {
   const { onRegisterSubmit } = useContext(AuthContext);
-  const { values, changeHandler, onSubmit } = useForm(
+  const { values, changeHandler, onSubmit } = useFormMine(
     {
       auth: auth,
       email: "",
@@ -15,6 +18,27 @@ export const Register = () => {
     },
     onRegisterSubmit
   );
+
+  const schema = yup.object().shape({
+    email: yup.string().required("Email is required!"),
+    password: yup
+      .string()
+      .min(6)
+      .max(20)
+      .required("Password must be at least 4 characters"),
+    rePassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null])
+      .required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   return (
     <>
@@ -44,7 +68,7 @@ export const Register = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "34px",
+              gap: 2,
               height: "100%",
               backgroundColor: "#B3AEAB",
             }}
@@ -65,6 +89,7 @@ export const Register = () => {
               label="Emails"
               type="email"
               name="email"
+              {...register("email")}
               value={values.email}
               onChange={changeHandler}
               sx={{
@@ -74,11 +99,15 @@ export const Register = () => {
                 color: "white",
               }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.email?.message}
+            </Typography>
             <TextField
               label="Password"
               color="warning"
               type="password"
               name="password"
+              {...register("password")}
               value={values.password}
               onChange={changeHandler}
               sx={{
@@ -87,11 +116,15 @@ export const Register = () => {
                 borderRadius: "4px",
               }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.password?.message}
+            </Typography>
             <TextField
               label="re-password"
               color="warning"
               type="password"
               name="rePassword"
+              {...register("rePassword")}
               value={values.rePassword}
               onChange={changeHandler}
               sx={{
@@ -100,8 +133,14 @@ export const Register = () => {
                 borderRadius: "4px",
               }}
             />
+            {errors.rePassword && (
+    <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              The re-password does not match with the password!
+    </Typography>
+            )}
+        
             <Button
-              onClick={onSubmit}
+              onClick={handleSubmit(onSubmit)}
               variant="outlined"
               sx={{
                 backgroundColor: "#170f0a",
