@@ -85,14 +85,16 @@ export const Details = () => {
       createdBy: userId,
       publicationId,
       comment,
+      createdOn: Timestamp.now().toDate().toDateString(),
     };
-
+    //  createdOn: Timestamp.now().toDate(),
+    // {comment.createdOn.toDate().toDateString()}:
     const data = await addDoc(docRefference, {
       comment: comment.comment,
       author: { email: commentInfo.email },
       createdBy: commentInfo.createdBy,
       publicationId: commentInfo.publicationId,
-      createdOn: Timestamp.now().toDate(),
+      createdOn: commentInfo.createdOn,
       likes: [],
     });
 
@@ -103,7 +105,7 @@ export const Details = () => {
       comment: comment.comment,
       createdBy: commentInfo.createdBy,
       publicationId: commentInfo.publicationId,
-      createdOn: Timestamp.now().toDate(),
+      createdOn: commentInfo.createdOn,
       ["_id"]: commentInfo._id,
       likes: [],
     };
@@ -203,6 +205,7 @@ export const Details = () => {
 
   const onClickEditCommentSubmit = async (values) => {
     const newComment = values.comment;
+    console.log(values);
     const commentId = values._id;
     const docRefference = doc(
       db,
@@ -271,7 +274,7 @@ export const Details = () => {
               width: "48%",
               flexDirection: "column",
               gap: 1,
-              marginBottom: 1,
+              marginBottom: 0.5,
               alignItems: "center",
               justifyContent: "space-evenly",
             }}
@@ -305,7 +308,7 @@ export const Details = () => {
                 <Typography gutterBottom variant="h5" component="div">
                   Height: {publication.height}
                 </Typography>
-                <Typography variant="h5">
+                <Typography variant="h4">
                   {publication?.likes?.length} likes
                 </Typography>
               </CardContent>
@@ -316,7 +319,7 @@ export const Details = () => {
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginBottom: 1.5,
+                  marginBottom: 1,
                   width: "100%",
                 }}
               >
@@ -327,9 +330,8 @@ export const Details = () => {
                     alignItems: "center",
                     justifyContent: "space-evenly",
                     width: "100%",
-                    gap: 1,
-                    margin: 1,
-                    mb: 1,
+                    gap: "4px",
+                    mb: 2,
                   }}
                 >
                   {isOwner && (
@@ -339,15 +341,15 @@ export const Details = () => {
                         variant="contained"
                         sx={{
                           backgroundColor: myColors.black,
-                          color: myColors["light-silver"],
+                          color: myColors.gold,
                           fontWeight: "bold",
                           transition: "all 300ms",
-                          padding: "12px",
+                          padding: "10px",
                           textDecoration: "none",
-                          width: "40%",
+                          width: "30%",
                           borderRadius: "6px",
                           textTransform: "uppercase",
-                          fontSize: "16px",
+                          fontSize: "14px",
                           "&:hover": {
                             backgroundColor: myColors["light-silver"],
                             color: myColors.black,
@@ -361,11 +363,10 @@ export const Details = () => {
                         onClick={onDeleteClick}
                         sx={{
                           backgroundColor: myColors.black,
-                          color: myColors["light-silver"],
+                          color: myColors.gold,
                           fontWeight: "bold",
                           transition: "all 300ms",
-                          width: "40%",
-                          padding: "9px",
+                          width: "30%",
                           fontFamily: "Robotto",
                           "&:hover": {
                             backgroundColor: myColors["light-silver"],
@@ -406,15 +407,15 @@ export const Details = () => {
                       variant="outlined"
                       sx={{
                         backgroundColor: colors.gold,
-                        width: "100px",
+                        width: "30%",
                         height: "auto",
                       }}
                       onClick={onClickLikePublicationSubmit}
                       style={{
                         cursor: "pointer",
                         color: publication?.likes?.includes(userId)
-                          ? myColors.black
-                          : myColors["dark-silver"],
+                          ? myColors["dark-silver"]
+                          : myColors.black,
                       }}
                     >
                       <FingerprintRounded></FingerprintRounded>
@@ -533,7 +534,7 @@ export const Details = () => {
                     }}
                   >
                     {comment?.author?.email} commented on{" "}
-                    {comment.createdOn.toDate().toDateString()}:
+                    {comment?.createdOn.toDate().toDateString()}:
                     {/* {comment?.createdOn.toDate().toDateString()}: */}
                     {comment?.comment}
                     <Stack

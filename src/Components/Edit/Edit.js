@@ -8,6 +8,7 @@ import {
   Paper,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { auth, db } from "../../config/firebase.js";
 import { useEffect } from "react";
@@ -15,6 +16,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFormMine } from "../../hooks/useFormMine.js";
 import { publicationServiceFactory } from "../../services/publicationServices.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const myColors = {
   black: "#070707",
@@ -51,7 +56,6 @@ export const Edit = () => {
       description: "",
       imageUrl: "",
       _ownerId: auth?.currentUser?.uid,
-      
     },
     onPublicationEditSubmit
   );
@@ -63,7 +67,24 @@ export const Edit = () => {
     });
   }, [publicationId]);
 
-    values["_id"] = publicationId;
+  values["_id"] = publicationId;
+
+  const schema = yup.object().shape({
+    name: yup.string().min(4).max(18).required(),
+    muscleGroup: yup.string().required("The muscle group is required!"),
+    weight: yup.number().positive().integer().min(40).required(),
+    height: yup.number().positive().integer().min(140).required(),
+    description: yup.string().required(),
+    imageUrl: yup.string().required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   return (
     <Stack
@@ -119,9 +140,13 @@ export const Edit = () => {
               placeholder="Name"
               name="name"
               sx={{ width: "100%" }}
+              {...register("name")}
               value={values.name}
               onChange={changeHandler}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.name?.message}
+            </Typography>
             <Box width="220px">
               <TextField
                 // sx={{ width: "220px" }}
@@ -131,6 +156,7 @@ export const Edit = () => {
                 name="muscleGroup"
                 color="success"
                 helperText="Please select your muscle group"
+                {...register("muscleGroup")}
                 value={values.muscleGroup}
                 error
                 onChange={changeHandler}
@@ -156,55 +182,74 @@ export const Edit = () => {
                   </MenuItem>
                 ))}
               </TextField>
+
               <Stack variant="p" sx={{ fontSize: "16px" }}>
                 Your current muscle is {values.muscleGroup}
               </Stack>
+              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                {errors.muscleGroup?.message}
+              </Typography>
             </Box>
             <TextField
               type="number"
               variant="outlined"
               placeholder="weight"
               name="weight"
+              {...register("weight")}
               value={values.weight}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
-
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.weight?.message}
+            </Typography>
             <TextField
               type="number"
               variant="outlined"
               placeholder="height"
               name="height"
+              {...register("height")}
               value={values.height}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.height?.message}
+            </Typography>
             <TextField
               variant="outlined"
               placeholder="description"
               multiline
               rows={4}
               name="description"
+              {...register("description")}
               value={values.description}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.description?.message}
+            </Typography>
 
             <TextField
               variant="outlined"
               placeholder="Image Url"
               name="imageUrl"
+              {...register("imageUrl")}
               value={values.imageUrl}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              {errors.imageUrl?.message}
+            </Typography>
           </FormControl>
         </FormGroup>
 
         <Button
           type="submit"
           variant="outlined"
-          onClick={onSubmit}
+          onClick={handleSubmit(onSubmit)}
           sx={{
             backgroundColor: "#170f0a",
             color: "#fbc760",

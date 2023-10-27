@@ -9,6 +9,9 @@ import {
 } from "@mui/material";
 
 import { useFormMine } from "../../hooks/useFormMine.js";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const myColors = {
   black: "#070707",
@@ -26,6 +29,15 @@ export const AddComent = ({ onCommentSubmit }) => {
     onCommentSubmit
   );
 
+  const schema = yup.object().shape({
+    comment: yup.string().required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   return (
     <>
       <Accordion
@@ -52,18 +64,22 @@ export const AddComent = ({ onCommentSubmit }) => {
             name="comment"
             variant="outlined"
             placeholder="My comment"
+            {...register("comment")}
             value={values.comment}
             onChange={changeHandler}
             multiline
             rows={4}
             sx={{ height: "140px", width: "100%" }}
           />
+          <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+            {errors.comment?.message}
+          </Typography>
         </AccordionDetails>
 
         <Button
           variant="contained"
           size="large"
-          onClick={onSubmit}
+          onClick={handleSubmit(onSubmit)}
           sx={{
             backgroundColor: myColors.black,
             color: myColors["light-silver"],

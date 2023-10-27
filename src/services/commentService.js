@@ -32,6 +32,7 @@ export const getOneComment = async (commentId, publicationId) => {
   );
   const data = await getDoc(docRefference);
   const result = data.data();
+  console.log(result)
   return result;
 };
 

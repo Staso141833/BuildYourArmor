@@ -60,7 +60,7 @@ export const publicationReducer = (state, action) => {
             currentComment._id === action.commentId
               ? {
                   ...currentComment,
-                  likes: [...currentComment.likes.concat(action.payload)],
+                  likes: [...currentComment?.likes?.concat(action.payload)],
                 }
               : { ...currentComment }
           ),

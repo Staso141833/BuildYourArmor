@@ -1,8 +1,12 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useFormMine } from "../../hooks/useFormMine.js";
 import * as commentService from "../../services/commentService";
 import { colors } from "../../metaData/colors.js";
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export const EditAndDelete = ({
   commentId,
@@ -12,12 +16,11 @@ export const EditAndDelete = ({
 }) => {
   const [isEdited, setIsEdited] = useState(false);
 
-
   useEffect(() => {
     commentService.getOneComment(commentId, publicationId).then((oldValue) => {
       changeValues(oldValue);
     });
-  }, [publicationId]);
+  }, [commentId]);
 
   const { values, changeHandler, onSubmit, changeValues } = useFormMine(
     {
@@ -27,8 +30,8 @@ export const EditAndDelete = ({
   );
   values["_id"] = commentId;
 
-  const onClickEdit = (e) => {
-    onSubmit(e);
+  const onClickEdit = () => {
+    onSubmit();
     setIsEdited(false);
   };
 
@@ -39,6 +42,18 @@ export const EditAndDelete = ({
   const onDeleteClick = () => {
     onDeleteCommentClick(commentId, publicationId);
   };
+
+  const schema = yup.object().shape({
+    comment: yup.string().required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   return (
     <Stack sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
       {!isEdited && (
@@ -46,7 +61,12 @@ export const EditAndDelete = ({
           color="success"
           onClick={onEdit}
           variant="contained"
-          sx={{ width: "auto", textTransform: "lowercase", backgroundColor: colors["light-silver"], color: colors.black }}
+          sx={{
+            width: "auto",
+            textTransform: "lowercase",
+            backgroundColor: colors["light-silver"],
+            color: colors.black,
+          }}
           style={{
             cursor: "pointer",
           }}
@@ -62,13 +82,28 @@ export const EditAndDelete = ({
             variant="standard"
             name="comment"
             placeholder="Update comment"
+            {...register("comment")}
             values={values.comment}
             onChange={changeHandler}
             multiline
-            rows={4}
-            sx={{ height: "64px", width: "100%", backgroundColor: colors.white }}
+            rows={3}
+            sx={{
+              height: "64px",
+              width: "100%",
+              backgroundColor: colors.white,
+            }}
           />
-          <Button onClick={onClickEdit} variant="contained">
+          <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+            {errors.comment?.message}
+          </Typography>
+          <Button
+            onClick={handleSubmit(onClickEdit)}
+            variant="contained"
+            sx={{
+              color: colors.black,
+              backgroundColor: colors["light-silver"],
+            }}
+          >
             Edit
           </Button>
         </Stack>
@@ -77,7 +112,11 @@ export const EditAndDelete = ({
         color="success"
         variant="contained"
         onClick={onDeleteClick}
-        sx={{ width: "auto", textTransform: "lowercase", backgroundColor: colors["dark-silver"] }}
+        sx={{
+          width: "auto",
+          textTransform: "lowercase",
+          backgroundColor: colors["dark-silver"],
+        }}
         style={{
           cursor: "pointer",
         }}

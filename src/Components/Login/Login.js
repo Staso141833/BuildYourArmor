@@ -23,7 +23,7 @@ export const Login = () => {
     loginEmail: yup.string().required("Email is required!"),
     loginPassword: yup
       .string()
-      .min(4)
+      .min(6)
       .max(20)
       .required("Password must be at least 4 characters"),
   });
@@ -110,9 +110,11 @@ export const Login = () => {
                 borderRadius: "4px",
               }}
             />
+
             <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
               {errors.loginPassword?.message}
             </Typography>
+
             <Button
               variant="outlined"
               onClick={handleSubmit(onSubmit)}
