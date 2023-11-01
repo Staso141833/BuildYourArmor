@@ -224,7 +224,7 @@ export const Details = () => {
   console.log(publication);
   const onDeleteClick = async () => {
     const caution = window.confirm(
-      "Are you sure you want to delete this public?"
+      "Are you sure you want to delete this publication?"
     );
 
     if (caution) {
@@ -534,9 +534,8 @@ export const Details = () => {
                     }}
                   >
                     {comment?.author?.email} commented on{" "}
-                    {comment?.createdOn.toDate().toDateString()}:
+                    {comment?.createdOn.seconds}: {comment?.comment}
                     {/* {comment?.createdOn.toDate().toDateString()}: */}
-                    {comment?.comment}
                     <Stack
                       sx={{ display: "flex", flexDirection: "row", gap: 1 }}
                     >

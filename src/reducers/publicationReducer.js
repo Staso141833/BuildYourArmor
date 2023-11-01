@@ -67,18 +67,6 @@ export const publicationReducer = (state, action) => {
         ],
       };
 
-    // case "COMMENT_LIKES_UPDATE":
-    //   return {
-    //     ...state,
-    //     comments: [
-    //       ...state.comments.map((currentComment) =>
-    //         currentComment._id === action.commentId
-    //           ? { ...currentComment, likes: [action.payload] }
-    //           : { ...currentComment }
-    //       ),
-    //     ],
-    //   };
-
     case "COMMENT_EDIT":
       return {
         ...state,

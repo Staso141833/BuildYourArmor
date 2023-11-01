@@ -104,7 +104,7 @@ export const Edit = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "24px",
+          gap: "10px",
           position: "absolute",
           left: "50%",
           top: "50%",
@@ -120,7 +120,7 @@ export const Edit = () => {
           component="h2"
           sx={{
             fontWeight: 700,
-            marginTop: 3,
+            marginTop: 1,
             letterSpacing: 2,
             textTransform: "uppercase",
           }}
@@ -132,7 +132,7 @@ export const Edit = () => {
           <FormControl
             sx={{
               display: "flex",
-              gap: "24px",
+              gap: "10px",
             }}
           >
             <TextField

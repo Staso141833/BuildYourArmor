@@ -85,14 +85,14 @@ export const Create = () => {
         position: "relative",
         backgroundColor: "#f6f6f6",
         width: "auto",
-        height: "90vh",
+        height: "100vh",
         overflow: "hidden",
       }}
     >
       <Paper
         sx={{
           width: "660px",
-          height: "100%",
+          height: "90%",
           backgroundColor: "#fbc760",
           border: "3px solid #170f0a",
           display: "flex",
@@ -101,8 +101,8 @@ export const Create = () => {
           gap: "12px",
           position: "absolute",
           left: "50%",
-          top: "50%",
-          mt: 8,
+          top: "56%",
+          mt: 2,
           transform: "translate(-53%, -61%)",
           zIndex: "2",
           boxShadow: "40px 30px 30px #170f0a",
@@ -240,7 +240,7 @@ export const Create = () => {
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
-                 <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
               {errors.imageUrl?.message}
             </Typography>
           </FormControl>
@@ -276,7 +276,7 @@ export const Create = () => {
             width: "200px",
             left: "50%",
             top: "50%",
-            transform: "translate(250%, 290%)",
+            transform: "translate(250%, 380%)",
           }}
         ></CardMedia>
       </Stack>

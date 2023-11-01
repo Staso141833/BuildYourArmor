@@ -1,11 +1,13 @@
 import { Masonry } from "@mui/lab";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../config/firebase.js";
 import { collection, doc, getDocs } from "firebase/firestore";
 import { CatalogItem } from "./CatalogItem.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
 import { Link } from "react-router-dom";
+
+import { SearchBar } from "./SearchBar.js";
 
 const myColors = {
   black: "#070707",
@@ -36,12 +38,17 @@ export const Catalog = () => {
         minHeight: 400,
         backgroundColor: myColors.gold,
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
       }}
     >
       <Stack sx={{ width: "100" }}>
+        <Stack sx={{ height: "200px" }}>
+          <SearchBar publications={publications} />
+        </Stack>
+
         {publications.length === 0 && (
           <Typography
             variant="h2"
@@ -85,11 +92,13 @@ export const Catalog = () => {
           </Typography>
         )}
       </Stack>
-      <Masonry columns={4} spacing={4} sx={{ margin: "32px 48px" }}>
-        {publications.map((publication) => (
-          <CatalogItem key={publication.id} {...publication} />
-        ))}
-      </Masonry>
+      <Stack sx={{marginLeft: "64px", marginRight:"64px"}}>
+        <Masonry columns={5} spacing={4} sx={{ margin: "12px 18px" }}>
+          {publications.map((publication) => (
+            <CatalogItem key={publication.id} {...publication} />
+          ))}
+        </Masonry>
+      </Stack>
     </Box>
   );
 };
