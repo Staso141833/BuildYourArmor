@@ -44,8 +44,8 @@ export const Catalog = () => {
         textAlign: "center",
       }}
     >
-      <Stack sx={{ width: "100" }}>
-        <Stack sx={{ height: "200px" }}>
+      <Stack sx={{ width: "50%", height:"26vh" }}>
+        <Stack sx={{ height: "100%" }}>
           <SearchBar publications={publications} />
         </Stack>
 

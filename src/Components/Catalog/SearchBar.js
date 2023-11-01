@@ -96,15 +96,47 @@ export const SearchBar = ({ publications }) => {
       </Stack>
 
       {filteredData.length !== 0 && (
-        <Stack>
-          {filteredData.slice(0, 10).map((value, key) => {
+        <Stack
+          sx={{
+            backgroundColor: colors.white,
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            overflow: "hidden",
+            overflowY: "auto",
+            width: "300px",
+            height: "140px",
+            borderRadius: "6px",
+
+            "&::-webkit-scrollbar": {
+              // borderRadius: "2px",
+            },
+          }}
+        >
+          {filteredData.slice(0, 30).map((value, key) => {
             return (
               <Link
                 href={`/catalog/${value.id}`}
                 target="_blank"
-                sx={{ textDecoration: "none" }}
+                sx={{
+                  textDecoration: "none",
+                  margin: "4px",
+                }}
               >
-                <Typography variant="p" sx={{fontSize: "20px", color: colors.black}}>{value.name}</Typography>{" "}
+                <Typography
+                  variant="p"
+                  sx={{
+                    fontSize: "20px",
+                    padding: "2px 24px",
+                    borderRadius: "4px",
+                    transition: "all 350ms",
+                    color: colors.black,
+                    "&:hover": {
+                      backgroundColor: colors.black,
+                      color: colors.gold,
+                    },
+                  }}
+                >
+                  {value.name}
+                </Typography>{" "}
               </Link>
             );
           })}

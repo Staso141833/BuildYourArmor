@@ -63,7 +63,7 @@ export const Create = () => {
   );
 
   const schema = yup.object().shape({
-    name: yup.string().min(4).max(18).required(),
+    name: yup.string().min(4).max(22).required(),
     muscleGroup: yup.string().required("The muscle group is required!"),
     weight: yup.number().positive().integer().min(40).required(),
     height: yup.number().positive().integer().min(140).required(),
@@ -132,6 +132,7 @@ export const Create = () => {
         >
           <FormControl
             sx={{
+              mt: 4,
               display: "flex",
               gap: "12px",
             }}
@@ -150,7 +151,7 @@ export const Create = () => {
               {errors.name?.message}
             </Typography>
 
-            <Box width="220px">
+            <Box width="100%">
               <TextField
                 sx={{ width: "220px" }}
                 label="select muscle"
@@ -187,7 +188,7 @@ export const Create = () => {
               </Typography>
             </Box>
             <TextField
-              label="kgs"
+              label="weight"
               type="number"
               variant="outlined"
               name="weight"

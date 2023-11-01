@@ -31,6 +31,7 @@ export const CatalogItem = ({
         sx={{
           border: "1px outset  silver",
           backgroundColor: myColors.white,
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         }}
       >
         <CardMedia
