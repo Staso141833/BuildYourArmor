@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useCookie } from "../../hooks/useCookie.js";
 import { useNavigate } from "react-router-dom";
 import SetCookie from "../../hooks/setCookie.js";
+import { motion } from "framer-motion";
 
 export const Login = () => {
   const [success, setSuccess] = useState("");
@@ -20,7 +21,6 @@ export const Login = () => {
   const [newError, setNewError] = useState("");
 
   const navigate = useNavigate();
-
 
   const onLoginSubmit = async (values) => {
     const auth = values.auth;
@@ -36,7 +36,7 @@ export const Login = () => {
       if (user) {
         RemoveCookie("userIn");
         setUserIn(user);
-         SetCookie("userIn", JSON.stringify(user));
+        SetCookie("userIn", JSON.stringify(user));
         setSuccess(true);
         navigate("/catalog");
 
@@ -79,7 +79,11 @@ export const Login = () => {
   });
 
   return (
-    <>
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    >
       <form method="POST" sx={{ width: "70vw", height: "80vh" }}>
         <Stack
           spacing={2}
@@ -178,6 +182,6 @@ export const Login = () => {
           ></CardMedia>
         </Stack>
       </form>
-    </>
+    </motion.div>
   );
 };

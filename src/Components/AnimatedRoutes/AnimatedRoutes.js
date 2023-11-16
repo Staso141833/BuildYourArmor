@@ -24,9 +24,8 @@ import { AnimatePresence } from "framer-motion";
 
 export const AnimatedRoutes = () => {
   const location = useLocation();
-  console.log(AnimatePresence);
+
   return (
-    //
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />;
@@ -37,14 +36,7 @@ export const AnimatedRoutes = () => {
         <Route path="/basicMuscles" element={<BasicMuscles />} />;
         <Route path="/catalog" element={<Catalog />} />;
         <Route path="/catalog/:publicationId" element={<Details />} />;
-        <Route
-          path="/catalog/:publicationId/edit"
-          element={
-            <PublicationOwner>
-              <Edit />
-            </PublicationOwner>
-          }
-        />
+        <Route path="/catalog/:publicationId/edit" element={<Edit />} />
         <Route path="/trapezius" element={<Trapezius />} />;
         <Route path="/deltoid" element={<DeltoidMuscle />} />;
         <Route path="/back" element={<Back />} />;

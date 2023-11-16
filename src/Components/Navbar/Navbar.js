@@ -5,7 +5,14 @@ import Toolbar from "@mui/material/Toolbar";
 
 import TemporaryDrawer from "../TemporaryDrawer/TemporaryDrawer.js";
 import "./navbar.css";
-import { Stack, Typography, Button, List, Switch } from "@mui/material";
+import {
+  Stack,
+  Typography,
+  Button,
+  List,
+  Switch,
+  IconButton,
+} from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
 import { Link as MuiLink } from "@mui/material";
 
@@ -13,6 +20,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../contexts/AuthContext.js";
+import { authServiceFactory } from "../../services/authService.js";
+import { MenuBook } from "@mui/icons-material";
+import RemoveCookie from "../../hooks/removeCookie.js";
+import { auth } from "../../config/firebase.js";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const myColors = {
   black: "#070707",
@@ -31,9 +43,29 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
     right: false,
   });
 
-  const { userIn, userEmail, isAuthenticated, userId, token, onLogout } =
+  const { userIn, userEmail, isAuthenticated, userId, token, setUserIn } =
     useAuthContext();
+
   const navigate = useNavigate();
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUserIn(currentUser);
+  });
+
+  const logout = () => signOut(auth);
+
+  const onLogout = async () => {
+    try {
+      await logout(auth);
+      RemoveCookie("userIn");
+      setUserIn({});
+      navigate("/home");
+      //   successCallback();
+    } catch (error) {
+      console.log(`There is a problem ${error}`);
+    }
+  };
+
   const [user, setUser] = useState({});
 
   const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
@@ -73,21 +105,6 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
               width: "15%",
             }}
           >
-            {/* <IconButton>
-              <MenuIcon
-                size="large"
-                edge="start"
-                color="warning"
-                aria-label="menu"
-                sx={{
-                  mr: 2,
-                  color: "#fbc760",
-                  transition: "transform 3000ms ease-in-out",
-                }}
-                onClick={toggleDrawer("left", true)}
-              />
-            </IconButton> */}
-
             <TemporaryDrawer
               state={state}
               setState={setState}
@@ -136,48 +153,6 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
 
             {isAuthenticated && (
               <>
-                {/* <List sx={{ display: "flex", flexDirection: "row" }}>
-                  {[
-                    "Home",
-                    "Share your experience",
-                    "Basic muscles",
-                    "The power of knowledge",
-                    "Increase intensity",
-                  ].map((text, index) => (
-                    <ListItem
-                      key={text}
-                      disablePadding
-                      sx={{
-                        marginBottom: 2,
-                        transition: "all 300ms",
-                        "&:hover": {
-                          backgroundColor: myColors.black,
-                        },
-                      }}
-                    >
-                      <ListItemButton>
-                        <ListItemIcon sx={{ color: myColors.gold }}>
-                          {index % 2 === 0 ? (
-                            <FitnessCenterSharp
-                              fontSize="small"
-                              position="right"
-                            />
-                          ) : (
-                            <FitnessCenterSharp fontSize="small" />
-                          )}
-                        </ListItemIcon>
-
-                        <Link
-                          href={`${links[index]}`}
-                     
-                        >
-                          {text}
-                        </Link>
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>  */}
-
                 <Typography variant="h6">
                   <Button
                     underline="none"
@@ -212,7 +187,9 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
                       textTransform: "uppercase",
                     }}
                   >
-                    <Link to="/login" className="login-register-button">Login</Link>
+                    <Link to="/login" className="login-register-button">
+                      Login
+                    </Link>
                   </MuiLink>
 
                   <MuiLink
@@ -223,7 +200,9 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
                       textTransform: "uppercase",
                     }}
                   >
-                    <Link to="/register" className="login-register-button">Register</Link>
+                    <Link to="/register" className="login-register-button">
+                      Register
+                    </Link>
                   </MuiLink>
                 </Stack>
               </>

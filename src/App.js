@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import { Home } from "./Components/Home/Home.js";
 import { Login } from "./Components/Login/Login.js";
 import { Register } from "./Components/Register/Register.js";
@@ -28,7 +28,7 @@ import { AuthProvider } from "./contexts/AuthContext.js";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
-import { Paper } from "@mui/material";
+import { AnimatedRoutes } from "./Components/AnimatedRoutes/AnimatedRoutes.js";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -53,7 +53,20 @@ function App() {
               checked={darkMode}
               onClickThemeChange={onClickThemeChange}
             />
+            <AnimatedRoutes></AnimatedRoutes>
 
+            <Footer></Footer>
+          </div>
+        </PublicationProvider>
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+
+{
+  /* 
             <Routes>
               <Route path="/" element={<Home />} />;
               <Route path="/home" element={<Home />} />;
@@ -82,14 +95,5 @@ function App() {
               <Route path="/legs" element={<Legs />} />;
               <Route path="/calves" element={<Calves />} />;
               <Route path="/intensity" element={<IncreaseIntensity />} />;
-            </Routes>
-
-            <Footer></Footer>
-          </div>
-        </PublicationProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  );
+            </Routes> */
 }
-
-export default App;

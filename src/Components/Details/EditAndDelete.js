@@ -85,7 +85,6 @@ export const EditAndDelete = ({
             name="comment"
             placeholder="Update comment"
             {...register("comment")}
-            // values={values.comment}
             onChange={changeHandler}
             multiline
             rows={3}

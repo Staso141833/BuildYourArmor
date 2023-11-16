@@ -1,15 +1,21 @@
 import {
-    Card,
-    CardMedia,
-    List,
-    ListItem,
-    ListItemText,
-    Stack,
-    Typography,
-  } from "@mui/material";
-  
-  export const Chest = () => {
-    return (
+  Card,
+  CardMedia,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { motion } from "framer-motion";
+
+export const Chest = () => {
+  return (
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    >
       <Stack
         sx={{
           fontSize: "18px",
@@ -35,7 +41,7 @@ import {
         >
           <Typography variant="h2">Chest</Typography>
           <Stack sx={{ width: "50%", border: "1px solid black" }}></Stack>
-  
+
           <Stack
             sx={{
               width: "70%",
@@ -48,7 +54,7 @@ import {
           >
             <Typography variant="h4">Chest muscles</Typography>
             <Stack sx={{ width: "70%", border: "1px solid black" }}></Stack>
-  
+
             <Stack
               sx={{
                 width: "70%",
@@ -63,49 +69,49 @@ import {
                 sternocostal (middle) and abdominis (lower), with bodybuilders
                 usually distinguishing between upper and middle-lower. The
                 starting attachment point for the upper part is the clavicle.
-                Along the midline of the body, it attaches to the sternum and the
-                cartilages of several ribs. The final catch point is on the crest
-                of the greater tubercle of the humerus. The pectoral muscles
-                spread out like a fan, covering the ribcage like armor plates
-                body. Prikrepeni kŭm grŭdnata kost i rebrata i dostigaĭki do
-                ramennata kost, tezi muskuli vi pozvolyavat izpŭlnenieto na
+                Along the midline of the body, it attaches to the sternum and
+                the cartilages of several ribs. The final catch point is on the
+                crest of the greater tubercle of the humerus. The pectoral
+                muscles spread out like a fan, covering the ribcage like armor
+                plates body. Prikrepeni kŭm grŭdnata kost i rebrata i dostigaĭki
+                do ramennata kost, tezi muskuli vi pozvolyavat izpŭlnenieto na
                 dvizheniya kato naprimer Khvŭrlyane na topka, Iztlaskvane na
                 shtanga ot leg s shirok khvat, otvaryane na kapachka na butilka,
                 pluvane kroul, kakto i pravene na uprazhneniya na usporedka.
                 Attached to the sternum and ribs and reaching the humerus, these
                 muscles allow you to perform movements such as Throwing a ball,
-                Pushing a barbell with a wide grip, opening a bottle cap, swimming
-                crawls, as well as doing parallel bars . In addition, due to their
-                grip on the humerus, they are of great importance when performing
-                exercises such as deadlifts. In fact, there is a significant
-                interdependence between the chest and back muscles. The breasts
-                would not reach their full potential size unless the latissimus
-                dorsi muscles in the upper back were fully developed.
+                Pushing a barbell with a wide grip, opening a bottle cap,
+                swimming crawls, as well as doing parallel bars . In addition,
+                due to their grip on the humerus, they are of great importance
+                when performing exercises such as deadlifts. In fact, there is a
+                significant interdependence between the chest and back muscles.
+                The breasts would not reach their full potential size unless the
+                latissimus dorsi muscles in the upper back were fully developed.
               </Typography>
-  
+
               <Typography variant="p">
-                Main function: To bring the arm and shoulder to the midline of the
-                body.
+                Main function: To bring the arm and shoulder to the midline of
+                the body.
               </Typography>
-  
+
               <Typography variant="p">
-                Subclavian muscle - a small cylindrical muscle located between the
-                collarbone and the first rib.
+                Subclavian muscle - a small cylindrical muscle located between
+                the collarbone and the first rib.
                 <Typography variant="p">
                   Main function: Stabilizes the clavicle.
                 </Typography>
               </Typography>
-  
+
               <Typography variant="p">
                 Front serratus muscle (m.serratus anterior) - Starts from the
-                lateral surface of I to IX ribs and is captured by the inner edge
-                and lower tip of the scapula.
+                lateral surface of I to IX ribs and is captured by the inner
+                edge and lower tip of the scapula.
                 <Typography variant="p">
                   Main function: Pulls the lower corner of the scapula down and
                   forward.
                 </Typography>
               </Typography>
-  
+
               <Typography variant="h4">Full Breast Development</Typography>
               <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
               <Typography variant="p">
@@ -117,13 +123,14 @@ import {
                 muscles, and to expand the entire chest so that the pectoral
                 muscles are shown to their best advantage.
               </Typography>
-  
+
               <Typography variant="p">
-                Improving the appearance of the chest is more difficult than many
-                bodybuilders think. You may have a huge chest and huge, dense
-                pectoral muscles, but this will not guarantee you a perfect breast
-                shape. The perfect chest, especially if you are interested in
-                competitive activity, includes all of the following:
+                Improving the appearance of the chest is more difficult than
+                many bodybuilders think. You may have a huge chest and huge,
+                dense pectoral muscles, but this will not guarantee you a
+                perfect breast shape. The perfect chest, especially if you are
+                interested in competitive activity, includes all of the
+                following:
                 <List>
                   <ListItem>
                     <ListItemText primary="1. Big chest" />
@@ -153,7 +160,7 @@ import {
                        the upper pectoral muscles, not in a way where the muscles seem to hang down."
                     />
                   </ListItem>
-  
+
                   <ListItem>
                     <ListItemText
                       primary="7. 
@@ -167,11 +174,12 @@ import {
               <Stack sx={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 <Stack>
                   <Typography variant="p">
-                    When Franco Columbu takes a chest pose, you can see that each
-                    area of ​​his chest is clearly defined - the upper and lower
-                    chest, the separation of the upper chest from the deltoid
-                    muscles, the inner part of the pectoral muscles, as well as
-                    the transition of the chest to the dentate anterior muscle.
+                    When Franco Columbu takes a chest pose, you can see that
+                    each area of ​​his chest is clearly defined - the upper and
+                    lower chest, the separation of the upper chest from the
+                    deltoid muscles, the inner part of the pectoral muscles, as
+                    well as the transition of the chest to the dentate anterior
+                    muscle.
                   </Typography>
                   <Card position="relative" sx={{ width: "100%", mt: 2 }}>
                     <CardMedia
@@ -182,11 +190,11 @@ import {
                     ></CardMedia>
                   </Card>
                 </Stack>
-  
+
                 <Stack>
                   <Typography variant="p">
-                    The pectoralis major complements the deltoid muscles, as well
-                    as the arm muscles when performing the side chest.
+                    The pectoralis major complements the deltoid muscles, as
+                    well as the arm muscles when performing the side chest.
                   </Typography>
                   <Card position="relative" sx={{ width: "100%", mt: 2 }}>
                     <CardMedia
@@ -197,13 +205,13 @@ import {
                     ></CardMedia>
                   </Card>
                 </Stack>
-  
+
                 <Stack>
                   <Typography variant="p">
-                    The chest takes center stage in the most muscular pose. Notice
-                    how the ribbing of the pectoral muscles connects all the other
-                    elements: the trapezius, the front deltoids, the arms, and the
-                    abs.
+                    The chest takes center stage in the most muscular pose.
+                    Notice how the ribbing of the pectoral muscles connects all
+                    the other elements: the trapezius, the front deltoids, the
+                    arms, and the abs.
                   </Typography>
                   <Card position="relative" sx={{ width: "100%", mt: 2 }}>
                     <CardMedia
@@ -219,5 +227,6 @@ import {
           </Stack>
         </Stack>
       </Stack>
-    );
-  };
+    </motion.div>
+  );
+};

@@ -55,18 +55,3 @@ export const CatalogItem = ({ id, name, imageUrl }) => {
     </Box>
   );
 };
-
-// <Link
-// to={`/catalog/${id}`}
-// // variant="contained"
-// // sx={{
-// //   backgroundColor: myColors.black,
-// //   color: myColors.gold,
-// //   fontWeight: "bold",
-// //   textDecoration: "none",
-// //   padding: "12px 16px",
-// //   borderRadius: "4px",
-// // }}
-// >
-// Details
-// </Link>

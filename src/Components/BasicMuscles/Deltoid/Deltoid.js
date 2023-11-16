@@ -1,8 +1,13 @@
 import { Box, Typography, Stack, Card, CardMedia } from "@mui/material";
+import { motion } from "framer-motion";
 
 export const DeltoidMuscle = () => {
   return (
-    <>
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    >
       <Box sx={{ fontSize: "18px" }}>
         <Typography variant="h2" sx={{ margin: 4, letterSpacing: 4 }}>
           Shoulders
@@ -405,6 +410,6 @@ export const DeltoidMuscle = () => {
           </Stack>
         </Stack>
       </Box>
-    </>
+    </motion.div>
   );
 };

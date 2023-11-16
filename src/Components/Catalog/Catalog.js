@@ -39,8 +39,6 @@ export const Catalog = () => {
     getPublications();
   }, []);
 
-  console.log(publications);
-
   return (
     <motion.div
       intial={{ width: 0 }}

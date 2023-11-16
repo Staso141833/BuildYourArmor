@@ -94,6 +94,7 @@ export const AuthProvider = ({ children }) => {
     onRegisterSubmit,
     onLogout,
     userIn,
+    setUserIn,
     token: userIn?.stsTokenManager?.accessToken,
     userId: userIn?.uid,
     userEmail: userIn?.email,

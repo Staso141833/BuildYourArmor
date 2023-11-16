@@ -37,6 +37,7 @@ import { Like } from "./Like.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
 import { EditAndDelete } from "./EditAndDelete.js";
 import { ArrowUpward, FingerprintRounded, InsertComment } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const myColors = {
   black: "#070707",
@@ -251,7 +252,10 @@ export const Details = () => {
   console.log("render");
 
   return (
-    <>
+    <motion.div
+    intial={{ width: 0 }}
+    animate={{ width: "100%" }}
+    exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}>
       <Box
         sx={{
           display: "flex",
@@ -531,6 +535,6 @@ export const Details = () => {
           </Stack>
         </Stack>
       </Box>
-    </>
+    </motion.div>
   );
 };

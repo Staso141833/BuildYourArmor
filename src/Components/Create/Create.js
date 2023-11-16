@@ -21,7 +21,7 @@ import { Timestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion.js";
+import { motion } from "framer-motion";
 
 const myColors = {
   black: "#070707",

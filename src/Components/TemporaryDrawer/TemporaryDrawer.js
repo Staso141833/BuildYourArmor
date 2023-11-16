@@ -123,16 +123,4 @@ export default function TemporaryDrawer() {
   );
 }
 
-{
-  /* <Link
-href={`${links[index]}`}
-sx={{
-  color: myColors.gold,
-  textDecoration: "none",
-  fontSize: "20px",
-  textTransform: "uppercase",
-}}
->
-<ListItemText primary={text} />
-</Link> */
-}
+

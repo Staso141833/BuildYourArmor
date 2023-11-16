@@ -10,6 +10,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import RemoveCookie from "../../hooks/removeCookie.js";
 import SetCookie from "../../hooks/setCookie.js";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -30,9 +31,8 @@ export const Register = () => {
       SetCookie("userIn", JSON.stringify(result));
       navigate("/catalog");
     } catch (error) {
-      window.alert(error)
+      window.alert(error);
       console.log(`There is a problem ${error}`);
-
     }
   };
 
@@ -68,7 +68,11 @@ export const Register = () => {
   });
 
   return (
-    <>
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    >
       <form>
         <Stack
           spacing={2}
@@ -205,7 +209,7 @@ export const Register = () => {
           </Stack>
         </Stack>
       </form>
-    </>
+    </motion.div>
   );
 };
 

@@ -14,6 +14,7 @@ import { useState } from "react";
 
 import "./basicMuscles.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const myColors = {
   black: "#070707",
@@ -58,7 +59,11 @@ export const BasicMuscles = () => {
   };
 
   return (
-    <>
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+    >
       <Stack position={"relative"}>
         <Card
           position="relative"
@@ -412,6 +417,6 @@ export const BasicMuscles = () => {
           marginTop: "910px",
         }}
       ></Box>
-    </>
+    </motion.div>
   );
 };
