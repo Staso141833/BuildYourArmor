@@ -1,28 +1,30 @@
-a {
-  font-size: 20px;
-  text-decoration: none;
-  color: #659dbd;
-  letter-spacing: 1px;
-}
+/* colors = {
+    black: "#070707",
+    "dark-silver": "#847470",
+    "light-silver": "#b9b3ae",
+    gold: "#fbc760",
+    white: "#edebea",
+  }; */
 
-.login-register-button {
+.details-button {
   display: flex;
   color: #fbc760;
   font-size: 16px;
   text-decoration: none;
   transition: all 350ms;
   padding: 12px;
-  width: 100%;
+  width: 50%;
   justify-content: center;
   align-items: center;
-  height: 100%;
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
+  background-color: #070707;
   font-family: Robotto;
   border-radius: 8px;
 }
-.login-register-button:hover {
+
+.details-button:hover {
   background-color: #fbc760;
   color: #070707;
 }

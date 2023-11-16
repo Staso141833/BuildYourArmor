@@ -25,45 +25,70 @@ import { PublicationOwner } from "./common/PublicationOwner.js";
 import { PublicationProvider } from "./contexts/PublicationContext.js";
 import { AuthProvider } from "./contexts/AuthContext.js";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { useState } from "react";
+import { Paper } from "@mui/material";
+
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+    },
+  });
+
+  const onClickThemeChange = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <AuthProvider>
-      <PublicationProvider>
-        <div className="App">
-          <NavigationBar></NavigationBar>
-          <Routes>
-            <Route path="/" element={<Home />} />;
-            <Route path="/home" element={<Home />} />;
-            <Route path="/login" element={<Login />} />;
-            <Route path="/register" element={<Register />} />;
-            <Route path="/create" element={<Create />} />;
-            <Route path="/basicMuscles" element={<BasicMuscles />} />;
-            <Route path="/catalog" element={<Catalog />} />;
-            <Route path="/catalog/:publicationId" element={<Details />} />;
-            <Route
-              path="/catalog/:publicationId/edit"
-              element={
-                <PublicationOwner>
-                  <Edit />
-                </PublicationOwner>
-              }
+    <ThemeProvider theme={darkTheme}>
+      <AuthProvider>
+        <PublicationProvider>
+          <CssBaseline></CssBaseline>
+          <div className="App">
+            <NavigationBar
+              checked={darkMode}
+              onClickThemeChange={onClickThemeChange}
             />
-            <Route path="/trapezius" element={<Trapezius />} />;
-            <Route path="/deltoid" element={<DeltoidMuscle />} />;
-            <Route path="/back" element={<Back />} />;
-            <Route path="/biceps" element={<Biceps />} />;
-            <Route path="/triceps" element={<Triceps />} />;
-            <Route path="/forearms" element={<Forearms />} />;
-            <Route path="/chest" element={<Chest />} />;
-            <Route path="/abs" element={<Abs />} />;
-            <Route path="/legs" element={<Legs />} />;
-            <Route path="/calves" element={<Calves />} />;
-            <Route path="/intensity" element={<IncreaseIntensity />} />;
-          </Routes>
-          <Footer></Footer>
-        </div>
-      </PublicationProvider>
-    </AuthProvider>
+
+            <Routes>
+              <Route path="/" element={<Home />} />;
+              <Route path="/home" element={<Home />} />;
+              <Route path="/login" element={<Login />} />;
+              <Route path="/register" element={<Register />} />;
+              <Route path="/create" element={<Create />} />;
+              <Route path="/basicMuscles" element={<BasicMuscles />} />;
+              <Route path="/catalog" element={<Catalog />} />;
+              <Route path="/catalog/:publicationId" element={<Details />} />;
+              <Route
+                path="/catalog/:publicationId/edit"
+                element={
+                  <PublicationOwner>
+                    <Edit />
+                  </PublicationOwner>
+                }
+              />
+              <Route path="/trapezius" element={<Trapezius />} />;
+              <Route path="/deltoid" element={<DeltoidMuscle />} />;
+              <Route path="/back" element={<Back />} />;
+              <Route path="/biceps" element={<Biceps />} />;
+              <Route path="/triceps" element={<Triceps />} />;
+              <Route path="/forearms" element={<Forearms />} />;
+              <Route path="/chest" element={<Chest />} />;
+              <Route path="/abs" element={<Abs />} />;
+              <Route path="/legs" element={<Legs />} />;
+              <Route path="/calves" element={<Calves />} />;
+              <Route path="/intensity" element={<IncreaseIntensity />} />;
+            </Routes>
+
+            <Footer></Footer>
+          </div>
+        </PublicationProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

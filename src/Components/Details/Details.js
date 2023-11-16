@@ -5,13 +5,12 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Link,
-  List,
   ListItem,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
+
+import { Link as MuiLink } from "@mui/material";
 import {
   Timestamp,
   addDoc,
@@ -20,24 +19,24 @@ import {
   collection,
   doc,
   getDoc,
-  getDocs,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { useEffect, useReducer, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../../config/firebase.js";
 import { publicationServiceFactory } from "../../services/publicationServices.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
 import * as commentService from "../../services/commentService.js";
 import { AddComent } from "./AddComment.js";
 import { publicationReducer } from "../../reducers/publicationReducer.js";
+
+import "./details.css";
 import { colors } from "../../metaData/colors.js";
 
 import { Like } from "./Like.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
 import { EditAndDelete } from "./EditAndDelete.js";
-import { FingerprintRounded } from "@mui/icons-material";
+import { ArrowUpward, FingerprintRounded, InsertComment } from "@mui/icons-material";
 
 const myColors = {
   black: "#070707",
@@ -53,6 +52,7 @@ export const Details = () => {
   const { userEmail, isAuthenticated, userId } = useAuthContext();
   const [publication, dispatch] = useReducer(publicationReducer, {});
   const { deletePublication } = usePublicationContext();
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -248,6 +248,8 @@ export const Details = () => {
     }
   };
 
+  console.log("render");
+
   return (
     <>
       <Box
@@ -337,27 +339,12 @@ export const Details = () => {
                   {isOwner && (
                     <>
                       <Link
-                        href={`/catalog/${publicationId}/edit`}
-                        variant="contained"
-                        sx={{
-                          backgroundColor: myColors.black,
-                          color: myColors.gold,
-                          fontWeight: "bold",
-                          transition: "all 300ms",
-                          padding: "10px",
-                          textDecoration: "none",
-                          width: "30%",
-                          borderRadius: "6px",
-                          textTransform: "uppercase",
-                          fontSize: "14px",
-                          "&:hover": {
-                            backgroundColor: myColors["light-silver"],
-                            color: myColors.black,
-                          },
-                        }}
+                        to={`/catalog/${publicationId}/edit`}
+                        className="edit-add-button"
                       >
                         Edit
                       </Link>
+
                       <Button
                         variant="contained"
                         onClick={onDeleteClick}
@@ -379,26 +366,7 @@ export const Details = () => {
                     </>
                   )}
                   {!isOwner && (
-                    <Link
-                      href="/create"
-                      variant="contained"
-                      sx={{
-                        backgroundColor: myColors.black,
-                        color: myColors["light-silver"],
-                        fontWeight: "bold",
-                        transition: "all 300ms",
-                        padding: "12px",
-                        textDecoration: "none",
-                        width: "auto",
-                        borderRadius: "6px",
-                        textTransform: "uppercase",
-                        fontSize: "12px",
-                        "&:hover": {
-                          backgroundColor: myColors["light-silver"],
-                          color: myColors.black,
-                        },
-                      }}
-                    >
+                    <Link to="/create" className="edit-add-button">
                       Add publication
                     </Link>
                   )}
@@ -505,7 +473,7 @@ export const Details = () => {
             <Stack>
               {!publication.comments?.length && (
                 <Typography variant="h5" sx={{ textShadow: "14px 10px 18px" }}>
-                  No comments yet. Be the first one who will give an opinion!
+                  No comments yet. Be the first one who will give an opinion! <ArrowUpward></ArrowUpward>
                 </Typography>
               )}
             </Stack>

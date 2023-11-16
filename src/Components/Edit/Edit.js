@@ -69,8 +69,10 @@ export const Edit = () => {
 
   values["_id"] = publicationId;
 
+  console.log(values);
+
   const schema = yup.object().shape({
-    name: yup.string().min(4).max(18).required(),
+    name: yup.string().min(4).max(22).required(),
     muscleGroup: yup.string().required("The muscle group is required!"),
     weight: yup.number().positive().integer().min(40).required(),
     height: yup.number().positive().integer().min(140).required(),
@@ -84,6 +86,7 @@ export const Edit = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    values: values,
   });
 
   return (
@@ -141,7 +144,7 @@ export const Edit = () => {
               name="name"
               sx={{ width: "100%" }}
               {...register("name")}
-              value={values.name}
+              // value={values.name}
               onChange={changeHandler}
             />
             <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
@@ -157,8 +160,7 @@ export const Edit = () => {
                 color="success"
                 helperText="Please select your muscle group"
                 {...register("muscleGroup")}
-                value={values.muscleGroup}
-                error
+                // value={values.muscleGroup}
                 onChange={changeHandler}
                 SelectProps={{
                   multiline: true,
@@ -166,14 +168,14 @@ export const Edit = () => {
               >
                 {muscleGroups.map((muscleGroup) => (
                   <MenuItem
-                    value={muscleGroup}
+                     value={muscleGroup}
                     sx={{
                       width: "auto",
                       background: myColors.gold,
                       color: myColors.white,
                       textTransform: "uppercase",
                       "&:hover": {
-                        background: "#ffff",
+                        background: myColors.black,
                         transition: "all 0.4s ease-in-out",
                       },
                     }}
@@ -196,7 +198,7 @@ export const Edit = () => {
               placeholder="weight"
               name="weight"
               {...register("weight")}
-              value={values.weight}
+              // value={values.weight}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
@@ -209,7 +211,7 @@ export const Edit = () => {
               placeholder="height"
               name="height"
               {...register("height")}
-              value={values.height}
+              // value={values.height}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
@@ -223,7 +225,7 @@ export const Edit = () => {
               rows={4}
               name="description"
               {...register("description")}
-              value={values.description}
+              // value={values.description}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />
@@ -236,7 +238,7 @@ export const Edit = () => {
               placeholder="Image Url"
               name="imageUrl"
               {...register("imageUrl")}
-              value={values.imageUrl}
+              // value={values.imageUrl}
               onChange={changeHandler}
               sx={{ width: "100%" }}
             />

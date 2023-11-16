@@ -6,9 +6,36 @@ import { useFormMine } from "../../hooks/useFormMine.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import RemoveCookie from "../../hooks/removeCookie.js";
+import SetCookie from "../../hooks/setCookie.js";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const { onRegisterSubmit } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const onRegisterSubmit = async (values) => {
+    const { rePassword, ...registerData } = values;
+    if (rePassword !== registerData.password) {
+      throw Error("Passwords do not match!");
+    }
+
+    try {
+      const result = await createUserWithEmailAndPassword(
+        registerData.auth,
+        registerData.email,
+        registerData.password
+      );
+      RemoveCookie("userIn");
+      SetCookie("userIn", JSON.stringify(result));
+      navigate("/catalog");
+    } catch (error) {
+      window.alert(error)
+      console.log(`There is a problem ${error}`);
+
+    }
+  };
+
   const { values, changeHandler, onSubmit } = useFormMine(
     {
       auth: auth,
@@ -134,11 +161,11 @@ export const Register = () => {
               }}
             />
             {errors.rePassword && (
-    <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
-              The re-password does not match with the password!
-    </Typography>
+              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                The re-password does not match with the password!
+              </Typography>
             )}
-        
+
             <Button
               onClick={handleSubmit(onSubmit)}
               variant="outlined"

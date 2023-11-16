@@ -1,16 +1,62 @@
+/* colors = {
+    black: "#070707",
+    "dark-silver": "#847470",
+    "light-silver": "#b9b3ae",
+    gold: "#fbc760",
+    white: "#edebea",
+  }; */
 
-.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper .css-6hp17o-MuiList-root-MuiMenu-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    outline: 0;
-    border: 2px inset #fbc760;
-    border-radius: 6px;
-    width: 240px;
-    background-color: black;
-    
- 
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper
+  .css-6hp17o-MuiList-root-MuiMenu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  outline: 0;
+  border: 2px inset #fbc760;
+  border-radius: 6px;
+  width: 240px;
+  background-color: black;
+}
+
+.muscle-button-dropdown {
+  color: #fbc760;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 300ms;
+  padding: 12px;
+  width: 100%;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Robotto;
+}
+
+.muscle-button-dropdown:hover {
+  background-color: #fbc760;
+  color: #070707;
+}
+
+.muscle-button {
+  display: flex;
+  color: #fbc760;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 350ms;
+  padding: 12px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Robotto;
+}
+
+.muscle-button:hover {
+  background-color: #fbc760;
+  color: #070707;
 }

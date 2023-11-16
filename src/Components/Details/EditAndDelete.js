@@ -31,6 +31,7 @@ export const EditAndDelete = ({
   values["_id"] = commentId;
 
   const onClickEdit = () => {
+    console.log(values.comment);
     onSubmit();
     setIsEdited(false);
   };
@@ -53,6 +54,7 @@ export const EditAndDelete = ({
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    values: values,
   });
   return (
     <Stack sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
@@ -83,7 +85,7 @@ export const EditAndDelete = ({
             name="comment"
             placeholder="Update comment"
             {...register("comment")}
-            values={values.comment}
+            // values={values.comment}
             onChange={changeHandler}
             multiline
             rows={3}

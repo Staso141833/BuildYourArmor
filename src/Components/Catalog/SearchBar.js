@@ -3,9 +3,11 @@ import {
   SearchOffSharp,
   SearchOffTwoTone,
 } from "@mui/icons-material";
-import { Button, Link, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { colors } from "../../metaData/colors.js";
+import { Link } from "react-router-dom";
+import { Link as MuiLink } from "@mui/material";
 
 export const SearchBar = ({ publications }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -113,15 +115,25 @@ export const SearchBar = ({ publications }) => {
         >
           {filteredData.slice(0, 30).map((value, key) => {
             return (
-              <Link
-                href={`/catalog/${value.id}`}
-                target="_blank"
-                sx={{
-                  textDecoration: "none",
-                  margin: "4px",
-                }}
-              >
-                <Typography
+              <MuiLink href={`/catalog/${value.id}`}>
+                <p>{value.name}</p>
+              </MuiLink>
+            );
+          })}
+        </Stack>
+      )}
+    </Stack>
+  );
+};
+
+// target="_blank"
+// sx={{
+//   textDecoration: "none",
+//   margin: "4px",
+// }}
+
+{
+  /* <Typography
                   variant="p"
                   sx={{
                     fontSize: "20px",
@@ -133,15 +145,10 @@ export const SearchBar = ({ publications }) => {
                       backgroundColor: colors.black,
                       color: colors.gold,
                     },
-                  }}
-                >
-                  {value.name}
-                </Typography>{" "}
-              </Link>
-            );
-          })}
-        </Stack>
-      )}
-    </Stack>
-  );
-};
+                  }} 
+                 > */
+}
+
+{
+  /* </Typography>{" "} */
+}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Box,
   Card,
@@ -5,10 +6,11 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Link,
   Button,
+  Link as MuiLink,
 } from "@mui/material";
 
+import "./catalogItem.css";
 
 const myColors = {
   black: "#070707",
@@ -18,13 +20,7 @@ const myColors = {
   white: "#edebea",
 };
 
-export const CatalogItem = ({
-  id,
-  name,
-  imageUrl,
-}) => {
-
-
+export const CatalogItem = ({ id, name, imageUrl }) => {
   return (
     <Box>
       <Card
@@ -41,9 +37,6 @@ export const CatalogItem = ({
           sx={{ opacity: 0.8 }}
         ></CardMedia>
         <CardContent>
-          {/* <Typography gutterBottom variant="h5" component="div">
-              {publication.muscleGroup}
-            </Typography> */}
           <Typography variant="h4">{name}</Typography>
         </CardContent>
         <CardActions
@@ -54,18 +47,7 @@ export const CatalogItem = ({
             marginBottom: 1.5,
           }}
         >
-          <Link
-            href={`/catalog/${id}`}
-            variant="contained"
-            sx={{
-              backgroundColor: myColors.black,
-              color: myColors.gold,
-              fontWeight: "bold",
-              textDecoration: "none",
-              padding: "12px 16px",
-              borderRadius: "4px",
-            }}
-          >
+          <Link to={`/catalog/${id}`} className="details-button">
             Details
           </Link>
         </CardActions>
@@ -73,3 +55,18 @@ export const CatalogItem = ({
     </Box>
   );
 };
+
+// <Link
+// to={`/catalog/${id}`}
+// // variant="contained"
+// // sx={{
+// //   backgroundColor: myColors.black,
+// //   color: myColors.gold,
+// //   fontWeight: "bold",
+// //   textDecoration: "none",
+// //   padding: "12px 16px",
+// //   borderRadius: "4px",
+// // }}
+// >
+// Details
+// </Link>

@@ -5,11 +5,12 @@ import Toolbar from "@mui/material/Toolbar";
 
 import TemporaryDrawer from "../TemporaryDrawer/TemporaryDrawer.js";
 import "./navbar.css";
-import { Stack, Link, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button, List, Switch } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
+import { Link as MuiLink } from "@mui/material";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../contexts/AuthContext.js";
 
@@ -20,14 +21,16 @@ const myColors = {
   gold: "#fbc760",
   white: "#edebea",
 };
+const label = { inputProps: { "area-label": "switch demo" } };
 
-export default function NavigationBar() {
+export default function NavigationBar({ checked, onClickThemeChange }) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
   const { userIn, userEmail, isAuthenticated, userId, token, onLogout } =
     useAuthContext();
   const navigate = useNavigate();
@@ -60,6 +63,7 @@ export default function NavigationBar() {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-evenly",
+            alignItems: "center",
           }}
         >
           <Stack
@@ -120,6 +124,16 @@ export default function NavigationBar() {
               width: "auto",
             }}
           >
+            <Stack sx={{ backgroundColor: myColors.white }}>
+              <Switch
+                {...label}
+                defaultChecked
+                color="secondary"
+                onClick={onClickThemeChange}
+                checked={checked}
+              />
+            </Stack>
+
             {isAuthenticated && (
               <>
                 {/* <List sx={{ display: "flex", flexDirection: "row" }}>
@@ -155,19 +169,15 @@ export default function NavigationBar() {
 
                         <Link
                           href={`${links[index]}`}
-                          sx={{
-                            color: myColors.gold,
-                            textDecoration: "none",
-                            fontSize: "14px",
-                            textTransform: "uppercase",
-                          }}
+                     
                         >
                           {text}
                         </Link>
                       </ListItemButton>
                     </ListItem>
                   ))}
-                </List> */}
+                </List>  */}
+
                 <Typography variant="h6">
                   <Button
                     underline="none"
@@ -185,24 +195,37 @@ export default function NavigationBar() {
             )}
             {!isAuthenticated && (
               <>
-                <Typography variant="h6">
-                  <Link
-                    sx={{ color: "#fbc760" }}
+                <Stack
+                  variant="div"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 2,
+                    alignItems: "center",
+                  }}
+                >
+                  <MuiLink
                     href="/login"
-                    underline="none"
+                    sx={{
+                      color: myColors.gold,
+                      textDecoration: "none",
+                      textTransform: "uppercase",
+                    }}
                   >
-                    Login
-                  </Link>
-                </Typography>
-                <Typography variant="h6">
-                  <Link
-                    sx={{ color: "#fbc760" }}
+                    <Link to="/login" className="login-register-button">Login</Link>
+                  </MuiLink>
+
+                  <MuiLink
                     href="/register"
-                    underline="none"
+                    sx={{
+                      color: myColors.gold,
+                      textDecoration: "none",
+                      textTransform: "uppercase",
+                    }}
                   >
-                    Register
-                  </Link>
-                </Typography>
+                    <Link to="/register" className="login-register-button">Register</Link>
+                  </MuiLink>
+                </Stack>
               </>
             )}
           </Stack>

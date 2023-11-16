@@ -6,9 +6,51 @@ import { useAuthContext } from "../../contexts/AuthContext.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { loginButtonStyles } from "./login.styles.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import RemoveCookie from "../../hooks/removeCookie.js";
+import { useState } from "react";
+import { useCookie } from "../../hooks/useCookie.js";
+import { useNavigate } from "react-router-dom";
+import SetCookie from "../../hooks/setCookie.js";
 
 export const Login = () => {
-  const { onLoginSubmit } = useAuthContext();
+  const [success, setSuccess] = useState("");
+  const [userIn, setUserIn] = useCookie("userIn", {});
+  const [newError, setNewError] = useState("");
+
+  const navigate = useNavigate();
+
+
+  const onLoginSubmit = async (values) => {
+    const auth = values.auth;
+    const loginEmail = values.loginEmail;
+    const loginPassword = values.loginPassword;
+
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      if (user) {
+        RemoveCookie("userIn");
+        setUserIn(user);
+         SetCookie("userIn", JSON.stringify(user));
+        setSuccess(true);
+        navigate("/catalog");
+
+        return user;
+      }
+    } catch (error) {
+      console.log(`${error}`);
+      if (error.response) {
+        console.log(error.response.data.message);
+        setNewError(error.response.data.message);
+        console.log(error.response.status);
+      }
+    }
+  };
 
   const { values, changeHandler, onSubmit } = useFormMine(
     {
@@ -86,7 +128,7 @@ export const Login = () => {
               type="email"
               name="loginEmail"
               {...register("loginEmail")}
-              value={values.loginEmail}
+              //value={values.loginEmail}
               onChange={changeHandler}
               sx={{
                 width: "80%",
@@ -102,7 +144,7 @@ export const Login = () => {
               type="password"
               {...register("loginPassword")}
               name="loginPassword"
-              value={values.loginPassword}
+              //value={values.loginPassword}
               onChange={changeHandler}
               sx={{
                 width: "80%",
@@ -118,17 +160,7 @@ export const Login = () => {
             <Button
               variant="outlined"
               onClick={handleSubmit(onSubmit)}
-              sx={{
-                backgroundColor: "#170f0a",
-                color: "#fbc760",
-                padding: "12px",
-                fontSize: "16px",
-                width: "46%",
-                border: " 1px solid #fbc760",
-                "&:hover": {
-                  backgroundColor: "fbc760",
-                },
-              }}
+              sx={loginButtonStyles}
             >
               Sign In
             </Button>

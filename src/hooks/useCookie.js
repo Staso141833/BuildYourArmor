@@ -20,11 +20,3 @@ export const useCookie = (key, initialValue) => {
   };
   return [state, setCookieState];
 };
-
-// const getCook = GetCookie("userIn");
-// const parsed = JSON.parse(getCook)
-
-// console.log(getCook)
-// console.log(parsed)
-// console.log(parsed.user.email)
-// console.log(userEmail)

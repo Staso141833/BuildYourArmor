@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useCookie } from "../hooks/useCookie.js";
 import { authServiceFactory } from "../services/authService.js";
 import { auth } from "../config/firebase.js";
@@ -11,12 +11,11 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
   const [newError, setNewError] = useState("");
   const [success, setSuccess] = useState("");
@@ -44,8 +43,6 @@ export const AuthProvider = ({ children }) => {
         //  SetCookie("userIn", JSON.stringify(user));
         setSuccess(true);
 
-        navigate("/catalog");
-
         return user;
       }
     } catch (error) {
@@ -72,7 +69,6 @@ export const AuthProvider = ({ children }) => {
       );
       RemoveCookie("userIn");
       SetCookie("userIn", JSON.stringify(result));
-      navigate("/catalog");
     } catch (error) {
       console.log(`There is a problem ${error}`);
     }
@@ -88,8 +84,6 @@ export const AuthProvider = ({ children }) => {
       RemoveCookie("userIn");
       setUserIn({});
       //   successCallback();
-
-      navigate("/home");
     } catch (error) {
       console.log(`There is a problem ${error}`);
     }

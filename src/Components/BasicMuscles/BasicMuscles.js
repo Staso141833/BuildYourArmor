@@ -2,7 +2,6 @@ import { KeyboardArrowDownSharp } from "@mui/icons-material";
 import {
   Stack,
   Grid,
-  Link,
   MenuItem,
   Menu,
   Button,
@@ -10,9 +9,11 @@ import {
   CardMedia,
   Box,
 } from "@mui/material";
+import { Link as MuiLink } from "@mui/material";
 import { useState } from "react";
 
 import "./basicMuscles.css";
+import { Link } from "react-router-dom";
 
 const myColors = {
   black: "#070707",
@@ -69,18 +70,7 @@ export const BasicMuscles = () => {
         >
           <CardMedia
             component="img"
-            // image="https://img.freepik.com/free-photo/muscular-man-squeezing-biceps_1048-2641.jpg?w=2000"
-            // image="https://www.teahub.io/photos/full/209-2099286_human-body-muscles-png.jpg"
-            // image="https://www.interactive-biology.com/wp-content/uploads/2012/04/MuscularManPosing1-scaled.jpg"
-            // image="https://knowledge.carolina.com/wp-content/uploads/2021/11/shutterstock_247631059_2048x1864.jpg"
             image="https://static.vecteezy.com/system/resources/previews/022/925/649/large_2x/human-anatomy-showcasing-male-muscles-with-nerves-isolated-on-black-background-generative-ai-photo.jpeg"
-            // image="https://img.freepik.com/premium-psd/medical-illustration-running-man-anatomy_1401-2537.jpg?w=2000"
-            // image="https://c8.alamy.com/comp/T6Y0AC/muscle-man-anatomy-in-an-white-background-will-put-some-creative-sensor-in-yours-creations-T6Y0AC.jpg"
-            // image="https://img.freepik.com/premium-photo/anatomy-human-muscles-dark-background_297535-5107.jpg"
-            // image="https://www.icns.es/img/news/298.jpg"
-            // image="https://as2.ftcdn.net/v2/jpg/05/52/87/63/1000_F_552876384_UiQ318RImZtFohqoK33B4CdHl8GVKsyq.jpg"
-            // image="https://t4.ftcdn.net/jpg/05/69/94/23/360_F_569942348_C80okrnDid1V5LDPaMf3b4e8j5l3kFlp.jpg"
-            // image="https://t3.ftcdn.net/jpg/05/69/94/24/360_F_569942415_D64aNxqgPfa4KqXBKbPtT7GKALCPCxy4.jpg"
             sx={{
               objectFit: "cover",
               zIndex: "1",
@@ -100,33 +90,6 @@ export const BasicMuscles = () => {
               zIndex: "2",
             }}
           >
-            {/* <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
-              <Link
-                href="/trapezius"
-                sx={{
-                  textDecoration: "none",
-                  color: myColors.gold,
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  fontSize: "18px",
-                }}
-              >
-                Trapezius
-              </Link>
-            </Grid> */}
             <Grid
               item
               xs={1.895}
@@ -185,8 +148,8 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/deltoid"
+                  <Link to="/deltoid" className="muscle-button-dropdown">
+                    {/* <MuiLink
                     sx={{
                       textDecoration: "none",
                       color: myColors.gold,
@@ -201,8 +164,8 @@ export const BasicMuscles = () => {
                       transition: "all 300ms",
                       padding: "12px",
                     }}
-                  >
-                    Shoulers
+                  > */}
+                    Shoulders {/* </MuiLink> */}
                   </Link>
                 </MenuItem>
                 <MenuItem
@@ -212,27 +175,11 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/trapezius"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/trapezius" className="muscle-button-dropdown">
+                    {" "}
                     Trapezius
                   </Link>
                 </MenuItem>
-             
               </Menu>
             </Grid>
 
@@ -243,24 +190,13 @@ export const BasicMuscles = () => {
                 backgroundColor: myColors.black,
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 borderRadius: "6px",
                 border: "2px outset #fbc760",
               }}
             >
-              <Link
-                href="/back"
-                sx={{
-                  textDecoration: "none",
-                  color: myColors.gold,
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  fontSize: "18px",
-                  cursor: "pointer",
-                }}
-              >
+              <Link to="/back" className="muscle-button">
+                {" "}
                 Back
               </Link>
             </Grid>
@@ -322,23 +258,7 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/biceps"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/biceps" className="muscle-button-dropdown">
                     Biceps
                   </Link>
                 </MenuItem>
@@ -349,23 +269,7 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/triceps"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/triceps" className="muscle-button-dropdown">
                     Triceps
                   </Link>
                 </MenuItem>
@@ -376,23 +280,7 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/forearms"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/forearms" className="muscle-button-dropdown">
                     Forearms
                   </Link>
                 </MenuItem>
@@ -410,19 +298,7 @@ export const BasicMuscles = () => {
                 border: "2px outset #fbc760",
               }}
             >
-              <Link
-                href="/chest"
-                sx={{
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  color: myColors.gold,
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                }}
-              >
+              <Link to="/chest" className="muscle-button">
                 Chest
               </Link>
             </Grid>
@@ -438,20 +314,8 @@ export const BasicMuscles = () => {
                 border: "2px outset #fbc760",
               }}
             >
-              <Link
-                href="/abs"
-                sx={{
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  color: myColors.gold,
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                }}
-              >
-                Abs
+              <Link to="/abs" className="muscle-button">
+                ABS
               </Link>
             </Grid>
             <Grid
@@ -511,23 +375,7 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/legs"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/legs" className="muscle-button-dropdown">
                     Front thigh
                   </Link>
                 </MenuItem>
@@ -538,23 +386,7 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/legs"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/legs" className="muscle-button-dropdown">
                     Back thigh
                   </Link>
                 </MenuItem>
@@ -565,23 +397,7 @@ export const BasicMuscles = () => {
                     padding: "0px",
                   }}
                 >
-                  <Link
-                    href="/calves"
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  >
+                  <Link to="/calves" className="muscle-button-dropdown">
                     Calves
                   </Link>
                 </MenuItem>
