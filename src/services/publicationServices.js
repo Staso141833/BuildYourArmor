@@ -26,6 +26,7 @@ export const publicationServiceFactory = () => {
   };
 
   const create = async (newPublication) => {
+    console.log(newPublication)
     const ownerId = auth?.currentUser?.uid;
 
     newPublication["_ownerId"] = ownerId;
@@ -40,12 +41,6 @@ export const publicationServiceFactory = () => {
     const data = await updateDoc(docRefference, updatedPublication);
     return data;
   };
-
-  // const onPublicationEditSubmit = async (values) => {
-  //   const publicationDoc = doc(db, "publications", publicationId);
-  //   await updateDoc(publicationDoc, values);
-  //   navigate(`/catalog/${publicationId}`);
-  // };
 
   const deletePublication = (id) => {
     const docRefference = doc(db, "publications", id);

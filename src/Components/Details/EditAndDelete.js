@@ -10,8 +10,8 @@ import * as yup from "yup";
 
 export const EditAndDelete = ({
   commentId,
-  onClickEditCommentSubmit,
-  onDeleteCommentClick,
+  onClickCommentEdit,
+  onClickCommentDelete,
   publicationId,
 }) => {
   const [isEdited, setIsEdited] = useState(false);
@@ -26,7 +26,7 @@ export const EditAndDelete = ({
     {
       comment: "",
     },
-    onClickEditCommentSubmit
+    onClickCommentEdit
   );
   values["_id"] = commentId;
 
@@ -41,7 +41,7 @@ export const EditAndDelete = ({
   };
 
   const onDeleteClick = () => {
-    onDeleteCommentClick(commentId, publicationId);
+    onClickCommentDelete(commentId, publicationId);
   };
 
   const schema = yup.object().shape({

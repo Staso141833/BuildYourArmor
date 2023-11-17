@@ -1,14 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
- import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { publicationServiceFactory } from "../services/publicationServices.js";
 
 export const PublicationContext = createContext();
 
 export const PublicationProvider = ({ children }) => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [publications, setPublications] = useState([]);
   const publicationService = publicationServiceFactory();
- 
+
   useEffect(() => {
     const test = async () => {
       const data = await publicationService.getAll();
@@ -29,19 +29,20 @@ export const PublicationProvider = ({ children }) => {
       return [...state, newPublication];
     });
 
-     navigate("/catalog");
+    navigate("/catalog");
   };
 
   const onPublicationEditSubmit = async (values) => {
-    const result = await publicationService.edit(values._id, values);
+    
+      const result = await publicationService.edit(values._id, values);
+      setPublications((state) =>
+        state?.map((oldPublication) =>
+          oldPublication?._id === values?._id ? result : oldPublication
+        )
+      );
 
-    setPublications((state) =>
-      state?.map((oldPublication) =>
-        oldPublication._id === values._id ? result : oldPublication
-      )
-    );
+       navigate(`/catalog/${values._id}`);
    
-     navigate(`/catalog/${values._id}`);
   };
 
   const getPublication = (publicationId) => {

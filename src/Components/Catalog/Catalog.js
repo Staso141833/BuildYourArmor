@@ -31,12 +31,19 @@ export const Catalog = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const getPublications = async () => {
-      const data = await getDocs(publicationsCollectionRefference);
+    try {
+      const getPublications = async () => {
+        const data = await getDocs(publicationsCollectionRefference);
+        setIsLoading(false);
+        setPublications(
+          data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      };
+      getPublications();
+    } catch (error) {
       setIsLoading(false);
-      setPublications(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getPublications();
+      window.alert(error);
+    }
   }, []);
 
   return (
@@ -80,7 +87,7 @@ export const Catalog = () => {
             >
               No publications yet. Would you like yours to be the first?
               <Link
-                href="/create"
+                to="/create"
                 variant="contained"
                 sx={{
                   backgroundColor: myColors.black,
@@ -106,7 +113,10 @@ export const Catalog = () => {
           )}
         </Stack>
         {isLoading ? (
-          <CircularProgress />
+          <Stack sx={{height: "80vh"}}>
+            <CircularProgress color="success" />
+          </Stack>
+          
         ) : (
           <Stack sx={{ marginLeft: "64px", marginRight: "64px" }}>
             <Masonry columns={5} spacing={4} sx={{ margin: "12px 18px" }}>

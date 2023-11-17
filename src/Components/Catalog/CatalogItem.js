@@ -6,8 +6,6 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Button,
-  Link as MuiLink,
 } from "@mui/material";
 
 import "./catalogItem.css";

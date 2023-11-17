@@ -21,17 +21,19 @@ const myColors = {
   white: "#edebea",
 };
 
-export const AddComent = ({ onCommentSubmit }) => {
+export const AddComent = ({ onClickCommentSubmit }) => {
   const { values, changeHandler, onSubmit } = useFormMine(
     {
       comment: "",
     },
-    onCommentSubmit
+    onClickCommentSubmit
   );
 
   const schema = yup.object().shape({
     comment: yup.string().required(),
   });
+
+
 
   const {
     register,
@@ -62,7 +64,8 @@ export const AddComent = ({ onCommentSubmit }) => {
           <TextField
             label="My comment"
             name="comment"
-            variant="outlined"
+            color="secondary"
+            variant="filled"
             placeholder="My comment"
             {...register("comment")}
             value={values.comment}

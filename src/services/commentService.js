@@ -1,15 +1,12 @@
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
   getDoc,
   getDocs,
   query,
-  setDoc,
 } from "firebase/firestore";
 import { db } from "../config/firebase.js";
-
 
 export const getAll = async (publicationId) => {
   const q = query(collection(db, `publications/${publicationId}/comments`));
@@ -32,11 +29,14 @@ export const getOneComment = async (commentId, publicationId) => {
   );
   const data = await getDoc(docRefference);
   const result = data.data();
-  console.log(result)
   return result;
 };
 
 export const deleteComment = (commentId, publicationId) => {
-  const docRefference = doc(db, `publications/${publicationId}/comments`, commentId);
+  const docRefference = doc(
+    db,
+    `publications/${publicationId}/comments`,
+    commentId
+  );
   return deleteDoc(docRefference);
 };

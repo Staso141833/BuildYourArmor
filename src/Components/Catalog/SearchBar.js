@@ -1,7 +1,10 @@
 import {
   CloseOutlined,
+  ImageSearchSharp,
   SearchOffSharp,
   SearchOffTwoTone,
+  SearchRounded,
+  SearchSharp,
 } from "@mui/icons-material";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
@@ -88,7 +91,7 @@ export const SearchBar = ({ publications }) => {
             </TextField>
             <Stack>
               {filteredData.length === 0 ? (
-                <SearchOffTwoTone></SearchOffTwoTone>
+                <SearchSharp></SearchSharp>
               ) : (
                 <CloseOutlined onClick={clearInput} />
               )}
@@ -115,9 +118,9 @@ export const SearchBar = ({ publications }) => {
         >
           {filteredData.slice(0, 30).map((value, key) => {
             return (
-              <MuiLink href={`/catalog/${value.id}`}>
+              <Link to={`/catalog/${value.id}`}>
                 <p>{value.name}</p>
-              </MuiLink>
+              </Link>
             );
           })}
         </Stack>
@@ -126,29 +129,4 @@ export const SearchBar = ({ publications }) => {
   );
 };
 
-// target="_blank"
-// sx={{
-//   textDecoration: "none",
-//   margin: "4px",
-// }}
 
-{
-  /* <Typography
-                  variant="p"
-                  sx={{
-                    fontSize: "20px",
-                    padding: "2px 24px",
-                    borderRadius: "4px",
-                    transition: "all 350ms",
-                    color: colors.black,
-                    "&:hover": {
-                      backgroundColor: colors.black,
-                      color: colors.gold,
-                    },
-                  }} 
-                 > */
-}
-
-{
-  /* </Typography>{" "} */
-}

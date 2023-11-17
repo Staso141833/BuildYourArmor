@@ -1,4 +1,12 @@
-import { TextField, Button, Stack, Typography, CardMedia } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Stack,
+  Typography,
+  CardMedia,
+  LinearProgress,
+  CircularProgress,
+} from "@mui/material";
 import "./login.css";
 import { auth } from "../../config/firebase.js";
 import { useFormMine } from "../../hooks/useFormMine.js";
@@ -19,6 +27,7 @@ export const Login = () => {
   const [success, setSuccess] = useState("");
   const [userIn, setUserIn] = useCookie("userIn", {});
   const [newError, setNewError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,6 +36,7 @@ export const Login = () => {
     const loginEmail = values.loginEmail;
     const loginPassword = values.loginPassword;
 
+    setIsLoading(true);
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -38,11 +48,13 @@ export const Login = () => {
         setUserIn(user);
         SetCookie("userIn", JSON.stringify(user));
         setSuccess(true);
+        setIsLoading(false);
         navigate("/catalog");
 
         return user;
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(`${error}`);
       if (error.response) {
         console.log(error.response.data.message);
@@ -84,104 +96,112 @@ export const Login = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
     >
-      <form method="POST" sx={{ width: "70vw", height: "80vh" }}>
-        <Stack
-          spacing={2}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            margin: "auto",
-            marginTop: "120px",
-            border: "2px double #4c4850",
-            borderRadius: "8px",
-            height: "500px",
-            width: "1040px",
-            backgroundColor: "#170f0a",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            boxShadow: "10px 20px 20px #665d58",
-            overflow: "hidden",
-            marginBottom: "140px",
-          }}
-        >
+      {isLoading ? (
+        <>
+          <Stack sx={{ height: "90vh" }}>
+            <LinearProgress color="success"></LinearProgress>
+          </Stack>
+        </>
+      ) : (
+        <form method="POST" sx={{ width: "70vw", height: "80vh" }}>
           <Stack
+            spacing={2}
             sx={{
-              width: "50%",
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
+              margin: "auto",
+              marginTop: "120px",
+              border: "2px double #4c4850",
+              borderRadius: "8px",
+              height: "500px",
+              width: "1040px",
+              backgroundColor: "#170f0a",
+              justifyContent: "space-evenly",
               alignItems: "center",
-              gap: 3,
-              height: "100%",
-              backgroundColor: "#B3AEAB",
+              boxShadow: "10px 20px 20px #665d58",
+              overflow: "hidden",
+              marginBottom: "140px",
             }}
           >
-            <Typography
+            <Stack
               sx={{
-                fontSize: "24px",
-                fontWeight: "bold",
-                color: "#fbc760",
-                textTransform: "upperCase",
-                letterSpacing: "2px",
-                marginTop: "32px",
-              }}
-            >
-              Login
-            </Typography>
-            <TextField
-              label="Emails"
-              type="email"
-              name="loginEmail"
-              {...register("loginEmail")}
-              //value={values.loginEmail}
-              onChange={changeHandler}
-              sx={{
-                width: "80%",
-                borderRadius: "4px",
-                color: "white",
-              }}
-            />
-            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
-              {errors?.loginEmail?.message}
-            </Typography>
-            <TextField
-              label="Password"
-              type="password"
-              {...register("loginPassword")}
-              name="loginPassword"
-              //value={values.loginPassword}
-              onChange={changeHandler}
-              sx={{
-                width: "80%",
+                width: "50%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 3,
+                height: "100%",
                 backgroundColor: "#B3AEAB",
-                borderRadius: "4px",
               }}
-            />
-
-            <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
-              {errors.loginPassword?.message}
-            </Typography>
-
-            <Button
-              variant="outlined"
-              onClick={handleSubmit(onSubmit)}
-              sx={loginButtonStyles}
             >
-              Sign In
-            </Button>
-          </Stack>
+              <Typography
+                sx={{
+                  fontSize: "24px",
+                  fontWeight: "bold",
+                  color: "#fbc760",
+                  textTransform: "upperCase",
+                  letterSpacing: "2px",
+                  marginTop: "32px",
+                }}
+              >
+                Login
+              </Typography>
+              <TextField
+                label="Emails"
+                type="email"
+                name="loginEmail"
+                variant="filled"
+                {...register("loginEmail")}
+                onChange={changeHandler}
+                sx={{
+                  width: "80%",
+                  borderRadius: "4px",
+                  color: "white",
+                }}
+              />
+              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                {errors?.loginEmail?.message}
+              </Typography>
+              <TextField
+                label="Password"
+                type="password"
+                {...register("loginPassword")}
+                name="loginPassword"
+                variant="filled"
+                onChange={changeHandler}
+                sx={{
+                  width: "80%",
+                  backgroundColor: "#B3AEAB",
+                  borderRadius: "4px",
+                }}
+              />
 
-          <CardMedia
-            component="img"
-            // image="https://www.mdpi.com/sports/sports-09-00032/article_deploy/html/images/sports-09-00032-g002.png"
-            image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"
-            alt="growing up"
-            sx={{
-              width: "50%",
-              filter: "opacity(0.8) drop-shadow(0 0 black)",
-            }}
-          ></CardMedia>
-        </Stack>
-      </form>
+              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                {errors.loginPassword?.message}
+              </Typography>
+
+              <Button
+                variant="outlined"
+                onClick={handleSubmit(onSubmit)}
+                sx={loginButtonStyles}
+              >
+                Sign In
+              </Button>
+            </Stack>
+
+            <CardMedia
+              component="img"
+              // image="https://www.mdpi.com/sports/sports-09-00032/article_deploy/html/images/sports-09-00032-g002.png"
+              image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"
+              alt="growing up"
+              sx={{
+                width: "50%",
+                filter: "opacity(0.8) drop-shadow(0 0 black)",
+              }}
+            ></CardMedia>
+          </Stack>
+        </form>
+      )}
     </motion.div>
   );
 };
