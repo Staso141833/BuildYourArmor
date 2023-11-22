@@ -26,7 +26,6 @@ export const publicationServiceFactory = () => {
   };
 
   const create = async (newPublication) => {
-    console.log(newPublication)
     const ownerId = auth?.currentUser?.uid;
 
     newPublication["_ownerId"] = ownerId;

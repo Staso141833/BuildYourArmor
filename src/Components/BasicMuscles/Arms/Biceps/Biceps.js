@@ -1,6 +1,16 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
+import {
+  cardStackStyles,
+  dividerStyles,
+  mainHeaderStyles,
+  mainStackStyles,
+  secondaryStackStyles,
+  tertiaryStackChildStyles,
+  tertiaryStackStyles,
+} from "../../basicMuscles.styles.js";
+
 export const Biceps = () => {
   return (
     <motion.div
@@ -8,42 +18,12 @@ export const Biceps = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
     >
-      <Stack
-        sx={{
-          fontSize: "18px",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          textAlign: "center",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <Stack
-          sx={{
-            fontSize: "18px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            justifyContent: "space-evenly",
-            width: "80%",
-            gap: 4,
-            marginBottom: 4,
-          }}
-        >
-          <Typography variant="h3">Biceps</Typography>
-          <Stack sx={{ width: "50%", border: "1px solid black" }}></Stack>
+      <Stack sx={mainStackStyles}>
+        <Stack sx={secondaryStackStyles}>
+          <Typography variant="h3" sx={mainHeaderStyles}>Biceps</Typography>
+          <Stack sx={dividerStyles}></Stack>
 
-          <Stack
-            sx={{
-              width: "50%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
+          <Stack>
             <Typography variant="p">
               Biceps muscle (biceps) - is a biceps muscle, whose starting point
               of attachment is located under the deltoid muscle, and its final
@@ -55,29 +35,13 @@ export const Biceps = () => {
               of the hand upwards as if holding a soup plate - note ex).
             </Typography>
           </Stack>
-
-          <Stack
-            sx={{
-              width: "70%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
+        </Stack>
+        <Stack sx={tertiaryStackStyles}>
+          <Stack sx={tertiaryStackChildStyles}>
             <Typography variant="h4">Biceps training</Typography>
-            <Stack sx={{ width: "70%", border: "1px solid black" }}></Stack>
+            <Stack sx={dividerStyles}></Stack>
 
-            <Stack
-              sx={{
-                width: "70%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                gap: 3,
-              }}
-            >
+            <Stack>
               <Typography variant="p">
                 Hard training and proper training techniques will unlock the
                 full potential of any muscle, but not everyone has the same
@@ -142,7 +106,7 @@ export const Biceps = () => {
                 motion.
               </Typography>
 
-              <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Stack sx={cardStackStyles}>
                 <Card position="relative">
                   <CardMedia
                     position="absolute"
@@ -190,7 +154,7 @@ export const Biceps = () => {
                 the Biceps Curl movement.
               </Typography>
 
-              <Stack sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Stack sx={cardStackStyles}>
                 <Card position="relative">
                   <CardMedia
                     position="absolute"

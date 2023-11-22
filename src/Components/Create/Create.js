@@ -20,6 +20,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import {
+  createAndEditPaperStyles,
+  createAndEditTitleStyles,
+  createAndEditmainStackStyles,
+  formControlStyles,
+  menuItemStyles,
+  publishAndEditButtonStyles,
+} from "./create.styles.js";
 
 const myColors = {
   black: "#070707",
@@ -102,65 +110,20 @@ export const Create = () => {
           <CircularProgress color="success"></CircularProgress>
         </Stack>
       ) : (
-        <Stack
-          sx={{
-            position: "relative",
-            backgroundColor: "#f6f6f6",
-            width: "auto",
-            height: "100vh",
-            overflow: "hidden",
-          }}
-        >
-          <Paper
-            sx={{
-              width: "660px",
-              height: "90%",
-              backgroundColor: "#fbc760",
-              border: "3px solid #170f0a",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "12px",
-              position: "absolute",
-              left: "50%",
-              top: "56%",
-              mt: 2,
-              transform: "translate(-53%, -61%)",
-              zIndex: "2",
-              boxShadow: "40px 30px 30px #170f0a",
-              "&:hover": {
-                padding: "4px",
-                transition: "all 0.4s ease-in-out",
-              },
-            }}
-          >
-            <Stack
-              sx={{
-                fontSize: 34,
-                fontWeight: 700,
-                marginTop: "34px",
-                letterSpacing: 2,
-                textTransform: "uppercase",
-              }}
-            >
+        <Stack sx={createAndEditmainStackStyles}>
+          <Paper sx={createAndEditPaperStyles}>
+            <Typography variant="h4" sx={createAndEditTitleStyles}>
               Share your expereince
-            </Stack>
+            </Typography>
 
             <FormGroup row sx={{ justifyContent: "space-around" }}>
-              <FormControl
-                sx={{
-                  mt: 4,
-                  display: "flex",
-                  gap: "12px",
-                }}
-              >
+              <FormControl sx={formControlStyles}>
                 <TextField
                   label="Name"
                   name="name"
                   variant="outlined"
                   placeholder="Name"
                   {...register("name")}
-                  value={values.name}
                   onChange={changeHandler}
                   sx={{ width: "100%" }}
                 />
@@ -168,34 +131,21 @@ export const Create = () => {
                   {errors.name?.message}
                 </Typography>
 
-                <Box width="100%">
+                <Box sx={{width:"100%"}}>
                   <TextField
-                    sx={{ width: "220px" }}
+                    sx={{ width: "100%" }}
                     label="select muscle"
                     select
                     name="muscleGroup"
                     color="success"
                     {...register("muscleGroup")}
-                    value={values.muscleGroup}
                     onChange={changeHandler}
                     SelectProps={{
                       multiline: true,
                     }}
                   >
                     {muscleGroups.map((muscleGroup) => (
-                      <MenuItem
-                        value={muscleGroup}
-                        sx={{
-                          width: "auto",
-                          backgroundColor: myColors.gold,
-                          color: myColors.white,
-                          transition: "all 350ms",
-                          "&:hover": {
-                            backgroundColor: myColors.black,
-                            color: myColors.gold,
-                          },
-                        }}
-                      >
+                      <MenuItem value={muscleGroup} sx={menuItemStyles}>
                         {muscleGroup}
                       </MenuItem>
                     ))}
@@ -211,7 +161,6 @@ export const Create = () => {
                   name="weight"
                   placeholder="Other explanation"
                   {...register("weight")}
-                  value={values.weight}
                   onChange={changeHandler}
                   sx={{ width: "100%" }}
                 />
@@ -225,7 +174,6 @@ export const Create = () => {
                   variant="outlined"
                   placeholder="height in cm"
                   {...register("height")}
-                  value={values.height}
                   onChange={changeHandler}
                   sx={{ width: "100%" }}
                 />
@@ -240,7 +188,6 @@ export const Create = () => {
                   multiline
                   rows={4}
                   {...register("description")}
-                  value={values.description}
                   onChange={changeHandler}
                   sx={{ width: "100%" }}
                 />
@@ -254,7 +201,6 @@ export const Create = () => {
                   type="img"
                   placeholder="Image Url"
                   {...register("imageUrl")}
-                  value={values.imageUrl}
                   onChange={changeHandler}
                   sx={{ width: "100%" }}
                 />
@@ -267,19 +213,7 @@ export const Create = () => {
             <Button
               variant="outlined"
               onClick={handleSubmit(onClickCreate)}
-              sx={{
-                backgroundColor: "#170f0a",
-                color: "#fbc760",
-                padding: "12px",
-                fontSize: "16px",
-
-                width: "60%",
-                border: " 1px solid #4c4850",
-                "&:hover": {
-                  backgroundColor: "#4c4850",
-                  border: "1px solid black",
-                },
-              }}
+              sx={publishAndEditButtonStyles}
             >
               Publish
             </Button>
@@ -294,7 +228,7 @@ export const Create = () => {
                 width: "200px",
                 left: "50%",
                 top: "50%",
-                transform: "translate(250%, 380%)",
+                transform: "translate(255.5%, 376%)",
               }}
             ></CardMedia>
           </Stack>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Box, Card, CardMedia } from "@mui/material";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { cardMediaStyles, cardStyles, homeTitleStyles } from "./home.styles.js";
 
 const myColors = {
   black: "#070707",
@@ -11,7 +12,7 @@ const myColors = {
 };
 
 export const Home = () => {
-  console.log(motion)
+  console.log(motion);
   return (
     <motion.div
       intial={{ width: 0 }}
@@ -19,38 +20,16 @@ export const Home = () => {
       exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}
     >
       <Box>
-        <Card position="relative">
+        <Card position="relative" sx={cardStyles}>
           <CardMedia
             position="absolute"
             component="img"
-            // image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRMKr8W2IFRq066ZVGxH2fbq9SehxamcDHvQ&usqp=CAU"
-            // image="https://www.bodybuildingmealplan.com/wp-content/uploads/Tom-Platz-Leg-Day-Hack-Squats.jpg"
-            // image="https://rare-gallery.com/uploads/posts/1182843-men-monochrome-Arnold-Schwarzenegger-Bodybuilder-bodybuilding-muscle-arm-black-and-white-monochrome-photography-wrestler.jpg"
-            // image="https://i.pinimg.com/736x/bd/45/ba/bd45ba309354d9ad47c9cdc6125fd44d.jpg"
             image="https://www.evolutionofbodybuilding.net/wp-content/uploads/2016/01/Arnold_Schwarzenegger_Klassisch_Posing.jpg"
             alt="Arnold"
-            sx={{
-              opacity: "0.9",
-              height: "100vh",
-              objectFit: "cover",
-              objectPosition: "80% 0%",
-            }}
+            sx={cardMediaStyles}
           />
 
-          <Typography
-            position="absolute"
-            variant="body4"
-            sx={{
-              top: "10%",
-              left: "4%",
-              fontSize: "78px",
-              color: "#f6f6f6",
-              fontWeight: "bold",
-              width: "46%",
-              textShadow: "4px 12px 14px #847470",
-              fontStyle: "Italic",
-            }}
-          >
+          <Typography position="absolute" variant="body4" sx={homeTitleStyles}>
             "The pain you feel today will be the strength you feel tomorrow."
           </Typography>
         </Card>

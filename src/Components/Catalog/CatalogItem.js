@@ -9,25 +9,12 @@ import {
 } from "@mui/material";
 
 import "./catalogItem.css";
-
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
+import { cardMediaStyles, cardStyles } from "./catalogItem.styles.js";
 
 export const CatalogItem = ({ id, name, imageUrl }) => {
   return (
     <Box>
-      <Card
-        sx={{
-          border: "1px outset  silver",
-          backgroundColor: myColors.white,
-          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-        }}
-      >
+      <Card sx={cardStyles}>
         <CardMedia
           component="img"
           height="auto"
@@ -37,14 +24,7 @@ export const CatalogItem = ({ id, name, imageUrl }) => {
         <CardContent>
           <Typography variant="h4">{name}</Typography>
         </CardContent>
-        <CardActions
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 1.5,
-          }}
-        >
+        <CardActions sx={cardMediaStyles}>
           <Link to={`/catalog/${id}`} className="details-button">
             Details
           </Link>

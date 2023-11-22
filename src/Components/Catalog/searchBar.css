@@ -1,0 +1,16 @@
+.searched-item {
+  background-color: #fbc760;
+  transition: all 350ms;
+}
+
+.searched-item:hover {
+  background-color: hsl(40, 89%, 76%);
+  color: black;
+  
+}
+
+.searched-item p {
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+}

@@ -1,5 +1,14 @@
 import { Box, Typography, Stack, Card, CardMedia } from "@mui/material";
 import { motion } from "framer-motion";
+import {
+  dividerStyles,
+  mainHeaderStyles,
+  mainStackStyles,
+  secondaryHeaderStyles,
+  secondaryStackStyles,
+  tertiaryStackChildStyles,
+  tertiaryStackStyles,
+} from "../basicMuscles.styles.js";
 
 export const DeltoidMuscle = () => {
   return (
@@ -8,49 +17,104 @@ export const DeltoidMuscle = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
     >
-      <Box sx={{ fontSize: "18px" }}>
-        <Typography variant="h2" sx={{ margin: 4, letterSpacing: 4 }}>
-          Shoulders
-        </Typography>
-        <Stack
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            gap: 2,
-            m: 2,
-          }}
-        >
+      <Stack sx={mainStackStyles}>
+        <Stack sx={secondaryStackStyles}>
+          <Typography variant="h2" sx={mainHeaderStyles}>
+            Shoulders
+          </Typography>
+          <Stack sx={dividerStyles}></Stack>
           <Stack
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              justifyContent: "space-evenly",
-              width: "50%",
-              gap: 1,
-              marginBottom: 4,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              gap: 2,
+              m: 2,
+              width: "100%",
             }}
           >
+            <Card position="relative" sx={{ width: "38%" }}>
+              <CardMedia
+                position="absolute"
+                component="img"
+                alt="Arnold"
+                image="https://images.saymedia-content.com/.image/t_share/MTc1MTI3MzYzOTcxOTgyNDMx/secret-tips-of-arnold-schwarzenegger.jpg"
+              ></CardMedia>
+            </Card>
+            <Stack
+              sx={{
+                fontSize: "18px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                justifyContent: "space-evenly",
+                width: "58%",
+                gap: 1,
+                marginBottom: 4,
+              }}
+            >
+              <Typography variant="h4" sx={secondaryHeaderStyles}>
+                Muscles of the shoulder
+              </Typography>
+              <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
+
+              <Typography variant="p">
+                The deltoid is a large, triceps, thick, triangular muscle that
+                starts at the collarbone (clavicle) and the crest of the patella
+                (the scapula at the back of the shoulder), and ends at its point
+                of insertion (insertion) on the arm.
+              </Typography>
+              <Typography variant="p">
+                Main function: To rotate and raise the arm. The front part of
+                the deltoid muscle raises the arm forward; the middle part lifts
+                it outward, and the back part brings the arm back.
+              </Typography>
+
+              <Typography variant="p">
+                The trapezius muscle is the flat, triangular muscle that extends
+                out and down from the neck and then down between the shoulder
+                blades.
+              </Typography>
+              <Typography variant="p">
+                Main function: To lift the entire shoulder girdle, move the
+                scapula up, down and in towards the spine. It also helps to turn
+                the head.
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
+
+        <Stack sx={tertiaryStackStyles}>
+          <Stack sx={tertiaryStackChildStyles}>
+            <Typography variant="h4">LOOK OVER YOUR SHOULDER</Typography>
+            <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
+
+            <Typography variant="p">
+              In the 1840s, men wore outerwear with huge, padded shoulders and
+              narrowed waists, giving them an exaggerated V-shape (a style that
+              seems to be coming back into fashion recently). Coincidentally,
+              this is the form of development that bodybuilders work very hard
+              on. Part of this look is the broad, fully developed shoulders.
+            </Typography>
+
+            <Card position="relative" sx={{ width: "100%" }}>
+              <CardMedia
+                position="absolute"
+                component="img"
+                alt="Arnold"
+                image="https://i.pinimg.com/originals/8b/f9/90/8bf990c510fcb0c0f9cb6b7e98c366c1.jpg"
+              ></CardMedia>
+            </Card>
             <Stack
               sx={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
                 gap: 2,
-                m: 2,
                 width: "100%",
               }}
             >
-              <Card position="relative" sx={{ width: "38%" }}>
-                <CardMedia
-                  position="absolute"
-                  component="img"
-                  alt="Arnold"
-                  image="https://images.saymedia-content.com/.image/t_share/MTc1MTI3MzYzOTcxOTgyNDMx/secret-tips-of-arnold-schwarzenegger.jpg"
-                ></CardMedia>
-              </Card>
               <Stack
                 sx={{
                   fontSize: "18px",
@@ -61,74 +125,62 @@ export const DeltoidMuscle = () => {
                   justifyContent: "space-evenly",
                   width: "58%",
                   gap: 1,
-                  marginBottom: 4,
                 }}
               >
-                <Typography variant="h4">MUSCLES OF THE SHOULDER</Typography>
-                <Stack
-                  sx={{ width: "100%", border: "1px solid black" }}
-                ></Stack>
-
                 <Typography variant="p">
-                  The deltoid is a large, triceps, thick, triangular muscle that
-                  starts at the collarbone (clavicle) and the crest of the
-                  patella (the scapula at the back of the shoulder), and ends at
-                  its point of insertion (insertion) on the arm.
-                </Typography>
-                <Typography variant="p">
-                  Main function: To rotate and raise the arm. The front part of
-                  the deltoid muscle raises the arm forward; the middle part
-                  lifts it outward, and the back part brings the arm back.
+                  Steve Reeves was one of the first bodybuilders to develop the
+                  classic V shape. He was able to achieve this look because he
+                  had naturally broad shoulders and a small waist. Proportions
+                  like these help create the most aesthetic looks in
+                  bodybuilding.
                 </Typography>
 
                 <Typography variant="p">
-                  The trapezius muscle is the flat, triangular muscle that
-                  extends out and down from the neck and then down between the
-                  shoulder blades.
+                  To a large extent, shoulder width is determined by skeletal
+                  structure. It's something you're born with. A bodybuilder like
+                  Reeves, with his very broad shoulder structure, has a huge
+                  advantage, especially when standing straight and relaxed. Don
+                  Howarth, Dave Draper and Frank Zane, all champions who started
+                  training around the time I did, are other good examples of
+                  this broad-shouldered correct look. Kevin Levron and Nasser El
+                  Sonbati also possess broad shoulders.
                 </Typography>
+
                 <Typography variant="p">
-                  Main function: To lift the entire shoulder girdle, move the
-                  scapula up, down and in towards the spine. It also helps to
-                  turn the head.
+                  There is another type of physique that is characterized not by
+                  narrow shoulders, but by a "sag" appearance. Reg Park wasn't
+                  narrow shouldered, but his trapezius muscles and his shoulders
+                  were "slumped" down. My own shoulders have the same "slumped"
+                  look, so they look much narrower when I'm standing relaxed
+                  than when I'm posing for example spreading out the latissimus
+                  dorsi (when their true width becomes visible) Watch Paul
+                  Dillet on stage and you'll see somewhat of the same structure.
+                </Typography>
+
+                <Typography variant="p">
+                  The other factor that is associated with the broad-shouldered
+                  look is the development of the middle portion of the deltoid
+                  muscles. When these muscles are fully developed, you get a
+                  very impressive look when they tense up. Sergio Oliva and Tom
+                  Platz, for example, have huge shoulder development, yet they
+                  don't look broad and well-built when they're slouching on
+                  stage. The ideal appearance for bodybuilding competitions
+                  requires that you have both proper bone structure and
+                  excellent mid-deltoid development. Look at the shoulders of
+                  Dorian Yeats and you will understand how valuable such a
+                  structure can be.
                 </Typography>
               </Stack>
-            </Stack>
 
-            <Stack
-              sx={{
-                fontSize: "18px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                justifyContent: "space-evenly",
-                width: "100%",
-                gap: 2,
-                marginBottom: 4,
-              }}
-            >
-              <Typography variant="h4">LOOK OVER YOUR SHOULDER</Typography>
-              <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
-
-              <Typography variant="p">
-                In the 1840s, men wore outerwear with huge, padded shoulders and
-                narrowed waists, giving them an exaggerated V-shape (a style
-                that seems to be coming back into fashion recently).
-                Coincidentally, this is the form of development that
-                bodybuilders work very hard on. Part of this look is the broad,
-                fully developed shoulders.
-              </Typography>
-
-              <Card position="relative" sx={{ width: "100%" }}>
+              <Card position="relative" sx={{ width: "40%" }}>
                 <CardMedia
                   position="absolute"
                   component="img"
-                  alt="Arnold"
-                  image="https://i.pinimg.com/originals/8b/f9/90/8bf990c510fcb0c0f9cb6b7e98c366c1.jpg"
+                  alt="Steve Reeves"
+                  image="https://www.muscleandfitness.com/wp-content/uploads/2013/06/Steve-Reeves-main.jpg?w=500&quality=86&strip=all"
                 ></CardMedia>
               </Card>
             </Stack>
-
             <Stack
               sx={{
                 fontSize: "18px",
@@ -141,85 +193,6 @@ export const DeltoidMuscle = () => {
                 marginBottom: 4,
               }}
             >
-              <Stack
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  gap: 2,
-                  m: 2,
-                  width: "100%",
-                }}
-              >
-                <Stack
-                  sx={{
-                    fontSize: "18px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    textAlign: "center",
-                    justifyContent: "space-evenly",
-                    width: "58%",
-                    gap: 1,
-                  }}
-                >
-                  <Typography variant="p">
-                    Steve Reeves was one of the first bodybuilders to develop
-                    the classic V shape. He was able to achieve this look
-                    because he had naturally broad shoulders and a small waist.
-                    Proportions like these help create the most aesthetic looks
-                    in bodybuilding.
-                  </Typography>
-
-                  <Typography variant="p">
-                    To a large extent, shoulder width is determined by skeletal
-                    structure. It's something you're born with. A bodybuilder
-                    like Reeves, with his very broad shoulder structure, has a
-                    huge advantage, especially when standing straight and
-                    relaxed. Don Howarth, Dave Draper and Frank Zane, all
-                    champions who started training around the time I did, are
-                    other good examples of this broad-shouldered correct look.
-                    Kevin Levron and Nasser El Sonbati also possess broad
-                    shoulders.
-                  </Typography>
-
-                  <Typography variant="p">
-                    There is another type of physique that is characterized not
-                    by narrow shoulders, but by a "sag" appearance. Reg Park
-                    wasn't narrow shouldered, but his trapezius muscles and his
-                    shoulders were "slumped" down. My own shoulders have the
-                    same "slumped" look, so they look much narrower when I'm
-                    standing relaxed than when I'm posing for example spreading
-                    out the latissimus dorsi (when their true width becomes
-                    visible) Watch Paul Dillet on stage and you'll see somewhat
-                    of the same structure.
-                  </Typography>
-
-                  <Typography variant="p">
-                    The other factor that is associated with the
-                    broad-shouldered look is the development of the middle
-                    portion of the deltoid muscles. When these muscles are fully
-                    developed, you get a very impressive look when they tense
-                    up. Sergio Oliva and Tom Platz, for example, have huge
-                    shoulder development, yet they don't look broad and
-                    well-built when they're slouching on stage. The ideal
-                    appearance for bodybuilding competitions requires that you
-                    have both proper bone structure and excellent mid-deltoid
-                    development. Look at the shoulders of Dorian Yeats and you
-                    will understand how valuable such a structure can be.
-                  </Typography>
-                </Stack>
-
-                <Card position="relative" sx={{ width: "40%" }}>
-                  <CardMedia
-                    position="absolute"
-                    component="img"
-                    alt="Steve Reeves"
-                    image="https://www.muscleandfitness.com/wp-content/uploads/2013/06/Steve-Reeves-main.jpg?w=500&quality=86&strip=all"
-                  ></CardMedia>
-                </Card>
-              </Stack>
-
               <Typography variant="p">
                 By the way, bodybuilders who are known for their massive
                 shoulder development are usually also known for their massive
@@ -364,52 +337,40 @@ export const DeltoidMuscle = () => {
                 proportionate and balanced appearance.
               </Typography>
             </Stack>
+          </Stack>
 
-            <Stack
-              sx={{
-                fontSize: "18px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                justifyContent: "space-evenly",
-                width: "100%",
-                gap: 1,
-                marginBottom: 4,
-              }}
-            >
-              <Typography variant="h4">
-                TRAINING FOR THE DELTOVID MUSCLES
-              </Typography>
-              <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
+          <Stack sx={tertiaryStackChildStyles}>
+            <Typography variant="h4">
+              TRAINING FOR THE DELTOVID MUSCLES
+            </Typography>
+            <Stack sx={dividerStyles}></Stack>
 
-              <Typography variant="p">
-                There are two main types of shoulder exercises. These are
-                deadlifts and shoulder presses.
-              </Typography>
-              <Typography variant="p">
-                Raises involve lifting your outstretched arms upward in a large
-                arc of motion that better isolates parts of the muscle. You
-                should do the forward, side and back lifts. When you do
-                deadlifts, you're not engaging the triceps, you're almost
-                completely isolating the different parts of the deltoid muscle.
-                However, since these exercises are aimed at isolating the
-                muscles (analytical training them - note, etc.), you cannot lift
-                as much weight as in the Shoulder Press, because you maintain an
-                upright position of your arm throughout the movement.With folded
-                hands, the weight is located at shoulder level, and from this
-                position you lift the barbell or dumbbells straight up over your
-                head. Because in addition to pulling up, you straighten your
-                arms, Presses involve working both the deltoids and triceps. To
-                a certain extent, you can change the load on your shoulders by
-                directing it to different parts of the deltoid muscles,
-                performing different types of presses - for the front or for the
-                rear parts, using a barbell, dumbbells or different machines.
-              </Typography>
-            </Stack>
+            <Typography variant="p">
+              There are two main types of shoulder exercises. These are
+              deadlifts and shoulder presses.
+            </Typography>
+            <Typography variant="p">
+              Raises involve lifting your outstretched arms upward in a large
+              arc of motion that better isolates parts of the muscle. You should
+              do the forward, side and back lifts. When you do deadlifts, you're
+              not engaging the triceps, you're almost completely isolating the
+              different parts of the deltoid muscle. However, since these
+              exercises are aimed at isolating the muscles (analytical training
+              them - note, etc.), you cannot lift as much weight as in the
+              Shoulder Press, because you maintain an upright position of your
+              arm throughout the movement.With folded hands, the weight is
+              located at shoulder level, and from this position you lift the
+              barbell or dumbbells straight up over your head. Because in
+              addition to pulling up, you straighten your arms, Presses involve
+              working both the deltoids and triceps. To a certain extent, you
+              can change the load on your shoulders by directing it to different
+              parts of the deltoid muscles, performing different types of
+              presses - for the front or for the rear parts, using a barbell,
+              dumbbells or different machines.
+            </Typography>
           </Stack>
         </Stack>
-      </Box>
+      </Stack>
     </motion.div>
   );
 };

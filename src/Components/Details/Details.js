@@ -287,7 +287,6 @@ export const Details = () => {
       "Are you sure you want to delete this comment?"
     );
 
-
     if (caution) {
       try {
         setIsLoadingLikeEditDelete(false);
@@ -394,8 +393,8 @@ export const Details = () => {
                       alignItems: "center",
                       justifyContent: "space-evenly",
                       width: "100%",
-                      gap: "4px",
-                      mb: 2,
+                      gap: 1,
+                      mb: 4,
                     }}
                   >
                     {isOwner && (
@@ -415,7 +414,7 @@ export const Details = () => {
                             color: myColors.gold,
                             fontWeight: "bold",
                             transition: "all 300ms",
-                            width: "30%",
+                            width: "25%",
                             fontFamily: "Robotto",
                             "&:hover": {
                               backgroundColor: myColors["light-silver"],
@@ -437,7 +436,7 @@ export const Details = () => {
                         variant="outlined"
                         sx={{
                           backgroundColor: colors.gold,
-                          width: "30%",
+                          width: "25%",
                           height: "auto",
                         }}
                         onClick={onClickPublicationLike}

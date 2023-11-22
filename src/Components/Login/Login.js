@@ -5,16 +5,21 @@ import {
   Typography,
   CardMedia,
   LinearProgress,
-  CircularProgress,
 } from "@mui/material";
 import "./login.css";
 import { auth } from "../../config/firebase.js";
 import { useFormMine } from "../../hooks/useFormMine.js";
-import { useAuthContext } from "../../contexts/AuthContext.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { loginButtonStyles } from "./login.styles.js";
+import {
+  emailAndPasswordStackStyles,
+  loginButtonStyles,
+  loginErrorsStyles,
+  loginFormMainStackStyles,
+  loginHeaderStyles,
+  loginInputStyles,
+} from "./login.styles.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import RemoveCookie from "../../hooks/removeCookie.js";
 import { useState } from "react";
@@ -104,48 +109,9 @@ export const Login = () => {
         </>
       ) : (
         <form method="POST" sx={{ width: "70vw", height: "80vh" }}>
-          <Stack
-            spacing={2}
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              margin: "auto",
-              marginTop: "120px",
-              border: "2px double #4c4850",
-              borderRadius: "8px",
-              height: "500px",
-              width: "1040px",
-              backgroundColor: "#170f0a",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              boxShadow: "10px 20px 20px #665d58",
-              overflow: "hidden",
-              marginBottom: "140px",
-            }}
-          >
-            <Stack
-              sx={{
-                width: "50%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 3,
-                height: "100%",
-                backgroundColor: "#B3AEAB",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "24px",
-                  fontWeight: "bold",
-                  color: "#fbc760",
-                  textTransform: "upperCase",
-                  letterSpacing: "2px",
-                  marginTop: "32px",
-                }}
-              >
-                Login
-              </Typography>
+          <Stack spacing={2} sx={loginFormMainStackStyles}>
+            <Stack sx={emailAndPasswordStackStyles}>
+              <Typography sx={loginHeaderStyles}>Login</Typography>
               <TextField
                 label="Emails"
                 type="email"
@@ -153,13 +119,9 @@ export const Login = () => {
                 variant="filled"
                 {...register("loginEmail")}
                 onChange={changeHandler}
-                sx={{
-                  width: "80%",
-                  borderRadius: "4px",
-                  color: "white",
-                }}
+                sx={loginInputStyles}
               />
-              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              <Typography variant="p" sx={loginErrorsStyles}>
                 {errors?.loginEmail?.message}
               </Typography>
               <TextField
@@ -169,14 +131,10 @@ export const Login = () => {
                 name="loginPassword"
                 variant="filled"
                 onChange={changeHandler}
-                sx={{
-                  width: "80%",
-                  backgroundColor: "#B3AEAB",
-                  borderRadius: "4px",
-                }}
+                sx={loginInputStyles}
               />
 
-              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              <Typography variant="p" sx={loginErrorsStyles}>
                 {errors.loginPassword?.message}
               </Typography>
 
@@ -191,7 +149,6 @@ export const Login = () => {
 
             <CardMedia
               component="img"
-              // image="https://www.mdpi.com/sports/sports-09-00032/article_deploy/html/images/sports-09-00032-g002.png"
               image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"
               alt="growing up"
               sx={{

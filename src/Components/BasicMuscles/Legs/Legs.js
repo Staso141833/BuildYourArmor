@@ -1,5 +1,13 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import {
+  dividerStyles,
+  mainHeaderStyles,
+  mainStackStyles,
+  secondaryStackStyles,
+  tertiaryStackChildStyles,
+  tertiaryStackStyles,
+} from "../basicMuscles.styles.js";
 
 export const Legs = () => {
   return (
@@ -8,29 +16,14 @@ export const Legs = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
     >
-      <Stack
-        sx={{
-          fontSize: "18px",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          textAlign: "start",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <Stack
-          sx={{
-            fontSize: "18px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "start",
-            justifyContent: "space-evenly",
-            width: "80%",
-            gap: 4,
-            marginBottom: 4,
-          }}
-        >
+      <Stack sx={mainStackStyles}>
+        <Stack sx={secondaryStackStyles}>
+          <Typography variant="h3" sx={mainHeaderStyles}>
+            Thighs
+          </Typography>
+          <Stack sx={dividerStyles}></Stack>
+          <Typography variant="h4">Muscles of the thighs</Typography>
+          <Stack sx={dividerStyles}></Stack>
           <Stack
             sx={{
               display: "flex",
@@ -39,7 +32,6 @@ export const Legs = () => {
               alignItems: "center",
               textAlign: "start",
               justifyContent: "space-evenly",
-              width: "50%",
               gap: 4,
               marginBottom: 4,
             }}
@@ -54,7 +46,7 @@ export const Legs = () => {
             </Card>
             <Stack
               sx={{
-                width: "57%",
+                width: "52%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-evenly",
@@ -62,12 +54,6 @@ export const Legs = () => {
                 gap: 1,
               }}
             >
-              <Typography variant="h4">Thighs</Typography>
-              <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
-
-              <Typography variant="h4">Muscles of the tighs</Typography>
-              <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
-
               <Typography variant="p">
                 The quadriceps femoris (m.quadriceps femoris) is made up of the
                 muscles on the front outer surface of your thighs that act as
@@ -115,136 +101,116 @@ export const Legs = () => {
               ></CardMedia>
             </Card>
           </Stack>
-
-          <Stack
-            sx={{
-              width: "70%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
+        </Stack>
+        <Stack sx={tertiaryStackStyles}>
+          <Stack sx={tertiaryStackChildStyles}>
             <Typography variant="h4">
               On the importance of training the thighs
             </Typography>
-            <Stack sx={{ width: "70%", border: "1px solid black" }}></Stack>
+            <Stack sx={dividerStyles}></Stack>
+            <Typography variant="p">
+              The thigh muscles are the largest and most powerful muscles in the
+              human body. There are few movements in sports that do not involve
+              intense leg effort. Baseball players, golfers, discus throwers,
+              shot putters, and boxers all initiate their respective actions
+              with a powerful leg-starting movement.
+            </Typography>
+            <Typography variant="p">
+              In weightlifting, the most powerful movements (such as Powerlifts,
+              Deadlifts, and Deadlifts) involve a large proportion of leg
+              effort, as do the lifts used in Olympic weightlifting
+              competitions.
+            </Typography>
+            <Typography variant="p">
+              However, there is no sport where hip development is as important
+              as bodybuilding. While the judges' attention in the upper body is
+              focused on the shoulders, chest, arms, back and abs, when they
+              look at the lower body, the single and most fascinating element is
+              the thighs - the quadriceps and the back of the thighs. The thighs
+              are the most massive muscle group in the body, and proportionately
+              make up almost half of your physique.
+            </Typography>
+            <Typography variant="p">
+              Can you imagine Sergio Oliva with skinny thighs? Or Nasser El
+              Sonbati with skinny legs? What's the point of building your arms
+              up to 53 centimeters or more if you're showing them against a body
+              whose hips are roughly the same size?
+            </Typography>
+            <Typography variant="p">
+              When I played soccer and skied as a teenager in Austria, the
+              referees made us do exercises like Squats, Hanagu and Toe Raises
+              to strengthen our legs. These early training sessions eventually
+              led to my falling in love with bodybuilding. In those days we were
+              lucky that the judges understood our need for stronger legs and
+              knew how to train for that purpose. Today, whenever I talk to
+              coaches around the world, they all agree that great leg
+              development is the foundation of athletic excellence, and that
+              weight training is the best way to develop that strength.
+            </Typography>
+            <Typography variant="p">
+              But the legs have another quality besides their great strength -
+              they are also capable of great endurance. Able to move up to a ton
+              of weight, the legs are also designed to carry you over great
+              distances without tiring. A person in good physical shape can walk
+              for weeks over rough terrain and run 100 miles. There are no other
+              muscles in the body that provide this combination of great
+              strength and great endurance.
+            </Typography>
 
-            <Stack
-              sx={{
-                width: "70%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                gap: 2,
-              }}
-            >
-              <Typography variant="p">
-                The thigh muscles are the largest and most powerful muscles in
-                the human body. There are few movements in sports that do not
-                involve intense leg effort. Baseball players, golfers, discus
-                throwers, shot putters, and boxers all initiate their respective
-                actions with a powerful leg-starting movement.
-              </Typography>
-              <Typography variant="p">
-                In weightlifting, the most powerful movements (such as
-                Powerlifts, Deadlifts, and Deadlifts) involve a large proportion
-                of leg effort, as do the lifts used in Olympic weightlifting
-                competitions.
-              </Typography>
-              <Typography variant="p">
-                However, there is no sport where hip development is as important
-                as bodybuilding. While the judges' attention in the upper body
-                is focused on the shoulders, chest, arms, back and abs, when
-                they look at the lower body, the single and most fascinating
-                element is the thighs - the quadriceps and the back of the
-                thighs. The thighs are the most massive muscle group in the
-                body, and proportionately make up almost half of your physique.
-              </Typography>
-              <Typography variant="p">
-                Can you imagine Sergio Oliva with skinny thighs? Or Nasser El
-                Sonbati with skinny legs? What's the point of building your arms
-                up to 53 centimeters or more if you're showing them against a
-                body whose hips are roughly the same size?
-              </Typography>
-              <Typography variant="p">
-                When I played soccer and skied as a teenager in Austria, the
-                referees made us do exercises like Squats, Hanagu and Toe Raises
-                to strengthen our legs. These early training sessions eventually
-                led to my falling in love with bodybuilding. In those days we
-                were lucky that the judges understood our need for stronger legs
-                and knew how to train for that purpose. Today, whenever I talk
-                to coaches around the world, they all agree that great leg
-                development is the foundation of athletic excellence, and that
-                weight training is the best way to develop that strength.
-              </Typography>
-              <Typography variant="p">
-                But the legs have another quality besides their great strength -
-                they are also capable of great endurance. Able to move up to a
-                ton of weight, the legs are also designed to carry you over
-                great distances without tiring. A person in good physical shape
-                can walk for weeks over rough terrain and run 100 miles. There
-                are no other muscles in the body that provide this combination
-                of great strength and great endurance.
-              </Typography>
+            <Typography variant="p">
+              This is why leg training in bodybuilding demands so much from you.
+              It's not enough just to put your feet under a lot of stress. You
+              need to use heavy weights and enough training volume to stress
+              their muscle fibers and exhaust their endurance capacity. Doing 5
+              sets of Barbell Bicep Curls can be difficult for your biceps, but
+              doing 5 sets of heavy Barbell Squats with 181 or 226.5 kg on your
+              shoulders can be compared to jogging of a mini-marathon, with the
+              same kind of complete exhaustion achieved within 8 or 9 minutes of
+              concentrated effort.
+            </Typography>
 
-              <Typography variant="p">
-                This is why leg training in bodybuilding demands so much from
-                you. It's not enough just to put your feet under a lot of
-                stress. You need to use heavy weights and enough training volume
-                to stress their muscle fibers and exhaust their endurance
-                capacity. Doing 5 sets of Barbell Bicep Curls can be difficult
-                for your biceps, but doing 5 sets of heavy Barbell Squats with
-                181 or 226.5 kg on your shoulders can be compared to jogging of
-                a mini-marathon, with the same kind of complete exhaustion
-                achieved within 8 or 9 minutes of concentrated effort.
-              </Typography>
+            <Typography variant="p">
+              Like many young bodybuilders, I tended to train my upper body
+              harder than my thighs. Fortunately, I realized in time how
+              important this muscle group was to achieving a championship
+              physique, and so I began performing superhuman barbell squats and
+              other thigh exercises to build this muscle mass.
+            </Typography>
 
-              <Typography variant="p">
-                Like many young bodybuilders, I tended to train my upper body
-                harder than my thighs. Fortunately, I realized in time how
-                important this muscle group was to achieving a championship
-                physique, and so I began performing superhuman barbell squats
-                and other thigh exercises to build this muscle mass.
-              </Typography>
+            <Typography variant="p">
+              One exception to the trend of young bodybuilders neglecting leg
+              development is Tom Platz. He actually had the opposite problem. He
+              put a heavy emphasis on leg training, after which it turned out
+              that he had developed his legs to the level of Mr. Olympia, which
+              exceeded the level of development of his upper body by several
+              classes. Since then, he has gone to great lengths to create a
+              perfectly proportioned body, but his incredible leg development
+              has set new standards for new generations of bodybuilders to
+              aspire to.
+            </Typography>
+            <Card position="relative" sx={{ mt: 2 }}>
+              <CardMedia
+                position="absolute"
+                component="img"
+                alt="Bill Pearl"
+                image="https://pbs.twimg.com/media/DxyjvSoW0AI16c-.jpg"
+              ></CardMedia>
+            </Card>
 
-              <Typography variant="p">
-                One exception to the trend of young bodybuilders neglecting leg
-                development is Tom Platz. He actually had the opposite problem.
-                He put a heavy emphasis on leg training, after which it turned
-                out that he had developed his legs to the level of Mr. Olympia,
-                which exceeded the level of development of his upper body by
-                several classes. Since then, he has gone to great lengths to
-                create a perfectly proportioned body, but his incredible leg
-                development has set new standards for new generations of
-                bodybuilders to aspire to.
-              </Typography>
-
-              <Card position="relative" sx={{ width: "100%", mt: 2 }}>
+            <Stack>
+              <Card position="relative" sx={{ mt: 2, mb: 2 }}>
                 <CardMedia
                   position="absolute"
                   component="img"
                   alt="Bill Pearl"
-                  image="https://pbs.twimg.com/media/DxyjvSoW0AI16c-.jpg"
+                  image="https://i.redd.it/azic9vu6e5lz.jpg"
                 ></CardMedia>
               </Card>
-
-              <Stack>
-                <Card position="relative" sx={{ width: "100%", mt: 2, mb: 2 }}>
-                  <CardMedia
-                    position="absolute"
-                    component="img"
-                    alt="Bill Pearl"
-                    image="https://i.redd.it/azic9vu6e5lz.jpg"
-                  ></CardMedia>
-                </Card>
-                <Typography variant="p">
-                  No one has achieved more quadriceps fullness and density than
-                  Tom Platz, especially in the lower area where the hamstrings
-                  attach to the knee.
-                </Typography>
-              </Stack>
+              <Typography variant="p">
+                No one has achieved more quadriceps fullness and density than
+                Tom Platz, especially in the lower area where the hamstrings
+                attach to the knee.
+              </Typography>
             </Stack>
           </Stack>
         </Stack>
