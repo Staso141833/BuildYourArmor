@@ -8,6 +8,7 @@ import { Box, Stack } from "@mui/material";
 import BusinessIcon from "@mui/icons-material/Business";
 import EmailIcon from "@mui/icons-material/Email";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
+import { mainStackStyles } from "./footer.styles.js";
 
 export const Footer = () => {
   return (
@@ -16,7 +17,7 @@ export const Footer = () => {
       sx={{
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
-            ? theme.palette.grey[200]
+            ? theme.palette.grey[400]
             : theme.palette.grey[800],
         p: 6,
       }}
@@ -36,44 +37,20 @@ export const Footer = () => {
             <Typography variant="h6" color="text.primary" gutterBottom>
               Contact Us
             </Typography>
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}
-            >
+            <Stack sx={mainStackStyles}>
               <BusinessIcon sx={{}} />
               <Typography variant="body2" color="text.secondary">
                 40bl., Darvenitsa, Sofia
               </Typography>
             </Stack>
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}
-            >
+            <Stack sx={mainStackStyles}>
               <EmailIcon />
               <Typography variant="body2" color="text.secondary">
                 Email: buildYourArmor@gmail.com
               </Typography>
             </Stack>
 
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}
-            >
+            <Stack sx={mainStackStyles}>
               <AddIcCallIcon />
               <Typography variant="body2" color="text.secondary">
                 Phone: +359 888 888 888

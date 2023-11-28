@@ -1,9 +1,4 @@
-a {
-  font-size: 20px;
-  text-decoration: none;
-  color: #659dbd;
-  letter-spacing: 1px;
-}
+
 
 .login-register-button {
   display: flex;
@@ -12,10 +7,10 @@ a {
   text-decoration: none;
   transition: all 350ms;
   padding: 12px;
-  width: 100%;
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;

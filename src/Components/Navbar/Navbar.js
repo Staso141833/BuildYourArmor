@@ -5,34 +5,26 @@ import Toolbar from "@mui/material/Toolbar";
 
 import TemporaryDrawer from "../TemporaryDrawer/TemporaryDrawer.js";
 import "./navbar.css";
-import {
-  Stack,
-  Typography,
-  Button,
-  List,
-  Switch,
-  IconButton,
-} from "@mui/material";
+import { Stack, Typography, Button, Switch } from "@mui/material";
 import SafetyCheckTwoToneIcon from "@mui/icons-material/SafetyCheckTwoTone";
-import { Link as MuiLink } from "@mui/material";
-
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { useAuthContext } from "../../contexts/AuthContext.js";
-import { authServiceFactory } from "../../services/authService.js";
-import { MenuBook } from "@mui/icons-material";
 import RemoveCookie from "../../hooks/removeCookie.js";
 import { auth } from "../../config/firebase.js";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import {
+  appBarStyles,
+  leftStackStyles,
+  loginRegisterStyles,
+  logoStyles,
+  logoutButtonStyles,
+  rightStackStyles,
+  switchStyles,
+  toolbarStyles,
+  userEmailStyles,
+  youAreWhatYouEatStyles,
+} from "./navbar.styles.js";
 
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
 const label = { inputProps: { "area-label": "switch demo" } };
 
 export default function NavigationBar({ checked, onClickThemeChange }) {
@@ -43,8 +35,7 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
     right: false,
   });
 
-  const { userIn, userEmail, isAuthenticated, userId, token, setUserIn } =
-    useAuthContext();
+  const { userEmail, isAuthenticated, setUserIn } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -60,15 +51,10 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
       RemoveCookie("userIn");
       setUserIn({});
       navigate("/home");
-      //   successCallback();
     } catch (error) {
       console.log(`There is a problem ${error}`);
     }
   };
-
-  const [user, setUser] = useState({});
-
-  const links = ["/home", "/create", "/basicMuscles", "/catalog", "/intensity"];
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -83,71 +69,30 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="static"
-        sx={{
-          backgroundColor: myColors.black,
-          padding: "2px 0px",
-        }}
-      >
-        <Toolbar
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-          }}
-        >
-          <Stack
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              width: "15%",
-            }}
-          >
+      <AppBar position="static" sx={appBarStyles}>
+        <Toolbar sx={toolbarStyles}>
+          <Stack sx={leftStackStyles}>
             <TemporaryDrawer
               state={state}
               setState={setState}
               toggleDrawer={toggleDrawer}
             ></TemporaryDrawer>
 
-            <SafetyCheckTwoToneIcon
-              sx={{ fontSize: "40px", color: myColors.gold }}
-            ></SafetyCheckTwoToneIcon>
+            <SafetyCheckTwoToneIcon sx={logoStyles}></SafetyCheckTwoToneIcon>
           </Stack>
 
-          <Typography
-            variant="h2"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              color: myColors.gold,
-              fontSize: "30px",
-              letterSpacing: "4px",
-              fontWeight: "600",
-              textTransform: "uppercase",
-              textAlign: "center",
-              fontFamily: "Robotto",
-              textShadow: "2px 4px 4px",
-            }}
-          >
+          <Typography variant="h2" component="div" sx={youAreWhatYouEatStyles}>
             You are what you eat
           </Typography>
-          <Stack
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              gap: 3,
-              width: "auto",
-            }}
-          >
-            <Stack sx={{ backgroundColor: myColors.white }}>
+          <Stack sx={rightStackStyles}>
+            <Stack>
               <Switch
                 {...label}
                 defaultChecked
                 color="secondary"
                 onClick={onClickThemeChange}
                 checked={checked}
+                sx={switchStyles}
               />
             </Stack>
 
@@ -156,56 +101,28 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
                 <Typography variant="h6">
                   <Button
                     underline="none"
-                    sx={{ color: "#fbc760", fontWeight: "bold" }}
+                    sx={logoutButtonStyles}
                     onClick={onLogout}
                   >
                     Sign Out
                   </Button>
                 </Typography>
 
-                <Typography variant="h6" sx={{ color: "#fbc760" }}>
+                <Typography variant="h6" sx={userEmailStyles}>
                   {userEmail}
                 </Typography>
               </>
             )}
             {!isAuthenticated && (
-              <>
-                <Stack
-                  variant="div"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 2,
-                    alignItems: "center",
-                  }}
-                >
-                  <MuiLink
-                    href="/login"
-                    sx={{
-                      color: myColors.gold,
-                      textDecoration: "none",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    <Link to="/login" className="login-register-button">
-                      Login
-                    </Link>
-                  </MuiLink>
+              <Stack variant="div" sx={loginRegisterStyles}>
+                <Link to="/login" className="login-register-button">
+                  Login
+                </Link>
 
-                  <MuiLink
-                    href="/register"
-                    sx={{
-                      color: myColors.gold,
-                      textDecoration: "none",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    <Link to="/register" className="login-register-button">
-                      Register
-                    </Link>
-                  </MuiLink>
-                </Stack>
-              </>
+                <Link to="/register" className="login-register-button">
+                  Register
+                </Link>
+              </Stack>
             )}
           </Stack>
         </Toolbar>

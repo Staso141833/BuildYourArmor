@@ -71,10 +71,10 @@ export const Register = () => {
       .string()
       .min(6)
       .max(20)
-      .required("Password must be at least 4 characters"),
+      .required("Password must be at least 6 characters"),
     rePassword: yup
       .string()
-      .oneOf([yup.ref("password"), null])
+      .oneOf([yup.ref("password"), null], "Passwords don't match")
       .required(),
   });
 

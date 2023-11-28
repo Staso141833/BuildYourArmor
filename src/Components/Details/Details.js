@@ -28,22 +28,38 @@ import { auth, db } from "../../config/firebase.js";
 import { publicationServiceFactory } from "../../services/publicationServices.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
 import * as commentService from "../../services/commentService.js";
-import { AddComent } from "./AddComment.js";
+import { AddComment } from "./addComment/AddComment.js";
+
 import { publicationReducer } from "../../reducers/publicationReducer.js";
 
 import "./details.css";
 import { colors } from "../../metaData/colors.js";
 
-import { Like } from "./Like.js";
+import { Like } from "./like/Like.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
-import { EditAndDelete } from "./EditAndDelete.js";
-import {
-  ArrowUpward,
-  FingerprintRounded,
-  InsertComment,
-} from "@mui/icons-material";
+import { EditAndDelete } from "./editAndDelete/EditAndDelete.js";
+import { ArrowUpward, FingerprintRounded } from "@mui/icons-material";
 import { motion } from "framer-motion";
-import { LoadingButton } from "@mui/lab";
+import {
+  boxStyles,
+  cardActionLikeButtonStyles,
+  cardActionStackStyles,
+  cardActionsStyles,
+  cardMediaStyles,
+  cardStyles,
+  commentStackStyles,
+  commentsCountStackStyles,
+  commentsTitleStyles,
+  currentCommentStackStyles,
+  editAndDeleteButtonStyles,
+  excerciseExplanationStyles,
+  explanationParagraphStyles,
+  explanationStackStyles,
+  mainStackStyles,
+  rightStackStyles,
+  rightStackStylesChild,
+  secondaryStackStyles,
+} from "./details.styles.js";
 
 const myColors = {
   black: "#070707",
@@ -313,47 +329,12 @@ export const Details = () => {
           <LinearProgress color="success"></LinearProgress>
         </Stack>
       ) : (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              gap: 2,
-              marginTop: 4,
-              width: "100%",
-              height: "100%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            <Stack
-              sx={{
-                display: "flex",
-                width: "48%",
-                flexDirection: "column",
-                gap: 1,
-                marginBottom: 0.5,
-                alignItems: "center",
-                justifyContent: "space-evenly",
-              }}
-            >
-              <Card
-                sx={{
-                  height: "80vh",
-                  width: "auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                }}
-              >
+        <Box sx={boxStyles}>
+          <Stack sx={mainStackStyles}>
+            <Stack sx={secondaryStackStyles}>
+              <Card sx={cardStyles}>
                 <CardMedia
-                  sx={{ objectFit: "cover", height: "65%" }} //fill, cover, contain, none, scale-down
+                  sx={cardMediaStyles}
                   component="img"
                   image={publication.imageUrl}
                 ></CardMedia>
@@ -376,227 +357,126 @@ export const Details = () => {
                   </Typography>
                 </CardContent>
 
-                <CardActions
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 1,
-                    width: "100%",
-                  }}
-                >
-                  <Stack
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-evenly",
-                      width: "100%",
-                      gap: 1,
-                      mb: 4,
-                    }}
-                  >
+                <CardActions sx={cardActionsStyles}>
+                  <Stack sx={cardActionStackStyles}>
                     {isOwner && (
                       <>
-                        <Link
-                          to={`/catalog/${publicationId}/edit`}
-                          className="edit-add-button"
-                        >
-                          Edit
-                        </Link>
+                        <Button sx={editAndDeleteButtonStyles}>
+                          <Link
+                            to={`/catalog/${publicationId}/edit`}
+                            className="edit-button"
+                          >
+                            Edit
+                          </Link>
+                        </Button>
 
                         <Button
                           variant="contained"
                           onClick={onClickPublicationDelete}
-                          sx={{
-                            backgroundColor: myColors.black,
-                            color: myColors.gold,
-                            fontWeight: "bold",
-                            transition: "all 300ms",
-                            width: "25%",
-                            fontFamily: "Robotto",
-                            "&:hover": {
-                              backgroundColor: myColors["light-silver"],
-                              color: myColors.black,
-                            },
-                          }}
+                          sx={editAndDeleteButtonStyles}
                         >
                           Delete
                         </Button>
                       </>
                     )}
                     {!isOwner && (
-                      <Link to="/create" className="edit-add-button">
+                      <Link to="/create" className="add-button">
                         Add publication
                       </Link>
                     )}
                     {isAuthenticated && (
                       <Button
                         variant="outlined"
-                        sx={{
-                          backgroundColor: colors.gold,
-                          width: "25%",
-                          height: "auto",
-                        }}
+                        sx={cardActionLikeButtonStyles}
                         onClick={onClickPublicationLike}
                         style={{
                           cursor: "pointer",
                           color: publication?.likes?.includes(userId)
-                            ? myColors["dark-silver"]
-                            : myColors.black,
+                            ? colors["dark-silver"]
+                            : colors.black,
                         }}
                       >
-                        <FingerprintRounded></FingerprintRounded>
+                        <FingerprintRounded></FingerprintRounded>Like
                       </Button>
                     )}
                   </Stack>
                 </CardActions>
               </Card>
-              <Stack
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 4,
-                  width: "50%",
-                }}
-              >
-                <Stack
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: 2,
-                    width: "80%",
-                  }}
-                >
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      letterSpacing: 4,
-                      textTransform: "uppercase",
-                      color: myColors.gold,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Explanation of the exercise
-                  </Typography>
-                  <Typography
-                    variant="p"
-                    sx={{
-                      width: "80%",
-                      fontSize: "20px",
-                      border: "4px inset",
-                      borderColor: myColors.gold,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      backgroundColor: myColors.white,
-                      padding: "12px 0px",
-                    }}
-                  >
+            </Stack>
+
+            <Stack sx={rightStackStyles}>
+              <Stack sx={rightStackStylesChild}>
+                <Typography variant="h5" sx={excerciseExplanationStyles}>
+                  Exercise explanation
+                </Typography>
+                <Stack sx={explanationStackStyles}>
+                  <Typography variant="p" sx={explanationParagraphStyles}>
                     {publication.description}
                   </Typography>
                 </Stack>
-              </Stack>
-            </Stack>
 
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                alignContent: "flex-start",
-                width: "48%",
-                gap: 2,
-              }}
-            >
+                <Stack sx={commentStackStyles}>
+                  <Typography variant="h5" sx={commentsTitleStyles}>
+                    Comments
+                  </Typography>
+                  {!publication.comments?.length && (
+                    <Typography
+                      variant="h5"
+                      sx={{ textShadow: "14px 10px 18px" }}
+                    >
+                      No comments yet. Be the first one who will give an
+                      opinion! <ArrowUpward></ArrowUpward>
+                    </Typography>
+                  )}
+                  {isLoadingLikeEditDelete ? (
+                    <CircularProgress color="success"></CircularProgress>
+                  ) : (
+                    <Stack
+                      sx={commentsCountStackStyles}
+                    >
+                      {publication?.comments?.map((comment) => (
+                        <ListItem key={comment?._id} sx={{ width: "30vw" }}>
+                          <Stack
+                            sx={currentCommentStackStyles}
+                          >
+                            {comment?.author?.email} commented on{" "}
+                            {comment?.createdOn.seconds}: {comment?.comment}
+                            <Stack
+                              sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                gap: 1,
+                              }}
+                            >
+                              {userId && (
+                                <Like
+                                  commentId={comment?._id}
+                                  likesCount={comment?.likes}
+                                  publicationId={publicationId}
+                                  onClickCommentLike={onClickCommentLike}
+                                />
+                              )}
+                              {comment.createdBy === userId && (
+                                <EditAndDelete
+                                  commentId={comment._id}
+                                  onClickCommentEdit={onClickCommentEdit}
+                                  onClickCommentDelete={onClickCommentDelete}
+                                  publicationId={publicationId}
+                                />
+                              )}
+                            </Stack>
+                          </Stack>
+                        </ListItem>
+                      ))}
+                    </Stack>
+                  )}
+                </Stack>
+              </Stack>
               <Stack sx={{ width: "50%" }}>
                 {isAuthenticated && (
-                  <AddComent onClickCommentSubmit={onClickCommentSubmit} />
+                  <AddComment onClickCommentSubmit={onClickCommentSubmit} />
                 )}
               </Stack>
-              <Typography
-                variant="h5"
-                sx={{
-                  letterSpacing: 4,
-                  textTransform: "uppercase",
-
-                  textAlign: "center",
-                  color: myColors["dark-silver"],
-                  fontWeight: "bold",
-                }}
-              >
-                Comments
-              </Typography>
-              <Stack>
-                {!publication.comments?.length && (
-                  <Typography
-                    variant="h5"
-                    sx={{ textShadow: "14px 10px 18px" }}
-                  >
-                    No comments yet. Be the first one who will give an opinion!{" "}
-                    <ArrowUpward></ArrowUpward>
-                  </Typography>
-                )}
-              </Stack>
-
-              {isLoadingLikeEditDelete ? (
-                <CircularProgress color="success"></CircularProgress>
-              ) : (
-                <Stack
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 1,
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  {publication?.comments?.map((comment) => (
-                    <ListItem key={comment?._id} sx={{ width: "100%" }}>
-                      <Stack
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          width: "60%",
-                          alignItems: "center",
-                          backgroundColor: colors.black,
-                          color: colors.white,
-                          padding: 1,
-                          borderRadius: 1,
-                        }}
-                      >
-                        {comment?.author?.email} commented on{" "}
-                        {comment?.createdOn.seconds}: {comment?.comment}
-                        {/* {comment?.createdOn.toDate().toDateString()}: */}
-                        <Stack
-                          sx={{ display: "flex", flexDirection: "row", gap: 1 }}
-                        >
-                          {userId && (
-                            <Like
-                              commentId={comment?._id}
-                              likesCount={comment?.likes}
-                              publicationId={publicationId}
-                              onClickCommentLike={onClickCommentLike}
-                            />
-                          )}
-                          {comment.createdBy === userId && (
-                            <EditAndDelete
-                              commentId={comment._id}
-                              onClickCommentEdit={onClickCommentEdit}
-                              onClickCommentDelete={onClickCommentDelete}
-                              publicationId={publicationId}
-                            />
-                          )}
-                        </Stack>
-                      </Stack>
-                    </ListItem>
-                  ))}
-                </Stack>
-              )}
             </Stack>
           </Stack>
         </Box>

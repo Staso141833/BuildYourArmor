@@ -1,8 +1,9 @@
 import { Button, Stack } from "@mui/material";
 
 import { FingerprintSharp } from "@mui/icons-material";
-import { colors } from "../../metaData/colors.js";
-import { useAuthContext } from "../../contexts/AuthContext.js";
+import { colors } from "../../../metaData/colors.js";
+import { useAuthContext } from "../../../contexts/AuthContext.js";
+import { likeButtonStyles } from "./like.styles.js";
 
 export const Like = ({ commentId, likesCount, onClickCommentLike }) => {
   const { userId } = useAuthContext();
@@ -17,11 +18,7 @@ export const Like = ({ commentId, likesCount, onClickCommentLike }) => {
         onClick={onLikeClick}
         variant="contained"
         startIcon={<FingerprintSharp />}
-        sx={{
-          width: "74px",
-          textTransform: "lowercase",
-          backgroundColor: colors.gold,
-        }}
+        sx={likeButtonStyles}
         style={{
           cursor: "pointer",
           color: likesCount?.includes(userId) ? colors.white : colors.black,

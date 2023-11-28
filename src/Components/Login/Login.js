@@ -84,7 +84,7 @@ export const Login = () => {
       .string()
       .min(6)
       .max(20)
-      .required("Password must be at least 4 characters"),
+      .required("Password must be at least 6 characters"),
   });
 
   const {

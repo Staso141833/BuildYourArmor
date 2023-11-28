@@ -21,21 +21,16 @@ import * as yup from "yup";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
+  cardMediaStyles,
   createAndEditPaperStyles,
   createAndEditTitleStyles,
   createAndEditmainStackStyles,
+  errorsStyles,
   formControlStyles,
   menuItemStyles,
   publishAndEditButtonStyles,
 } from "./create.styles.js";
-
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver:": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
+import "./create.css";
 
 const muscleGroups = [
   "traps",
@@ -71,10 +66,23 @@ export const Create = () => {
   );
 
   const schema = yup.object().shape({
-    name: yup.string().min(4).max(22).required(),
-    muscleGroup: yup.string().required("The muscle group is required!"),
-    weight: yup.number().positive().integer().min(40).required(),
-    height: yup.number().positive().integer().min(140).required(),
+    name: yup.string().min(3).max(22).required(),
+    muscleGroup: yup.string().required("The muscle group is required"),
+    weight: yup
+      .number()
+      .positive()
+      .integer()
+      .min(40)
+      .max(150)
+      .required("Weight field is a required field"),
+
+    height: yup
+      .number()
+      .positive()
+      .integer()
+      .min(140)
+      .max(220)
+      .required("Weight field is a required field"),
     description: yup.string().required(),
     imageUrl: yup.string().required(),
   });
@@ -87,6 +95,9 @@ export const Create = () => {
     resolver: yupResolver(schema),
   });
 
+  if (errors.weight === "") {
+    errors.weight.message = "Yeaaa";
+  }
   const onClickCreate = () => {
     setIsLoading(true);
 
@@ -125,19 +136,18 @@ export const Create = () => {
                   placeholder="Name"
                   {...register("name")}
                   onChange={changeHandler}
-                  sx={{ width: "100%" }}
                 />
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={errorsStyles}>
                   {errors.name?.message}
                 </Typography>
 
-                <Box sx={{width:"100%"}}>
+                <Box sx={{ width: "240px" }}>
                   <TextField
-                    sx={{ width: "100%" }}
                     label="select muscle"
                     select
+                    fullWidth
                     name="muscleGroup"
-                    color="success"
+                    helperText="Please select your muscle group"
                     {...register("muscleGroup")}
                     onChange={changeHandler}
                     SelectProps={{
@@ -151,7 +161,7 @@ export const Create = () => {
                     ))}
                   </TextField>
                 </Box>
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={errorsStyles}>
                   {errors.muscleGroup?.message}
                 </Typography>
                 <TextField
@@ -162,11 +172,11 @@ export const Create = () => {
                   placeholder="Other explanation"
                   {...register("weight")}
                   onChange={changeHandler}
-                  sx={{ width: "100%" }}
                 />
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={errorsStyles}>
                   {errors.weight?.message}
                 </Typography>
+
                 <TextField
                   label="height"
                   type="number"
@@ -175,23 +185,21 @@ export const Create = () => {
                   placeholder="height in cm"
                   {...register("height")}
                   onChange={changeHandler}
-                  sx={{ width: "100%" }}
                 />
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={errorsStyles}>
                   {errors.height?.message}
                 </Typography>
+
                 <TextField
-                  label="description"
                   variant="outlined"
-                  placeholder="Explanation"
-                  name="description"
+                  placeholder="description"
                   multiline
-                  rows={4}
+                  rows={3}
+                  name="description"
                   {...register("description")}
                   onChange={changeHandler}
-                  sx={{ width: "100%" }}
                 />
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={errorsStyles}>
                   {errors.description?.message}
                 </Typography>
                 <TextField
@@ -202,9 +210,8 @@ export const Create = () => {
                   placeholder="Image Url"
                   {...register("imageUrl")}
                   onChange={changeHandler}
-                  sx={{ width: "100%" }}
                 />
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={errorsStyles}>
                   {errors.imageUrl?.message}
                 </Typography>
               </FormControl>
@@ -222,14 +229,8 @@ export const Create = () => {
             <CardMedia
               component="img"
               image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjzFDFDPUsRTDly7lBJkOUXxizcWZo-aLIfdKhD-PvblYcldlFdvJN1XOMbG7MMhk4jZE&usqp=CAU"
-              // image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGy2osMQ8i6WdL9X5Dmrf5TUwRYITkq8wZ5A&usqp=CAU"
               alt="growing up"
-              sx={{
-                width: "200px",
-                left: "50%",
-                top: "50%",
-                transform: "translate(255.5%, 376%)",
-              }}
+              sx={cardMediaStyles}
             ></CardMedia>
           </Stack>
         </Stack>

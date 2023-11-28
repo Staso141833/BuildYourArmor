@@ -1,12 +1,16 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useFormMine } from "../../hooks/useFormMine.js";
-import * as commentService from "../../services/commentService";
-import { colors } from "../../metaData/colors.js";
+import { useFormMine } from "../../../hooks/useFormMine.js";
+import * as commentService from "../../../services/commentService.js";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import {
+  editAndDeleteButtonStyles,
+  errorsStyles,
+  textFieldStyles,
+} from "./editAndDelete.styles.js";
 
 export const EditAndDelete = ({
   commentId,
@@ -59,26 +63,13 @@ export const EditAndDelete = ({
   return (
     <Stack sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
       {!isEdited && (
-        <Button
-          color="success"
-          onClick={onEdit}
-          variant="contained"
-          sx={{
-            width: "auto",
-            textTransform: "lowercase",
-            backgroundColor: colors["light-silver"],
-            color: colors.black,
-          }}
-          style={{
-            cursor: "pointer",
-          }}
-        >
+        <Button onClick={onEdit} sx={editAndDeleteButtonStyles}>
           Edit
         </Button>
       )}
 
       {isEdited && (
-        <Stack sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <Stack sx={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           <TextField
             label="Update comment"
             variant="standard"
@@ -88,40 +79,20 @@ export const EditAndDelete = ({
             onChange={changeHandler}
             multiline
             rows={3}
-            sx={{
-              height: "64px",
-              width: "100%",
-              backgroundColor: colors.white,
-            }}
+            sx={textFieldStyles}
           />
-          <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+          <Typography variant="p" sx={errorsStyles}>
             {errors.comment?.message}
           </Typography>
           <Button
             onClick={handleSubmit(onClickEdit)}
-            variant="contained"
-            sx={{
-              color: colors.black,
-              backgroundColor: colors["light-silver"],
-            }}
+            sx={editAndDeleteButtonStyles}
           >
             Edit
           </Button>
         </Stack>
       )}
-      <Button
-        color="success"
-        variant="contained"
-        onClick={onDeleteClick}
-        sx={{
-          width: "auto",
-          textTransform: "lowercase",
-          backgroundColor: colors["dark-silver"],
-        }}
-        style={{
-          cursor: "pointer",
-        }}
-      >
+      <Button onClick={onDeleteClick} sx={editAndDeleteButtonStyles}>
         Delete
       </Button>
     </Stack>

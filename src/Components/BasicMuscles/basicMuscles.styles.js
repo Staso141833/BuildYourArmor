@@ -1,5 +1,3 @@
-import { Typography } from "@mui/material";
-
 export const mainStackStyles = {
   fontSize: "18px",
   display: "flex",
@@ -9,6 +7,7 @@ export const mainStackStyles = {
   justifyContent: "space-evenly",
   mb: 1,
 };
+
 export const mainHeaderStyles = { mt: 4 };
 export const secondaryHeaderStyles = { textTransform: "uppercase" };
 export const dividerStyles = {

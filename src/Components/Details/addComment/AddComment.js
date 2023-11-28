@@ -1,4 +1,4 @@
-import { ExpandCircleDownOutlined, ExpandMore } from "@mui/icons-material";
+import { ExpandCircleDownOutlined } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -8,20 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useFormMine } from "../../hooks/useFormMine.js";
+import { useFormMine } from "../../../hooks/useFormMine.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { accordionStyles, commentButtonStyles } from "./addComment.styles.js";
 
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
-
-export const AddComent = ({ onClickCommentSubmit }) => {
+export const AddComment = ({ onClickCommentSubmit }) => {
   const { values, changeHandler, onSubmit } = useFormMine(
     {
       comment: "",
@@ -33,24 +26,15 @@ export const AddComent = ({ onClickCommentSubmit }) => {
     comment: yup.string().required(),
   });
 
-
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schema), values: values });
+
   return (
     <>
-      <Accordion
-        sx={{
-          width: "100%",
-          backgroundColor: myColors.gold,
-          marginBottom: "124px",
-          borderRadius: "4px",
-          overflow: "hidden",
-        }}
-      >
+      <Accordion sx={accordionStyles}>
         <AccordionSummary
           id="panel1-header"
           aria-controls="panel1-content"
@@ -68,7 +52,6 @@ export const AddComent = ({ onClickCommentSubmit }) => {
             variant="filled"
             placeholder="My comment"
             {...register("comment")}
-            value={values.comment}
             onChange={changeHandler}
             multiline
             rows={4}
@@ -83,18 +66,7 @@ export const AddComent = ({ onClickCommentSubmit }) => {
           variant="contained"
           size="large"
           onClick={handleSubmit(onSubmit)}
-          sx={{
-            backgroundColor: myColors.black,
-            color: myColors["light-silver"],
-            fontWeight: "bold",
-            transition: "all 300ms",
-            width: "44%",
-            marginBottom: 4,
-            "&:hover": {
-              backgroundColor: myColors["light-silver"],
-              color: myColors.black,
-            },
-          }}
+          sx={commentButtonStyles}
         >
           Comment
         </Button>
