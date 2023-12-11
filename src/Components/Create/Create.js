@@ -29,8 +29,10 @@ import {
   formControlStyles,
   menuItemStyles,
   publishAndEditButtonStyles,
+  textFieldStyles,
 } from "./create.styles.js";
 import "./create.css";
+import { colors } from "../../metaData/colors.js";
 
 const muscleGroups = [
   "traps",
@@ -132,35 +134,37 @@ export const Create = () => {
                 <TextField
                   label="Name"
                   name="name"
+                  color="warning"
                   variant="outlined"
                   placeholder="Name"
                   {...register("name")}
                   onChange={changeHandler}
+                  sx={textFieldStyles}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.name?.message}
                 </Typography>
 
-                <Box sx={{ width: "240px" }}>
+                <div>
                   <TextField
-                    label="select muscle"
+                    id="outlined-select-muscle"
                     select
-                    fullWidth
+                    label="Select"
                     name="muscleGroup"
-                    helperText="Please select your muscle group"
+                    sx={textFieldStyles}
+                    defaultValue="traps"
+                    helperText="Please select your muscle"
                     {...register("muscleGroup")}
                     onChange={changeHandler}
-                    SelectProps={{
-                      multiline: true,
-                    }}
                   >
-                    {muscleGroups.map((muscleGroup) => (
-                      <MenuItem value={muscleGroup} sx={menuItemStyles}>
-                        {muscleGroup}
+                    {muscleGroups.map((muscle) => (
+                      <MenuItem key={muscle} value={muscle} sx={menuItemStyles}>
+                        {muscle}
                       </MenuItem>
                     ))}
                   </TextField>
-                </Box>
+                </div>
+
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.muscleGroup?.message}
                 </Typography>
@@ -169,6 +173,7 @@ export const Create = () => {
                   type="number"
                   variant="outlined"
                   name="weight"
+                  sx={textFieldStyles}
                   placeholder="Other explanation"
                   {...register("weight")}
                   onChange={changeHandler}
@@ -182,6 +187,7 @@ export const Create = () => {
                   type="number"
                   name="height"
                   variant="outlined"
+                  sx={textFieldStyles}
                   placeholder="height in cm"
                   {...register("height")}
                   onChange={changeHandler}
@@ -196,6 +202,7 @@ export const Create = () => {
                   multiline
                   rows={3}
                   name="description"
+                  sx={textFieldStyles}
                   {...register("description")}
                   onChange={changeHandler}
                 />
@@ -207,6 +214,7 @@ export const Create = () => {
                   variant="outlined"
                   name="imageUrl"
                   type="img"
+                  sx={textFieldStyles}
                   placeholder="Image Url"
                   {...register("imageUrl")}
                   onChange={changeHandler}
@@ -238,3 +246,24 @@ export const Create = () => {
     </motion.div>
   );
 };
+
+{
+  /* <TextField
+label="select muscle"
+select
+fullWidth
+name="muscleGroup"
+helperText="Please select your muscle group"
+{...register("muscleGroup")}
+onChange={changeHandler}
+SelectProps={{
+  multiline: true,
+}}
+>
+{muscleGroups.map((muscleGroup) => (
+  <MenuItem value={muscleGroup} sx={menuItemStyles}>
+    {muscleGroup}
+  </MenuItem>
+))}
+</TextField> */
+}

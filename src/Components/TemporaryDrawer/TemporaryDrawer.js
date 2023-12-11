@@ -8,18 +8,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { IconButton, MenuItem, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Link as MuiLink } from "@mui/material";
 import {
-  FitnessCenter,
   FitnessCenterRounded,
   FitnessCenterTwoTone,
-  SportsGymnastics,
 } from "@mui/icons-material";
-import { auth } from "../../config/firebase.js";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const myColors = {
   black: "#070707",
@@ -87,7 +82,6 @@ export default function TemporaryDrawer() {
                   textTransform: "uppercase",
                 }}
               >
-    
                 <ListItemText primary={text} />
               </MuiLink>
             </ListItemButton>
@@ -122,5 +116,3 @@ export default function TemporaryDrawer() {
     </Stack>
   );
 }
-
-

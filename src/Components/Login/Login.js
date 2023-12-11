@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
+  cardMediaStyles,
   emailAndPasswordStackStyles,
   loginButtonStyles,
   loginErrorsStyles,
@@ -151,10 +152,7 @@ export const Login = () => {
               component="img"
               image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"
               alt="growing up"
-              sx={{
-                width: "50%",
-                filter: "opacity(0.8) drop-shadow(0 0 black)",
-              }}
+              sx={cardMediaStyles}
             ></CardMedia>
           </Stack>
         </form>

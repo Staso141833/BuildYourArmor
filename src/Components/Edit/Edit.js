@@ -33,14 +33,6 @@ import {
   publishAndEditButtonStyles,
 } from "./edit.styles.js";
 
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver:": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
-
 const muscleGroups = [
   "traps",
   "delts",
@@ -157,34 +149,24 @@ export const Edit = () => {
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.name?.message}
                 </Typography>
-                <Box width="240px">
+                <div>
                   <TextField
-                    label="select muscle"
+                    id="outlined-select-muscle"
                     select
-                    fullWidth
+                    label="Select"
                     name="muscleGroup"
-                    color="success"
-                    helperText="Please select your muscle group"
+                    defaultValue={values.muscleGroup}
+                    helperText="Please select your muscle"
                     {...register("muscleGroup")}
                     onChange={changeHandler}
-                    SelectProps={{
-                      multiline: true,
-                    }}
                   >
-                    {muscleGroups.map((muscleGroup) => (
-                      <MenuItem value={muscleGroup} sx={menuItemStyles}>
-                        {muscleGroup}
+                    {muscleGroups.map((muscle) => (
+                      <MenuItem key={muscle} value={muscle} sx={menuItemStyles}>
+                        {muscle}
                       </MenuItem>
                     ))}
                   </TextField>
-
-                  <Stack variant="p" sx={{ fontSize: "16px" }}>
-                    Your current muscle is {values.muscleGroup}
-                  </Stack>
-                  <Typography variant="p" sx={errorsStyles}>
-                    {errors.muscleGroup?.message}
-                  </Typography>
-                </Box>
+                </div>
                 <TextField
                   type="number"
                   variant="outlined"

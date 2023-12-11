@@ -11,7 +11,7 @@ export const createAndEditmainStackStyles = {
 export const createAndEditPaperStyles = {
   width: "660px",
   height: "92%",
-  backgroundColor: "#fbc760",
+  backgroundColor: colors.gold,
   border: "3px solid #170f0a",
   display: "flex",
   flexDirection: "column",
@@ -27,8 +27,8 @@ export const createAndEditPaperStyles = {
 };
 
 export const publishAndEditButtonStyles = {
-  backgroundColor: "#170f0a",
-  color: "#fbc760",
+  backgroundColor: colors.black,
+  color: colors.gold,
   padding: "12px",
   fontSize: "16px",
   mb: 1,
@@ -48,13 +48,17 @@ export const createAndEditTitleStyles = {
   textTransform: "uppercase",
 };
 
+export const textFieldStyles = {
+  // backgroundColor: colors.white,
+};
+
 export const menuItemStyles = {
   width: "100%",
-  backgroundColor: colors.gold,
-  color: colors.black,
+  backgroundColor: colors.black,
+  color: colors.white,
   transition: "all 350ms",
   "&:hover": {
-    backgroundColor: colors.black,
+    backgroundColor: colors.white,
     color: colors.gold,
   },
 };

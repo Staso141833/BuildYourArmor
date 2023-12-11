@@ -1,5 +1,5 @@
-import { Card, CardMedia, Stack, Typography } from "@mui/material";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion.js";
+import { Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import {
   mainHeaderStyles,
   mainStackStyles,

@@ -8,6 +8,7 @@ export const mainStackStyles = {
   textAlign: "center",
   justifyContent: "space-evenly",
   mb: 1,
+  backgroundColor: colors.white,
 };
 
 export const mainHeaderStyles = { mt: 4 };

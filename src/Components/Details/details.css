@@ -10,6 +10,7 @@
   color: #fbc760;
   font-size: 14px;
   width: 100%;
+  text-decoration: none;
 }
 
 .add-button {
@@ -22,4 +23,5 @@
   text-transform: uppercase;
   border-radius: 4px;
   font-weight: 600;
+  text-decoration: none;
 }

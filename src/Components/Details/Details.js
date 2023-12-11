@@ -392,8 +392,8 @@ export const Details = () => {
                         style={{
                           cursor: "pointer",
                           color: publication?.likes?.includes(userId)
-                            ? colors["dark-silver"]
-                            : colors.black,
+                            ? colors.gold
+                            : colors.white,
                         }}
                       >
                         <FingerprintRounded></FingerprintRounded>Like

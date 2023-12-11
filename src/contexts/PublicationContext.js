@@ -25,7 +25,6 @@ export const PublicationProvider = ({ children }) => {
     const newPublication = await publicationService.create(data);
 
     setPublications((state) => {
-      console.log(state);
       return [...state, newPublication];
     });
 
@@ -33,16 +32,14 @@ export const PublicationProvider = ({ children }) => {
   };
 
   const onPublicationEditSubmit = async (values) => {
-    
-      const result = await publicationService.edit(values._id, values);
-      setPublications((state) =>
-        state?.map((oldPublication) =>
-          oldPublication?._id === values?._id ? result : oldPublication
-        )
-      );
+    const result = await publicationService.edit(values._id, values);
+    setPublications((state) =>
+      state?.map((oldPublication) =>
+        oldPublication?._id === values?._id ? result : oldPublication
+      )
+    );
 
-       navigate(`/catalog/${values._id}`);
-   
+    navigate(`/catalog/${values._id}`);
   };
 
   const getPublication = (publicationId) => {

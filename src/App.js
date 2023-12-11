@@ -32,7 +32,9 @@ function App() {
               checked={darkMode}
               onClickThemeChange={onClickThemeChange}
             />
-            <AnimatedRoutes></AnimatedRoutes>
+            <main id="main-content">
+              <AnimatedRoutes></AnimatedRoutes>
+            </main>
 
             <Footer></Footer>
           </div>

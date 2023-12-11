@@ -3,11 +3,11 @@ import { colors } from "../../../metaData/colors.js";
 export const editAndDeleteButtonStyles = {
   width: "auto",
   textTransform: "lowercase",
-  backgroundColor: colors["light-silver"],
-  color: colors.black,
+  backgroundColor: colors.black,
+  color: colors.gold,
   cursor: "pointer",
   "&:hover": {
-    backgroundColor: colors.gold,
+    backgroundColor: colors.white,
     color: colors.black,
   },
 };

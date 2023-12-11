@@ -51,7 +51,7 @@ export const createAndEditTitleStyles = {
 export const menuItemStyles = {
   width: "100%",
   backgroundColor: colors.gold,
-  color: colors.black,
+  color: colors.white,
   transition: "all 350ms",
   "&:hover": {
     backgroundColor: colors.black,

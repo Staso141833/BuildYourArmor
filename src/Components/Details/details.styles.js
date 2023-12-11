@@ -4,6 +4,8 @@ export const boxStyles = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  mb: 4,
+  
 };
 
 export const mainStackStyles = {
@@ -11,7 +13,7 @@ export const mainStackStyles = {
   flexDirection: "row",
   gap: 2,
   mt: 4,
-  mb: 4,
+  mb: 5,
   width: "100%",
   height: "100%",
   justifyContent: "space-evenly",
@@ -34,6 +36,7 @@ export const cardStyles = {
   flexDirection: "column",
   justifyContent: "space-evenly",
   alignItems: "center",
+  backgroundColor: colors.gold
 };
 
 export const cardMediaStyles = { objectFit: "cover", height: "65%" };
@@ -69,7 +72,7 @@ export const editAndDeleteButtonStyles = {
 };
 
 export const cardActionLikeButtonStyles = {
-  backgroundColor: colors.gold,
+  backgroundColor: colors.black,
   width: "25%",
   height: "auto",
 };
@@ -143,7 +146,7 @@ export const currentCommentStackStyles = {
   width: "100%",
   alignItems: "center",
   backgroundColor: colors.gold,
-  color: colors.white,
+  color: colors.black,
   padding: 1,
   borderRadius: 1,
 };

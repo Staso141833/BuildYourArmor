@@ -82,7 +82,7 @@ export const BasicMuscles = () => {
               position: "absolute",
               opacity: ".7",
               width: "100%",
-              height: "94vh",
+              height: "91.3vh",
             }}
           />
           <Grid

@@ -1,3 +1,5 @@
+import { colors } from "../../metaData/colors.js";
+
 export const cardStyles = { borderRadius: "0px" };
 
 export const cardMediaStyles = {
@@ -11,7 +13,7 @@ export const homeTitleStyles = {
   top: "10%",
   left: "4%",
   fontSize: "78px",
-  color: "#f6f6f6",
+  color: colors.white,
   fontWeight: "bold",
   width: "46%",
   textShadow: "4px 12px 14px #847470",

@@ -1,3 +1,5 @@
+import { colors } from "../../metaData/colors.js";
+
 export const loginHeaderStyles = {
   fontSize: "24px",
   fontWeight: "bold",
@@ -12,11 +14,11 @@ export const loginFormMainStackStyles = {
   flexDirection: "row",
   margin: "auto",
   marginTop: "120px",
-  border: "2px double #4c4850",
+  border: "1px solid #4c4850",
   borderRadius: "8px",
   height: "500px",
   width: "1040px",
-  backgroundColor: "#170f0a",
+  backgroundColor: colors.black,
   justifyContent: "space-evenly",
   alignItems: "center",
   boxShadow: "10px 20px 20px #665d58",
@@ -30,25 +32,31 @@ export const emailAndPasswordStackStyles = {
   alignItems: "center",
   gap: 3,
   height: "100%",
-  backgroundColor: "#B3AEAB",
+  backgroundColor: colors.white,
 };
 
 export const loginInputStyles = {
   width: "80%",
-  backgroundColor: "#B3AEAB",
   borderRadius: "4px",
 };
 
 export const loginButtonStyles = {
-  backgroundColor: "#170f0a",
-  color: "#fbc760",
+  backgroundColor: colors.gold,
+  color: colors.black,
   padding: "12px",
   fontSize: "16px",
   width: "46%",
-  border: " 1px solid #fbc760",
+  border: " 1px solid ",
+  borderColor: colors.black,
   "&:hover": {
-    backgroundColor: "fbc760",
+    backgroundColor: colors.black,
+    color: colors.gold,
   },
+};
+
+export const cardMediaStyles = {
+  width: "50%",
+  filter: "opacity(0.8) drop-shadow(0 0 black)",
 };
 
 export const loginErrorsStyles = { fontSize: "16px", color: "red" };
