@@ -15,14 +15,7 @@ import {
   FitnessCenterTwoTone,
 } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
-
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver:": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
+import { colors } from "../../metaData/colors.js";
 
 export default function TemporaryDrawer() {
   const navigate = useNavigate();
@@ -76,9 +69,15 @@ export default function TemporaryDrawer() {
                   navigate(`${links[index]}`);
                 }}
                 sx={{
-                  color: myColors.gold,
+                  color: colors.black,
                   textDecoration: "none",
-                  fontSize: "20px",
+                  fontSize: {
+                    xs: "12px",
+                    sm: "14px",
+                    md: "20px",
+                    lg: "20px",
+                    xl: "20px",
+                  },
                   textTransform: "uppercase",
                 }}
               >
@@ -99,7 +98,17 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
           <Button
             onClick={toggleDrawer(anchor, true)}
-            sx={{ width: "auto", color: myColors.gold }}
+            sx={{
+              width: "auto",
+              color: colors.gold,
+              fontSize: {
+                xs: "10px",
+                sm: "20px",
+                md: "30px",
+                lg: "10px",
+                xl: "14px",
+              },
+            }}
           >
             {anchor}
           </Button>

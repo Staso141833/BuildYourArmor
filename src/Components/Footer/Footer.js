@@ -9,30 +9,22 @@ import BusinessIcon from "@mui/icons-material/Business";
 import EmailIcon from "@mui/icons-material/Email";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import {
+  boxCopyRightStyles,
   boxStyles,
   linkStyles,
   mainStackStyles,
   socialMediaStyles,
   typographyStyles,
+  typographyTitleStyles,
 } from "./footer.styles.js";
 
 export const Footer = () => {
   return (
-    <Box
-      component="footer"
-      // sx={{
-      //   backgroundColor: (theme) =>
-      //     theme.palette.mode === "light"
-      //       ? theme.palette.grey[300]
-      //       : theme.palette.grey[800],
-      //   p: 6,
-      // }}
-      sx={boxStyles}
-    >
+    <Box component="footer" sx={boxStyles}>
       <Container maxWidth="lg" position="relative">
-        <Grid container spacing={5}>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" sx={typographyStyles} gutterBottom>
+            <Typography variant="h6" sx={typographyTitleStyles} gutterBottom>
               About Us
             </Typography>
             <Typography variant="body2" sx={typographyStyles}>
@@ -41,11 +33,11 @@ export const Footer = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" sx={typographyStyles} gutterBottom>
+            <Typography variant="h6" sx={typographyTitleStyles} gutterBottom>
               Contact Us
             </Typography>
             <Stack sx={mainStackStyles}>
-              <BusinessIcon sx={{}} />
+              <BusinessIcon />
               <Typography variant="body2" sx={typographyStyles}>
                 40bl., Darvenitsa, Sofia
               </Typography>
@@ -65,7 +57,7 @@ export const Footer = () => {
             </Stack>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" sx={typographyStyles} gutterBottom>
+            <Typography variant="h6" sx={typographyTitleStyles} gutterBottom>
               Follow Us
             </Typography>
             <Link href="https://www.facebook.com/" sx={linkStyles}>
@@ -83,9 +75,9 @@ export const Footer = () => {
             </Link>
           </Grid>
         </Grid>
-        <Box mt={5}>
+        <Box sx={boxCopyRightStyles}>
           <Typography variant="body2" sx={typographyStyles} align="center">
-            {"Copyright © "}
+            {"2023 Inferno - All rights reserved || Designed By: S. Stiptsov"}
             <Link sx={typographyStyles} href="https://your-website.com/">
               Your Website
             </Link>{" "}

@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   CardMedia,
   FormControl,
@@ -10,6 +9,7 @@ import {
   MenuItem,
   Typography,
   CircularProgress,
+  InputAdornment,
 } from "@mui/material";
 
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
@@ -33,6 +33,12 @@ import {
 } from "./create.styles.js";
 import "./create.css";
 import { colors } from "../../metaData/colors.js";
+import {
+  AccountCircle,
+  DescriptionRounded,
+  HeightOutlined,
+  Image,
+} from "@mui/icons-material";
 
 const muscleGroups = [
   "traps",
@@ -134,8 +140,14 @@ export const Create = () => {
                 <TextField
                   label="Name"
                   name="name"
-                  color="warning"
                   variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }}
                   placeholder="Name"
                   {...register("name")}
                   onChange={changeHandler}
@@ -191,6 +203,13 @@ export const Create = () => {
                   placeholder="height in cm"
                   {...register("height")}
                   onChange={changeHandler}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <HeightOutlined />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.height?.message}
@@ -202,6 +221,13 @@ export const Create = () => {
                   multiline
                   rows={3}
                   name="description"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <DescriptionRounded />
+                      </InputAdornment>
+                    ),
+                  }}
                   sx={textFieldStyles}
                   {...register("description")}
                   onChange={changeHandler}
@@ -215,6 +241,13 @@ export const Create = () => {
                   name="imageUrl"
                   type="img"
                   sx={textFieldStyles}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Image />
+                      </InputAdornment>
+                    ),
+                  }}
                   placeholder="Image Url"
                   {...register("imageUrl")}
                   onChange={changeHandler}
@@ -246,24 +279,3 @@ export const Create = () => {
     </motion.div>
   );
 };
-
-{
-  /* <TextField
-label="select muscle"
-select
-fullWidth
-name="muscleGroup"
-helperText="Please select your muscle group"
-{...register("muscleGroup")}
-onChange={changeHandler}
-SelectProps={{
-  multiline: true,
-}}
->
-{muscleGroups.map((muscleGroup) => (
-  <MenuItem value={muscleGroup} sx={menuItemStyles}>
-    {muscleGroup}
-  </MenuItem>
-))}
-</TextField> */
-}

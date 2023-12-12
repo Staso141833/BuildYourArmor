@@ -1,7 +1,7 @@
 import React from "react";
-import { Typography, Box, Card, CardMedia } from "@mui/material";
+import { Typography, Box, Card, CardMedia, Stack } from "@mui/material";
 import { motion } from "framer-motion";
-import { cardMediaStyles, cardStyles, homeTitleStyles } from "./home.styles.js";
+import { cardMediaStyles, cardStyles, homeTitleStackStyles, homeTitleStyles } from "./home.styles.js";
 
 const myColors = {
   black: "#070707",
@@ -28,10 +28,15 @@ export const Home = () => {
             alt="Arnold"
             sx={cardMediaStyles}
           />
-
-          <Typography position="absolute" variant="body4" sx={homeTitleStyles}>
-            "The pain you feel today will be the strength you feel tomorrow."
-          </Typography>
+          <Stack sx={homeTitleStackStyles}>
+            <Typography
+              position="absolute"
+              variant="body4"
+              sx={homeTitleStyles}
+            >
+              "The pain you feel today will be the strength you feel tomorrow."
+            </Typography>
+          </Stack>
         </Card>
       </Box>
     </motion.div>

@@ -9,12 +9,23 @@ import {
   CardMedia,
   Box,
 } from "@mui/material";
-import { Link as MuiLink } from "@mui/material";
 import { useState } from "react";
 
 import "./basicMuscles.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import {
+  boxFooterStyles,
+  buttonStyles,
+  cardMediaStyles,
+  cardStyles,
+  gridContainerItemStyles,
+  gridContainerStyles,
+  muscleContainerStyles,
+  muscleItemContainerStyles,
+  xsSizeStyles,
+  xsStyles,
+} from "./basicMuscles.styles.js";
 
 const myColors = {
   black: "#070707",
@@ -65,48 +76,14 @@ export const BasicMuscles = () => {
       exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
     >
       <Stack position={"relative"}>
-        <Card
-          position="relative"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
+        <Card position="relative" sx={cardStyles}>
           <CardMedia
             component="img"
             image="https://static.vecteezy.com/system/resources/previews/022/925/649/large_2x/human-anatomy-showcasing-male-muscles-with-nerves-isolated-on-black-background-generative-ai-photo.jpeg"
-            sx={{
-              objectFit: "cover",
-              zIndex: "1",
-              position: "absolute",
-              opacity: ".7",
-              width: "100%",
-              height: "91.3vh",
-            }}
+            sx={cardMediaStyles}
           />
-          <Grid
-            container
-            sx={{
-              width: "80vw",
-              margin: "32px 12px",
-              gap: "16px",
-              position: "absolute",
-              zIndex: "2",
-            }}
-          >
-            <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
+          <Stack container sx={muscleContainerStyles}>
+            <Stack sx={muscleItemContainerStyles}>
               <Button
                 id="delts-button"
                 aria-controls={openMenuDelts ? "delts-menu" : undefined}
@@ -114,16 +91,7 @@ export const BasicMuscles = () => {
                 aria-expanded={openMenuDelts ? "true" : undefined}
                 onClick={handleClickDelts}
                 endIcon={<KeyboardArrowDownSharp />}
-                sx={{
-                  fontFamily: "Robotto",
-                  fontSize: "18px",
-                  color: myColors.gold,
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                }}
+                sx={buttonStyles}
               >
                 Delts
               </Button>
@@ -154,23 +122,7 @@ export const BasicMuscles = () => {
                   }}
                 >
                   <Link to="/deltoid" className="muscle-button-dropdown">
-                    {/* <MuiLink
-                    sx={{
-                      textDecoration: "none",
-                      color: myColors.gold,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      fontFamily: "Robotto",
-                      width: "100%",
-                      "&:hover": {
-                        backgroundColor: myColors.gold,
-                        color: myColors["dark-silver"],
-                      },
-                      transition: "all 300ms",
-                      padding: "12px",
-                    }}
-                  > */}
-                    Shoulders {/* </MuiLink> */}
+                    Shoulders
                   </Link>
                 </MenuItem>
                 <MenuItem
@@ -186,38 +138,16 @@ export const BasicMuscles = () => {
                   </Link>
                 </MenuItem>
               </Menu>
-            </Grid>
+            </Stack>
 
-            <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
+            <Stack sx={muscleItemContainerStyles}>
               <Link to="/back" className="muscle-button">
                 {" "}
                 Back
               </Link>
-            </Grid>
+            </Stack>
 
-            <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
+            <Stack sx={muscleItemContainerStyles}>
               <Button
                 id="arms-button"
                 aria-controls={openMenuArms ? "arms-menu" : undefined}
@@ -225,16 +155,7 @@ export const BasicMuscles = () => {
                 aria-haspopup="true"
                 onClick={handleClickArms}
                 endIcon={<KeyboardArrowDownSharp />}
-                sx={{
-                  fontFamily: "Robotto",
-                  fontSize: "18px",
-                  color: myColors.gold,
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                }}
+                sx={buttonStyles}
               >
                 Arms
               </Button>
@@ -290,51 +211,18 @@ export const BasicMuscles = () => {
                   </Link>
                 </MenuItem>
               </Menu>
-            </Grid>
-            <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
+            </Stack>
+            <Stack sx={muscleItemContainerStyles}>
               <Link to="/chest" className="muscle-button">
                 Chest
               </Link>
-            </Grid>
-            <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
+            </Stack>
+            <Stack sx={muscleItemContainerStyles}>
               <Link to="/abs" className="muscle-button">
                 ABS
               </Link>
-            </Grid>
-            <Grid
-              item
-              xs={1.895}
-              sx={{
-                backgroundColor: myColors.black,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "6px",
-                border: "2px outset #fbc760",
-              }}
-            >
+            </Stack>
+            <Stack sx={muscleItemContainerStyles}>
               <Button
                 id="legs-button"
                 aria-controls={openMenuLegs ? "legs-menu" : undefined}
@@ -342,16 +230,7 @@ export const BasicMuscles = () => {
                 aria-expanded={openMenuLegs ? "true" : undefined}
                 onClick={handleClickLegs}
                 endIcon={<KeyboardArrowDownSharp />}
-                sx={{
-                  fontFamily: "Robotto",
-                  fontSize: "18px",
-                  color: myColors.gold,
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  fontWeight: "600",
-                  padding: "14px 24px",
-                  borderRadius: "6px",
-                }}
+                sx={buttonStyles}
               >
                 Legs
               </Button>
@@ -407,16 +286,11 @@ export const BasicMuscles = () => {
                   </Link>
                 </MenuItem>
               </Menu>
-            </Grid>
-          </Grid>
+            </Stack>
+          </Stack>
         </Card>
       </Stack>
-      <Box
-        component="footer"
-        sx={{
-          marginTop: "910px",
-        }}
-      ></Box>
+      <Box component="footer" sx={boxFooterStyles}></Box>
     </motion.div>
   );
 };

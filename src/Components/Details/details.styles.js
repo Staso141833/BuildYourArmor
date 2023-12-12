@@ -75,6 +75,9 @@ export const cardActionLikeButtonStyles = {
   backgroundColor: colors.black,
   width: "25%",
   height: "auto",
+  "&:hover": {
+    backgroundColor: colors["light-silver"],
+  },
 };
 
 export const rightStackStyles = {
@@ -98,7 +101,7 @@ export const rightStackStylesChild = {
 export const excerciseExplanationStyles = {
   letterSpacing: 4,
   textTransform: "lowercase",
-  color: colors.gold,
+  color: colors.black,
   fontWeight: "bold",
 };
 

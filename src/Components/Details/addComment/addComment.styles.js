@@ -10,13 +10,13 @@ export const accordionStyles = {
 
 export const commentButtonStyles = {
   backgroundColor: colors.black,
-  color: colors["light-silver"],
+  color: colors.gold,
   fontWeight: "bold",
   transition: "all 300ms",
   width: "44%",
   marginBottom: 4,
   "&:hover": {
-    backgroundColor: colors["light-silver"],
+    backgroundColor: colors.white,
     color: colors.black,
   },
 };

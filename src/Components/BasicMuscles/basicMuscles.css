@@ -42,7 +42,7 @@
 .muscle-button {
   display: flex;
   color: #fbc760;
-  font-size: 16px;
+  font-size: 18px;
   text-decoration: none;
   transition: all 350ms;
   padding: 12px;
@@ -59,4 +59,14 @@
 .muscle-button:hover {
   background-color: #fbc760;
   color: #070707;
+}
+
+@media (max-width: 600px) {
+  .muscle-button-dropdown {
+    font-size: 10px;
+  }
+
+  .muscle-button {
+    font-size: 12px;
+  }
 }

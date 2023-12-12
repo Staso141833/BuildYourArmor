@@ -22,9 +22,11 @@
   background-color: #070707;
   font-family: Robotto;
   border-radius: 8px;
+  border: 1px solid black;
 }
 
 .details-button:hover {
-  background-color: #fbc760;
+  background-color: #f7f2ef;
   color: #070707;
+  border: 1px solid black;
 }

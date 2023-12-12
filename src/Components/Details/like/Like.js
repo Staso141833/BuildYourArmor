@@ -21,7 +21,7 @@ export const Like = ({ commentId, likesCount, onClickCommentLike }) => {
         sx={likeButtonStyles}
         style={{
           cursor: "pointer",
-          color: likesCount?.includes(userId) ? colors.white : colors.black,
+          color: likesCount?.includes(userId) ? colors["dark-silver"] : colors.black,
         }}
       >
         {likesCount?.length}Likes

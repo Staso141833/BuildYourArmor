@@ -72,20 +72,19 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
       <AppBar position="static" sx={appBarStyles}>
         <Toolbar sx={toolbarStyles}>
           <Stack sx={leftStackStyles}>
+            <SafetyCheckTwoToneIcon sx={logoStyles}></SafetyCheckTwoToneIcon>
             <TemporaryDrawer
               state={state}
               setState={setState}
               toggleDrawer={toggleDrawer}
             ></TemporaryDrawer>
-
-            <SafetyCheckTwoToneIcon sx={logoStyles}></SafetyCheckTwoToneIcon>
           </Stack>
 
           <Typography variant="h2" component="div" sx={youAreWhatYouEatStyles}>
             You are what you eat
           </Typography>
           <Stack sx={rightStackStyles}>
-            <Stack>
+            {/* <Stack>
               <Switch
                 {...label}
                 defaultChecked
@@ -94,7 +93,7 @@ export default function NavigationBar({ checked, onClickThemeChange }) {
                 checked={checked}
                 sx={switchStyles}
               />
-            </Stack>
+            </Stack> */}
 
             {isAuthenticated && (
               <>
