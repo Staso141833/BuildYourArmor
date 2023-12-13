@@ -1,13 +1,15 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import {
+  cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
-} from ".././basicMuscles.styles.js"
+} from ".././basicMuscles.styles.js";
 
 export const Abs = () => {
   return (
@@ -48,7 +50,9 @@ export const Abs = () => {
         </Stack>
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">ABDOMINAL TRAINING MUSCLES</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              ABDOMINAL TRAINING MUSCLES
+            </Typography>
             <Stack sx={dividerStyles}></Stack>
             <Typography variant="p">
               Strong abdominal (abdominal) muscles are essential for maximizing
@@ -120,14 +124,14 @@ export const Abs = () => {
               in more detail.
             </Typography>
 
-            <Stack>
+            <Stack sx={tertiaryStackChildStyles}>
               <Typography variant="p">
                 In a posedown, when you can get into any position you want, it
                 makes sense not to get into the same position as other
                 bodybuilders who have advantages as a result of the greater
                 development of a body part or because of their greater mass.
               </Typography>
-              <Card position="relative" sx={{ width: "100%", mt: 2 }}>
+              <Card position="relative" sx={cardWidthStyles}>
                 <CardMedia
                   position="absolute"
                   component="img"
@@ -139,18 +143,12 @@ export const Abs = () => {
           </Stack>
 
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">POINT REDUCTION</Typography>
-            <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              POINT REDUCTION
+            </Typography>
+            <Stack sx={dividerStyles}></Stack>
 
-            <Stack
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                gap: 2,
-              }}
-            >
+            <Stack sx={tertiaryStackChildStyles}>
               <Typography variant="p">
                 Strong abdominal (abdominal) muscles are essential for
                 maximizing performance in almost all sports. In bodybuilding,
@@ -200,8 +198,8 @@ export const Abs = () => {
               </Typography>
             </Stack>
 
-            <Stack>
-              <Card position="relative" sx={{ width: "100%", mt: 2 }}>
+            <Stack sx={tertiaryStackChildStyles}>
+              <Card position="relative" sx={cardWidthStyles}>
                 <CardMedia
                   position="absolute"
                   component="img"

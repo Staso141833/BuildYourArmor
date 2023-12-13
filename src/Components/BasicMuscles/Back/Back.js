@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   cardAndParagraphRowStyles,
   cardStackStyles,
+  cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
@@ -70,59 +71,57 @@ export const Back = () => {
 
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Stack>
-              <Typography variant="h4" sx={secondaryHeaderStyles}>
-                Upper back
-              </Typography>
-              <Stack sx={dividerStyles}></Stack>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              Upper back
+            </Typography>
+            <Stack sx={dividerStyles}></Stack>
 
-              <Stack sx={{ display: "flex", flexDirection: "row" }}>
-                <Stack sx={{ width: "35%" }}>
-                  <Card position="relative">
-                    <CardMedia
-                      position="absolute"
-                      component="img"
-                      alt="Arnold"
-                      image="https://www.greatestphysiques.com/wp-content/uploads/2016/09/1970-Arnold-1.jpg"
-                    ></CardMedia>
-                  </Card>
-                </Stack>
-                <Stack sx={{ width: "64%" }}>
-                  <Typography variant="p">
-                    Upper back development involves much more than the back
-                    muscles themselves. When you're in Double Biceps Back Pose,
-                    the trapezius and upper and middle back muscles are
-                    dominant, but all the muscles from elbow to elbow have a
-                    role to play, including the biceps and rear deltoids.
-                  </Typography>
-                  <Typography variant="p">
-                    The central muscle in the upper back is the trapezius, an
-                    angular muscle that extends down from the shoulders on
-                    either side of the neck, then meets at a point on the spine,
-                    roughly mid-back. With a highly developed back, the
-                    trapezius muscles will be large and massive, balancing the
-                    broad back muscles on each side, and clearly separated from
-                    them in the back poses. The exercises that train especially
-                    the trapezius muscles, cover everything, at which is
-                    included lifting the shoulders - in the first place
-                    Trapezoid shrugs and Standing Barbell Rows, but also Rowing
-                    in some poses and some types of push-ups. They are discussed
-                    in the training program for training the trapezius muscles.
-                  </Typography>
-                  <Typography variant="p">
-                    In the arched back pose, you need a solid, muscular upper
-                    back to balance the development of the shoulders, biceps,
-                    triceps and forearms.
-                  </Typography>
-                </Stack>
+            <Stack sx={cardAndParagraphRowStyles}>
+              <Stack sx={{ width: "100%" }}>
+                <Card position="relative">
+                  <CardMedia
+                    position="absolute"
+                    component="img"
+                    alt="Arnold"
+                    image="https://www.greatestphysiques.com/wp-content/uploads/2016/09/1970-Arnold-1.jpg"
+                  ></CardMedia>
+                </Card>
               </Stack>
-
-              <Stack></Stack>
+              <Stack>
+                <Typography variant="p">
+                  Upper back development involves much more than the back
+                  muscles themselves. When you're in Double Biceps Back Pose,
+                  the trapezius and upper and middle back muscles are dominant,
+                  but all the muscles from elbow to elbow have a role to play,
+                  including the biceps and rear deltoids.
+                </Typography>
+                <Typography variant="p">
+                  The central muscle in the upper back is the trapezius, an
+                  angular muscle that extends down from the shoulders on either
+                  side of the neck, then meets at a point on the spine, roughly
+                  mid-back. With a highly developed back, the trapezius muscles
+                  will be large and massive, balancing the broad back muscles on
+                  each side, and clearly separated from them in the back poses.
+                  The exercises that train especially the trapezius muscles,
+                  cover everything, at which is included lifting the shoulders -
+                  in the first place Trapezoid shrugs and Standing Barbell Rows,
+                  but also Rowing in some poses and some types of push-ups. They
+                  are discussed in the training program for training the
+                  trapezius muscles.
+                </Typography>
+                <Typography variant="p">
+                  In the arched back pose, you need a solid, muscular upper back
+                  to balance the development of the shoulders, biceps, triceps
+                  and forearms.
+                </Typography>
+              </Stack>
             </Stack>
           </Stack>
 
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">Latissimus Dorsi</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              Latissimus Dorsi
+            </Typography>
             <Stack sx={dividerStyles}></Stack>
             <Typography variant="p">
               The most impressive part of a fully developed back is the curve of
@@ -170,7 +169,7 @@ export const Back = () => {
 
           <Stack sx={tertiaryStackChildStyles}>
             <Stack sx={cardAndParagraphRowStyles}>
-              <Stack sx={{ width: "38%" }}>
+              <Stack>
                 {" "}
                 <Card position="relative">
                   <CardMedia
@@ -182,13 +181,8 @@ export const Back = () => {
                 </Card>
               </Stack>
 
-              <Stack
-                sx={{
-                  width: "58%",
-                  gap: 1,
-                }}
-              >
-                <Typography variant="h4">
+              <Stack sx={tertiaryStackChildStyles}>
+                <Typography variant="h4" sx={secondaryHeaderStyles}>
                   Lower part of the latissimus dorsi
                 </Typography>
                 <Stack sx={dividerStyles}></Stack>
@@ -246,7 +240,7 @@ export const Back = () => {
             </Typography>
 
             <Stack sx={{ alignItems: "center" }}>
-              <Card position="relative" sx={{ width: "60%" }}>
+              <Card position="relative" sx={cardWidthStyles}>
                 <CardMedia
                   position="absolute"
                   component="img"
@@ -255,7 +249,7 @@ export const Back = () => {
                 ></CardMedia>
               </Card>
               <Typography variant="p">
-                The flex wheeler has the advantage due to an excellent genetic
+                Flex Wheeler has the advantage due to an excellent genetic
                 predisposition: the density and musculature of his back shows
                 how hard he has trained to realize his potential.
               </Typography>
@@ -263,7 +257,7 @@ export const Back = () => {
           </Stack>
 
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
               Lower back (waist area, lower back)
             </Typography>
             <Stack sx={dividerStyles}></Stack>
@@ -286,7 +280,7 @@ export const Back = () => {
               the waist area.
             </Typography>
             <Stack sx={{ alignItems: "center" }}>
-              <Card position="relative" sx={{ width: "60%" }}>
+              <Card position="relative" sx={cardWidthStyles}>
                 <CardMedia
                   position="absolute"
                   component="img"

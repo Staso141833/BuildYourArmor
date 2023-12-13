@@ -1,9 +1,12 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import {
+  cardAndParagraphRowStyles,
+  cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
@@ -22,38 +25,23 @@ export const Legs = () => {
             Thighs
           </Typography>
           <Stack sx={dividerStyles}></Stack>
-          <Typography variant="h4">Muscles of the thighs</Typography>
+          <Typography variant="h4" sx={secondaryHeaderStyles}>
+            Muscles of the thighs
+          </Typography>
           <Stack sx={dividerStyles}></Stack>
-          <Stack
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              alignItems: "center",
-              textAlign: "start",
-              justifyContent: "space-evenly",
-              gap: 4,
-              marginBottom: 4,
-            }}
-          >
-            <Card position="relative" sx={{ width: "38%", mt: 2 }}>
-              <CardMedia
-                position="absolute"
-                component="img"
-                alt="Bill Pearl"
-                image="https://www.evolutionofbodybuilding.net/wp-content/uploads/2015/06/arnold-legs.jpg"
-              ></CardMedia>
-            </Card>
-            <Stack
-              sx={{
-                width: "52%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                alignItems: "start",
-                gap: 1,
-              }}
-            >
+          <Stack sx={cardAndParagraphRowStyles}>
+            <Stack sx={{ width: "100%" }}>
+              <Card position="relative">
+                <CardMedia
+                  position="absolute"
+                  component="img"
+                  alt="Arnold"
+                  image="https://www.evolutionofbodybuilding.net/wp-content/uploads/2015/06/arnold-legs.jpg"
+                ></CardMedia>
+              </Card>
+            </Stack>
+
+            <Stack>
               <Typography variant="p">
                 The quadriceps femoris (m.quadriceps femoris) is made up of the
                 muscles on the front outer surface of your thighs that act as
@@ -83,7 +71,9 @@ export const Legs = () => {
                 diagonally across the upper-inner thigh.
               </Typography>
             </Stack>
-            <Card position="relative" sx={{ width: "46%", mt: 2 }}>
+          </Stack>
+          <Stack sx={cardAndParagraphRowStyles}>
+            <Card position="relative" sx={cardWidthStyles}>
               <CardMedia
                 position="absolute"
                 component="img"
@@ -92,7 +82,7 @@ export const Legs = () => {
               ></CardMedia>
             </Card>
 
-            <Card position="relative" sx={{ width: "46%", mt: 2 }}>
+            <Card position="relative" sx={cardWidthStyles}>
               <CardMedia
                 position="absolute"
                 component="img"
@@ -104,7 +94,7 @@ export const Legs = () => {
         </Stack>
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
               On the importance of training the thighs
             </Typography>
             <Stack sx={dividerStyles}></Stack>
@@ -188,17 +178,19 @@ export const Legs = () => {
               has set new standards for new generations of bodybuilders to
               aspire to.
             </Typography>
-            <Card position="relative" sx={{ mt: 2 }}>
-              <CardMedia
-                position="absolute"
-                component="img"
-                alt="Bill Pearl"
-                image="https://pbs.twimg.com/media/DxyjvSoW0AI16c-.jpg"
-              ></CardMedia>
-            </Card>
+            <Stack sx={{alignItems: "center"}}>
+              <Card position="relative" sx={cardWidthStyles}>
+                <CardMedia
+                  position="absolute"
+                  component="img"
+                  alt="Bill Pearl"
+                  image="https://pbs.twimg.com/media/DxyjvSoW0AI16c-.jpg"
+                ></CardMedia>
+              </Card>
+            </Stack>
 
-            <Stack>
-              <Card position="relative" sx={{ mt: 2, mb: 2 }}>
+            <Stack sx={tertiaryStackChildStyles}>
+              <Card position="relative" sx={cardWidthStyles}>
                 <CardMedia
                   position="absolute"
                   component="img"

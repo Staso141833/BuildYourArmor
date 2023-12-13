@@ -4,6 +4,7 @@ import {
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
@@ -33,7 +34,9 @@ export const Forearms = () => {
           </Typography>
         </Stack>
         <Stack sx={tertiaryStackStyles}>
-          <Typography variant="h4">Forearms training</Typography>
+          <Typography variant="h4" sx={secondaryHeaderStyles}>
+            Forearms training
+          </Typography>
           <Stack sx={dividerStyles}></Stack>
 
           <Stack sx={tertiaryStackChildStyles}>

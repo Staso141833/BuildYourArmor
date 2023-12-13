@@ -1,9 +1,11 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import {
+  cardAndParagraphRowStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   stackCardAndParagraphStyles,
   tertiaryStackChildStyles,
@@ -35,7 +37,7 @@ export const Trapezius = () => {
 
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
               TRAINING FOR THE TRAPEZIOUS MUSCLES
             </Typography>
             <Stack sx={dividerStyles}></Stack>
@@ -54,7 +56,7 @@ export const Trapezius = () => {
               the impressive most muscular pose.
             </Typography>
 
-            <Stack sx={stackCardAndParagraphStyles}>
+            <Stack sx={cardAndParagraphRowStyles}>
               <Card position="relative">
                 <CardMedia
                   position="absolute"

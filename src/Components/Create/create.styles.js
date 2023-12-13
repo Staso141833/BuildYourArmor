@@ -48,7 +48,7 @@ export const createAndEditTitleStyles = {
     sm: "20px",
     md: "20px",
     lg: "30px",
-    xl: "32px",
+    xl: "28px",
   },
 };
 
@@ -91,7 +91,13 @@ export const publishAndEditButtonStyles = {
   backgroundColor: colors.black,
   color: colors.gold,
   padding: "12px",
-  fontSize: "16px",
+  fontSize: {
+    xs: "12px",
+    sm: "16px",
+    md: "16px",
+    lg: "16px",
+    xl: "16px",
+  },
   mb: 1,
   mt: 1,
   width: "60%",

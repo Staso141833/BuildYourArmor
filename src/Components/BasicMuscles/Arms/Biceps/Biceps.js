@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 
 import {
   cardStackStyles,
+  cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
@@ -38,7 +40,7 @@ export const Biceps = () => {
         </Stack>
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">Biceps training</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>Biceps training</Typography>
             <Stack sx={dividerStyles}></Stack>
 
             <Stack>
@@ -107,7 +109,7 @@ export const Biceps = () => {
               </Typography>
 
               <Stack sx={cardStackStyles}>
-                <Card position="relative">
+                <Card position="relative" sx={cardWidthStyles}>
                   <CardMedia
                     position="absolute"
                     component="img"
@@ -155,7 +157,7 @@ export const Biceps = () => {
               </Typography>
 
               <Stack sx={cardStackStyles}>
-                <Card position="relative">
+                <Card position="relative" sx={cardWidthStyles}>
                   <CardMedia
                     position="absolute"
                     component="img"

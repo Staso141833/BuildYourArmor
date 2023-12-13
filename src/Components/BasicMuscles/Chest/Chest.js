@@ -9,9 +9,12 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import {
+  cardStackStyles,
+  cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
@@ -26,11 +29,15 @@ export const Chest = () => {
     >
       <Stack sx={mainStackStyles}>
         <Stack sx={secondaryStackStyles}>
-          <Typography variant="h3" sx={mainHeaderStyles}>Chest</Typography>
+          <Typography variant="h3" sx={mainHeaderStyles}>
+            Chest
+          </Typography>
 
           <Stack sx={dividerStyles}></Stack>
           <Stack>
-            <Typography variant="h4">Chest muscles</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              Chest muscles
+            </Typography>
             <Stack sx={dividerStyles}></Stack>
             <Typography variant="p">
               The pectoralis major consists of three parts clavicle (upper),
@@ -84,7 +91,9 @@ export const Chest = () => {
 
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">Full Breast Development</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              Full Breast Development
+            </Typography>
             <Stack sx={dividerStyles}></Stack>
             <Typography variant="p">
               A broad and well-shaped chest is one of the most important
@@ -142,8 +151,8 @@ export const Chest = () => {
                 </ListItem>
               </List>
             </Typography>
-            <Stack sx={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              <Stack>
+            <Stack sx={tertiaryStackChildStyles}>
+              <Stack sx={cardStackStyles}>
                 <Typography variant="p">
                   When Franco Columbu takes a chest pose, you can see that each
                   area of ​​his chest is clearly defined - the upper and lower
@@ -151,7 +160,7 @@ export const Chest = () => {
                   muscles, the inner part of the pectoral muscles, as well as
                   the transition of the chest to the dentate anterior muscle.
                 </Typography>
-                <Card position="relative" sx={{ width: "100%", mt: 2 }}>
+                <Card position="relative" sx={cardWidthStyles}>
                   <CardMedia
                     position="absolute"
                     component="img"
@@ -161,12 +170,12 @@ export const Chest = () => {
                 </Card>
               </Stack>
 
-              <Stack>
+              <Stack sx={cardStackStyles}>
                 <Typography variant="p">
                   The pectoralis major complements the deltoid muscles, as well
                   as the arm muscles when performing the side chest.
                 </Typography>
-                <Card position="relative" sx={{ width: "100%", mt: 2 }}>
+                <Card position="relative" sx={cardWidthStyles}>
                   <CardMedia
                     position="absolute"
                     component="img"
@@ -176,14 +185,14 @@ export const Chest = () => {
                 </Card>
               </Stack>
 
-              <Stack>
+              <Stack sx={cardStackStyles}>
                 <Typography variant="p">
                   The chest takes center stage in the most muscular pose. Notice
                   how the ribbing of the pectoral muscles connects all the other
                   elements: the trapezius, the front deltoids, the arms, and the
                   abs.
                 </Typography>
-                <Card position="relative" sx={{ width: "100%", mt: 2 }}>
+                <Card position="relative" sx={cardWidthStyles}>
                   <CardMedia
                     position="absolute"
                     component="img"

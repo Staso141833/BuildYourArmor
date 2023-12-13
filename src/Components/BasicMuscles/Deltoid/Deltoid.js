@@ -1,11 +1,17 @@
 import { Box, Typography, Stack, Card, CardMedia } from "@mui/material";
 import { motion } from "framer-motion";
 import {
+  cardAndParagraphRowStyles,
+  cardStackStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
   secondaryHeaderStyles,
+  secondaryStackCardStyles,
+  secondaryStackChildChildStyles,
+  secondaryStackChildStyles,
   secondaryStackStyles,
+  tertialyHeaderStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
 } from "../basicMuscles.styles.js";
@@ -23,17 +29,8 @@ export const DeltoidMuscle = () => {
             Shoulders
           </Typography>
           <Stack sx={dividerStyles}></Stack>
-          <Stack
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              gap: 2,
-              m: 2,
-              width: "100%",
-            }}
-          >
-            <Card position="relative" sx={{ width: "38%" }}>
+          <Stack sx={secondaryStackChildStyles}>
+            <Card position="relative" sx={secondaryStackCardStyles}>
               <CardMedia
                 position="absolute"
                 component="img"
@@ -41,23 +38,11 @@ export const DeltoidMuscle = () => {
                 image="https://images.saymedia-content.com/.image/t_share/MTc1MTI3MzYzOTcxOTgyNDMx/secret-tips-of-arnold-schwarzenegger.jpg"
               ></CardMedia>
             </Card>
-            <Stack
-              sx={{
-                fontSize: "18px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                justifyContent: "space-evenly",
-                width: "58%",
-                gap: 1,
-                marginBottom: 4,
-              }}
-            >
+            <Stack sx={secondaryStackChildChildStyles}>
               <Typography variant="h4" sx={secondaryHeaderStyles}>
                 Muscles of the shoulder
               </Typography>
-              <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
+              <Stack sx={dividerStyles}></Stack>
 
               <Typography variant="p">
                 The deltoid is a large, triceps, thick, triangular muscle that
@@ -87,8 +72,10 @@ export const DeltoidMuscle = () => {
 
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">LOOK OVER YOUR SHOULDER</Typography>
-            <Stack sx={{ width: "100%", border: "1px solid black" }}></Stack>
+            <Typography variant="h4" sx={tertialyHeaderStyles}>
+              LOOK OVER YOUR SHOULDER
+            </Typography>
+            <Stack sx={dividerStyles}></Stack>
 
             <Typography variant="p">
               In the 1840s, men wore outerwear with huge, padded shoulders and
@@ -98,7 +85,7 @@ export const DeltoidMuscle = () => {
               on. Part of this look is the broad, fully developed shoulders.
             </Typography>
 
-            <Card position="relative" sx={{ width: "100%" }}>
+            <Card position="relative" sx={cardStackStyles}>
               <CardMedia
                 position="absolute"
                 component="img"
@@ -106,27 +93,8 @@ export const DeltoidMuscle = () => {
                 image="https://i.pinimg.com/originals/8b/f9/90/8bf990c510fcb0c0f9cb6b7e98c366c1.jpg"
               ></CardMedia>
             </Card>
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                gap: 2,
-                width: "100%",
-              }}
-            >
-              <Stack
-                sx={{
-                  fontSize: "18px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  justifyContent: "space-evenly",
-                  width: "58%",
-                  gap: 1,
-                }}
-              >
+            <Stack sx={cardAndParagraphRowStyles}>
+              <Stack sx={tertiaryStackChildStyles}>
                 <Typography variant="p">
                   Steve Reeves was one of the first bodybuilders to develop the
                   classic V shape. He was able to achieve this look because he
@@ -172,7 +140,7 @@ export const DeltoidMuscle = () => {
                 </Typography>
               </Stack>
 
-              <Card position="relative" sx={{ width: "40%" }}>
+              <Card position="relative" sx={cardStackStyles}>
                 <CardMedia
                   position="absolute"
                   component="img"
@@ -181,18 +149,7 @@ export const DeltoidMuscle = () => {
                 ></CardMedia>
               </Card>
             </Stack>
-            <Stack
-              sx={{
-                fontSize: "18px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                justifyContent: "space-evenly",
-                width: "100%",
-                marginBottom: 4,
-              }}
-            >
+            <Stack sx={tertiaryStackChildStyles}>
               <Typography variant="p">
                 By the way, bodybuilders who are known for their massive
                 shoulder development are usually also known for their massive
@@ -270,55 +227,36 @@ export const DeltoidMuscle = () => {
                 My favorite example of this is Reg Park.
               </Typography>
 
-              <Stack
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  m: 1,
-                  width: "100%",
-                }}
-              >
-                <Stack
-                  sx={{
-                    fontSize: "18px",
-                    display: "flex",
-                    flexDirection: "column",
-                    textAlign: "center",
-                    justifyContent: "space-evenly",
-                    width: "57%",
-                  }}
-                >
-                  <Typography variant="p">
-                    Reg worked very hard to compensate for his relatively narrow
-                    skeletal proportions, and this resulted in tremendous
-                    shoulder development. He was the first bodybuilder to do a
-                    226.5 kg leg press, and this was possible because of the
-                    size and strength of his front deltoids, which along with
-                    his pectorals and triceps worked very hard for this lift.
-                  </Typography>
+              <Stack sx={cardAndParagraphRowStyles}>
+                <Typography variant="p">
+                  Reg worked very hard to compensate for his relatively narrow
+                  skeletal proportions, and this resulted in tremendous shoulder
+                  development. He was the first bodybuilder to do a 226.5 kg leg
+                  press, and this was possible because of the size and strength
+                  of his front deltoids, which along with his pectorals and
+                  triceps worked very hard for this lift.
+                </Typography>
 
-                  <Typography variant="p">
-                    An additional issue worth considering is that all of these
-                    champions trained in very different ways. Franco had
-                    developed huge front deltoids from all the push-ups he was
-                    doing, so he needed to supplement his training with rear
-                    deltoid exercises to get the balance right.
-                  </Typography>
+                <Typography variant="p">
+                  An additional issue worth considering is that all of these
+                  champions trained in very different ways. Franco had developed
+                  huge front deltoids from all the push-ups he was doing, so he
+                  needed to supplement his training with rear deltoid exercises
+                  to get the balance right.
+                </Typography>
 
-                  <Typography variant="p">
-                    Larry Scott has gotten the best results in his shoulder
-                    training using the stripping method, starting with heavier
-                    weights and gradually reducing them set by set so that he
-                    really trains and develops his deltoids - from 40 - kilogram
-                    dumbbells up to 13.5 kilograms. Dorian Yates has spent years
-                    performing high-intensity training using a relatively low
-                    number of sets but applying all intensity techniques such as
-                    negatives, forced reps, forced negatives and partial reps.
-                  </Typography>
-                </Stack>
+                <Typography variant="p">
+                  Larry Scott has gotten the best results in his shoulder
+                  training using the stripping method, starting with heavier
+                  weights and gradually reducing them set by set so that he
+                  really trains and develops his deltoids - from 40 - kilogram
+                  dumbbells up to 13.5 kilograms. Dorian Yates has spent years
+                  performing high-intensity training using a relatively low
+                  number of sets but applying all intensity techniques such as
+                  negatives, forced reps, forced negatives and partial reps.
+                </Typography>
 
-                <Card position="relative" sx={{ width: "42%" }}>
+                <Card position="relative" sx={cardStackStyles}>
                   <CardMedia
                     position="absolute"
                     component="img"
@@ -340,7 +278,7 @@ export const DeltoidMuscle = () => {
           </Stack>
 
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">
+            <Typography variant="h4" sx={tertialyHeaderStyles}>
               TRAINING FOR THE DELTOVID MUSCLES
             </Typography>
             <Stack sx={dividerStyles}></Stack>

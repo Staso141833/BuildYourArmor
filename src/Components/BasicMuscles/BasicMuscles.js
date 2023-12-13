@@ -1,7 +1,6 @@
 import { KeyboardArrowDownSharp } from "@mui/icons-material";
 import {
   Stack,
-  Grid,
   MenuItem,
   Menu,
   Button,
@@ -15,25 +14,16 @@ import "./basicMuscles.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
+  anchorOriginStyles,
   boxFooterStyles,
   buttonStyles,
   cardMediaStyles,
   cardStyles,
-  gridContainerItemStyles,
-  gridContainerStyles,
+  menuItemStyles,
   muscleContainerStyles,
   muscleItemContainerStyles,
-  xsSizeStyles,
-  xsStyles,
+  transformOriginStyles,
 } from "./basicMuscles.styles.js";
-
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
 
 export const BasicMuscles = () => {
   const [anchorDelts, setAnchorDelts] = useState(null);
@@ -105,33 +95,15 @@ export const BasicMuscles = () => {
                 MenuListProps={{
                   "aria-labelledby": "delts-button",
                 }}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
+                anchorOrigin={anchorOriginStyles}
+                transformOrigin={transformOriginStyles}
               >
-                <MenuItem
-                  onClick={handleCloseDelts}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseDelts} sx={menuItemStyles}>
                   <Link to="/deltoid" className="muscle-button-dropdown">
                     Shoulders
                   </Link>
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseDelts}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseDelts} sx={menuItemStyles}>
                   <Link to="/trapezius" className="muscle-button-dropdown">
                     {" "}
                     Trapezius
@@ -168,44 +140,20 @@ export const BasicMuscles = () => {
                 MenuListProps={{
                   "aria-labelledby": "arms-button",
                 }}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
+                anchorOrigin={anchorOriginStyles}
+                transformOrigin={transformOriginStyles}
               >
-                <MenuItem
-                  onClick={handleCloseArms}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseArms} sx={menuItemStyles}>
                   <Link to="/biceps" className="muscle-button-dropdown">
                     Biceps
                   </Link>
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseArms}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseArms} sx={menuItemStyles}>
                   <Link to="/triceps" className="muscle-button-dropdown">
                     Triceps
                   </Link>
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseArms}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseArms} sx={menuItemStyles}>
                   <Link to="/forearms" className="muscle-button-dropdown">
                     Forearms
                   </Link>
@@ -243,44 +191,20 @@ export const BasicMuscles = () => {
                 MenuListProps={{
                   "aria-describedby": "legs-button",
                 }}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
+                anchorOrigin={anchorOriginStyles}
+                transformOrigin={transformOriginStyles}
               >
-                <MenuItem
-                  onClick={handleCloseLegs}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseLegs} sx={menuItemStyles}>
                   <Link to="/legs" className="muscle-button-dropdown">
                     Front thigh
                   </Link>
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseLegs}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseLegs} sx={menuItemStyles}>
                   <Link to="/legs" className="muscle-button-dropdown">
                     Back thigh
                   </Link>
                 </MenuItem>
-                <MenuItem
-                  onClick={handleCloseLegs}
-                  sx={{
-                    justifyContent: "center",
-                    padding: "0px",
-                  }}
-                >
+                <MenuItem onClick={handleCloseLegs} sx={menuItemStyles}>
                   <Link to="/calves" className="muscle-button-dropdown">
                     Calves
                   </Link>
