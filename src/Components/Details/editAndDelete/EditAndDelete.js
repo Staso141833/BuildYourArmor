@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
   editAndDeleteButtonStyles,
+  editAndDeleteStackStyles,
   errorsStyles,
   textFieldStyles,
 } from "./editAndDelete.styles.js";
@@ -61,7 +62,7 @@ export const EditAndDelete = ({
     values: values,
   });
   return (
-    <Stack sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+    <Stack sx={editAndDeleteStackStyles}>
       {!isEdited && (
         <Button onClick={onEdit} sx={editAndDeleteButtonStyles}>
           Edit

@@ -1,3 +1,5 @@
+import { colors } from "../../metaData/colors.js";
+
 export const registerHeaderStyles = {
   fontSize: "24px",
   fontWeight: "bold",
@@ -12,7 +14,7 @@ export const registerFormMainStackStyles = {
   flexDirection: "row",
   margin: "auto",
   marginTop: "120px",
-  border: "2px double #4c4850",
+  border: "2px solid #4c4850",
   borderRadius: "8px",
   height: "500px",
   width: "1040px",
@@ -31,23 +33,25 @@ export const emailAndPasswordStackStyles = {
   alignItems: "center",
   gap: 2,
   height: "100%",
-  backgroundColor: "#B3AEAB",
+  backgroundColor: colors.white,
 };
 
 export const registerInputStyles = {
     width: "80%",
-    backgroundColor: "#B3AEAB",
+    backgroundColor: colors.white,
     borderRadius: "4px",
   };
 
 export const registerButtonStyles = {
-  backgroundColor: "#170f0a",
-  color: "#fbc760",
+  backgroundColor: colors.gold,
+  color: colors.black,
+  mt: 1,
   padding: "12px",
   fontSize: "16px",
   width: "46%",
-  border: " 1px solid #fbc760",
+  border: " 1px solid",
   "&:hover": {
-    backgroundColor: "fbc760",
+    backgroundColor: colors.black,
+    color:colors.gold,
   },
 };

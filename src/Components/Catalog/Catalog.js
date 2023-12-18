@@ -1,4 +1,3 @@
-import { Masonry } from "@mui/lab";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { db } from "../../config/firebase.js";
@@ -7,7 +6,13 @@ import { CatalogItem } from "./CatalogItem.js";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SearchBar } from "./SearchBar.js";
-import { boxStyles, noPublicationsStyles } from "./catalog.styles.js";
+import "./catalog.css";
+import {
+  boxStyles,
+  noPublicationsStyles,
+  publicationMainStackStyles,
+  publicationStackStyles,
+} from "./catalog.styles.js";
 
 export const Catalog = () => {
   const [publications, setPublications] = useState([]);
@@ -55,15 +60,18 @@ export const Catalog = () => {
             <CircularProgress color="success" />
           </Stack>
         ) : (
-          <Stack sx={{ marginLeft: "64px", marginRight: "64px" }}>
-            <Masonry columns={5} spacing={4} sx={{ margin: "12px 18px" }}>
+          <Stack sx={publicationMainStackStyles}>
+            <Stack sx={publicationStackStyles}>
               {publications.map((publication) => (
                 <CatalogItem key={publication.id} {...publication} />
               ))}
-            </Masonry>
+            </Stack>
           </Stack>
         )}
       </Box>
     </motion.div>
   );
 };
+{
+  /* <Masonry columns={5} spacing={4} sx={{ margin: "12px 18px" }}> */
+}

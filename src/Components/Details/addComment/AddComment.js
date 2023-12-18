@@ -12,7 +12,7 @@ import { useFormMine } from "../../../hooks/useFormMine.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { accordionStyles, commentButtonStyles } from "./addComment.styles.js";
+import { accordionStyles, commentButtonStyles, textFieldStyles } from "./addComment.styles.js";
 
 export const AddComment = ({ onClickCommentSubmit }) => {
   const { values, changeHandler, onSubmit } = useFormMine(
@@ -55,7 +55,7 @@ export const AddComment = ({ onClickCommentSubmit }) => {
             onChange={changeHandler}
             multiline
             rows={4}
-            sx={{ height: "140px", width: "100%" }}
+            sx={textFieldStyles}
           />
           <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
             {errors.comment?.message}

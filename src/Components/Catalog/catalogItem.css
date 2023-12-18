@@ -30,3 +30,12 @@
   color: #070707;
   border: 1px solid black;
 }
+
+@media (max-width: 600px) {
+  .details-button {
+    font-size: 12px;
+    padding: 8px;
+    width: 60%;
+    font-weight: 400;
+  }
+}

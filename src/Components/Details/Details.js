@@ -41,24 +41,32 @@ import { EditAndDelete } from "./editAndDelete/EditAndDelete.js";
 import { ArrowUpward, FingerprintRounded } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import {
+  addCommentStackStyles,
+  authorAndLikesStyles,
+  authorSyles,
   boxStyles,
   cardActionLikeButtonStyles,
   cardActionStackStyles,
   cardActionsStyles,
   cardMediaStyles,
   cardStyles,
+  commentListItemStyles,
   commentStackStyles,
   commentsCountStackStyles,
   commentsTitleStyles,
+  currentCommentAuthorStyles,
   currentCommentStackStyles,
+  currentCommentTextStyles,
   editAndDeleteButtonStyles,
   excerciseExplanationStyles,
   explanationParagraphStyles,
   explanationStackStyles,
+  likeEditDeleteStackStyles,
   mainStackStyles,
   rightStackStyles,
   rightStackStylesChild,
   secondaryStackStyles,
+  typographyStyles,
 } from "./details.styles.js";
 
 const myColors = {
@@ -339,20 +347,36 @@ export const Details = () => {
                   image={publication.imageUrl}
                 ></CardMedia>
                 <CardContent>
-                  <Typography gutterBottom variant="h4" component="div">
+                  <Typography
+                    gutterBottom
+                    component="div"
+                    sx={authorAndLikesStyles}
+                  >
                     Author: {publication.name}
                   </Typography>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    gutterBottom
+                    sx={typographyStyles}
+                    component="div"
+                  >
                     Muscle: {publication.muscleGroup}
                   </Typography>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    gutterBottom
+                    sx={typographyStyles}
+                    component="div"
+                  >
                     Weight: {publication.weight}
                   </Typography>
 
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    gutterBottom
+                    sx={typographyStyles}
+                    component="div"
+                  >
                     Height: {publication.height}
                   </Typography>
-                  <Typography variant="h4">
+                  <Typography sx={authorAndLikesStyles}>
                     {publication?.likes?.length} likes
                   </Typography>
                 </CardContent>
@@ -396,7 +420,10 @@ export const Details = () => {
                             : colors.white,
                         }}
                       >
-                        <FingerprintRounded></FingerprintRounded>Like
+                        <FingerprintRounded
+                          sx={{ fontSize: "17px" }}
+                        ></FingerprintRounded>
+                        Like
                       </Button>
                     )}
                   </Stack>
@@ -425,29 +452,23 @@ export const Details = () => {
                       sx={{ textShadow: "14px 10px 18px" }}
                     >
                       No comments yet. Be the first one who will give an
-                      opinion! <ArrowUpward></ArrowUpward>
+                      opinion!
                     </Typography>
                   )}
                   {isLoadingLikeEditDelete ? (
                     <CircularProgress color="success"></CircularProgress>
                   ) : (
-                    <Stack
-                      sx={commentsCountStackStyles}
-                    >
+                    <Stack sx={commentsCountStackStyles}>
                       {publication?.comments?.map((comment) => (
-                        <ListItem key={comment?._id} sx={{ width: "30vw" }}>
-                          <Stack
-                            sx={currentCommentStackStyles}
-                          >
-                            {comment?.author?.email} commented on{" "}
-                            {comment?.createdOn.seconds}: {comment?.comment}
-                            <Stack
-                              sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                gap: 1,
-                              }}
-                            >
+                        <ListItem key={comment?._id} sx={commentListItemStyles}>
+                          <Stack sx={currentCommentStackStyles}>
+                            <Typography sx={currentCommentAuthorStyles}>
+                              {" "}
+                              {comment?.author?.email} commented:
+                            </Typography>
+                          
+                            <Typography sx={currentCommentTextStyles}>{comment?.comment}</Typography>
+                            <Stack sx={likeEditDeleteStackStyles}>
                               {userId && (
                                 <Like
                                   commentId={comment?._id}
@@ -472,7 +493,7 @@ export const Details = () => {
                   )}
                 </Stack>
               </Stack>
-              <Stack sx={{ width: "50%" }}>
+              <Stack sx={addCommentStackStyles}>
                 {isAuthenticated && (
                   <AddComment onClickCommentSubmit={onClickCommentSubmit} />
                 )}

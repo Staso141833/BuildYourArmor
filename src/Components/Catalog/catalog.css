@@ -1,0 +1,22 @@
+@media (max-width: 600px) {
+  .css-27tvl3-MuiStack-root .css-1bhusj4-MuiMasonry-root {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-box-flex-flow: column wrap;
+    -webkit-flex-flow: column wrap;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: flex-start;
+    align-content: flex-start;
+    box-sizing: border-box;
+    margin: calc(0px - (32px / 2));
+    height: calc(301px + 16px);
+    margin: 12px 18px;
+  }
+}

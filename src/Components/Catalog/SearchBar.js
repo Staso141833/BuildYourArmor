@@ -8,6 +8,7 @@ import {
   filteredDataStackStyles,
   mainStackStyles,
   secondaryStackStyles,
+  tertialyStackStyles,
 } from "./searchBarStyles.js";
 
 export const SearchBar = ({ publications }) => {
@@ -41,7 +42,7 @@ export const SearchBar = ({ publications }) => {
           </Typography>
         </Stack>
         <Stack sx={mainStackStyles}>
-          <Stack sx={secondaryStackStyles}>
+          <Stack sx={tertialyStackStyles}>
             <TextField
               label="search"
               name="search"

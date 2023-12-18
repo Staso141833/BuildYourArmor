@@ -1,9 +1,12 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import {
+  cardAndParagraphRowStyles,
+  cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
   mainStackStyles,
+  secondaryHeaderStyles,
   secondaryStackStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
@@ -18,20 +21,14 @@ export const Calves = () => {
     >
       <Stack sx={mainStackStyles}>
         <Stack sx={secondaryStackStyles}>
-          <Typography variant="h3" sx={mainHeaderStyles}>Calves</Typography>
+          <Typography variant="h3" sx={mainHeaderStyles}>
+            Calves
+          </Typography>
           <Stack sx={dividerStyles}></Stack>
           <Typography variant="h4">CALF MUSCLES</Typography>
           <Stack sx={dividerStyles}></Stack>
-          <Stack
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "start",
-              justifyContent: "space-evenly",
-              gap: 1,
-            }}
-          >
-            <Card position="relative" sx={{ width: "38%", mt: 2 }}>
+          <Stack sx={cardAndParagraphRowStyles}>
+            <Card position="relative" sx={cardWidthStyles}>
               <CardMedia
                 position="absolute"
                 component="img"
@@ -39,53 +36,35 @@ export const Calves = () => {
                 image="https://www.builtreport.com/wp-content/uploads/2018/05/Tom_Platz_calves-300x212.jpg"
               ></CardMedia>
             </Card>
-            <Stack
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-                gap: 1,
-                width: "58%",
-              }}
-            >
-              <Stack
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  gap: 1,
-                }}
-              >
-                <Typography variant="p">
-                  The flat muscle (m.soleus) is the wide and deep muscle that is
-                  located under the two heads of the calf muscle, and whose
-                  starting point is at the upper end of the bones of the tibia
-                  and tibia.
-                </Typography>
-                <Typography variant="p">
-                  Main function: To flex the foot (plantar flexion in the ankle
-                  joint - note pr.).
-                </Typography>
 
-                <Typography variant="p">
-                  The calf muscle has two heads. One of its heads starts from
-                  the posterior surface of the medial condyle of the femur, and
-                  the other from the posterior surface of the lateral condyle.
-                  Both heads join together with that of the flat muscle and form
-                  the Achilles tendon, which grips the heel bone.
-                </Typography>
-                <Typography variant="p">
-                  Main function: Plantar flexion in the ankle joint.
-                </Typography>
-              </Stack>
-            </Stack>
+            <Typography variant="p">
+              The flat muscle (m.soleus) is the wide and deep muscle that is
+              located under the two heads of the calf muscle, and whose starting
+              point is at the upper end of the bones of the tibia and tibia.
+            </Typography>
+            <Typography variant="p">
+              Main function: To flex the foot (plantar flexion in the ankle
+              joint - note pr.).
+            </Typography>
+
+            <Typography variant="p">
+              The calf muscle has two heads. One of its heads starts from the
+              posterior surface of the medial condyle of the femur, and the
+              other from the posterior surface of the lateral condyle. Both
+              heads join together with that of the flat muscle and form the
+              Achilles tendon, which grips the heel bone.
+            </Typography>
+            <Typography variant="p">
+              Main function: Plantar flexion in the ankle joint.
+            </Typography>
           </Stack>
         </Stack>
 
         <Stack sx={tertiaryStackStyles}>
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">CALF TRAINING</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              CALF TRAINING
+            </Typography>
             <Stack sx={dividerStyles}></Stack>
 
             <Typography variant="p">
@@ -205,7 +184,9 @@ export const Calves = () => {
           </Stack>
 
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">CALF STRETCH</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>
+              CALF STRETCH
+            </Typography>
             <Stack sx={dividerStyles}></Stack>
 
             <Typography variant="p">
