@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
+  cardMediaStackStyles,
   cardMediaStyles,
   emailAndPasswordStackStyles,
   loginButtonStyles,
@@ -109,8 +110,8 @@ export const Login = () => {
           </Stack>
         </>
       ) : (
-        <form method="POST" sx={{ width: "70vw", height: "80vh" }}>
-          <Stack spacing={2} sx={loginFormMainStackStyles}>
+        <form className="form" method="POST">
+          <Stack sx={loginFormMainStackStyles}>
             <Stack sx={emailAndPasswordStackStyles}>
               <Typography sx={loginHeaderStyles}>Login</Typography>
               <TextField
@@ -147,13 +148,14 @@ export const Login = () => {
                 Sign In
               </Button>
             </Stack>
-
-            <CardMedia
-              component="img"
-              image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"
-              alt="growing up"
-              sx={cardMediaStyles}
-            ></CardMedia>
+            <Stack sx={cardMediaStackStyles}> 
+              <CardMedia
+                component="img"
+                image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"
+                alt="growing up"
+                sx={cardMediaStyles}
+              ></CardMedia>
+            </Stack>
           </Stack>
         </form>
       )}

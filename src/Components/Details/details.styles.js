@@ -78,13 +78,29 @@ export const cardStyles = {
 
 export const cardMediaStyles = { objectFit: "cover", height: "65%" };
 
+export const cardActionStackStyles = {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  width: "100%",
+  gap: 1,
+  mb: {
+    xs: 1,
+    sm: 4,
+    md: 4,
+    lg: 4,
+    xl: 4,
+  },
+};
+
 export const cardActionsStyles = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: {
-    xs: 3,
+  mb: {
+    xs: 1,
     sm: 1,
     md: 1,
     lg: 1,
@@ -109,22 +125,6 @@ export const typographyStyles = {
     md: "12px",
     lg: "12px",
     xl: "24px",
-  },
-};
-
-export const cardActionStackStyles = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-evenly",
-  width: "100%",
-  gap: 1,
-  mb: {
-    xs: 2,
-    sm: 4,
-    md: 4,
-    lg: 4,
-    xl: 4,
   },
 };
 
@@ -332,4 +332,4 @@ export const currentCommentAuthorStyles = {
     lg: "28px",
     xl: "22px",
   },
-}
+};

@@ -45,3 +45,7 @@
   .css-l1v1wv-MuiFormControl-root-MuiTextField-root .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
      color: black;
   }
+
+  .form {
+    height: 90vh;
+  }

@@ -5,6 +5,7 @@ import {
   Typography,
   CardMedia,
   LinearProgress,
+  FormControl,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { auth } from "../../config/firebase.js";
@@ -19,8 +20,11 @@ import SetCookie from "../../hooks/setCookie.js";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
+  cardMediaStackStyles,
   emailAndPasswordStackStyles,
+  formControlStyles,
   registerButtonStyles,
+  registerErrorsStyles,
   registerFormMainStackStyles,
   registerHeaderStyles,
   registerInputStyles,
@@ -97,7 +101,7 @@ export const Register = () => {
           <LinearProgress color="success"></LinearProgress>
         </Stack>
       ) : (
-        <form>
+        <FormControl sx={formControlStyles}>
           <Stack spacing={2} sx={registerFormMainStackStyles}>
             <Stack sx={emailAndPasswordStackStyles}>
               <Typography sx={registerHeaderStyles}>Register</Typography>
@@ -110,7 +114,7 @@ export const Register = () => {
                 onChange={changeHandler}
                 sx={registerInputStyles}
               />
-              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              <Typography variant="p" sx={registerErrorsStyles}>
                 {errors.email?.message}
               </Typography>
               <TextField
@@ -122,7 +126,7 @@ export const Register = () => {
                 onChange={changeHandler}
                 sx={registerInputStyles}
               />
-              <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+              <Typography variant="p" sx={registerErrorsStyles}>
                 {errors.password?.message}
               </Typography>
               <TextField
@@ -135,7 +139,7 @@ export const Register = () => {
                 sx={registerInputStyles}
               />
               {errors.rePassword && (
-                <Typography variant="p" sx={{ fontSize: "16px", color: "red" }}>
+                <Typography variant="p" sx={registerErrorsStyles}>
                   The re-password does not match with the password!
                 </Typography>
               )}
@@ -149,7 +153,7 @@ export const Register = () => {
               </Button>
             </Stack>
 
-            <Stack sx={{ width: "50%" }}>
+            <Stack sx={cardMediaStackStyles}>
               <CardMedia
                 component="img"
                 image="https://www.godearlife.com/wp-content/uploads/2022/09/muscle-gain-motivation.jpg"
@@ -161,7 +165,7 @@ export const Register = () => {
               ></CardMedia>
             </Stack>
           </Stack>
-        </form>
+        </FormControl>
       )}
     </motion.div>
   );

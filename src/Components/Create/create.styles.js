@@ -3,7 +3,6 @@ import { colors } from "../../metaData/colors.js";
 export const createAndEditmainStackStyles = {
   position: "relative",
   backgroundColor: "#f6f6f6",
-
   height: "100vh",
   overflow: "hidden",
 };
@@ -11,9 +10,9 @@ export const createAndEditmainStackStyles = {
 export const createAndEditPaperStyles = {
   width: {
     xs: "300px",
-    sm: "row",
-    md: "row",
-    lg: "row",
+    sm: "660px",
+    md: "660px",
+    lg: "660px",
     xl: "660px",
   },
   height: "92%",
@@ -40,7 +39,13 @@ export const createAndEditPaperStyles = {
 
 export const createAndEditTitleStyles = {
   fontWeight: 700,
-  marginTop: "18px",
+  marginTop: {
+    xs: "8px",
+    sm: "18px",
+    md: "18px",
+    lg: "18px",
+    xl: "18px",
+  },
   letterSpacing: 1,
   textTransform: "uppercase",
   fontSize: {
