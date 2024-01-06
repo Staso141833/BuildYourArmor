@@ -99,9 +99,9 @@ export const Login = () => {
 
   return (
     <motion.div
-      intial={{ width: 0 }}
+      initial={{ width: 0 }}
       animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.4 } }}
     >
       {isLoading ? (
         <>
@@ -148,7 +148,7 @@ export const Login = () => {
                 Sign In
               </Button>
             </Stack>
-            <Stack sx={cardMediaStackStyles}> 
+            <Stack sx={cardMediaStackStyles}>
               <CardMedia
                 component="img"
                 image="https://images.ctfassets.net/psi7gc0m4mjv/a5c4b79a-ff46-4f36-8998-42e67772d8ea/3d9bf46397da19651891e1f4f154a62e/issa-blog-header-gaining-muscle-mass.jpg"

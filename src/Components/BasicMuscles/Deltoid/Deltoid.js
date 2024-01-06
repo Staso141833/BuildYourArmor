@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, Card, CardMedia } from "@mui/material";
+import { Typography, Stack, Card, CardMedia } from "@mui/material";
 import { motion } from "framer-motion";
 import {
   cardAndParagraphRowStyles,
@@ -19,9 +19,9 @@ import {
 export const DeltoidMuscle = () => {
   return (
     <motion.div
-      intial={{ width: 0 }}
+      initial={{ width: 0 }}
       animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.4 } }}
     >
       <Stack sx={mainStackStyles}>
         <Stack sx={secondaryStackStyles}>

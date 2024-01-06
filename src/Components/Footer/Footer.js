@@ -66,7 +66,7 @@ export const Footer = () => {
             <Link
               href="https://www.instagram.com/"
               color="inherit"
-              sx={{ pl: 2, pr: 2, color: "#fbc760" }}
+              sx={linkStyles}
             >
               <Instagram sx={socialMediaStyles} />
             </Link>

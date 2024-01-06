@@ -328,9 +328,9 @@ export const Details = () => {
 
   return (
     <motion.div
-      intial={{ width: 0 }}
+      initial={{ width: 0 }}
       animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.4 } }}
     >
       {isLoading ? (
         <Stack sx={{ height: "90vh" }}>
@@ -466,8 +466,10 @@ export const Details = () => {
                               {" "}
                               {comment?.author?.email} commented:
                             </Typography>
-                          
-                            <Typography sx={currentCommentTextStyles}>{comment?.comment}</Typography>
+
+                            <Typography sx={currentCommentTextStyles}>
+                              {comment?.comment}
+                            </Typography>
                             <Stack sx={likeEditDeleteStackStyles}>
                               {userId && (
                                 <Like

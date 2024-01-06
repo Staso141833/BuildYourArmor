@@ -12,6 +12,7 @@ const newColors = {
   "light-silver": "#854B5A",
   blue: "#00C6CF",
   green: "#D3FBD8",
+  yellow: "#fff300",
 };
 
 export const colorsCopy = {

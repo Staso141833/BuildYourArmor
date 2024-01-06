@@ -15,9 +15,9 @@ import {
 export const Legs = () => {
   return (
     <motion.div
-      intial={{ width: 0 }}
+      initial={{ width: 0 }}
       animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.4 } }}
     >
       <Stack sx={mainStackStyles}>
         <Stack sx={secondaryStackStyles}>
@@ -178,7 +178,7 @@ export const Legs = () => {
               has set new standards for new generations of bodybuilders to
               aspire to.
             </Typography>
-            <Stack sx={{alignItems: "center"}}>
+            <Stack sx={{ alignItems: "center" }}>
               <Card position="relative" sx={cardWidthStyles}>
                 <CardMedia
                   position="absolute"

@@ -1,7 +1,6 @@
 import { Card, CardMedia, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import {
-  cardAndParagraphRowStyles,
   cardWidthStyles,
   dividerStyles,
   mainHeaderStyles,
@@ -15,9 +14,9 @@ import {
 export const Triceps = () => {
   return (
     <motion.div
-      intial={{ width: 0 }}
+      initial={{ width: 0 }}
       animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.4 } }}
     >
       <Stack sx={mainStackStyles}>
         <Stack sx={secondaryStackStyles}>
@@ -46,14 +45,10 @@ export const Triceps = () => {
               Triceps training
             </Typography>
             <Stack sx={dividerStyles}></Stack>
-            <Stack
-              sx={tertiaryStackChildStyles}
-            >
+            <Stack sx={tertiaryStackChildStyles}>
               {" "}
-              <Stack
-                sx={tertiaryStackChildStyles}
-              >
-                <Stack sx={{alignItems: "center"}}>
+              <Stack sx={tertiaryStackChildStyles}>
+                <Stack sx={{ alignItems: "center" }}>
                   <Card position="relative" sx={cardWidthStyles}>
                     <CardMedia
                       position="absolute"

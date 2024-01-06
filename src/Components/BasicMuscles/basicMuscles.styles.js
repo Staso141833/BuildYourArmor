@@ -12,13 +12,7 @@ export const cardMediaStyles = {
   position: "absolute",
   opacity: "0.9",
   width: "100%",
-  height: {
-    xs: "91.4vh",
-    sm: "94vh",
-    md: "94vh",
-    lg: "94vh",
-    xl: "94.2vh",
-  },
+  height: "91.4vh",
 };
 
 export const muscleContainerStyles = {
@@ -128,6 +122,7 @@ export const mainHeaderStyles = {
     lg: "48px",
     xl: "48px",
   },
+  textShadow: "5px 5px 10px #fbc760",
 };
 export const secondaryHeaderStyles = {
   textTransform: "uppercase",
@@ -138,6 +133,7 @@ export const secondaryHeaderStyles = {
     lg: "28px",
     xl: "28px",
   },
+  textShadow: "2px 2px #fbc760",
 };
 export const dividerStyles = {
   width: "100%",
@@ -232,11 +228,12 @@ export const tertiaryStackStyles = {
 export const tertialyHeaderStyles = {
   fontSize: {
     xs: "22px",
-    sm: "48px",
-    md: "48px",
-    lg: "48px",
-    xl: "40px",
+    sm: "28px",
+    md: "28px",
+    lg: "28px",
+    xl: "28px",
   },
+  textShadow: "2px 2px #fbc760",
 };
 
 export const tertiaryStackChildStyles = {

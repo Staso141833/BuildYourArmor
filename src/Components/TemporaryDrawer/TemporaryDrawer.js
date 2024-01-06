@@ -14,8 +14,13 @@ import {
   FitnessCenterRounded,
   FitnessCenterTwoTone,
 } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { colors } from "../../metaData/colors.js";
+import {
+  linkStyles,
+  listItemIconStyles,
+  toggleDrawerButtonStyles,
+} from "./temporaryDrawer.styles.js";
 
 export default function TemporaryDrawer() {
   const navigate = useNavigate();
@@ -41,7 +46,11 @@ export default function TemporaryDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+        backgroundColor: colors.black,
+        height: "100%",
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, true)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -56,7 +65,7 @@ export default function TemporaryDrawer() {
         ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
+              <ListItemIcon sx={listItemIconStyles}>
                 {index % 2 === 0 ? (
                   <FitnessCenterTwoTone />
                 ) : (
@@ -68,18 +77,7 @@ export default function TemporaryDrawer() {
                 onClick={() => {
                   navigate(`${links[index]}`);
                 }}
-                sx={{
-                  color: colors.black,
-                  textDecoration: "none",
-                  fontSize: {
-                    xs: "12px",
-                    sm: "14px",
-                    md: "20px",
-                    lg: "20px",
-                    xl: "20px",
-                  },
-                  textTransform: "uppercase",
-                }}
+                sx={linkStyles}
               >
                 <ListItemText primary={text} />
               </MuiLink>
@@ -93,22 +91,12 @@ export default function TemporaryDrawer() {
   );
 
   return (
-    <Stack sx={{ backgroundColor: "black" }}>
+    <Stack sx={{ backgroundColor: colors.black }}>
       {["Menu"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button
             onClick={toggleDrawer(anchor, true)}
-            sx={{
-              width: "auto",
-              color: colors.gold,
-              fontSize: {
-                xs: "10px",
-                sm: "20px",
-                md: "30px",
-                lg: "10px",
-                xl: "14px",
-              },
-            }}
+            sx={toggleDrawerButtonStyles}
           >
             {anchor}
           </Button>
