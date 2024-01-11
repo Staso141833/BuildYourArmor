@@ -18,9 +18,9 @@ export const toggleDrawerButtonStyles = {
   color: colors.gold,
   fontSize: {
     xs: "10px",
-    sm: "20px",
-    md: "30px",
-    lg: "10px",
+    sm: "12px",
+    md: "14px",
+    lg: "14px",
     xl: "14px",
   },
 };

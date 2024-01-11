@@ -20,7 +20,7 @@ export const mainHeaderStyles = {
   },
   fontSize: {
     xs: "24px",
-    sm: "24px",
+    sm: "26px",
     md: "24px",
     lg: "24px",
     xl: "32px",
@@ -32,7 +32,7 @@ export const secondaryHeaderStyles = {
   textTransform: "uppercase",
   fontSize: {
     xs: "20px",
-    sm: "24px",
+    sm: "22px",
     md: "24px",
     lg: "24px",
     xl: "22px",
@@ -56,7 +56,7 @@ export const secondaryStackStyles = {
   justifyContent: "space-evenly",
   width: {
     xs: "90%",
-    sm: "50%",
+    sm: "75%",
     md: "50%",
     lg: "50%",
     xl: "50%",

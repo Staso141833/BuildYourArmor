@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   cardMediaStackStyles,
+  cardMediaStyles,
   emailAndPasswordStackStyles,
   formControlStyles,
   registerButtonStyles,
@@ -158,10 +159,7 @@ export const Register = () => {
                 component="img"
                 image="https://www.godearlife.com/wp-content/uploads/2022/09/muscle-gain-motivation.jpg"
                 alt="growing up"
-                sx={{
-                  width: "100%",
-                  filter: "opacity(0.8) drop-shadow(0 0 black)",
-                }}
+                sx={cardMediaStyles}
               ></CardMedia>
             </Stack>
           </Stack>

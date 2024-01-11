@@ -12,7 +12,13 @@ export const cardMediaStyles = {
   position: "absolute",
   opacity: "0.9",
   width: "100%",
-  height: "91.4vh",
+  height: {
+    xs: "84.4vh",
+    sm: "85.2vh",
+    md: "91.4vh",
+    lg: "91.4vh",
+    xl: "91.4vh",
+  },
 };
 
 export const muscleContainerStyles = {
@@ -25,7 +31,7 @@ export const muscleContainerStyles = {
   display: "flex",
   flexDirection: {
     xs: "column",
-    sm: "row",
+    sm: "column",
     md: "row",
     lg: "row",
     xl: "row",
@@ -41,14 +47,14 @@ export const muscleItemContainerStyles = {
   border: "2px outset #fbc760",
   width: {
     xs: "65%",
-    sm: "15%",
+    sm: "55%",
     md: "15%",
     lg: "15%",
     xl: "15%",
   },
   height: {
     xs: "40px",
-    sm: "60px",
+    sm: "70px",
     md: "60px",
     lg: "60px",
     xl: "60px",
@@ -64,11 +70,12 @@ export const buttonStyles = {
   fontFamily: "Robotto",
   fontSize: {
     xs: "12px",
-    sm: "18px",
-    md: "18px",
+    sm: "14px",
+    md: "16px",
     lg: "18px",
     xl: "18px",
   },
+  letterSpacing: "1px",
   color: colors.gold,
   cursor: "pointer",
   textTransform: "uppercase",
@@ -110,16 +117,16 @@ export const mainStackStyles = {
 export const mainHeaderStyles = {
   mt: {
     xs: 2,
-    sm: 4,
+    sm: 3,
     md: 4,
     lg: 4,
     xl: 4,
   },
   fontSize: {
     xs: "24px",
-    sm: "48px",
-    md: "48px",
-    lg: "48px",
+    sm: "32px",
+    md: "36px",
+    lg: "42px",
     xl: "48px",
   },
   textShadow: "5px 5px 10px #fbc760",
@@ -128,7 +135,7 @@ export const secondaryHeaderStyles = {
   textTransform: "uppercase",
   fontSize: {
     xs: "22px",
-    sm: "28px",
+    sm: "24px",
     md: "28px",
     lg: "28px",
     xl: "28px",
@@ -151,14 +158,14 @@ export const secondaryStackStyles = {
   justifyContent: "space-evenly",
   width: {
     xs: "90%",
-    sm: "50%",
-    md: "50%",
-    lg: "50%",
+    sm: "90%",
+    md: "80%",
+    lg: "70%",
     xl: "50%",
   },
   gap: {
     xs: 1,
-    sm: 4,
+    sm: 2,
     md: 4,
     lg: 4,
     xl: 4,
@@ -185,7 +192,7 @@ export const secondaryStackChildStyles = {
 export const secondaryStackCardStyles = {
   width: {
     xs: "80%",
-    sm: "50%",
+    sm: "90%",
     md: "50%",
     lg: "50%",
     xl: "38%",
@@ -201,9 +208,9 @@ export const secondaryStackChildChildStyles = {
   justifyContent: "space-evenly",
   width: {
     xs: "94%",
-    sm: "50%",
-    md: "50%",
-    lg: "50%",
+    sm: "100%",
+    md: "90%",
+    lg: "70%",
     xl: "58%",
   },
   gap: 1,
@@ -213,9 +220,9 @@ export const secondaryStackChildChildStyles = {
 export const tertiaryStackStyles = {
   width: {
     xs: "90%",
-    sm: "50%",
-    md: "50%",
-    lg: "50%",
+    sm: "90%",
+    md: "90%",
+    lg: "70%",
     xl: "50%",
   },
   display: "flex",
@@ -228,7 +235,7 @@ export const tertiaryStackStyles = {
 export const tertialyHeaderStyles = {
   fontSize: {
     xs: "22px",
-    sm: "28px",
+    sm: "24px",
     md: "28px",
     lg: "28px",
     xl: "28px",
@@ -287,7 +294,7 @@ export const stackCardAndParagraphStyles = {
 export const cardWidthStyles = {
   width: {
     xs: "100%",
-    sm: "60%",
+    sm: "80%",
     md: "60%",
     lg: "60%",
     xl: "60%",

@@ -28,9 +28,9 @@ export const typographyStyles = {
   color: colors.gold,
   fontSize: {
     xs: "12px",
-    sm: "40px",
-    md: "50px",
-    lg: "40px",
+    sm: "14px",
+    md: "16px",
+    lg: "16px",
     xl: "16px",
   },
 };
@@ -40,23 +40,24 @@ export const typographyTitleStyles = {
   mt: 1,
   fontSize: {
     xs: "14px",
-    sm: "40px",
-    md: "50px",
-    lg: "40px",
+    sm: "16px",
+    md: "18px",
+    lg: "18px",
     xl: "18px",
   },
 };
 
 export const linkStyles = {
   color: colors.gold,
+  margin: "0px 4px"
 };
 
 export const socialMediaStyles = {
   fontSize: {
     xs: "18px",
     sm: "20px",
-    md: "20px",
-    lg: "20px",
+    md: "24px",
+    lg: "26px",
     xl: "30px",
   },
 };
@@ -64,10 +65,17 @@ export const socialMediaStyles = {
 export const boxCopyRightStyles = {
   mt: {
     xs: 2,
-    sm: 5,
+    sm: 3,
     md: 5,
     lg: 5,
     xl: 5,
+  },
+  pb: {
+    xs: 1,
+    sm: 1,
+    md: 1,
+    lg: 1,
+    xl: 1,
   },
 };
 

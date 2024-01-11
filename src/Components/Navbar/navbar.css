@@ -19,6 +19,26 @@
   background-color: #fbc760;
   color: #070707;
 }
+@media (max-width: 1536px) {
+  .login-register-button {
+    font-size: 15px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .login-register-button {
+    font-size: 14px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  .login-register-button {
+    font-size: 12px;
+    padding: 4px;
+  }
+}
 
 @media (max-width: 600px) {
   .login-register-button {

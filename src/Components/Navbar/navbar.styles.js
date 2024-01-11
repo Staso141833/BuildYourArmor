@@ -30,9 +30,9 @@ export const leftStackStyles = {
 export const logoStyles = {
   fontSize: {
     xs: "26px",
-    sm: "20px",
-    md: "20px",
-    lg: "30px",
+    sm: "28px",
+    md: "32px",
+    lg: "34px",
     xl: "40px",
   },
   color: colors.gold,
@@ -43,15 +43,15 @@ export const youAreWhatYouEatStyles = {
   fontSize: {
     xs: "11px",
     sm: "20px",
-    md: "30px",
-    lg: "30px",
+    md: "24px",
+    lg: "26px",
     xl: "30px",
   },
   letterSpacing: {
     xs: "1px",
     sm: "2px",
     md: "3px",
-    lg: "4px",
+    lg: "3px",
     xl: "4px",
   },
   ml: {
@@ -93,20 +93,22 @@ export const logoutButtonStyles = {
   fontWeight: "bold",
   fontSize: {
     xs: "10px",
-    sm: "20px",
-    md: "20px",
-    lg: "20px",
+    sm: "12px",
+    md: "13px",
+    lg: "13px",
     xl: "14px",
   },
+  transition: "all 350ms",
+  "&:hover": { backgroundColor: "#fbc760", color: "#070707" },
 };
 
 export const userEmailStyles = {
   color: colors.gold,
   fontSize: {
     xs: "12px",
-    sm: "20px",
-    md: "20px",
-    lg: "20px",
+    sm: "16px",
+    md: "18px",
+    lg: "18px",
     xl: "20px",
   },
 };
@@ -127,17 +129,10 @@ export const loginRegisterStyles = {
   },
   gap: {
     xs: "4px",
-    sm: 2,
+    sm: "4px",
     md: 2,
     lg: 2,
     xl: 2,
   },
   alignItems: "center",
-  fontSize: {
-    xs: "14px",
-    sm: "20px",
-    md: "20px",
-    lg: "30px",
-    xl: "40px",
-  },
 };

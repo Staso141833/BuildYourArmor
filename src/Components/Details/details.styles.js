@@ -6,7 +6,7 @@ export const boxStyles = {
   justifyContent: "center",
   mb: {
     xs: 2,
-    sm: 4,
+    sm: 3,
     md: 4,
     lg: 4,
     xl: 4,
@@ -18,7 +18,7 @@ export const mainStackStyles = {
   display: "flex",
   flexDirection: {
     xs: "column",
-    sm: "row",
+    sm: "column",
     md: "row",
     lg: "row",
     xl: "row",
@@ -26,14 +26,14 @@ export const mainStackStyles = {
   gap: 2,
   mt: {
     xs: 2,
-    sm: 4,
+    sm: 3,
     md: 4,
     lg: 4,
     xl: 4,
   },
   mb: {
     xs: 2,
-    sm: 4,
+    sm: 3,
     md: 4,
     lg: 4,
     xl: 5,
@@ -48,9 +48,9 @@ export const secondaryStackStyles = {
   display: "flex",
   width: {
     xs: "90%",
-    sm: "38%",
-    md: "38%",
-    lg: "38%",
+    sm: "80%",
+    md: "60%",
+    lg: "50%",
     xl: "38%",
   },
   flexDirection: "column",
@@ -63,7 +63,7 @@ export const secondaryStackStyles = {
 export const cardStyles = {
   height: {
     xs: "70vh",
-    sm: "80vh",
+    sm: "70vh",
     md: "80vh",
     lg: "80vh",
     xl: "80vh",
@@ -87,7 +87,7 @@ export const cardActionStackStyles = {
   gap: 1,
   mb: {
     xs: 1,
-    sm: 4,
+    sm: 2,
     md: 4,
     lg: 4,
     xl: 4,
@@ -112,18 +112,18 @@ export const cardActionsStyles = {
 export const authorAndLikesStyles = {
   fontSize: {
     xs: "22px",
-    sm: "32px",
-    md: "32px",
-    lg: "32px",
+    sm: "24px",
+    md: "24px",
+    lg: "26px",
     xl: "28px",
   },
 };
 export const typographyStyles = {
   fontSize: {
     xs: "18px",
-    sm: "12px",
-    md: "12px",
-    lg: "12px",
+    sm: "18px",
+    md: "18px",
+    lg: "18px",
     xl: "24px",
   },
 };
@@ -136,9 +136,9 @@ export const editAndDeleteButtonStyles = {
   width: "25%",
   fontSize: {
     xs: "9px",
-    sm: "28px",
-    md: "28px",
-    lg: "28px",
+    sm: "12px",
+    md: "12px",
+    lg: "12px",
     xl: "14px",
   },
   fontFamily: "Robotto",
@@ -152,12 +152,13 @@ export const cardActionLikeButtonStyles = {
   width: "25%",
   fontSize: {
     xs: "9px",
-    sm: "28px",
-    md: "28px",
-    lg: "28px",
+    sm: "12px",
+    md: "12px",
+    lg: "12px",
     xl: "14px",
   },
   height: "auto",
+  transition: "all 350ms",
   "&:hover": {
     backgroundColor: colors["light-silver"],
   },
@@ -173,13 +174,20 @@ export const rightStackStyles = {
     xl: "row",
   },
   textAlign: "center",
-  alignContent: "flex-start",
+  alignItems: {
+    xs: "center",
+    sm: "center",
+    md: "flex-start",
+    lg: "flex-start",
+    xl: "flex-start",
+  },
+
   justifyContent: "space-evenly",
   width: {
     xs: "90%",
-    sm: "38%",
-    md: "38%",
-    lg: "38%",
+    sm: "80%",
+    md: "70%",
+    lg: "65%",
     xl: "58%",
   },
   gap: 3,
@@ -189,6 +197,7 @@ export const rightStackStylesChild = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  justifyContent: "center",
   gap: 2,
   width: "100%",
 };
@@ -203,9 +212,9 @@ export const excerciseExplanationStyles = {
   },
   fontSize: {
     xs: "14px",
-    sm: "28px",
-    md: "28px",
-    lg: "28px",
+    sm: "16px",
+    md: "18px",
+    lg: "22px",
     xl: "24px",
   },
   textTransform: "uppercase",
@@ -245,7 +254,13 @@ export const commentStackStyles = {
   flexDirection: "column",
   textAlign: "center",
   justifyContent: "space-evenly",
-  height: "60vh",
+  height: {
+    xs: "60vh",
+    sm: "20%",
+    md: "60vh",
+    lg: "60vh",
+    xl: "60vh",
+  },
   width: "100%",
 };
 
@@ -277,10 +292,10 @@ export const commentsCountStackStyles = {
 export const commentListItemStyles = {
   width: {
     xs: "100%",
-    sm: "30vw",
-    md: "30vw",
-    lg: "30vw",
-    xl: "30vw",
+    sm: "80%",
+    md: "80%",
+    lg: "80%",
+    xl: "100",
   },
 };
 
@@ -317,19 +332,19 @@ export const currentCommentTextStyles = {
   fontWeight: "bold",
   fontSize: {
     xs: "14px",
-    sm: "28px",
-    md: "28px",
-    lg: "28px",
-    xl: "24px",
+    sm: "16px",
+    md: "16px",
+    lg: "16px",
+    xl: "20px",
   },
 };
 
 export const currentCommentAuthorStyles = {
   fontSize: {
     xs: "12px",
-    sm: "28px",
-    md: "28px",
-    lg: "28px",
-    xl: "22px",
+    sm: "16px",
+    md: "16px",
+    lg: "16px",
+    xl: "18px",
   },
 };

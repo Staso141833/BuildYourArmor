@@ -15,6 +15,7 @@ export const editAndDeleteStackStyles = {
 export const editAndDeleteButtonStyles = {
   width: "auto",
   textTransform: "lowercase",
+  transition: "all 350ms",
   backgroundColor: colors.black,
   color: colors.gold,
   cursor: "pointer",
@@ -25,15 +26,22 @@ export const editAndDeleteButtonStyles = {
 };
 
 export const textFieldStyles = {
-  height: "64px",
+  height: {
+    xs: "64px",
+    sm: "86px",
+    md: "66px",
+    lg: "66px",
+    xl: "64px",
+  },
   width: "100%",
   backgroundColor: colors.white,
+  overflow: "auto",
 };
 
 export const errorsStyles = {
   fontSize: {
     xs: "12px",
-    sm: "16px",
+    sm: "14px",
     md: "16px",
     lg: "16px",
     xl: "16px",

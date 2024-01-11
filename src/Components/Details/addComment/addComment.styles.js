@@ -10,6 +10,7 @@ export const accordionStyles = {
 export const textFieldStyles = {
   height: "140px",
   width: "100%",
+  overflow: "auto",
 };
 
 export const commentButtonStyles = {
@@ -19,15 +20,15 @@ export const commentButtonStyles = {
   transition: "all 350ms",
   width: {
     xs: "60%",
-    sm: "80%",
-    md: "80%",
-    lg: "80%",
+    sm: "50%",
+    md: "50%",
+    lg: "48%",
     xl: "44%",
   },
   fontSize: {
     xs: "12px",
-    sm: "16px",
-    md: "16px",
+    sm: "14px",
+    md: "14px",
     lg: "16px",
     xl: "16px",
   },

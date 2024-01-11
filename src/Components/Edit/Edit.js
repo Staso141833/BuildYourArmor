@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   CardMedia,
   CircularProgress,
@@ -11,9 +10,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { auth, db } from "../../config/firebase.js";
+import { auth } from "../../config/firebase.js";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useFormMine } from "../../hooks/useFormMine.js";
 import { publicationServiceFactory } from "../../services/publicationServices.js";
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
@@ -29,8 +28,14 @@ import {
   createAndEditmainStackStyles,
   errorsStyles,
   formControlStyles,
+  formGroupStyles,
+  inputPropsDescription,
+  inputPropsHeight,
+  inputPropsImageUrl,
+  inputPropsName,
   menuItemStyles,
   publishAndEditButtonStyles,
+  textFieldStyles,
 } from "./edit.styles.js";
 
 const muscleGroups = [
@@ -134,23 +139,23 @@ export const Edit = () => {
               Edit
             </Stack>
 
-            <FormGroup
-              row
-              sx={{ justifyContent: "space-around", height: "auto" }}
-            >
+            <FormGroup row sx={formGroupStyles}>
               <FormControl sx={formControlStyles}>
                 <TextField
+                  sx={textFieldStyles}
                   variant="outlined"
                   placeholder="Name"
                   name="name"
                   {...register("name")}
                   onChange={changeHandler}
+                  InputProps={inputPropsName}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.name?.message}
                 </Typography>
                 <div>
                   <TextField
+                    sx={textFieldStyles}
                     id="outlined-select-muscle"
                     select
                     label="Select"
@@ -168,6 +173,7 @@ export const Edit = () => {
                   </TextField>
                 </div>
                 <TextField
+                  sx={textFieldStyles}
                   type="number"
                   variant="outlined"
                   placeholder="weight"
@@ -180,17 +186,20 @@ export const Edit = () => {
                 </Typography>
 
                 <TextField
+                  sx={textFieldStyles}
                   type="number"
                   variant="outlined"
                   placeholder="height"
                   name="height"
                   {...register("height")}
                   onChange={changeHandler}
+                  InputProps={inputPropsHeight}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.height?.message}
                 </Typography>
                 <TextField
+                  sx={textFieldStyles}
                   variant="outlined"
                   placeholder="description"
                   multiline
@@ -198,17 +207,20 @@ export const Edit = () => {
                   name="description"
                   {...register("description")}
                   onChange={changeHandler}
+                  InputProps={inputPropsDescription}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.description?.message}
                 </Typography>
 
                 <TextField
+                  sx={textFieldStyles}
                   variant="outlined"
                   placeholder="Image Url"
                   name="imageUrl"
                   {...register("imageUrl")}
                   onChange={changeHandler}
+                  InputProps={inputPropsImageUrl}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.imageUrl?.message}

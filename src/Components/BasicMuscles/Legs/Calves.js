@@ -25,7 +25,7 @@ export const Calves = () => {
             Calves
           </Typography>
           <Stack sx={dividerStyles}></Stack>
-          <Typography variant="h4">CALF MUSCLES</Typography>
+          <Typography variant="h4" sx={secondaryHeaderStyles}>CALF MUSCLES</Typography>
           <Stack sx={dividerStyles}></Stack>
           <Stack sx={cardAndParagraphRowStyles}>
             <Card position="relative" sx={cardWidthStyles}>

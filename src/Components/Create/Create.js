@@ -27,6 +27,11 @@ import {
   createAndEditmainStackStyles,
   errorsStyles,
   formControlStyles,
+  formGroupStyles,
+  inputPropsDescription,
+  inputPropsHeight,
+  inputPropsImageUrl,
+  inputPropsName,
   menuItemStyles,
   publishAndEditButtonStyles,
   textFieldStyles,
@@ -135,19 +140,13 @@ export const Create = () => {
               Share your expereince
             </Typography>
 
-            <FormGroup row sx={{ justifyContent: "space-around" }}>
+            <FormGroup row sx={formGroupStyles}>
               <FormControl sx={formControlStyles}>
                 <TextField
                   label="Name"
                   name="name"
                   variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    ),
-                  }}
+                  InputProps={inputPropsName}
                   placeholder="Name"
                   {...register("name")}
                   onChange={changeHandler}
@@ -203,13 +202,7 @@ export const Create = () => {
                   placeholder="height in cm"
                   {...register("height")}
                   onChange={changeHandler}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <HeightOutlined />
-                      </InputAdornment>
-                    ),
-                  }}
+                  InputProps={inputPropsHeight}
                 />
                 <Typography variant="p" sx={errorsStyles}>
                   {errors.height?.message}
@@ -221,13 +214,7 @@ export const Create = () => {
                   multiline
                   rows={3}
                   name="description"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <DescriptionRounded />
-                      </InputAdornment>
-                    ),
-                  }}
+                  InputProps={inputPropsDescription}
                   sx={textFieldStyles}
                   {...register("description")}
                   onChange={changeHandler}
@@ -241,13 +228,7 @@ export const Create = () => {
                   name="imageUrl"
                   type="img"
                   sx={textFieldStyles}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Image />
-                      </InputAdornment>
-                    ),
-                  }}
+                  InputProps={inputPropsImageUrl}
                   placeholder="Image Url"
                   {...register("imageUrl")}
                   onChange={changeHandler}

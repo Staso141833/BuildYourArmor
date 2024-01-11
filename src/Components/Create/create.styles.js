@@ -1,49 +1,76 @@
+import { InputAdornment } from "@mui/material";
 import { colors } from "../../metaData/colors.js";
+import {
+  AccountCircle,
+  DescriptionRounded,
+  HeightOutlined,
+  Image,
+} from "@mui/icons-material";
 
 export const createAndEditmainStackStyles = {
   position: "relative",
   backgroundColor: "#f6f6f6",
-  height: "100vh",
+  height: {
+    xs: "100vh",
+    sm: "100vh",
+    md: "100vh",
+    lg: "115vh",
+    xl: "100vh",
+  },
   overflow: "hidden",
 };
 
 export const createAndEditPaperStyles = {
   width: {
     xs: "300px",
-    sm: "660px",
+    sm: "560px",
     md: "660px",
     lg: "660px",
     xl: "660px",
   },
-  height: "92%",
+  height: {
+    xs: "92%",
+    sm: "82%",
+    md: "80%",
+    lg: "96%",
+    xl: "92%",
+  },
   backgroundColor: colors.gold,
   border: "3px solid #170f0a",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  textAlign: "center",
   position: "absolute",
   justifyContent: "space-evenly",
   left: {
     xs: "52%",
-    sm: "50%",
+    sm: "52%",
     md: "50%",
     lg: "50%",
     xl: "50%",
   },
-  top: "56%",
+  top: {
+    xs: "56%",
+    sm: "56%",
+    md: "50%",
+    lg: "60%",
+    xl: "56%",
+  },
+
   mt: 1,
   transform: "translate(-53%, -61%)",
   zIndex: "2",
-  boxShadow: "40px 30px 40px #170f0a",
+  boxShadow: "40px 30px 50px #170f0a",
 };
 
 export const createAndEditTitleStyles = {
   fontWeight: 700,
   marginTop: {
     xs: "8px",
-    sm: "18px",
-    md: "18px",
-    lg: "18px",
+    sm: "10px",
+    md: "12px",
+    lg: "12px",
     xl: "18px",
   },
   letterSpacing: 1,
@@ -51,32 +78,37 @@ export const createAndEditTitleStyles = {
   fontSize: {
     xs: "14px",
     sm: "20px",
-    md: "20px",
-    lg: "30px",
-    xl: "28px",
+    md: "22px",
+    lg: "24px",
+    xl: "26px",
   },
 };
+
+export const formGroupStyles = { justifyContent: "space-around", width: "90%" };
 
 export const formControlStyles = {
   mt: 1,
   display: "flex",
+  flexDirection: "column",
+  textAlign: "center",
+  alignItems: "center",
   gap: "12px",
   width: {
     xs: "200px",
-    sm: "row",
-    md: "row",
-    lg: "row",
-    xl: "400px",
+    sm: "80%",
+    md: "80%",
+    lg: "80%",
+    xl: "100%",
   },
 };
 
 export const textFieldStyles = {
   width: {
     xs: "100%",
-    sm: "auto",
-    md: "auto",
-    lg: "auto",
-    xl: "auto",
+    sm: "100%",
+    md: "100%",
+    lg: "100%",
+    xl: "80%",
   },
   fontSize: "12px",
 };
@@ -124,9 +156,9 @@ export const cardMediaStyles = {
   top: "50%",
   transform: {
     xs: "translate(-2%, 694%)",
-    sm: "50%",
-    md: "50%",
-    lg: "50%",
+    sm: "translate(1.3%, 387%)",
+    md: "translate(-2%, 694%)",
+    lg: "translate(-2%, 694%)",
     xl: "translate(255.5%, 376%)",
   },
 };
@@ -134,10 +166,41 @@ export const cardMediaStyles = {
 export const errorsStyles = {
   fontSize: {
     xs: "10px",
-    sm: "16px",
-    md: "16px",
+    sm: "12px",
+    md: "14px",
     lg: "16px",
     xl: "16px",
   },
   color: "red",
+};
+
+export const inputPropsName = {
+  startAdornment: (
+    <InputAdornment position="start">
+      <AccountCircle />
+    </InputAdornment>
+  ),
+};
+
+export const inputPropsHeight = {
+  startAdornment: (
+    <InputAdornment position="start">
+      <HeightOutlined />
+    </InputAdornment>
+  ),
+};
+export const inputPropsDescription = {
+  startAdornment: (
+    <InputAdornment position="start">
+      <DescriptionRounded />
+    </InputAdornment>
+  ),
+};
+
+export const inputPropsImageUrl = {
+  startAdornment: (
+    <InputAdornment position="start">
+      <Image />
+    </InputAdornment>
+  ),
 };

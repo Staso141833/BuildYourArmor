@@ -36,6 +36,7 @@
   text-transform: uppercase;
   text-decoration: none;
   font-family: Robotto;
+  letter-spacing: 1px;
 }
 
 .muscle-button:hover {
@@ -59,6 +60,15 @@
   background-color: #fbc760;
   color: #070707;
 }
+@media (max-width: 900px) {
+  .muscle-button-dropdown {
+    font-size: 12px;
+  }
+
+  .muscle-button {
+    font-size: 14px;
+  }
+}
 
 @media (max-width: 600px) {
   .muscle-button-dropdown {
@@ -69,3 +79,4 @@
     font-size: 12px;
   }
 }
+

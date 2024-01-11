@@ -56,7 +56,7 @@ export const Login = () => {
         SetCookie("userIn", JSON.stringify(user));
         setSuccess(true);
         setIsLoading(false);
-        navigate("/catalog");
+        navigate("/home");
 
         return user;
       }

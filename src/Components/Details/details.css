@@ -25,6 +25,16 @@
   font-weight: 600;
   text-decoration: none;
 }
+@media (max-width: 900px) {
+  .edit-button {
+    font-size: 12px;
+  }
+
+  .add-button {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
 
 @media (max-width: 600px) {
   .edit-button {

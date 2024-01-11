@@ -1,19 +1,72 @@
 .main-div {
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: white;
-    align-items: center;
-
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: white;
+  align-items: center;
+  opacity: 0.8;
+  transition: opacity ease-in-out 0.4;
+  margin-bottom: 7px;
 }
 
 .slides {
+  margin: auto;
+  object-fit: contain;
+  width: 100%;
+  aspect-ratio: calc(16 / 9);
+  /* position: absolute; */
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.dot-active {
+  font-size: 60px;
+  cursor: pointer;
+  color: #fbc760;
+}
+
+.dot {
+  font-size: 40px;
+  cursor: pointer;
+  padding: 16px 0px;
+}
+
+@media (max-width: 600px) {
+  .slides {
     margin: auto;
     object-fit: cover;
-    width: 100%;
-    aspect-ratio:calc(16/9);
-    position: relative;
-    overflow: hidden;
+
+  }
+  .dot-active {
+    font-size: 40px;
+    cursor: pointer;
+    color: #fbc760;
+  }
+
+  .dot {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 16px 0px;
+  }
+}
+
+@media (max-width: 900px) {
+  .slides {
+    margin: auto;
+    object-fit: contain;
+
+  }
+  .dot-active {
+    font-size: 40px;
+    cursor: pointer;
+    color: #fbc760;
+  }
+
+  .dot {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 16px 0px;
+  }
 }

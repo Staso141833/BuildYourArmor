@@ -2,23 +2,12 @@ import React, { useState } from "react";
 import { Typography, Box, Card, CardMedia, Stack } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  cardMediaStyles,
-  cardStyles,
-  homeTitleStackStyles,
-  homeTitleStyles,
   leftArrowStyles,
-  quoteStackStyles,
   quoteStyles,
   rightArrowStyles,
-  stackCardStyles,
   stackDotsStyles,
 } from "./home.styles.js";
-import {
-  ArrowBack,
-  ArrowCircleLeft,
-  ArrowCircleLeftSharp,
-  ArrowCircleRight,
-} from "@mui/icons-material";
+import { ArrowCircleLeft, ArrowCircleRight } from "@mui/icons-material";
 import { colors } from "../../metaData/colors.js";
 import { Fade, Slide } from "react-slideshow-image";
 import { RxDotFilled, RxDotsHorizontal, RxDotsVertical } from "react-icons/rx";
@@ -29,6 +18,16 @@ export const Home = () => {
     {
       url: "https://www.evolutionofbodybuilding.net/wp-content/uploads/2016/01/Arnold_Schwarzenegger_Klassisch_Posing.jpg",
       quote: "The pain you feel today will be the strength you feel tomorrow.",
+      alt: "Arnold Schwarzenegger",
+    },
+    {
+      url: "https://www.goalcast.com/wp-content/uploads/2017/05/Arnold-Schwarzenegger-quotes-I-learned-that-we-are-always-stronger-than-we-know.jpg?w=708",
+      quote: "",
+      alt: "Arnold Schwarzenegger",
+    },
+    {
+      url: "https://i.ebayimg.com/images/g/bFcAAOSwKH9g67K1/s-l1600.jpg",
+      quote: "",
       alt: "Arnold",
     },
 
@@ -39,11 +38,49 @@ export const Home = () => {
       alt: "Dorian Yates",
     },
     {
+      url: "https://i.ebayimg.com/images/g/wboAAOSw-1VhZiVu/s-l1200.webp",
+      quote: "",
+      alt: "Dorian Yates",
+    },
+    {
+      url: "https://theconsciousbodybuilder.com/wp-content/uploads/2022/04/7-1-683x1024.png",
+      quote: "",
+      alt: "Dorian Yates",
+    },
+    {
+      url: "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F69a0af23-3402-4d05-843e-24a4759011e9_516x778.jpeg",
+      quote:
+        "No tricks, no easy gain. It is just about authenticity and hard work.",
+      alt: "Dorian Yates",
+    },
+    {
       url: "https://i.ytimg.com/vi/FZDf0uyuN34/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBd1O-eZmZBEmlV40RO81fk-aP9Gg",
       quote: "",
       alt: "Tom Platz",
     },
+    {
+      url: "https://i.pinimg.com/originals/af/0b/df/af0bdfddc659f38f5929cdc3edc9105e.jpg",
+      quote: "",
+      alt: "Tom Platz",
+    },
+    {
+      url: "https://i.pinimg.com/564x/bd/f5/41/bdf5417915d80326400e61605393757a.jpg",
+      quote: "",
+      alt: "Tom Platz",
+    },
+    {
+      url: "https://generationiron.com/wp-content/uploads/2014/12/Jay-Cutler-Quote.png",
+      quote: "",
+      alt: "Jay Cutler",
+    },
+    {
+      url: "https://raw.githubusercontent.com/Npoubko/Mentzer-Quote-Images/main/images/mikementzer8-smaller.png",
+      quote: "",
+      alt: "Mike Mentzer",
+    },
   ];
+
+  const slidesLenght = slideShowImages.length;
 
   const variants = {
     initial: {
@@ -137,11 +174,11 @@ export const Home = () => {
           ></ArrowCircleRight>
         </div>
         <Stack sx={stackDotsStyles}>
-          {slideShowImages.map((slide, slideIndex) => (
+          {slideShowImages.map((item, index) => (
             <div
-              key={slideIndex}
-              onClick={() => goToSlide(slideIndex)}
-              className="text-2xl cursor-pointer"
+              key={index}
+              onClick={() => goToSlide(index + 1)}
+              className={currentIndex === index + 1 ? "dot-active" : "dot"}
             >
               <RxDotFilled></RxDotFilled>
             </div>

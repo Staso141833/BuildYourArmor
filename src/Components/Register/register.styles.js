@@ -7,7 +7,7 @@ export const formControlStyles = {
 export const registerHeaderStyles = {
   fontSize: {
     xs: "16px",
-    sm: "24px",
+    sm: "18px",
     md: "24px",
     lg: "24px",
     xl: "24px",
@@ -37,30 +37,30 @@ export const registerFormMainStackStyles = {
   margin: "auto",
   marginTop: {
     xs: "40px",
-    sm: "120px",
-    md: "120px",
-    lg: "120px",
+    sm: "50px",
+    md: "80px",
+    lg: "100px",
     xl: "120px",
   },
   marginBottom: {
     xs: "40px",
-    sm: "120px",
-    md: "120px",
-    lg: "120px",
+    sm: "50px",
+    md: "80px",
+    lg: "100px",
     xl: "120px",
   },
   border: "1px solid #4c4850",
   borderRadius: "8px",
   height: {
     xs: "80%",
-    sm: "80vh",
+    sm: "800px",
     md: "500px",
     lg: "500px",
     xl: "500px",
   },
   width: {
     xs: "340px",
-    sm: "1040px",
+    sm: "640px",
     md: "1040px",
     lg: "1040px",
     xl: "1040px",
@@ -75,7 +75,7 @@ export const registerFormMainStackStyles = {
 export const emailAndPasswordStackStyles = {
   width: {
     xs: "100%",
-    sm: "50%",
+    sm: "100%",
     md: "50%",
     lg: "50%",
     xl: "50%",
@@ -83,8 +83,8 @@ export const emailAndPasswordStackStyles = {
   height: {
     xs: "64%",
     sm: "50%",
-    md: "50%",
-    lg: "50%",
+    md: "100%",
+    lg: "100%",
     xl: "100%",
   },
   display: "flex",
@@ -92,9 +92,9 @@ export const emailAndPasswordStackStyles = {
   alignItems: "center",
   gap: {
     xs: 1,
-    sm: 3,
-    md: 3,
-    lg: 3,
+    sm: 1,
+    md: 2,
+    lg: 2,
     xl: 3,
   },
 
@@ -111,16 +111,16 @@ export const registerButtonStyles = {
   color: colors.black,
   padding: {
     xs: "8px",
-    sm: "12px",
-    md: "12px",
-    lg: "12px",
+    sm: "8px",
+    md: "10px",
+    lg: "10px",
     xl: "12px",
   },
   fontSize: {
     xs: "14px",
-    sm: "16px",
-    md: "16px",
-    lg: "16px",
+    sm: "14px",
+    md: "14px",
+    lg: "14px",
     xl: "16px",
   },
   width: "46%",
@@ -140,7 +140,7 @@ export const cardMediaStackStyles = {
   justifyContent: "space-evenly",
   height: {
     xs: "35%",
-    sm: "100%",
+    sm: "50%",
     md: "100%",
     lg: "100%",
     xl: "100%",
@@ -154,12 +154,17 @@ export const cardMediaStackStyles = {
   },
 };
 
+export const cardMediaStyles = {
+  width: "100%",
+  filter: "opacity(0.8) drop-shadow(0 0 black)",
+};
+
 export const registerErrorsStyles = {
   fontSize: {
     xs: "12px",
-    sm: "16px",
-    md: "16px",
-    lg: "16px",
+    sm: "14px",
+    md: "14px",
+    lg: "14px",
     xl: "16px",
   },
   color: "red",

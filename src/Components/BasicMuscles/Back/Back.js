@@ -293,7 +293,7 @@ export const Back = () => {
           </Stack>
 
           <Stack sx={tertiaryStackChildStyles}>
-            <Typography variant="h4">Functions of the back muscles</Typography>
+            <Typography variant="h4" sx={secondaryHeaderStyles}>Functions of the back muscles</Typography>
             <Stack sx={dividerStyles}></Stack>
 
             <Stack>
