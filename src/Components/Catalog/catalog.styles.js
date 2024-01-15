@@ -9,7 +9,7 @@ export const boxStyles = {
     xs: 16,
     sm: 6,
     md: 4,
-    lg: 4,
+    lg: 14,
     xl: 0,
   },
   flexDirection: "column",
@@ -34,8 +34,8 @@ export const publicationMainStackStyles = {
   margin: {
     xs: "4px 14px",
     sm: "0px 20px",
-    md: "0px 64px",
-    lg: "0px 64px",
+    md: "0px 24px",
+    lg: "0px 14px",
     xl: "12px 38px",
   },
 };
@@ -58,7 +58,7 @@ export const publicationStackStyles = {
     xs: "80%",
     sm: "90%",
     md: "90%",
-    lg: "90%",
+    lg: "95%",
     xl: "100%",
   },
 };

@@ -10,7 +10,13 @@ import {
 export const createAndEditmainStackStyles = {
   position: "relative",
   backgroundColor: "#f6f6f6",
-  height: "100vh",
+  height: {
+    xs: "100vh",
+    sm: "100vh",
+    md: "100vh",
+    lg: "130vh",
+    xl: "100vh",
+  },
   overflow: "hidden",
 };
 
@@ -26,7 +32,7 @@ export const createAndEditPaperStyles = {
     xs: "92%",
     sm: "82%",
     md: "80%",
-    lg: "80%",
+    lg: "85%",
     xl: "92%",
   },
   backgroundColor: "#fbc760",
@@ -43,32 +49,17 @@ export const createAndEditPaperStyles = {
     lg: "50%",
     xl: "50%",
   },
-  top: "56%",
+  top: {
+    xs: "56%",
+    sm: "56%",
+    md: "50%",
+    lg: "52%",
+    xl: "56%",
+  },
   mt: 1,
   transform: "translate(-53%, -61%)",
   zIndex: "2",
   boxShadow: "40px 30px 50px #170f0a",
-};
-
-export const publishAndEditButtonStyles = {
-  backgroundColor: colors.black,
-  color: colors.gold,
-  padding: "12px",
-  fontSize: {
-    xs: "12px",
-    sm: "16px",
-    md: "16px",
-    lg: "16px",
-    xl: "16px",
-  },
-  mb: 1,
-  mt: 1,
-  width: "60%",
-  border: " 1px solid #4c4850",
-  "&:hover": {
-    backgroundColor: "#4c4850",
-    border: "1px solid black",
-  },
 };
 
 export const createAndEditTitleStyles = {
@@ -76,8 +67,8 @@ export const createAndEditTitleStyles = {
   marginTop: {
     xs: "8px",
     sm: "10px",
-    md: "14px",
-    lg: "16px",
+    md: "12px",
+    lg: "12px",
     xl: "18px",
   },
   letterSpacing: 1,
@@ -85,9 +76,9 @@ export const createAndEditTitleStyles = {
   fontSize: {
     xs: "14px",
     sm: "20px",
-    md: "24px",
-    lg: "36px",
-    xl: "28px",
+    md: "22px",
+    lg: "24px",
+    xl: "26px",
   },
 };
 
@@ -130,6 +121,27 @@ export const textFieldStyles = {
   fontSize: "12px",
 };
 
+export const publishAndEditButtonStyles = {
+  backgroundColor: colors.black,
+  color: colors.gold,
+  padding: "12px",
+  fontSize: {
+    xs: "12px",
+    sm: "16px",
+    md: "16px",
+    lg: "16px",
+    xl: "16px",
+  },
+  mb: 1,
+  mt: 1,
+  width: "60%",
+  border: " 1px solid #4c4850",
+  "&:hover": {
+    backgroundColor: "#4c4850",
+    border: "1px solid black",
+  },
+};
+
 export const cardMediaStyles = {
   width: {
     xs: "100px",
@@ -144,7 +156,7 @@ export const cardMediaStyles = {
     xs: "translate(-2%, 694%)",
     sm: "translate(1.3%, 387%)",
     md: "translate(-2%, 694%)",
-    lg: "translate(-2%, 694%)",
+    lg: "translate(121%, 358%)",
     xl: "translate(255.5%, 376%)",
   },
 };

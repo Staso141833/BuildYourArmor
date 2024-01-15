@@ -16,7 +16,7 @@ export const cardMediaStyles = {
     xs: "84.4vh",
     sm: "85.2vh",
     md: "91.4vh",
-    lg: "91.4vh",
+    lg: "113.5vh",
     xl: "91.4vh",
   },
 };
@@ -49,7 +49,7 @@ export const muscleItemContainerStyles = {
     xs: "65%",
     sm: "55%",
     md: "15%",
-    lg: "15%",
+    lg: "20%",
     xl: "15%",
   },
   height: {
@@ -275,6 +275,7 @@ export const cardAndParagraphRowStyles = {
     xl: "row",
   },
   gap: 1,
+  mb: 1,
   alignItems: "center",
   justifyContent: "space-evenly",
 };

@@ -7,8 +7,8 @@ export const boxStyles = {
   mb: {
     xs: 2,
     sm: 3,
-    md: 4,
-    lg: 4,
+    md: 3,
+    lg: 3,
     xl: 4,
   },
   width: "100%",
@@ -39,8 +39,14 @@ export const mainStackStyles = {
     xl: 5,
   },
   width: "100%",
-  height: "100%",
-  alignItems: "center",
+  height: {
+    xs: "100%",
+    sm: "100%",
+    md: "100%",
+    lg: "115vh",
+    xl: "100%",
+  },
+  alignItems: "start",
   justifyContent: "space-evenly",
 };
 
@@ -65,7 +71,7 @@ export const cardStyles = {
     xs: "70vh",
     sm: "70vh",
     md: "80vh",
-    lg: "80vh",
+    lg: "84vh",
     xl: "80vh",
   },
   width: "auto",
@@ -132,7 +138,7 @@ export const editAndDeleteButtonStyles = {
   backgroundColor: colors.black,
   color: colors.gold,
   fontWeight: "bold",
-  transition: "all 300ms",
+  transition: "all 350ms",
   width: "25%",
   fontSize: {
     xs: "9px",
@@ -178,7 +184,7 @@ export const rightStackStyles = {
     xs: "center",
     sm: "center",
     md: "flex-start",
-    lg: "flex-start",
+    lg: "center",
     xl: "flex-start",
   },
 
