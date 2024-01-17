@@ -46,7 +46,14 @@ export const mainStackStyles = {
     lg: "115vh",
     xl: "100%",
   },
-  alignItems: "start",
+
+  alignItems: {
+    xs: "center",
+    sm: "start",
+    md: "start",
+    lg: "start",
+    xl: "start",
+  },
   justifyContent: "space-evenly",
 };
 
@@ -68,7 +75,7 @@ export const secondaryStackStyles = {
 
 export const cardStyles = {
   height: {
-    xs: "70vh",
+    xs: "auto",
     sm: "70vh",
     md: "80vh",
     lg: "84vh",
@@ -106,7 +113,7 @@ export const cardActionsStyles = {
   alignItems: "center",
   justifyContent: "center",
   mb: {
-    xs: 1,
+    xs: 0,
     sm: 1,
     md: 1,
     lg: 1,

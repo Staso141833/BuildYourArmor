@@ -9,7 +9,6 @@ import {
   MenuItem,
   Typography,
   CircularProgress,
-  InputAdornment,
 } from "@mui/material";
 
 import { usePublicationContext } from "../../contexts/PublicationContext.js";
@@ -20,6 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { motion } from "framer-motion";
 import { useState } from "react";
+
 import {
   cardMediaStyles,
   createAndEditPaperStyles,
@@ -37,13 +37,8 @@ import {
   textFieldStyles,
 } from "./create.styles.js";
 import "./create.css";
-import { colors } from "../../metaData/colors.js";
-import {
-  AccountCircle,
-  DescriptionRounded,
-  HeightOutlined,
-  Image,
-} from "@mui/icons-material";
+import { useAuthContext } from "../../contexts/AuthContext.js";
+import { Link } from "react-router-dom";
 
 const muscleGroups = [
   "traps",
@@ -62,6 +57,7 @@ const muscleGroups = [
 export const Create = () => {
   const { onCreatePublicationSubmit } = usePublicationContext();
   const [isLoading, setIsLoading] = useState(false);
+  const { isAuthenticated } = useAuthContext();
 
   const { values, changeHandler, onSubmit } = useFormMine(
     {
@@ -239,13 +235,19 @@ export const Create = () => {
               </FormControl>
             </FormGroup>
 
-            <Button
-              variant="outlined"
-              onClick={handleSubmit(onClickCreate)}
-              sx={publishAndEditButtonStyles}
-            >
-              Publish
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                variant="outlined"
+                onClick={handleSubmit(onClickCreate)}
+                sx={publishAndEditButtonStyles}
+              >
+                Publish
+              </Button>
+            ) : (
+              <Link to="/register" className="add-button">
+                Register and add your own publication
+              </Link>
+            )}
           </Paper>
           <Stack sx={{ position: "absolute" }}>
             <CardMedia

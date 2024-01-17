@@ -9,7 +9,13 @@ export const mainStackStyles = {
     lg: "column",
     xl: "column",
   },
-  gap: 3,
+  gap: {
+    xs: 1,
+    sm: 3,
+    md: 3,
+    lg: 3,
+    xl: 3,
+  },
   alignItems: "center",
   mt: 2,
   justifyContent: "space-evenly",
@@ -32,7 +38,13 @@ export const secondaryStackStyles = {
 export const tertialyStackStyles = {
   display: "flex",
   flexDirection: "row",
-  gap: 4,
+  gap: {
+    xs: 1,
+    sm: 4,
+    md: 4,
+    lg: 4,
+    xl: 4,
+  },
   alignItems: "end",
   justifyContent: "space-evenly",
 };

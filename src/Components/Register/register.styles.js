@@ -1,28 +1,7 @@
 import { colors } from "../../metaData/colors.js";
 
 export const formControlStyles = {
-  height: "90vh",
-};
-
-export const registerHeaderStyles = {
-  fontSize: {
-    xs: "16px",
-    sm: "18px",
-    md: "24px",
-    lg: "24px",
-    xl: "24px",
-  },
-  fontWeight: "bold",
-  color: colors.black,
-  textTransform: "upperCase",
-  letterSpacing: "2px",
-  marginTop: {
-    xs: 2,
-    sm: 3,
-    md: 3,
-    lg: 3,
-    xl: 3,
-  },
+  height: "100vh",
 };
 
 export const registerFormMainStackStyles = {
@@ -36,7 +15,7 @@ export const registerFormMainStackStyles = {
   },
   margin: "auto",
   marginTop: {
-    xs: "40px",
+    xs: "10px",
     sm: "50px",
     md: "80px",
     lg: "100px",
@@ -52,14 +31,14 @@ export const registerFormMainStackStyles = {
   border: "1px solid #4c4850",
   borderRadius: "8px",
   height: {
-    xs: "80%",
+    xs: "96%",
     sm: "800px",
     md: "500px",
     lg: "500px",
     xl: "500px",
   },
   width: {
-    xs: "340px",
+    xs: "90%",
     sm: "640px",
     md: "1040px",
     lg: "1040px",
@@ -101,9 +80,34 @@ export const emailAndPasswordStackStyles = {
   backgroundColor: colors.white,
 };
 
+export const registerHeaderStyles = {
+  fontSize: {
+    xs: "16px",
+    sm: "18px",
+    md: "24px",
+    lg: "24px",
+    xl: "24px",
+  },
+  fontWeight: "bold",
+  color: colors.black,
+  textTransform: "upperCase",
+  letterSpacing: "2px",
+  marginTop: {
+    xs: 2,
+    sm: 3,
+    md: 3,
+    lg: 3,
+    xl: 3,
+  },
+};
+
 export const registerInputStyles = {
   width: "80%",
   borderRadius: "4px",
+  height: {
+    xs: "48px",
+  },
+
 };
 
 export const registerButtonStyles = {
@@ -117,14 +121,15 @@ export const registerButtonStyles = {
     xl: "12px",
   },
   fontSize: {
-    xs: "14px",
+    xs: "12px",
     sm: "14px",
     md: "14px",
     lg: "14px",
     xl: "16px",
   },
-  width: "46%",
+  width: "40%",
   mb: 1,
+  mt: 1,
   border: " 1px solid ",
   borderColor: colors.black,
   "&:hover": {
@@ -161,7 +166,7 @@ export const cardMediaStyles = {
 
 export const registerErrorsStyles = {
   fontSize: {
-    xs: "12px",
+    xs: "11px",
     sm: "14px",
     md: "14px",
     lg: "14px",

@@ -16,6 +16,15 @@ export const editAndDeleteButtonStyles = {
   width: "auto",
   textTransform: "lowercase",
   transition: "all 350ms",
+  padding: {
+    xs: "4px 8px",
+    sm: "8px 12px",
+    md: "8px 12px",
+    lg: "8px 12px",
+    xl: "8px 12px",
+  },
+  boxShadow:
+    "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
   backgroundColor: colors.black,
   color: colors.gold,
   cursor: "pointer",

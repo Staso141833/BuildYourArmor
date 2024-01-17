@@ -13,7 +13,7 @@ export const cardMediaStyles = {
   opacity: "0.9",
   width: "100%",
   height: {
-    xs: "84.4vh",
+    xs: "128.4vh",
     sm: "85.2vh",
     md: "91.4vh",
     lg: "113.5vh",

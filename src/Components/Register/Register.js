@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { auth } from "../../config/firebase.js";
-import { AuthContext } from "../../contexts/AuthContext.js";
 import { useFormMine } from "../../hooks/useFormMine.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,6 +18,7 @@ import RemoveCookie from "../../hooks/removeCookie.js";
 import SetCookie from "../../hooks/setCookie.js";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import "./register.css";
 import {
   cardMediaStackStyles,
   cardMediaStyles,

@@ -16,6 +16,7 @@ import {
   cardMediaStackStyles,
   cardMediaStyles,
   emailAndPasswordStackStyles,
+  inputSizeStyles,
   loginButtonStyles,
   loginErrorsStyles,
   loginFormMainStackStyles,

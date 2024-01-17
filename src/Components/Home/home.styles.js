@@ -7,7 +7,7 @@ export const cardMediaStyles = {
   height: {
     xs: "82.5vh", //0
     sm: "100vh", // 600
-    md: "100vh", //900
+    md: "60%", //900
     lg: "100vh", //1200
     xl: "100vh", //1536
   },
@@ -18,7 +18,6 @@ export const cardMediaStyles = {
     lg: "cover",
     xl: "cover",
   },
-  objectPosition: "80% 0%",
 };
 
 export const stackCardStyles = {
@@ -30,8 +29,20 @@ export const stackCardStyles = {
 
 export const leftArrowStyles = {
   position: "absolute",
-  top: "50%",
-  left: "2%",
+  top: {
+    xs: "50%",
+    sm: "50%",
+    md: "23%",
+    lg: "50%",
+    xl: "50%",
+  },
+  left: {
+    xs: "2%",
+    sm: "2%",
+    md: "4%",
+    lg: "2%",
+    xl: "2%",
+  },
   fontSize: "40px",
   padding: "2px",
   cursor: "pointer",
@@ -40,8 +51,20 @@ export const leftArrowStyles = {
 
 export const rightArrowStyles = {
   position: "absolute",
-  top: "50%",
-  right: "2%",
+  top: {
+    xs: "50%",
+    sm: "50%",
+    md: "23%",
+    lg: "50%",
+    xl: "50%",
+  },
+  right: {
+    xs: "2%",
+    sm: "2%",
+    md: "4%",
+    lg: "2%",
+    xl: "2%",
+  },
   fontSize: "40px",
   padding: "2px",
   cursor: "pointer",
@@ -54,7 +77,7 @@ export const quoteStyles = {
   fontSize: {
     xs: "24px",
     sm: "30px",
-    md: "40px",
+    md: "34px",
     lg: "38px",
     xl: "40px",
   },
@@ -66,11 +89,17 @@ export const quoteStyles = {
     xl: "80%",
   },
 
-  top: "50%",
+  top: {
+    xs: "50%",
+    sm: "50%",
+    md: "30%",
+    lg: "50%",
+    xl: "50%",
+  },
   left: {
     xs: "5%",
     sm: "6%",
-    md: "5%",
+    md: "14%",
     lg: "12%",
     xl: "5%",
   },
@@ -81,13 +110,13 @@ export const quoteStyles = {
     lg: colors.gold,
     xl: colors.white,
   },
-  textShadow:{
+  textShadow: {
     xs: "6px 6px 6px",
-    sm:  "4px 4px 10px",
+    sm: "4px 4px 10px",
     md: "6px 6px 6px",
     lg: "6px 6px 6px",
     xl: "6px 6px 6px",
-  }, 
+  },
 };
 
 export const stackDotsStyles = {

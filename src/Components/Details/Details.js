@@ -38,12 +38,11 @@ import { colors } from "../../metaData/colors.js";
 import { Like } from "./like/Like.js";
 import { useAuthContext } from "../../contexts/AuthContext.js";
 import { EditAndDelete } from "./editAndDelete/EditAndDelete.js";
-import { ArrowUpward, FingerprintRounded } from "@mui/icons-material";
+import { FingerprintRounded } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import {
   addCommentStackStyles,
   authorAndLikesStyles,
-  authorSyles,
   boxStyles,
   cardActionLikeButtonStyles,
   cardActionStackStyles,
@@ -68,14 +67,6 @@ import {
   secondaryStackStyles,
   typographyStyles,
 } from "./details.styles.js";
-
-const myColors = {
-  black: "#070707",
-  "dark-silver": "#847470",
-  "light-silver": "#b9b3ae",
-  gold: "#fbc760",
-  white: "#edebea",
-};
 
 export const Details = () => {
   const publicationService = publicationServiceFactory();
@@ -119,6 +110,7 @@ export const Details = () => {
 
   const ownerId = publication._ownerId;
   const isOwner = ownerId === userId;
+  const isNotOwner = !isOwner === isAuthenticated;
 
   const onClickCommentSubmit = async (comment) => {
     setIsLoading(true);
@@ -403,7 +395,7 @@ export const Details = () => {
                         </Button>
                       </>
                     )}
-                    {!isOwner && (
+                    {isNotOwner && (
                       <Link to="/create" className="add-button">
                         Add publication
                       </Link>

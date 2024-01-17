@@ -11,7 +11,7 @@ export const createAndEditmainStackStyles = {
   position: "relative",
   backgroundColor: "#f6f6f6",
   height: {
-    xs: "100vh",
+    xs: "150vh",
     sm: "100vh",
     md: "100vh",
     lg: "130vh",
@@ -22,16 +22,16 @@ export const createAndEditmainStackStyles = {
 
 export const createAndEditPaperStyles = {
   width: {
-    xs: "300px",
+    xs: "86%",
     sm: "560px",
     md: "660px",
     lg: "660px",
     xl: "660px",
   },
   height: {
-    xs: "92%",
+    xs: "90%",
     sm: "82%",
-    md: "80%",
+    md: "70%",
     lg: "85%",
     xl: "92%",
   },
@@ -44,20 +44,19 @@ export const createAndEditPaperStyles = {
   position: "absolute",
   justifyContent: "space-evenly",
   left: {
-    xs: "52%",
+    xs: "58%",
     sm: "52%",
-    md: "50%",
+    md: "52%",
     lg: "50%",
     xl: "50%",
   },
   top: {
     xs: "56%",
     sm: "56%",
-    md: "50%",
+    md: "45%",
     lg: "52%",
     xl: "56%",
   },
-
   mt: 1,
   transform: "translate(-53%, -61%)",
   zIndex: "2",
@@ -155,9 +154,9 @@ export const cardMediaStyles = {
   left: "50%",
   top: "50%",
   transform: {
-    xs: "translate(-2%, 694%)",
+    xs: "translate(-10%, 726%)",
     sm: "translate(1.3%, 387%)",
-    md: "translate(-2%, 694%)",
+    md: "translate(39.2%, 407%)",
     lg: "translate(121%, 358%)",
     xl: "translate(255.5%, 376%)",
   },

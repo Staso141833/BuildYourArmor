@@ -18,8 +18,9 @@ export const leftStackStyles = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
+  mr: 2,
   width: {
-    xs: "18%",
+    xs: "17%",
     sm: "15%",
     md: "15%",
     lg: "15%",
@@ -29,7 +30,7 @@ export const leftStackStyles = {
 
 export const logoStyles = {
   fontSize: {
-    xs: "26px",
+    xs: "24px",
     sm: "28px",
     md: "32px",
     lg: "34px",
@@ -65,7 +66,7 @@ export const youAreWhatYouEatStyles = {
   textTransform: "uppercase",
   textAlign: "center",
   fontFamily: "Robotto",
-  textShadow: "2px 4px 4px",
+  textShadow: "2px 4px 6px",
 };
 
 export const rightStackStyles = {

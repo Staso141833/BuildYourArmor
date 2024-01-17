@@ -32,7 +32,7 @@ export const noPublicationsStyles = {
 
 export const publicationMainStackStyles = {
   margin: {
-    xs: "4px 14px",
+    xs: "40px 14px",
     sm: "0px 20px",
     md: "0px 24px",
     lg: "0px 14px",
