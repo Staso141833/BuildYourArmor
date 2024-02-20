@@ -16,6 +16,7 @@
 - Edit comment post (only for comment's owner);
 - Delete comment post (only for comment's owner);
 - Increase Intensity page(information about how to get in better shape for all users);
+- Responsive design;
 
 ## Built with:
 

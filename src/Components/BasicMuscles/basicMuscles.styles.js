@@ -24,7 +24,7 @@ export const cardMediaStyles = {
     sm: "85.2vh",
     md: "120.2vh",
     lg: "113.5vh",
-    xl: "91.6vh",
+    xl: "91.4vh",
   },
 };
 
