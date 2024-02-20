@@ -11,6 +11,7 @@ import {
   secondaryStackChildChildStyles,
   secondaryStackChildStyles,
   secondaryStackStyles,
+  stackCardAndParagraphStyles,
   tertialyHeaderStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
@@ -227,7 +228,7 @@ export const DeltoidMuscle = () => {
                 My favorite example of this is Reg Park.
               </Typography>
 
-              <Stack sx={cardAndParagraphRowStyles}>
+              <Stack sx={stackCardAndParagraphStyles}>
                 <Typography variant="p">
                   Reg worked very hard to compensate for his relatively narrow
                   skeletal proportions, and this resulted in tremendous shoulder
@@ -279,7 +280,7 @@ export const DeltoidMuscle = () => {
 
           <Stack sx={tertiaryStackChildStyles}>
             <Typography variant="h4" sx={tertialyHeaderStyles}>
-              TRAINING FOR THE DELTOVID MUSCLES
+              TRAINING FOR THE DELTOID MUSCLES
             </Typography>
             <Stack sx={dividerStyles}></Stack>
 

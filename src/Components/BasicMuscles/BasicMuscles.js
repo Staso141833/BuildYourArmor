@@ -19,6 +19,7 @@ import {
   buttonStyles,
   cardMediaStyles,
   cardStyles,
+  mainStyles,
   menuItemStyles,
   muscleContainerStyles,
   muscleItemContainerStyles,
@@ -65,7 +66,7 @@ export const BasicMuscles = () => {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.4 } }}
     >
-      <Stack position={"relative"}>
+      <Stack position={"relative"} sx={mainStyles}>
         <Card position="relative" sx={cardStyles}>
           <CardMedia
             component="img"
@@ -111,14 +112,12 @@ export const BasicMuscles = () => {
                 </MenuItem>
               </Menu>
             </Stack>
-
             <Stack sx={muscleItemContainerStyles}>
               <Link to="/back" className="muscle-button">
                 {" "}
                 Back
               </Link>
             </Stack>
-
             <Stack sx={muscleItemContainerStyles}>
               <Button
                 id="arms-button"

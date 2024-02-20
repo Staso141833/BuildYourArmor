@@ -1,5 +1,12 @@
 import { colors } from "../../metaData/colors.js";
 
+export const mainStyles = {
+  display: "flex",
+  alignItems: "center",
+  textAlign: "center",
+  justifyContent: "center",
+};
+
 export const cardStyles = {
   display: "flex",
   justifyContent: "center",
@@ -13,11 +20,11 @@ export const cardMediaStyles = {
   opacity: "0.9",
   width: "100%",
   height: {
-    xs: "128.4vh",
+    xs: "84.2vh",
     sm: "85.2vh",
-    md: "91.4vh",
+    md: "120.2vh",
     lg: "113.5vh",
-    xl: "91.4vh",
+    xl: "91.6vh",
   },
 };
 
@@ -27,8 +34,9 @@ export const muscleContainerStyles = {
   gap: 2,
   position: "absolute",
   zIndex: "2",
-  alignItems: "center",
   display: "flex",
+  alignItems: "center",
+  justifyContent:"space-evenly",
   flexDirection: {
     xs: "column",
     sm: "column",
@@ -42,7 +50,7 @@ export const muscleItemContainerStyles = {
   backgroundColor: colors.black,
   display: "coloumn",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "space-evenly",
   borderRadius: "6px",
   border: "2px outset #fbc760",
   width: {
@@ -71,8 +79,8 @@ export const buttonStyles = {
   fontSize: {
     xs: "12px",
     sm: "14px",
-    md: "16px",
-    lg: "18px",
+    md: "14px",
+    lg: "14px",
     xl: "18px",
   },
   letterSpacing: "1px",
@@ -282,8 +290,9 @@ export const cardAndParagraphRowStyles = {
 
 export const stackCardAndParagraphStyles = {
   display: "flex",
+  alignItems: "center",
   flexDirection: {
-    xs: "row",
+    xs: "column",
     sm: "column",
     md: "column",
     lg: "column",

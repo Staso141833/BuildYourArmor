@@ -8,7 +8,7 @@ export const boxStyles = {
   gap: {
     xs: 16,
     sm: 6,
-    md: 4,
+    md: 16,
     lg: 14,
     xl: 0,
   },

@@ -8,6 +8,7 @@ import {
   mainStackStyles,
   secondaryHeaderStyles,
   secondaryStackStyles,
+  stackCardAndParagraphStyles,
   tertiaryStackChildStyles,
   tertiaryStackStyles,
 } from "../basicMuscles.styles.js";
@@ -27,7 +28,7 @@ export const Calves = () => {
           <Stack sx={dividerStyles}></Stack>
           <Typography variant="h4" sx={secondaryHeaderStyles}>CALF MUSCLES</Typography>
           <Stack sx={dividerStyles}></Stack>
-          <Stack sx={cardAndParagraphRowStyles}>
+          <Stack sx={stackCardAndParagraphStyles}>
             <Card position="relative" sx={cardWidthStyles}>
               <CardMedia
                 position="absolute"

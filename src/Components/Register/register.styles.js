@@ -2,6 +2,7 @@ import { colors } from "../../metaData/colors.js";
 
 export const formControlStyles = {
   height: "100vh",
+  width: "100%",
 };
 
 export const registerFormMainStackStyles = {
@@ -31,18 +32,18 @@ export const registerFormMainStackStyles = {
   border: "1px solid #4c4850",
   borderRadius: "8px",
   height: {
-    xs: "96%",
+    xs: "80%",
     sm: "800px",
-    md: "500px",
+    md: "64%",
     lg: "500px",
     xl: "500px",
   },
   width: {
     xs: "90%",
     sm: "640px",
-    md: "1040px",
+    md: "92%",
     lg: "1040px",
-    xl: "1040px",
+    xl: "80%",
   },
   backgroundColor: colors.black,
   justifyContent: "space-evenly",
@@ -60,7 +61,7 @@ export const emailAndPasswordStackStyles = {
     xl: "50%",
   },
   height: {
-    xs: "64%",
+    xs: "54%",
     sm: "50%",
     md: "100%",
     lg: "100%",
@@ -93,7 +94,7 @@ export const registerHeaderStyles = {
   textTransform: "upperCase",
   letterSpacing: "2px",
   marginTop: {
-    xs: 2,
+    xs: 3,
     sm: 3,
     md: 3,
     lg: 3,
@@ -107,7 +108,6 @@ export const registerInputStyles = {
   height: {
     xs: "48px",
   },
-
 };
 
 export const registerButtonStyles = {
@@ -144,7 +144,7 @@ export const cardMediaStackStyles = {
   alignItems: "center",
   justifyContent: "space-evenly",
   height: {
-    xs: "35%",
+    xs: "44%",
     sm: "50%",
     md: "100%",
     lg: "100%",

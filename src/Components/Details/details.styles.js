@@ -24,20 +24,14 @@ export const mainStackStyles = {
     xl: "row",
   },
   gap: 2,
-  mt: {
-    xs: 2,
-    sm: 3,
-    md: 4,
-    lg: 4,
-    xl: 4,
+  m: {
+    xs: "16px 0px",
+    sm: "24px 0px",
+    md: "32px 16px",
+    lg: "32px",
+    xl: "32px 0 px",
   },
-  mb: {
-    xs: 2,
-    sm: 3,
-    md: 4,
-    lg: 4,
-    xl: 5,
-  },
+  
   width: "100%",
   height: {
     xs: "100%",
@@ -49,7 +43,7 @@ export const mainStackStyles = {
 
   alignItems: {
     xs: "center",
-    sm: "start",
+    sm: "center",
     md: "start",
     lg: "start",
     xl: "start",
@@ -62,13 +56,13 @@ export const secondaryStackStyles = {
   width: {
     xs: "90%",
     sm: "80%",
-    md: "60%",
-    lg: "50%",
+    md: "45%",
+    lg: "45%",
     xl: "38%",
   },
   flexDirection: "column",
   gap: 1,
-  marginBottom: 0.5,
+  mb: 0.5,
   alignItems: "center",
   justifyContent: "space-evenly",
 };
@@ -77,7 +71,7 @@ export const cardStyles = {
   height: {
     xs: "auto",
     sm: "70vh",
-    md: "80vh",
+    md: "auto",
     lg: "84vh",
     xl: "80vh",
   },
@@ -101,8 +95,8 @@ export const cardActionStackStyles = {
   mb: {
     xs: 1,
     sm: 2,
-    md: 4,
-    lg: 4,
+    md: 0,
+    lg: 1,
     xl: 4,
   },
 };
@@ -116,7 +110,7 @@ export const cardActionsStyles = {
     xs: 0,
     sm: 1,
     md: 1,
-    lg: 1,
+    lg: 0,
     xl: 1,
   },
   width: "100%",
@@ -190,7 +184,7 @@ export const rightStackStyles = {
   alignItems: {
     xs: "center",
     sm: "center",
-    md: "flex-start",
+    md: "center",
     lg: "center",
     xl: "flex-start",
   },
@@ -199,20 +193,26 @@ export const rightStackStyles = {
   width: {
     xs: "90%",
     sm: "80%",
-    md: "70%",
-    lg: "65%",
+    md: "45%",
+    lg: "45%",
     xl: "58%",
   },
   gap: 3,
 };
 
-export const rightStackStylesChild = {
+export const rightStackChildStyles = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   gap: 2,
-  width: "100%",
+  width: {
+    xs: "100%",
+    sm: "100%",
+    md: "100%",
+    lg: "100%",
+    xl: "60%",
+  },
 };
 
 export const excerciseExplanationStyles = {
@@ -259,7 +259,7 @@ export const addCommentStackStyles = {
     sm: "80%",
     md: "80%",
     lg: "80%",
-    xl: "90%",
+    xl: "40%",
   },
 };
 export const commentStackStyles = {
@@ -335,13 +335,17 @@ export const currentCommentStackStyles = {
   flexDirection: "column",
   width: "100%",
   alignItems: "center",
+  textAlign: "center",
+  justifyContent: "space-evenly",
   backgroundColor: colors.gold,
   color: colors.black,
   padding: 1,
   borderRadius: 1,
+  overflow: "auto",
 };
 
 export const currentCommentTextStyles = {
+  width: "90%",
   fontWeight: "bold",
   fontSize: {
     xs: "14px",

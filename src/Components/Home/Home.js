@@ -156,9 +156,11 @@ export const Home = () => {
             custom={direction}
             className="slides"
           ></motion.img>
-          <Typography sx={quoteStyles}>
-            {slideShowImages[currentIndex].quote}
-          </Typography>
+          {slideShowImages[currentIndex].quote && (
+            <Typography sx={quoteStyles}>
+              "{slideShowImages[currentIndex].quote}"
+            </Typography>
+          )}
         </AnimatePresence>
 
         <div>
@@ -189,77 +191,4 @@ export const Home = () => {
   );
 };
 
-{
-  /* <div className="max-w-[1960px] h-[980px] w-full m-auto py-6 px-4 relative mb-4 ">
-<div
-  style={{
-    backgroundImage: `url(${slideShowImages[currentIndex].url})`,
-  }}
-  className="w-full h-full rounded-2xl bg-center bg-cover duration-1000"
-></div>
 
-<Typography sx={quoteStyles}>
-  {slideShowImages[currentIndex].quote}
-</Typography>
-<div>
-  <ArrowCircleLeft
-    onClick={previousSlide}
-    sx={leftArrowStyles}
-  ></ArrowCircleLeft>
-</div>
-<div>
-  <ArrowCircleRight
-    onClick={nextSlide}
-    sx={rightArrowStyles}
-  ></ArrowCircleRight>
-</div>
-<div className="flex top-4 justify-center py-2">
-    {slideShowImages.map((slide, slideIndex) => (
-    <div key={slideIndex} onClick={() => goToSlide(slideIndex)} className="text-2xl cursor-pointer">
-      <RxDotFilled></RxDotFilled>
-    </div>
-    ))}
-</div>
-</div> */
-}
-
-{
-  /* <div className="main-div">
-<AnimatePresence initial={false} custom={direction}>
-  <motion.img
-    variants={variants}
-    animate="animate"
-    initial="initial"
-    exit="exit"
-    src={slideShowImages[currentIndex].url}
-    key={slideShowImages[currentIndex]}
-    custom={direction}
-    className="slides"
-  ></motion.img>
-</AnimatePresence>
-
-<div>
-  <ArrowCircleLeft
-    onClick={previousSlide}
-    sx={leftArrowStyles}
-  ></ArrowCircleLeft>
-</div>
-<div>
-  <ArrowCircleRight
-    onClick={nextSlide}
-    sx={rightArrowStyles}
-  ></ArrowCircleRight>
-</div>
-<Stack sx={stackDotsStyles}>
-  {slideShowImages.map((slide, slideIndex) => (
-    <div
-      key={slideIndex}
-      onClick={() => goToSlide(slideIndex)}
-      className="text-2xl cursor-pointer"
-    >
-      <RxDotFilled></RxDotFilled>
-    </div>
-  ))}
-</Stack>
-</div> */
-}

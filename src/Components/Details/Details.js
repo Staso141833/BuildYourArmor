@@ -62,6 +62,7 @@ import {
   explanationStackStyles,
   likeEditDeleteStackStyles,
   mainStackStyles,
+  rightStackChildStyles,
   rightStackStyles,
   rightStackStylesChild,
   secondaryStackStyles,
@@ -424,7 +425,7 @@ export const Details = () => {
             </Stack>
 
             <Stack sx={rightStackStyles}>
-              <Stack sx={rightStackStylesChild}>
+              <Stack sx={rightStackChildStyles}>
                 <Typography variant="h5" sx={excerciseExplanationStyles}>
                   Exercise explanation
                 </Typography>

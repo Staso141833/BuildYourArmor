@@ -60,6 +60,15 @@
   background-color: #fbc760;
   color: #070707;
 }
+@media (max-width: 1400px) {
+  .muscle-button-dropdown {
+    font-size: 12px;
+  }
+
+  .muscle-button {
+    font-size: 14px;
+  }
+}
 @media (max-width: 900px) {
   .muscle-button-dropdown {
     font-size: 12px;

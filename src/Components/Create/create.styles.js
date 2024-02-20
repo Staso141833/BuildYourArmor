@@ -11,11 +11,11 @@ export const createAndEditmainStackStyles = {
   position: "relative",
   backgroundColor: "#f6f6f6",
   height: {
-    xs: "150vh",
+    xs: "130vh",
     sm: "100vh",
-    md: "100vh",
+    md: "130vh",
     lg: "130vh",
-    xl: "100vh",
+    xl: "110vh",
   },
   overflow: "hidden",
 };
@@ -24,16 +24,16 @@ export const createAndEditPaperStyles = {
   width: {
     xs: "86%",
     sm: "560px",
-    md: "660px",
+    md: "80%",
     lg: "660px",
     xl: "660px",
   },
   height: {
     xs: "90%",
     sm: "82%",
-    md: "70%",
+    md: "82%",
     lg: "85%",
-    xl: "92%",
+    xl: "80%",
   },
   backgroundColor: colors.gold,
   border: "3px solid #170f0a",
@@ -52,15 +52,21 @@ export const createAndEditPaperStyles = {
   },
   top: {
     xs: "56%",
-    sm: "56%",
-    md: "45%",
+    sm: "52%",
+    md: "52%",
     lg: "52%",
-    xl: "56%",
+    xl: "50%",
   },
   mt: 1,
   transform: "translate(-53%, -61%)",
   zIndex: "2",
-  boxShadow: "40px 30px 50px #170f0a",
+  boxShadow: {
+    xs: "none",
+    sm: "40px 30px 50px #170f0a",
+    md: "40px 30px 50px #170f0a",
+    lg: "40px 30px 50px #170f0a",
+    xl: "40px 30px 50px #170f0a",
+  },
 };
 
 export const createAndEditTitleStyles = {
@@ -93,7 +99,7 @@ export const formControlStyles = {
   alignItems: "center",
   gap: "12px",
   width: {
-    xs: "200px",
+    xs: "90%",
     sm: "80%",
     md: "80%",
     lg: "80%",
@@ -154,11 +160,11 @@ export const cardMediaStyles = {
   left: "50%",
   top: "50%",
   transform: {
-    xs: "translate(-10%, 726%)",
-    sm: "translate(1.3%, 387%)",
-    md: "translate(39.2%, 407%)",
+    xs: "translate(4.8%, 980%)",
+    sm: "translate(5.3%, 367%)",
+    md: "translate(1.4%, 336%)",
     lg: "translate(121%, 358%)",
-    xl: "translate(255.5%, 376%)",
+    xl: "translate(255.5%, 365.5%)",
   },
 };
 

@@ -15,14 +15,14 @@ export const createAndEditmainStackStyles = {
     sm: "100vh",
     md: "100vh",
     lg: "130vh",
-    xl: "100vh",
+    xl: "110vh",
   },
   overflow: "hidden",
 };
 
 export const createAndEditPaperStyles = {
   width: {
-    xs: "300px",
+    xs: "86%",
     sm: "560px",
     md: "660px",
     lg: "660px",
@@ -31,9 +31,9 @@ export const createAndEditPaperStyles = {
   height: {
     xs: "92%",
     sm: "82%",
-    md: "80%",
+    md: "70%",
     lg: "85%",
-    xl: "92%",
+    xl: "80%",
   },
   backgroundColor: "#fbc760",
   border: "3px solid #170f0a",
@@ -54,7 +54,7 @@ export const createAndEditPaperStyles = {
     sm: "56%",
     md: "50%",
     lg: "52%",
-    xl: "56%",
+    xl: "50%",
   },
   mt: 1,
   transform: "translate(-53%, -61%)",
@@ -157,7 +157,7 @@ export const cardMediaStyles = {
     sm: "translate(1.3%, 387%)",
     md: "translate(-2%, 694%)",
     lg: "translate(121%, 358%)",
-    xl: "translate(255.5%, 376%)",
+    xl: "translate(255.5%, 365.5%)",
   },
 };
 

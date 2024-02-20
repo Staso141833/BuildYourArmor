@@ -49,7 +49,7 @@ export const typographyTitleStyles = {
 
 export const linkStyles = {
   color: colors.gold,
-  margin: "0px 4px"
+  margin: "0px 4px",
 };
 
 export const socialMediaStyles = {
@@ -64,12 +64,13 @@ export const socialMediaStyles = {
 
 export const boxCopyRightStyles = {
   mt: {
-    xs: 2,
-    sm: 3,
+    xs: 1,
+    sm: 2,
     md: 5,
     lg: 5,
     xl: 5,
   },
+
   pb: {
     xs: 1,
     sm: 1,
