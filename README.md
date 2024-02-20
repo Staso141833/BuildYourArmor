@@ -1,6 +1,6 @@
 # Build Your Armor
 
-*An application for sharing gym experience and to inspire the users to be in good health by transforming their bodies in better way.*
+*An application for sharing gym experience and to inspire the users to be in good health by putting some "suit of armor".*
 
 ## Features
 
@@ -19,16 +19,15 @@
 
 ## Built with:
 
-- ReactJS;
 - JavaScript;
+- ReactJS;
 - Firebase;
 
 ## Libraries used:
 
 - react-router-dom;
 - react-hook-form;
-- mui;
+- material-ui;
 - framer-motion;
 - yup;
-- framer-motion;
 - js-cookie;
